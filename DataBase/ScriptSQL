@@ -79,7 +79,6 @@ create table turma_formacao(
 	id INT primary key,
 	nome_turma_formacao VARCHAR(30) not null,
 	descricao_turma_formacao VARCHAR(100) not null,
-	disciplinas VARCHAR(30) not null,
 	dataTermino DATE,
 	id_status INT not null references status 
 );
