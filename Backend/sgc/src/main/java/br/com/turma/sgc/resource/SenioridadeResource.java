@@ -1,4 +1,4 @@
-package br.com.turma.sgc.controller;
+package br.com.turma.sgc.resource;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
