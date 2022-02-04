@@ -1,4 +1,4 @@
-package br.com.turma.sgc.controller;
+package br.com.turma.sgc.resource;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @SpringBootApplication
 @RequestMapping("/Senioridade")
 @RestController
-public class SenioridadeController {
+public class SenioridadeResource {
 
 
     @GetMapping
