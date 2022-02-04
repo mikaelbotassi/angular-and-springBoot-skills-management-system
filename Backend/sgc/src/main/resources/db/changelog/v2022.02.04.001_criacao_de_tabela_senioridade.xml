@@ -22,4 +22,32 @@
 
     </changeSet>
 
+    <changeSet author="Mikael.Botassi" id="2">
+        <insert tableName="senioridade">
+            <column name="id" value="1"/>
+            <column name="nome" value="Estagiário"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Mikael.Botassi" id="3">
+        <insert tableName="senioridade">
+            <column name="id" value="2"/>
+            <column name="nome" value="Junior"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Mikael.Botassi" id="4">
+        <insert tableName="senioridade">
+            <column name="id" value="3"/>
+            <column name="nome" value="Pleno"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Mikael.Botassi" id="5">
+        <insert tableName="senioridade">
+            <column name="id" value="4"/>
+            <column name="nome" value="Sênior"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

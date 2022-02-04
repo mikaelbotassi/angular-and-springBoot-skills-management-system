@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
+		<!--  lookup parent from repository  -->
 	</parent>
-	<groupId>br.com.turma.</groupId>
+	<groupId>br.com.turma</groupId>
 	<artifactId>sgc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sgc</name>
-	<description>Competency Management System of the fourth Basis Training Class</description>
+	<description>Projeto Turma de Formacao</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 	<dependencies>
@@ -26,12 +25,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -80,7 +77,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -97,5 +93,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
