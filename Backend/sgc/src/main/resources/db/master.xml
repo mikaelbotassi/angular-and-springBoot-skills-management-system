@@ -8,4 +8,7 @@
     <include file="db/changelog/v2022.02.04.001_criacao_de_tabela_senioridade.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="db/changelog/20220204193200_criacao_tabela_colaborador.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
