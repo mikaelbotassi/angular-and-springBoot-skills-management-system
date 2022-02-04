@@ -1,12 +1,10 @@
 package br.com.turma.sgc.controller;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@SpringBootApplication
-@RequestMapping("/Senioridade")
 @RestController
+@RequestMapping(value = "/senioridade")
 public class SenioridadeController {
 
 
