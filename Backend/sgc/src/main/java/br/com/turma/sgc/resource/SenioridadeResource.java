@@ -1,11 +1,11 @@
-package br.com.turma.sgc.controller;
+package br.com.turma.sgc.resource;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/senioridade")
-public class SenioridadeController {
+public class SenioridadeResource {
 
 
     @GetMapping
