@@ -6,9 +6,9 @@ spring:
         name: srsservice
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/srs
-        username: srs
-        password: srs
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: admin
+        password: teste
         hikari:
             poolName: Hikari
             auto-commit: false
