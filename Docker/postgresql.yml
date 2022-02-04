@@ -1,11 +1,11 @@
 version: '2'
 services:
-  sge-postgresql:
+  sgc-postgresql:
     image: postgres:11.5
     # volumes:
     #     - ~/volumes/jhipster/srsservice/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=sge
-      - POSTGRES_PASSWORD=sge
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=teste
     ports:
       - 5432:5432
