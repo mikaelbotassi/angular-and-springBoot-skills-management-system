@@ -22,7 +22,7 @@
         </createTable>
 
         <addPrimaryKey tableName="categoria" columnNames="id" constraintName="pk_categoria"/>
-        
+
     </changeSet>
 
 </databaseChangeLog>

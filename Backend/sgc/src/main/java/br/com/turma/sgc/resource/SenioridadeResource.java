@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @SpringBootApplication
 @RequestMapping("/Senioridade")
 @RestController
-public class SenioridadeController {
+public class SenioridadeResource {
 
 
     @GetMapping

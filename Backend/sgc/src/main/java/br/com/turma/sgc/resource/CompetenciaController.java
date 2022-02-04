@@ -1,4 +1,4 @@
-package br.com.turma.sgc.controller;
+package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.services.CompetenciaService;
