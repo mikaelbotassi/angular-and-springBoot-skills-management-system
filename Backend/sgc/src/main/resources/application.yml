@@ -1,9 +1,9 @@
 application:
-    appName: srs
+    appName: sgc
 
 spring:
     application:
-        name: srsservice
+        name: sgcservice
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://localhost:5432/postgres
