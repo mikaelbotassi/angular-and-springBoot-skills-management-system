@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -29,15 +28,15 @@ public class CategoriaResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll() {
-        List<Categoria> list = categoriaRepository.findAll();
-        return ResponseEntity.ok().body(list);
+    public List findAll() {
+        return categoriaRepository.findAll();
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
-
-        return ResponseEntity.ok().body();
+    @GetMapping(path = {"/{id}"})
+    public ResponseEntity findById(@PathVariable Integer id) {
+        return categoriaRepository.findById(id)
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse((ResponseEntity<Categoria>) ResponseEntity.notFound());
     }
 }
 

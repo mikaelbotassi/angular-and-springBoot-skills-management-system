@@ -1,16 +1,15 @@
 package br.com.turma.sgc.domain;
 
 import lombok.*;
+import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Optional;
 
 @AllArgsConstructor //cria automaticamente um construtor com todas os atributos da classe como argumento.
 @NoArgsConstructor //cria automaticamente um construtor vazio (sem argumentos).
-
-//@Data cria automaticamente os métodos toString, equals, hashCode, getters e setters.
-@Getter
-@Setter
+@Data // cria automaticamente os métodos toString, equals, hashCode, getters e setters.
 
 @Entity
 @Table (name = "categoria")

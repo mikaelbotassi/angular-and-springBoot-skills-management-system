@@ -8,15 +8,5 @@ import java.util.List;
 
 @Service
 public class CategoriaServices {
-    /*
-    private final CategoriaRepository categoriaRepository;
 
-    public CategoriaServices(CategoriaRepository categoriaRepository) {
-        this.categoriaRepository = categoriaRepository;
-    }
-
-    public List<Categoria> getCategoria() {
-        return categoriaRepository.findAll();
-    }
-     */
 }
