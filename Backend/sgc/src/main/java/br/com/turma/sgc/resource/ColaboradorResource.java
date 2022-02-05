@@ -30,4 +30,15 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.insert(colab));
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Colaborador> update(@PathVariable int id, @RequestBody Colaborador c){
+        return ResponseEntity.ok().body(service.update(id, c));
+    }
+
 }
