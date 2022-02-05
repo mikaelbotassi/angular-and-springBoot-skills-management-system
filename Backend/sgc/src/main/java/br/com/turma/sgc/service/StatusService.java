@@ -1,8 +1,6 @@
 package br.com.turma.sgc.service;
 
-import br.com.turma.sgc.domain.Senioridade;
 import br.com.turma.sgc.domain.Status;
-import br.com.turma.sgc.repository.SenoridadeRepository;
 import br.com.turma.sgc.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
