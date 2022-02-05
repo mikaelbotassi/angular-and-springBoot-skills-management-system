@@ -2,17 +2,17 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Senioridade;
 import br.com.turma.sgc.repository.SenoridadeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SenioridadeService {
 
-    @Autowired
-    private SenoridadeRepository repository;
+    private final SenoridadeRepository repository;
 
     public List<Senioridade> findAll(){
         return repository.findAll();

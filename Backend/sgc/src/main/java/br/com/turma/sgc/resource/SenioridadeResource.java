@@ -2,18 +2,18 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Senioridade;
 import br.com.turma.sgc.service.SenioridadeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/senioridade")
+@RequestMapping(value = "/api/senioridade")
+@RequiredArgsConstructor
 public class SenioridadeResource {
 
-    @Autowired
-    private SenioridadeService service;
+    private final SenioridadeService service;
 
     @GetMapping
     public ResponseEntity<List<Senioridade>> findAll(){
