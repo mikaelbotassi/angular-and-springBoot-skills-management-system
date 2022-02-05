@@ -14,4 +14,7 @@
     <include file="db/changelog/202202041930_insercao_tabela_status.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="db/changelog/20220204193200_criacao_tabela_colaborador.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
