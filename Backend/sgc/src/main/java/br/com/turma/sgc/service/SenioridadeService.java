@@ -1,7 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Senioridade;
-import br.com.turma.sgc.repository.SenoridadeRepository;
+import br.com.turma.sgc.repository.SenioridadeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SenioridadeService {
 
-    private final SenoridadeRepository repository;
+    private final SenioridadeRepository repository;
 
     public List<Senioridade> findAll(){
         return repository.findAll();
