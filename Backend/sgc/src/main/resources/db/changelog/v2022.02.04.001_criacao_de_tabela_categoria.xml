@@ -4,7 +4,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet id="1" author="Layla.Couto">
+    <changeSet author="Layla.Couto" id="1" >
 
         <createTable tableName="categoria">
 
@@ -36,49 +36,51 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Layla.Couto" id="3">
+    <changeSet author="Layla.Couto" id="4">
 
         <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
+            <column name="id" value="3"/>
+            <column name="nome" value="Banco"/>
         </insert>
     </changeSet>
 
-    <changeSet author="Layla.Couto" id="3">
+    <changeSet author="Layla.Couto" id="5">
 
         <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
+            <column name="id" value="4"/>
+            <column name="nome" value="Arquitetura"/>
         </insert>
     </changeSet>
 
-    <changeSet author="Layla.Couto" id="3">
+    <changeSet author="Layla.Couto" id="6">
 
         <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
-        </insert>
-    </changeSet>
-    <changeSet author="Layla.Couto" id="3">
-
-        <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
-        </insert>
-    </changeSet>
-    <changeSet author="Layla.Couto" id="3">
-
-        <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
+            <column name="id" value="5"/>
+            <column name="nome" value="Metodologia Ágil"/>
         </insert>
     </changeSet>
 
-    <changeSet author="Layla.Couto" id="3">
+    <changeSet author="Layla.Couto" id="7">
 
         <insert tableName="categoria">
-            <column name="id" value="2"/>
-            <column name="nome" value="Frontend"/>
+            <column name="id" value="6"/>
+            <column name="nome" value="Testes"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="8">
+
+        <insert tableName="categoria">
+            <column name="id" value="7"/>
+            <column name="nome" value="Devops"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="9">
+
+        <insert tableName="categoria">
+            <column name="id" value="8"/>
+            <column name="nome" value="Liderança"/>
         </insert>
     </changeSet>
 
