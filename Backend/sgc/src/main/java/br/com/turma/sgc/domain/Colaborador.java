@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class Colaborador implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_COLAB")
-    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_COLAB")
+    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", initialValue = 2, allocationSize = 1)
     private int id;
 
     @Column(name = "nome_colaborador")
@@ -27,6 +27,7 @@ public class Colaborador implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
+    @Lob
     @Column(name = "foto")
     private byte[] foto;
 

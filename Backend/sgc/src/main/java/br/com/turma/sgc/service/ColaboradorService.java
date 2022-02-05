@@ -33,11 +33,11 @@ public class ColaboradorService {
 
     public Colaborador update(int id, Colaborador c){
         Colaborador orig = repository.getById(id);
-        updateDatta(orig, c);
+        c = updateDatta(orig, c);
         return repository.save(c);
     }
 
-    private void updateDatta(Colaborador orig, Colaborador c) {
+    private Colaborador updateDatta(Colaborador orig, Colaborador c) {
         orig.setNomeColaborador(c.getNomeColaborador());
         orig.setSobrenomeColaborador(c.getSobrenomeColaborador());
         orig.setCpf(c.getCpf());
@@ -45,6 +45,7 @@ public class ColaboradorService {
         orig.setFoto(c.getFoto());
         orig.setDataAdmissao(c.getDataAdmissao());
         orig.setDataNascimento(c.getDataNascimento());
+        return orig;
     }
 
 }

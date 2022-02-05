@@ -5,8 +5,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="20220204193200-01" author="Mikael.Botassi">
+        <createSequence sequenceName="sq_colaborador" incrementBy="1" startValue="1" />
 
         <createTable tableName="colaborador">
+
 
             <column name="id" type="NUMBER" >
                 <constraints nullable="false"/>
@@ -46,12 +48,16 @@
 
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName=""
+        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName="fk_colaborador_senioridade"
                                  referencedTableName="senioridade"
                                  referencedColumnNames="id"/>
 
+
         <addPrimaryKey tableName="colaborador" columnNames="id" constraintName="pk_colaborador"/>
 
+
+
     </changeSet>
+
 
 </databaseChangeLog>
