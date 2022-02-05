@@ -1,11 +1,12 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Categoria;
-import br.com.turma.sgc.repository.CategoriaRepository;
+import br.com.turma.sgc.services.CategoriaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,22 +22,19 @@ a classe indica que o valor retornado pelos métodos devem ser vinculados ao cor
 public class CategoriaResource {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
-
-    CategoriaResource(CategoriaRepository categoriaRepository) {
-        this.categoriaRepository = categoriaRepository;
-    }
+    private CategoriaServices categoriaServices;
 
     @GetMapping
-    public List findAll() {
-        return categoriaRepository.findAll();
+    @ResponseStatus(HttpStatus.OK)
+    public List<Categoria> listCategoria() {
+        return categoriaServices.listCategoria();
     }
 
-    @GetMapping(path = {"/{id}"})
-    public ResponseEntity findById(@PathVariable Integer id) {
-        return categoriaRepository.findById(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse((ResponseEntity<Categoria>) ResponseEntity.notFound());
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Categoria searchById(@PathVariable("id") Long id) {
+        return categoriaServices.findId(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria nao encontrada"));
     }
 }
 
