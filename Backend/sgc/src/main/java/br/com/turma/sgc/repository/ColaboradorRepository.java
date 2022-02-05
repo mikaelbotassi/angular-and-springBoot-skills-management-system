@@ -1,4 +1,7 @@
 package br.com.turma.sgc.repository;
 
-public interface ColaboradorRepository {
+import br.com.turma.sgc.domain.Colaborador;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ColaboradorRepository extends JpaRepository<Colaborador, Integer> {
 }
