@@ -29,7 +29,7 @@
             </column>
 
             <column name="foto" type="BLOB" >
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="data_nascimento" type="DATE" >
@@ -46,11 +46,12 @@
 
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName=""
-                                 referencedTableName="senioridade"
-                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName="fk_senioridade"
+                                 referencedTableName="senioridade" referencedColumnNames="id"/>
 
         <addPrimaryKey tableName="colaborador" columnNames="id" constraintName="pk_colaborador"/>
+
+        <createSequence sequenceName="sq_colaborador" cycle="false" cacheSize="20" incrementBy="1" startValue="1"/>
 
     </changeSet>
 
