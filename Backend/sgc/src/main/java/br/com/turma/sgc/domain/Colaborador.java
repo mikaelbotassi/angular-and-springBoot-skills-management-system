@@ -1,5 +1,6 @@
 package br.com.turma.sgc.domain;
 
+import br.com.turma.sgc.enums.SenioridadeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class Colaborador implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_COLAB")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_COLAB")
     @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", initialValue = 2, allocationSize = 1)
     private int id;
 
@@ -40,10 +41,6 @@ public class Colaborador implements Serializable {
     @Column(name = "data_admissao")
     private LocalDate dataAdmissao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_senioridade")
-    private Senioridade senioridade;
-
-
-
+    @Enumerated(EnumType.ORDINAL)
+    private SenioridadeEnum senioridade;
 }
