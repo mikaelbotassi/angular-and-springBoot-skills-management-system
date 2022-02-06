@@ -1,6 +1,5 @@
 package br.com.turma.sgc.domain;
 
-import ch.qos.logback.classic.db.names.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +10,14 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "senioridade")
+@Table(name = "categoria")
 @Getter
 @Setter
-public class Senioridade implements Serializable {
+public class Categoria implements Serializable {
 
     @Id
     private int id;
+
     @Column(name = "nome")
     private String nome;
-
 }

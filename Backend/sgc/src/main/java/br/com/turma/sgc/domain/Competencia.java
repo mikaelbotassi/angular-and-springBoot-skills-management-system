@@ -3,6 +3,7 @@ package br.com.turma.sgc.domain;
 import ch.qos.logback.classic.db.names.TableName;
 import lombok.Getter;
 import lombok.Setter;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +15,8 @@ import java.io.Serializable;
 public class Competencia implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "serial_competencia")
+    @SequenceGenerator(sequenceName = "serial_competencia", name = "serial_competencia")
+    /*@GeneratedValue(strategy = GenerationType.SEQUENCE)*/
     private Integer id;
 
     @Column(name = "nome")
@@ -23,7 +25,7 @@ public class Competencia implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    /*@Column(name= "id_categoria")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Categoria categoria;*/
+    @ManyToOne
+    @JoinColumn(name="id_categoria", nullable=false)
+    private Categoria categoria;
 }

@@ -16,4 +16,12 @@ public class CompetenciaService {
     public ResponseEntity<List<Competencia>> findAll(){
         return ResponseEntity.ok().body(competencia.findAll());
     }
+
+    public ResponseEntity<String> save(Competencia competencia){
+
+        this.competencia.save(competencia);
+
+        return ResponseEntity.ok("Competencia salva com Sucesso!");
+    }
+
 }

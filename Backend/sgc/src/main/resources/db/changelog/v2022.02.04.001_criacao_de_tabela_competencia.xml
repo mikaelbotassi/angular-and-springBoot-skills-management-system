@@ -21,8 +21,22 @@
 
         </createTable>
 
-        <addPrimaryKey tableName="categoria" columnNames="id" constraintName="pk_categoria"/>
+        <addPrimaryKey tableName="competencia" columnNames="id" constraintName="pk_competencia"/>
+        <addForeignKeyConstraint baseTableName="competencia" baseColumnNames="id_categoria"
+                                 constraintName="pk_Categoria" referencedTableName="categoria"
+                                 referencedColumnNames="id"/>
+
 
     </changeSet>
+    <changeSet id="202202042051" author="Renan.Frassi">
+        <addColumn tableName="competencia">
+            <column name="descricao" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 
+    <changeSet id="202202042128" author="Renan.Frassi">
+        <createSequence sequenceName="serial_competencia" startValue="1"/>
+    </changeSet>
 </databaseChangeLog>
