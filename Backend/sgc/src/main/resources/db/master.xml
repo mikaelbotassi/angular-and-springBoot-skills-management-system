@@ -11,4 +11,7 @@
     <include file="db/changelog/20220205191700_criacao_de_tabela_turma_formacao.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="db/changelog/20220206183100_criacao_tabela_colaborador_competencia.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
