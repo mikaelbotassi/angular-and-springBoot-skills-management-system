@@ -22,3 +22,23 @@ Exemplo Update Colaborador:
   "dataAdmissao": "2022-08-11",
   "senioridade": "JUNIOR"
 }
+
+Exemplo Turma Formação:
+Inserção:
+{
+  "nome": "testeInsert 2",
+  "descricao": "teste Insert 2",
+  "inicio": "2001-11-08",
+  "termino": "2022-08-11",
+  "status": "INICIADA"
+}
+
+Update:
+{
+  "id": 3,
+  "nome": "testeInsert 2",
+  "descricao": "teste Insert 2",
+  "inicio": "2001-11-08",
+  "termino": "2022-08-11",
+  "status": "INICIADA"
+}
