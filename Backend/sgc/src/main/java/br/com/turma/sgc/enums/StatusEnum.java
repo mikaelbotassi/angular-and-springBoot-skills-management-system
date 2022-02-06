@@ -28,7 +28,7 @@ public enum StatusEnum {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public StatusEnum valueOf(int id){
+    public static StatusEnum valueOf(int id){
         for(StatusEnum value : StatusEnum.values()){
             if(value.getId() == id){
                 return value;
