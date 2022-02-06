@@ -2,10 +2,11 @@ package br.com.turma.sgc.enums;
 
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
-public enum SenioridadeEnum {
+public enum SenioridadeEnum implements Serializable {
 
     ESTAGIARIO(0, "Estagiário"),
     JUNIOR(1, "Júnior"),

@@ -28,6 +28,7 @@ public class Colaborador implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
+    @Lob
     @Column(name = "foto")
     private byte[] foto;
 
