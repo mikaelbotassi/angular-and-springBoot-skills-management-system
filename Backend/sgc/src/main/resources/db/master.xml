@@ -16,5 +16,7 @@
 
     <include file="db/changelog/20220204193200_criacao_tabela_colaborador.xml"
              relativeToChangelogFile="false"/>
+    <include file="db/changelog/v2022.02.05.19.17_criacao_de_tabela_turma_formacao.xml"
+             relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
