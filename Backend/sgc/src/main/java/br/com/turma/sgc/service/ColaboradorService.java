@@ -4,8 +4,8 @@ import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.repository.ColaboradorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,7 +20,13 @@ public class ColaboradorService {
 
     public Colaborador findById(int id){
         Optional<Colaborador> obj = repository.findById(id);
-        return obj.get();
+        if(obj.isPresent()){
+            return obj.get();
+        }
+        else{
+            throw new NoSuchElementException("Elemento não encontrado!");
+        }
+
     }
 
     public Colaborador insert(Colaborador colab){
@@ -31,21 +37,8 @@ public class ColaboradorService {
         repository.deleteById(id);
     }
 
-    public Colaborador update(int id, Colaborador c){
-        Colaborador orig = repository.getById(id);
-        c = updateDatta(orig, c);
+    public Colaborador update(Colaborador c){
         return repository.save(c);
-    }
-
-    private Colaborador updateDatta(Colaborador orig, Colaborador c) {
-        orig.setNomeColaborador(c.getNomeColaborador());
-        orig.setSobrenomeColaborador(c.getSobrenomeColaborador());
-        orig.setCpf(c.getCpf());
-        orig.setEmail(c.getEmail());
-        orig.setFoto(c.getFoto());
-        orig.setDataAdmissao(c.getDataAdmissao());
-        orig.setDataNascimento(c.getDataNascimento());
-        return orig;
     }
 
 }
