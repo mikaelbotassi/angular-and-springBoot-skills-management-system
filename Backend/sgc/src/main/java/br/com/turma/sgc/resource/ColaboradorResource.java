@@ -38,9 +38,9 @@ public class ColaboradorResource {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Colaborador> update(@PathVariable int id, @RequestBody Colaborador c){
-        return ResponseEntity.ok().body(service.update(id, c));
+    @PutMapping
+    public ResponseEntity<Colaborador> update(@RequestBody Colaborador c){
+        return ResponseEntity.ok().body(service.update(c));
     }
 
 }

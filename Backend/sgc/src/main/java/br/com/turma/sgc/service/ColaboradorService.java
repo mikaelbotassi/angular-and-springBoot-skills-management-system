@@ -24,7 +24,7 @@ public class ColaboradorService {
             return obj.get();
         }
         else{
-            throw new NoSuchElementException("Elemento não encontrado");
+            throw new NoSuchElementException("Elemento não encontrado!");
         }
 
     }
