@@ -3,28 +3,28 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.services.TurmaFormacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping("/TurmaFormacao")
 @RestController
+@RequestMapping("/TurmaFormacao")
 public class TurmaFormacaoResource {
 
     @Autowired
     private TurmaFormacaoService turmaFormacaoService;
 
-    @PostMapping("{nome}/{decricao}/{diciplinas_instrutores}/{inicio}/{termino}/{status}")
+    @PostMapping("{nome}/{descricao}/{diciplinas_instrutores}/{inicio}/{termino}/{status}")
     public ResponseEntity<String> addTurmaFormacao (
             @PathVariable(value = "nome") String nome,
             @PathVariable(value = "descricao") String descricao,
             @PathVariable(value = "diciplinas_instrutores") Integer diciplinas_instrutores,
-            @PathVariable(value = "inicio") Date inicio,
-            @PathVariable(value = "termino") Date termino,
+            @PathVariable(value = "inicio") String inicio,
+            @PathVariable(value = "termino") String termino,
             @PathVariable(value = "status") Integer status
     ){
         //Treat error to Save
@@ -39,7 +39,7 @@ public class TurmaFormacaoResource {
             );
 
             return new ResponseEntity(HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ParseException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
@@ -49,14 +49,21 @@ public class TurmaFormacaoResource {
         return turmaFormacaoService.getTurmaFormacao();
     }
 
-    @PutMapping
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<TurmaFormacao> findById(
+            @PathVariable Integer id
+    ){
+        return ResponseEntity.ok().body(turmaFormacaoService.findById(id));
+    }
+
+    @PutMapping("{id}/{nome}/{descricao}/{diciplinas_instrutores}/{inicio}/{termino}/{status}")
     public ResponseEntity attTurmaFormacao(
             @PathVariable(value = "id") Integer id,
             @PathVariable(value = "nome") String nome,
             @PathVariable(value = "descricao") String descricao,
             @PathVariable(value = "diciplinas_instrutores") Integer diciplinas_instrutores,
-            @PathVariable(value = "inicio") Date inicio,
-            @PathVariable(value = "termino") Date termino,
+            @PathVariable(value = "inicio") String inicio,
+            @PathVariable(value = "termino") String termino,
             @PathVariable(value = "status") Integer status
     ) {
         //Treat error to Save
@@ -73,13 +80,13 @@ public class TurmaFormacaoResource {
 
             //Susses return
             return new ResponseEntity(HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ParseException e) {
             //Error return
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public ResponseEntity delTurmaFormacao(
             @PathVariable(value = "id") Integer id
     ) {
