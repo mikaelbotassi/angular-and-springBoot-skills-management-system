@@ -7,9 +7,9 @@ import java.util.Objects;
 @Getter
 public enum StatusEnum {
 
-    PENDENTE(0, "Pendente"),
-    INICIADA(1, "Iniciada"),
-    CONCLUIDA(2, "Concluida");
+    PENDENTE(1, "Pendente"),
+    INICIADA(2, "Iniciada"),
+    CONCLUIDA(3, "Concluida");
 
     private int id;
     private String nome;
