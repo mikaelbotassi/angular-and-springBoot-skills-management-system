@@ -31,7 +31,7 @@
     <changeSet author="Mikael.Botassi" id="3">
         <insert tableName="senioridade">
             <column name="id" value="2"/>
-            <column name="nome" value="Junior"/>
+            <column name="nome" value="Júnior"/>
         </insert>
     </changeSet>
 
