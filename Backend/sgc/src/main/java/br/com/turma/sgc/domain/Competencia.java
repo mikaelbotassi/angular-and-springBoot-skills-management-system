@@ -15,8 +15,8 @@ import java.io.Serializable;
 public class Competencia implements Serializable {
 
     @Id
-    @SequenceGenerator(sequenceName = "serial_competencia", name = "serial_competencia")
-    /*@GeneratedValue(strategy = GenerationType.SEQUENCE)*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_COMPE")
+    @SequenceGenerator(name = "SQ_COMPE", sequenceName = "serial_competencia", initialValue = 1, allocationSize = 1)
     private Integer id;
 
     @Column(name = "nome")

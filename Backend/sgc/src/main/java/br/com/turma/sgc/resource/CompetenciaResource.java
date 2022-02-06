@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/competencia")
@@ -22,5 +23,20 @@ public class CompetenciaResource {
     @PostMapping
     public ResponseEntity<String> save(@RequestBody Competencia competencia) {
         return competenciaService.save(competencia);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> update(@RequestBody Competencia competencia) {
+        return competenciaService.update(competencia);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<Competencia>> findById(@PathVariable Integer id){
+        return competenciaService.findById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id){
+        return competenciaService.delete(id);
     }
 }

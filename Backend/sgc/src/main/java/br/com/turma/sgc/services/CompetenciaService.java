@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompetenciaService {
@@ -17,11 +18,29 @@ public class CompetenciaService {
         return ResponseEntity.ok().body(competencia.findAll());
     }
 
+    public ResponseEntity<Optional<Competencia>> findById(Integer id){
+        return ResponseEntity.ok(this.competencia.findById(id));
+    }
+
     public ResponseEntity<String> save(Competencia competencia){
 
         this.competencia.save(competencia);
 
         return ResponseEntity.ok("Competencia salva com Sucesso!");
+    }
+
+    public ResponseEntity<String> update(Competencia competencia){
+
+        this.competencia.save(competencia);
+
+        return ResponseEntity.ok("Competência atualizada com Sucesso");
+    }
+
+    public ResponseEntity<String> delete(Integer id){
+
+        this.competencia.deleteById(id);
+
+        return ResponseEntity.ok("Competência deletada com Sucesso");
     }
 
 }
