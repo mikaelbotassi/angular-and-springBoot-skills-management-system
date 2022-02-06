@@ -8,10 +8,10 @@ import java.util.Objects;
 @Getter
 public enum SenioridadeEnum implements Serializable {
 
-    ESTAGIARIO(0, "Estagiário"),
-    JUNIOR(1, "Júnior"),
-    PLENO(2, "Pleno"),
-    SENIOR(3, "Sênior");
+    ESTAGIARIO(1, "Estagiário"),
+    JUNIOR(2, "Júnior"),
+    PLENO(3, "Pleno"),
+    SENIOR(4, "Sênior");
 
     private int id;
     private String nome;
@@ -30,7 +30,7 @@ public enum SenioridadeEnum implements Serializable {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public SenioridadeEnum valueOf(int id){
+    public static SenioridadeEnum valueOf(int id){
         for(SenioridadeEnum value : SenioridadeEnum.values()){
             if(value.getId() == id){
                 return value;
