@@ -1,11 +1,12 @@
 package br.com.turma.sgc.domain;
 
+import br.com.turma.sgc.enums.StatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -14,19 +15,21 @@ import java.util.Date;
 public class TurmaFormacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_TURMA_FORMACAO")
-    @SequenceGenerator(name = "SQ_TURMA_FORMACAO", sequenceName = "SQ_TURMA_FORMACAO", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "SQ_TURMA_FORMACAO", sequenceName = "sq_turma_formacao", initialValue = 1, allocationSize = 1)
     private Integer id;
 
     @Column(name = "nome")
-    String nome;
+    private String nome;
+
     @Column(name = "descricao")
-    String descricao;
-    @Column(name = "id_diciplinas_instrutores")
-    Integer diciplinas_instrutores;
+    private String descricao;
+
     @Column(name = "inicio")
-    Date inicio;
+    private LocalDate inicio;
+
     @Column(name = "termino")
-    java.util.Date termino;
-    @Column(name = "id_status")
-    Integer status;
+    private LocalDate termino;
+
+    @Enumerated(EnumType.ORDINAL)
+    private StatusEnum status;
 }
