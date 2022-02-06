@@ -1,5 +1,6 @@
 package br.com.turma.sgc.domain;
 
+import br.com.turma.sgc.enums.SenioridadeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,10 +41,6 @@ public class Colaborador implements Serializable {
     @Column(name = "data_admissao")
     private LocalDate dataAdmissao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_senioridade")
-    private Senioridade senioridade;
-
-
-
+    @Enumerated(EnumType.ORDINAL)
+    private SenioridadeEnum senioridade;
 }

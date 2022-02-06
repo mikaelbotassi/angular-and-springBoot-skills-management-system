@@ -1,14 +1,12 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="20220204193200-01" author="Mikael.Botassi">
-        <createSequence sequenceName="sq_colaborador" incrementBy="1" startValue="1" />
 
         <createTable tableName="colaborador">
-
 
             <column name="id" type="NUMBER" >
                 <constraints nullable="false"/>
@@ -31,7 +29,7 @@
             </column>
 
             <column name="foto" type="BLOB" >
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="data_nascimento" type="DATE" >
@@ -42,22 +40,16 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="id_senioridade" type="NUMBER" >
+            <column name="senioridade" type="INT">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName="fk_colaborador_senioridade"
-                                 referencedTableName="senioridade"
-                                 referencedColumnNames="id"/>
-
-
         <addPrimaryKey tableName="colaborador" columnNames="id" constraintName="pk_colaborador"/>
 
-
+        <createSequence sequenceName="sq_colaborador" cycle="false" cacheSize="20" incrementBy="1" startValue="1"/>
 
     </changeSet>
-
 
 </databaseChangeLog>
