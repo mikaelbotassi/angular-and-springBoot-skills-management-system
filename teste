@@ -1,4 +1,4 @@
-Exemplo Inseert Colaborador:
+Exemplo Insert Colaborador:
 {
   "nomeColaborador": "teste4",
   "sobrenomeColaborador": "teste 4",
@@ -35,10 +35,26 @@ Inserção:
 
 Update:
 {
-  "id": 3,
+  "id": 1,
   "nome": "testeInsert 2",
   "descricao": "teste Insert 2",
   "inicio": "2001-11-08",
   "termino": "2022-08-11",
-  "status": "INICIADA"
+  "status": "TERMINADA"
+}
+
+EXEMPLO COMPETÊNCIA:
+INSERT:
+{
+  "nome": "testeInsert",
+  "descricao": "teste Insert 1",
+  "categoria": "FRONTEND"
+}
+
+UPDATE:
+{
+  "id": 1,
+  "nome": "testeInsert",
+  "descricao": "teste Insert 1",
+  "categoria": "FRONTEND"
 }

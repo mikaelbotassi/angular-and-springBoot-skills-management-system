@@ -1,28 +1,40 @@
 package br.com.turma.sgc.service;
 
-import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
+import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class TurmaColaboradorCompetenciaService {
 
-    @Autowired
-    private TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
+    private final TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
 
     public ResponseEntity<List<TurmaColaboradorCompetencia>>  findAll(){
-        return ResponseEntity.ok(turmaColaboradorCompetenciaRepository.findAll());
+        return ResponseEntity.ok().body(turmaColaboradorCompetenciaRepository.findAll());
     }
 
-    public ResponseEntity<String> save(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+    public TurmaColaboradorCompetencia findById(int idTurma, int idColaborador, int idCompetencia){
+        Optional<TurmaColaboradorCompetencia> obj = turmaColaboradorCompetenciaRepository.findById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+        if(obj.isPresent()){
+            return obj.get();
+        }
+        else{
+            throw new NoSuchElementException("Elemento não encontrado!");
+        }
 
-        turmaColaboradorCompetenciaRepository.save(turmaColaboradorCompetencia);
+    }
 
-        return ResponseEntity.ok("Resgistro incluído com Sucesso!");
+    public TurmaColaboradorCompetencia save(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+
+        return turmaColaboradorCompetenciaRepository.save(turmaColaboradorCompetencia);
     }
 
     public ResponseEntity<String> update(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
@@ -33,4 +45,7 @@ public class TurmaColaboradorCompetenciaService {
     }
 
 
+    public void delete(int idTurma, int idColaborador, int idCompetencia) {
+        turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+    }
 }

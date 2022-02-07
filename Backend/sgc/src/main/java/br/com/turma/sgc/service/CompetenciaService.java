@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -18,8 +19,12 @@ public class CompetenciaService {
         return ResponseEntity.ok(competencia.findAll());
     }
 
-    public ResponseEntity<Optional<Competencia>> findById(Integer id){
-        return ResponseEntity.ok(this.competencia.findById(id));
+    public Competencia findById(Integer id){
+        Optional<Competencia> obj = competencia.findById(id);
+        if(obj.isPresent())
+            return obj.get();
+        else
+            throw new NoSuchElementException("Elemento não encontrado!");
     }
 
     public ResponseEntity<String> save(Competencia competencia){
