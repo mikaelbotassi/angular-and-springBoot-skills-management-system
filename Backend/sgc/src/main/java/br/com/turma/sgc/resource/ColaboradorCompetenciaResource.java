@@ -1,5 +1,6 @@
 package br.com.turma.sgc.resource;
 
+import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.service.ColaboradorCompetenciaService;
 import lombok.RequiredArgsConstructor;
@@ -17,24 +18,29 @@ public class ColaboradorCompetenciaResource {
 
 
     @GetMapping
-    public ResponseEntity<List<ColaboradorCompetencia>> findAll(){
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<ColaboradorCompetencia>> procurarTodos(){
+        return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/colaborador-{idColaborador}/competencia-{idCompetencia}")
-    public ResponseEntity<ColaboradorCompetencia> findById(@PathVariable int idColaborador, @PathVariable int idCompetencia){
-        return ResponseEntity.ok().body(service.findById(idColaborador, idCompetencia));
+    public ResponseEntity<ColaboradorCompetencia> procurarPorId(@PathVariable int idColaborador, @PathVariable int idCompetencia){
+        return ResponseEntity.ok().body(service.procurarPorId(idColaborador, idCompetencia));
     }
 
     @PostMapping
-    public ColaboradorCompetencia insert(ColaboradorCompetencia ColaboradorCompetencia){
-        return service.insert(ColaboradorCompetencia);
+    public ColaboradorCompetencia inserir(ColaboradorCompetencia ColaboradorCompetencia){
+        return service.inserir(ColaboradorCompetencia);
     }
 
     @DeleteMapping(value = "/colaborador-{idColaborador}/competencia-{idCompetencia}")
-    public ResponseEntity<Void> delete(@PathVariable int idColaborador, @PathVariable int idCompetencia){
-        service.delete(idColaborador, idCompetencia);
+    public ResponseEntity<Void> deletar(@PathVariable int idColaborador, @PathVariable int idCompetencia){
+        service.deletar(idColaborador, idCompetencia);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<ColaboradorCompetencia> atualizar(@RequestBody ColaboradorCompetencia c){
+        return ResponseEntity.ok().body(service.atualizar(c));
     }
 
 }

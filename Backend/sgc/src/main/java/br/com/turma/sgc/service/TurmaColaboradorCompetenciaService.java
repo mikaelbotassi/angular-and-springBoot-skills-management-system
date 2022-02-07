@@ -20,11 +20,11 @@ public class TurmaColaboradorCompetenciaService {
     private final ColaboradorService colaboradorService;
     private final CompetenciaService competenciaService;
 
-    public ResponseEntity<List<TurmaColaboradorCompetencia>>  findAll(){
+    public ResponseEntity<List<TurmaColaboradorCompetencia>> procurarTodos(){
         return ResponseEntity.ok().body(turmaColaboradorCompetenciaRepository.findAll());
     }
 
-    public TurmaColaboradorCompetencia findById(int idTurma, int idColaborador, int idCompetencia){
+    public TurmaColaboradorCompetencia procurarPorId(int idTurma, int idColaborador, int idCompetencia){
         Optional<TurmaColaboradorCompetencia> obj = turmaColaboradorCompetenciaRepository.findById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
         if(obj.isPresent()){
             return obj.get();
@@ -35,20 +35,20 @@ public class TurmaColaboradorCompetenciaService {
 
     }
 
-    public TurmaColaboradorCompetencia insertByPK(TurmaColaboradorCompetenciaPK pk){
-        return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.findById(pk.getIdTurmaFormacao()),
-                colaboradorService.findById(pk.getIdColaborador()), competenciaService.findById(pk.getIdCompetencia()));
+    public TurmaColaboradorCompetencia inserirPorPK(TurmaColaboradorCompetenciaPK pk){
+        return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.procurarPorId(pk.getIdTurmaFormacao()),
+                colaboradorService.procurarPorId(pk.getIdColaborador()), competenciaService.procurarProId(pk.getIdCompetencia()));
     }
 
-    public TurmaColaboradorCompetencia save(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
+    public TurmaColaboradorCompetencia inserir(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
 
-        TurmaColaboradorCompetencia novo = insertByPK(turmaColaboradorCompetenciaPK);
+        TurmaColaboradorCompetencia novo = inserirPorPK(turmaColaboradorCompetenciaPK);
 
         return turmaColaboradorCompetenciaRepository.save(novo);
     }
 
 
-    public void delete(int idTurma, int idColaborador, int idCompetencia) {
+    public void deletar(int idTurma, int idColaborador, int idCompetencia) {
         turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
     }
 }

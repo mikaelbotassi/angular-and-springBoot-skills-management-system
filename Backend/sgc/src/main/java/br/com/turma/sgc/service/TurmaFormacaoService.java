@@ -15,11 +15,11 @@ public class TurmaFormacaoService {
 
     private final TurmaFormacaoRepository repository;
 
-    public List<TurmaFormacao> findAll(){
+    public List<TurmaFormacao> procurarTodos(){
         return repository.findAll();
     }
 
-    public TurmaFormacao findById(int id){
+    public TurmaFormacao procurarPorId(int id){
         Optional<TurmaFormacao> obj = repository.findById(id);
         if(obj.isPresent())
             return obj.get();
@@ -27,15 +27,15 @@ public class TurmaFormacaoService {
             throw new NoSuchElementException("Elemento não encontrado!");
     }
 
-    public TurmaFormacao insert(TurmaFormacao turma){
+    public TurmaFormacao inserir(TurmaFormacao turma){
         return repository.save(turma);
     }
 
-    public void delete(int id){
+    public void deletar(int id){
         repository.deleteById(id);
     }
 
-    public TurmaFormacao update(TurmaFormacao turma){
+    public TurmaFormacao atualizar(TurmaFormacao turma){
         return repository.save(turma);
     }
 

@@ -15,27 +15,27 @@ public class CompetenciaResource {
     CompetenciaService competenciaService;
 
     @GetMapping()
-    public ResponseEntity<List<Competencia>> findAll(){
-        return competenciaService.findAll();
+    public ResponseEntity<List<Competencia>> procurarTodos(){
+        return ResponseEntity.ok().body(competenciaService.procurarTodos());
     }
 
     @PostMapping
-    public ResponseEntity<String> save(@RequestBody Competencia competencia) {
-        return competenciaService.save(competencia);
+    public ResponseEntity<Competencia> inserir(@RequestBody Competencia competencia) {
+        return ResponseEntity.ok().body(competenciaService.inserir(competencia));
     }
 
     @PutMapping
-    public ResponseEntity<String> update(@RequestBody Competencia competencia) {
-        return competenciaService.update(competencia);
+    public ResponseEntity<Competencia> atualizar(@RequestBody Competencia competencia) {
+        return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Competencia> findById(@PathVariable Integer id){
-        return ResponseEntity.ok().body(competenciaService.findById(id));
+    public ResponseEntity<Competencia> procurarPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id){
-        return competenciaService.delete(id);
+    public ResponseEntity<Void> deletar(@PathVariable Integer id){
+        return ResponseEntity.noContent().build();
     }
 }

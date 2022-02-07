@@ -15,29 +15,29 @@ public class TurmaFormacaoResource {
     private final TurmaFormacaoService service;
 
     @GetMapping
-    public ResponseEntity<List<TurmaFormacao>> findAll(){
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<TurmaFormacao>> procurarTodos(){
+        return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> findById(@PathVariable int id){
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id){
+        return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<TurmaFormacao> insert(@RequestBody TurmaFormacao turma){
-        return ResponseEntity.ok().body(service.insert(turma));
+    public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma){
+        return ResponseEntity.ok().body(service.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id){
-        service.delete(id);
+    public ResponseEntity<Void> deletar(@PathVariable int id){
+        service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacao> update(@RequestBody TurmaFormacao turma){
-        return ResponseEntity.ok().body(service.update(turma));
+    public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma){
+        return ResponseEntity.ok().body(service.atualizar(turma));
     }
 
 }

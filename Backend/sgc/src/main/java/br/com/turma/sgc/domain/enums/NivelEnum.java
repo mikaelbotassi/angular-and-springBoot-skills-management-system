@@ -1,12 +1,13 @@
-package br.com.turma.sgc.enums;
+package br.com.turma.sgc.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
-public enum NivelEnum implements Serializable {
+@AllArgsConstructor
+public enum NivelEnum{
 
     NIVEL1(1, "Júnior"),
     NIVEL2(2, "Pleno"),
@@ -15,12 +16,7 @@ public enum NivelEnum implements Serializable {
     private int id;
     private String nome;
 
-    NivelEnum(int id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public static NivelEnum findByName(String nivel) {
+    public static NivelEnum PegaEnumPorNome(String nivel) {
         for(NivelEnum value : NivelEnum.values()){
             if(Objects.equals(value.getNome(), nivel)){
                 return value;
@@ -29,7 +25,7 @@ public enum NivelEnum implements Serializable {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static NivelEnum valueOf(int id){
+    public static NivelEnum pegaEnumPorId(int id){
         for(NivelEnum value : NivelEnum.values()){
             if(value.getId() == id){
                 return value;

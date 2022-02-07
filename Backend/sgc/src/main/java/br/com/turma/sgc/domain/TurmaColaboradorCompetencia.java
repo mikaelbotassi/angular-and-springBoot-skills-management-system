@@ -1,7 +1,9 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "turma_colaborador_competencia")
+@AllArgsConstructor
+@NoArgsConstructor
 public class TurmaColaboradorCompetencia implements Serializable {
 
     @EmbeddedId
@@ -31,12 +35,4 @@ public class TurmaColaboradorCompetencia implements Serializable {
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
 
-    public TurmaColaboradorCompetencia(){}
-
-    public TurmaColaboradorCompetencia(TurmaColaboradorCompetenciaPK id, TurmaFormacao turma, Colaborador colaborador, Competencia competencia) {
-        this.id = id;
-        this.turma = turma;
-        this.colaborador = colaborador;
-        this.competencia = competencia;
-    }
 }

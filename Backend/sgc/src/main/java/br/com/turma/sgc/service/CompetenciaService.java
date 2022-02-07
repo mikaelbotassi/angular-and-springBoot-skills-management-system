@@ -2,50 +2,45 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.CompetenciaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class CompetenciaService {
-    @Autowired
-    CompetenciaRepository competencia;
+    private final CompetenciaRepository repository;
 
-    public ResponseEntity<List<Competencia>> findAll(){
-        return ResponseEntity.ok(competencia.findAll());
+    public List<Competencia> procurarTodos(){
+        return repository.findAll();
     }
 
-    public Competencia findById(Integer id){
-        Optional<Competencia> obj = competencia.findById(id);
+    public Competencia procurarPorId(Integer id){
+        Optional<Competencia> obj = repository.findById(id);
         if(obj.isPresent())
             return obj.get();
         else
             throw new NoSuchElementException("Elemento não encontrado!");
     }
 
-    public ResponseEntity<String> save(Competencia competencia){
+    public Competencia inserir(Competencia competencia){
 
-        this.competencia.save(competencia);
-
-        return ResponseEntity.ok("Competencia salva com Sucesso!");
+        return repository.save(competencia);
     }
 
-    public ResponseEntity<String> update(Competencia competencia){
+    public Competencia atualizar(Competencia competencia){
 
-        this.competencia.save(competencia);
+        return repository.save(competencia);
 
-        return ResponseEntity.ok("Competência atualizada com Sucesso");
     }
 
-    public ResponseEntity<String> delete(Integer id){
+    public void deletar(Integer id){
 
-        this.competencia.deleteById(id);
+        repository.deleteById(id);
 
-        return ResponseEntity.ok("Competência deletada com Sucesso");
     }
 
 }

@@ -1,6 +1,8 @@
 package br.com.turma.sgc.domain.pk;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import java.util.Objects;
 @Table(name = "colaborador_competencia")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class ColaboradorCompetenciaPK implements Serializable{
 
@@ -20,14 +24,6 @@ public class ColaboradorCompetenciaPK implements Serializable{
 
     @Column(name = "id_competencia")
     private int idCompetencia;
-
-    public ColaboradorCompetenciaPK() {
-    }
-
-    public ColaboradorCompetenciaPK(int idColaborador, int idCompetencia) {
-        this.idColaborador = idColaborador;
-        this.idCompetencia = idCompetencia;
-    }
 
     @Override
     public boolean equals(Object o) {

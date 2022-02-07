@@ -1,10 +1,12 @@
-package br.com.turma.sgc.enums;
+package br.com.turma.sgc.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Objects;
 
 @Getter
+@AllArgsConstructor
 public enum StatusEnum {
 
     PENDENTE(1, "Pendente"),
@@ -14,12 +16,7 @@ public enum StatusEnum {
     private int id;
     private String nome;
 
-    StatusEnum(int id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public static StatusEnum findByName(String status) {
+    public static StatusEnum pegaEnumPorNome(String status) {
         for(StatusEnum value : StatusEnum.values()){
             if(Objects.equals(value.getNome(), status)){
                 return value;
@@ -28,7 +25,7 @@ public enum StatusEnum {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static StatusEnum valueOf(int id){
+    public static StatusEnum pegaEnumPorId(int id){
         for(StatusEnum value : StatusEnum.values()){
             if(value.getId() == id){
                 return value;

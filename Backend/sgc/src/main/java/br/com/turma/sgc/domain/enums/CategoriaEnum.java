@@ -1,12 +1,14 @@
-package br.com.turma.sgc.enums;
+package br.com.turma.sgc.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
-public enum CategoriaEnum implements Serializable {
+@AllArgsConstructor
+public enum CategoriaEnum {
 
     BACKEND(1, "Backend"),
     FRONTEND(2, "Frontend"),
@@ -21,21 +23,7 @@ public enum CategoriaEnum implements Serializable {
     private int id;
     private String nome;
 
-    CategoriaEnum(int id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public static CategoriaEnum findByName(String categoria) {
-        for(CategoriaEnum value : CategoriaEnum.values()){
-            if(Objects.equals(value.getNome(), categoria)){
-                return value;
-            }
-        }
-        throw new IllegalArgumentException("Código não encontrado");
-    }
-
-    public static CategoriaEnum valueOf(int id){
+    public static CategoriaEnum PegaEnumPorId(int id){
         for(CategoriaEnum value : CategoriaEnum.values()){
             if(value.getId() == id){
                 return value;

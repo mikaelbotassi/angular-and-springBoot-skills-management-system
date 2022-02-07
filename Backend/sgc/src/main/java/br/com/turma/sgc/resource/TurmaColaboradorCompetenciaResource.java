@@ -18,23 +18,23 @@ public class TurmaColaboradorCompetenciaResource {
 
 
     @GetMapping
-    public ResponseEntity<List<TurmaColaboradorCompetencia>> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<TurmaColaboradorCompetencia>> procurarTodos(){
+        return service.procurarTodos();
     }
 
     @GetMapping(value = "/turma-{idTurma}/colaborador-{idColaborador}-competencia/{idCompetencia}")
-    public ResponseEntity<TurmaColaboradorCompetencia> findById(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
-        return ResponseEntity.ok().body(service.findById(idTurma, idColaborador, idCompetencia));
+    public ResponseEntity<TurmaColaboradorCompetencia> procurarPorId(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
+        return ResponseEntity.ok().body(service.procurarPorId(idTurma, idColaborador, idCompetencia));
     }
 
     @PostMapping
-    public TurmaColaboradorCompetencia save(@RequestBody TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
-        return service.save(turmaColaboradorCompetenciaPK);
+    public TurmaColaboradorCompetencia inserir(@RequestBody TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
+        return service.inserir(turmaColaboradorCompetenciaPK);
     }
 
     @DeleteMapping(value = "/turma/{idTurma}/colaborador/{idColaborador}/competencia/{idCompetencia}")
-    public ResponseEntity<Void> delete(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
-        service.delete(idTurma, idColaborador, idCompetencia);
+    public ResponseEntity<Void> deletar(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
+        service.deletar(idTurma, idColaborador, idCompetencia);
         return ResponseEntity.noContent().build();
     }
 

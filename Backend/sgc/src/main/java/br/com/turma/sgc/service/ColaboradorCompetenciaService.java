@@ -16,11 +16,11 @@ public class ColaboradorCompetenciaService {
 
     private final ColaboradorCompetenciaRepository repository;
 
-    public List<ColaboradorCompetencia> findAll(){
+    public List<ColaboradorCompetencia> procurarTodos(){
         return repository.findAll();
     }
 
-    public ColaboradorCompetencia findById(int idColaborador, int idCompetencia){
+    public ColaboradorCompetencia procurarPorId(int idColaborador, int idCompetencia){
         Optional<ColaboradorCompetencia> obj = repository.findById(new ColaboradorCompetenciaPK(idColaborador, idCompetencia));
         if(obj.isPresent()){
             return obj.get();
@@ -31,15 +31,15 @@ public class ColaboradorCompetenciaService {
 
     }
 
-    public ColaboradorCompetencia insert(ColaboradorCompetencia colaboradorCompetencia){
+    public ColaboradorCompetencia inserir(ColaboradorCompetencia colaboradorCompetencia){
         return repository.save(colaboradorCompetencia);
     }
 
-    public void delete(int idColaborador, int idCompetencia){
+    public void deletar(int idColaborador, int idCompetencia){
         repository.deleteById(new ColaboradorCompetenciaPK(idColaborador, idCompetencia));
     }
 
-    public ColaboradorCompetencia update(ColaboradorCompetencia c){
+    public ColaboradorCompetencia atualizar(ColaboradorCompetencia c){
         return repository.save(c);
     }
 

@@ -1,12 +1,13 @@
-package br.com.turma.sgc.enums;
+package br.com.turma.sgc.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
-public enum SenioridadeEnum implements Serializable {
+@AllArgsConstructor
+public enum SenioridadeEnum{
 
     ESTAGIARIO(1, "Estagiário"),
     JUNIOR(2, "Júnior"),
@@ -16,12 +17,7 @@ public enum SenioridadeEnum implements Serializable {
     private int id;
     private String nome;
 
-    SenioridadeEnum(int id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public static SenioridadeEnum findByName(String senioridade) {
+    public static SenioridadeEnum PegaEnumPorNome(String senioridade) {
         for(SenioridadeEnum value : SenioridadeEnum.values()){
             if(Objects.equals(value.getNome(), senioridade)){
                 return value;
@@ -30,7 +26,7 @@ public enum SenioridadeEnum implements Serializable {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static SenioridadeEnum valueOf(int id){
+    public static SenioridadeEnum PegaEnumPorId(int id){
         for(SenioridadeEnum value : SenioridadeEnum.values()){
             if(value.getId() == id){
                 return value;
