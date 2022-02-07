@@ -14,6 +14,9 @@
     <include file="db/changelog/20220204135200_criacao_de_tabela_competencia.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="db/changelog/20220207163300_criacao_de_tabela_colaborador_competencia.xml"
+             relativeToChangelogFile="false"/>
+
     <include file="db/changelog/202202065420_criacao_de_tabela_turma_colaborador_competencia.xml"
              relativeToChangelogFile="false"/>
 
