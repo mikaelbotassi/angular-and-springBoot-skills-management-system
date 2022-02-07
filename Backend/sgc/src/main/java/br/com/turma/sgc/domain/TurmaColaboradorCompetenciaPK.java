@@ -8,17 +8,19 @@ import java.io.Serializable;
 
 @Table(name = "turma_colaborador_competencia")
 @Embeddable
+@Getter
+@Setter
 public class TurmaColaboradorCompetenciaPK implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id_turma_formacao", nullable=false, referencedColumnName = "id")
     private TurmaFormacao tumaFormacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id_colaborador", nullable=false, referencedColumnName = "id")
     private Colaborador colaborador;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id_competencia", nullable=false, referencedColumnName = "id")
     private Competencia competencia;
 

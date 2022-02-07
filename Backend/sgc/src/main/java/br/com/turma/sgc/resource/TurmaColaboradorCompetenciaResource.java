@@ -29,4 +29,12 @@ public class TurmaColaboradorCompetenciaResource {
     public ResponseEntity<String> update(@RequestBody TurmaColaboradorCompetencia turmaColaboradorCompetencia){
         return turmaColaboradorCompetenciaService.update(turmaColaboradorCompetencia);
     }
+
+    /*@DeleteMapping("{id_turma}/{id_competencia}/{id_colaborador}")
+    public ResponseEntity<String> delete(@PathVariable("id_turma") Integer idTurma,
+                                         @PathVariable("id_competencia") Integer idCompetencia,
+                                         @PathVariable("id_colaborador") Integer idColaborador) {
+
+
+    }*/
 }

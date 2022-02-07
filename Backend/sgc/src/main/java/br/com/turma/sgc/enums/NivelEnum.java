@@ -12,10 +12,10 @@ public enum NivelEnum implements Serializable {
     NIVEL2(2, "Pleno"),
     NIVEL3(3, "Sênior).");
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    NivelEnum(int id, String nome){
+    NivelEnum(Integer id, String nome){
         this.id = id;
         this.nome = nome;
     }
