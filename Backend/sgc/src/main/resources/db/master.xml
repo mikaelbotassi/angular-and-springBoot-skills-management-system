@@ -10,9 +10,11 @@
 
     <include file="db/changelog/20220205191700_criacao_de_tabela_turma_formacao.xml"
              relativeToChangelogFile="false"/>
-    <include file="db/changelog/v2022.02.04.001_criacao_de_tabela_categoria.xml"
-             relativeToChangelogFile="false"/>
+
     <include file="db/changelog/v2022.02.04.001_criacao_de_tabela_competencia.xml"
+             relativeToChangelogFile="false"/>
+
+    <include file="db/changelog/202202065420_criacao_de_tabela_turma_colaborador_competencia.xml"
              relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

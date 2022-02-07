@@ -1,4 +1,4 @@
-package br.com.turma.sgc.services;
+package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.CompetenciaRepository;
@@ -15,7 +15,7 @@ public class CompetenciaService {
     CompetenciaRepository competencia;
 
     public ResponseEntity<List<Competencia>> findAll(){
-        return ResponseEntity.ok().body(competencia.findAll());
+        return ResponseEntity.ok(competencia.findAll());
     }
 
     public ResponseEntity<Optional<Competencia>> findById(Integer id){

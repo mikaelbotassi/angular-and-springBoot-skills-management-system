@@ -29,6 +29,6 @@ spring:
             hibernate.generate_statistics: false
     liquibase:
         change-log: classpath:/db/master.xml
-#        drop-first: true
+ #       drop-first: true
 server:
     port: 8080

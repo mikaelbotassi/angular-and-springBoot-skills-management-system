@@ -1,5 +1,7 @@
 package br.com.turma.sgc.domain;
 
+import br.com.turma.sgc.enums.CategoriaEnum;
+import br.com.turma.sgc.enums.SenioridadeEnum;
 import ch.qos.logback.classic.db.names.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +27,6 @@ public class Competencia implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name="id_categoria", nullable=false)
-    private Categoria categoria;
+    @Enumerated(EnumType.ORDINAL)
+    private CategoriaEnum categoria;
 }

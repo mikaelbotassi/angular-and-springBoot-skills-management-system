@@ -22,9 +22,6 @@
         </createTable>
 
         <addPrimaryKey tableName="competencia" columnNames="id" constraintName="pk_competencia"/>
-        <addForeignKeyConstraint baseTableName="competencia" baseColumnNames="id_categoria"
-                                 constraintName="pk_Categoria" referencedTableName="categoria"
-                                 referencedColumnNames="id"/>
 
 
     </changeSet>
