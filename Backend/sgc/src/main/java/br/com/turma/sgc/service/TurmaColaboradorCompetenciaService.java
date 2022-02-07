@@ -37,7 +37,7 @@ public class TurmaColaboradorCompetenciaService {
 
     public TurmaColaboradorCompetencia inserirPorPK(TurmaColaboradorCompetenciaPK pk){
         return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.procurarPorId(pk.getIdTurmaFormacao()),
-                colaboradorService.procurarPorId(pk.getIdColaborador()), competenciaService.procurarProId(pk.getIdCompetencia()));
+                colaboradorService.procurarPorId(pk.getIdColaborador()), competenciaService.procurarPorId(pk.getIdCompetencia()));
     }
 
     public TurmaColaboradorCompetencia inserir(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
