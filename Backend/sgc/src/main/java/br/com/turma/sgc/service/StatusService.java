@@ -15,11 +15,11 @@ public class StatusService {
 
     private final StatusRepository repository;
 
-    public List<Status> findAll(){
+    public List<Status> procurarTodos(){
         return repository.findAll();
     }
 
-    public Status findById(int id){
+    public Status procurarPorId(int id){
         Optional<Status> obj = repository.findById(id);
         return obj.get();
     }
