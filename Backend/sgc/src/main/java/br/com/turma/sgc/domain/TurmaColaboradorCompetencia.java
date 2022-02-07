@@ -17,31 +17,10 @@ public class TurmaColaboradorCompetencia implements Serializable {
     @EmbeddedId
     private TurmaColaboradorCompetenciaPK id;
 
-    @ManyToOne
-    @MapsId("idTurmaFormacao")
-    @JoinColumn(name = "id_turma_formacao")
-    private TurmaFormacao turma;
-
-    @ManyToOne
-    @MapsId("idColaborador")
-    @JoinColumn(name = "id_colaborador")
-    private Colaborador colaborador;
-
-    @ManyToOne
-    @MapsId("idCompetencia")
-    @JoinColumn(name = "id_competencia")
-    private Competencia competencia;
-
     @Enumerated(EnumType.ORDINAL)
     private NivelEnum nivel;
 
-    public TurmaColaboradorCompetencia(){}
-
-    public TurmaColaboradorCompetencia(TurmaColaboradorCompetenciaPK id, TurmaFormacao turma, Colaborador colaborador, Competencia competencia, NivelEnum nivel) {
-        this.id = id;
-        this.turma = turma;
-        this.colaborador = colaborador;
-        this.competencia = competencia;
-        this.nivel = nivel;
+    public TurmaColaboradorCompetencia(){
+        this.id = new TurmaColaboradorCompetenciaPK();
     }
 }

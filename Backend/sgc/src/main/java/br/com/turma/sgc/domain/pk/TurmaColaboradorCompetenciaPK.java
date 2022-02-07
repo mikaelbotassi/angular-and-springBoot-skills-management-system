@@ -1,45 +1,30 @@
 package br.com.turma.sgc.domain.pk;
+
+import br.com.turma.sgc.domain.Colaborador;
+import br.com.turma.sgc.domain.Competencia;
+import br.com.turma.sgc.domain.TurmaFormacao;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Table(name = "turma_colaborador_competencia")
+@Embeddable
 @Getter
 @Setter
-@Embeddable
 public class TurmaColaboradorCompetenciaPK implements Serializable {
 
-    @Column(name = "id_turma_formacao")
-    private int idTurmaFormacao;
+    @ManyToOne
+    @JoinColumn(name="id_turma_formacao", nullable=false, referencedColumnName = "id")
+    private TurmaFormacao tumaFormacao;
 
-    @Column(name = "id_colaborador")
-    private int idColaborador;
+    @ManyToOne
+    @JoinColumn(name="id_colaborador", nullable=false, referencedColumnName = "id")
+    private Colaborador colaborador;
 
-    @Column(name = "id_competencia")
-    private int idCompetencia;
+    @ManyToOne
+    @JoinColumn(name="id_competencia", nullable=false, referencedColumnName = "id")
+    private Competencia competencia;
 
-    public TurmaColaboradorCompetenciaPK() {
-    }
-
-    public TurmaColaboradorCompetenciaPK(int idTurmaFormacao, int idColaborador, int idCompetencia) {
-        this.idTurmaFormacao = idTurmaFormacao;
-        this.idColaborador = idColaborador;
-        this.idCompetencia = idCompetencia;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TurmaColaboradorCompetenciaPK that = (TurmaColaboradorCompetenciaPK) o;
-        return idTurmaFormacao == that.idTurmaFormacao && idColaborador == that.idColaborador && idCompetencia == that.idCompetencia;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idTurmaFormacao, idColaborador, idCompetencia);
-    }
 }

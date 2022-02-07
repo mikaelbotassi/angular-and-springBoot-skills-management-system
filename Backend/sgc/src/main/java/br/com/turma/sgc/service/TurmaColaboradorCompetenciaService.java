@@ -1,14 +1,10 @@
 package br.com.turma.sgc.service;
 
-import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
-import br.com.turma.sgc.domain.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 @Service
