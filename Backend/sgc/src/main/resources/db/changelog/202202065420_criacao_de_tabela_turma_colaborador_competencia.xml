@@ -20,10 +20,6 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="nivel" type="NUMBER" >
-                <constraints nullable="false"/>
-            </column>
-
         </createTable>
 
         <addForeignKeyConstraint baseTableName="turma_colaborador_competencia"

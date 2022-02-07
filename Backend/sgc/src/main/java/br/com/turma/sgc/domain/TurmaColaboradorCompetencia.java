@@ -1,7 +1,6 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
-import br.com.turma.sgc.enums.NivelEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,16 +31,12 @@ public class TurmaColaboradorCompetencia implements Serializable {
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
 
-    @Enumerated(EnumType.ORDINAL)
-    private NivelEnum nivel;
-
     public TurmaColaboradorCompetencia(){}
 
-    public TurmaColaboradorCompetencia(TurmaColaboradorCompetenciaPK id, TurmaFormacao turma, Colaborador colaborador, Competencia competencia, NivelEnum nivel) {
+    public TurmaColaboradorCompetencia(TurmaColaboradorCompetenciaPK id, TurmaFormacao turma, Colaborador colaborador, Competencia competencia) {
         this.id = id;
         this.turma = turma;
         this.colaborador = colaborador;
         this.competencia = competencia;
-        this.nivel = nivel;
     }
 }

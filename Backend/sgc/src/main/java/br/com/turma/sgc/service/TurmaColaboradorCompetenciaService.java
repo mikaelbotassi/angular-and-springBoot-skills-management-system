@@ -16,6 +16,9 @@ import java.util.Optional;
 public class TurmaColaboradorCompetenciaService {
 
     private final TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
+    private final TurmaFormacaoService turmaFormacaoService;
+    private final ColaboradorService colaboradorService;
+    private final CompetenciaService competenciaService;
 
     public ResponseEntity<List<TurmaColaboradorCompetencia>>  findAll(){
         return ResponseEntity.ok().body(turmaColaboradorCompetenciaRepository.findAll());
@@ -32,16 +35,16 @@ public class TurmaColaboradorCompetenciaService {
 
     }
 
-    public TurmaColaboradorCompetencia save(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
-
-        return turmaColaboradorCompetenciaRepository.save(turmaColaboradorCompetencia);
+    public TurmaColaboradorCompetencia insertByPK(TurmaColaboradorCompetenciaPK pk){
+        return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.findById(pk.getIdTurmaFormacao()),
+                colaboradorService.findById(pk.getIdColaborador()), competenciaService.findById(pk.getIdCompetencia()));
     }
 
-    public ResponseEntity<String> update(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+    public TurmaColaboradorCompetencia save(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
 
-        turmaColaboradorCompetenciaRepository.save(turmaColaboradorCompetencia);
+        TurmaColaboradorCompetencia novo = insertByPK(turmaColaboradorCompetenciaPK);
 
-        return ResponseEntity.ok("Resgistro atualizado com Sucesso!");
+        return turmaColaboradorCompetenciaRepository.save(novo);
     }
 
 
