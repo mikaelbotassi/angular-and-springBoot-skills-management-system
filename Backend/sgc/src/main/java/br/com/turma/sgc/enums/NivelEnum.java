@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Getter
 public enum NivelEnum implements Serializable {
-
     NIVEL1(1, "Júnior"),
     NIVEL2(2, "Pleno"),
     NIVEL3(3, "Sênior).");

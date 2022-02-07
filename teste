@@ -40,9 +40,8 @@ Update:
   "descricao": "teste Insert 2",
   "inicio": "2001-11-08",
   "termino": "2022-08-11",
-  "status": "TERMINADA"
+  "status": "CONCLUIDA"
 }
-
 EXEMPLO COMPETÊNCIA:
 INSERT:
 {
@@ -59,37 +58,38 @@ UPDATE:
   "categoria": "FRONTEND"
 }
 
-EXEMPLO TURMA COLABORADOR COMPETENCIA:
+EXEMPLOS TURMA_COLABORADOR_COMPETENCIA:
+INSERÇÃO:
 {
-  "id": {
-    "idTurmaFormacao": 1,
-    "idColaborador": 1,
-    "idCompetencia": 2
-  },
-  "turma": {
-    "id": 1,
-    "nome": "testeInsert 2",
-    "descricao": "teste Insert 2",
-    "inicio": "2001-11-08",
-    "termino": "2022-08-11",
-    "status": "INICIADA"
-  },
-  "colaborador": {
-    "id": 1,
-    "nomeColaborador": "teste4",
-    "sobrenomeColaborador": "teste 4",
-    "cpf": "3364",
-    "foto": "MTAxMDEwMQ==",
-    "email": "fre",
-    "dataNascimento": "2001-11-08",
-    "dataAdmissao": "2022-08-11",
-    "senioridade": "JUNIOR"
-  },
-  "competencia": {
-    "id": 2,
-    "nome": "Angular",
-    "descricao": "Angular",
-    "categoria": "FRONTEND"
-  },
-  "nivel": "NIVEL2"
+"id": {
+"idTurmaFormacao": 1,
+"idColaborador": 1,
+"idCompetencia": 2
+},
+"turma": {
+"id": 1,
+"nome": "testeInsert 2",
+"descricao": "teste Insert 2",
+"inicio": "2001-11-08",
+"termino": "2022-08-11",
+"status": "INICIADA"
+},
+"colaborador": {
+"id": 1,
+"nomeColaborador": "teste4",
+"sobrenomeColaborador": "teste 4",
+"cpf": "3364",
+"foto": "MTAxMDEwMQ==",
+"email": "fre",
+"dataNascimento": "2001-11-08",
+"dataAdmissao": "2022-08-11",
+"senioridade": "JUNIOR"
+},
+"competencia": {
+"id": 2,
+"nome": "Angular",
+"descricao": "Angular",
+"categoria": "FRONTEND"
+},
+"nivel": "NIVEL3"
 }
