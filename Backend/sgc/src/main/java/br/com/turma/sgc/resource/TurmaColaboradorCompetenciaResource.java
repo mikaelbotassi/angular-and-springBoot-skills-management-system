@@ -4,9 +4,7 @@ import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.service.TurmaColaboradorCompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +13,20 @@ import java.util.List;
 public class TurmaColaboradorCompetenciaResource {
 
     @Autowired
-    TurmaColaboradorCompetenciaService turmaColaboradorCompetencia;
+    TurmaColaboradorCompetenciaService turmaColaboradorCompetenciaService;
 
     @GetMapping
     public ResponseEntity<List<TurmaColaboradorCompetencia>> findAll(){
-        return turmaColaboradorCompetencia.findAll();
+        return turmaColaboradorCompetenciaService.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> save(@RequestBody TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+        return turmaColaboradorCompetenciaService.save(turmaColaboradorCompetencia);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> update(@RequestBody TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+        return turmaColaboradorCompetenciaService.update(turmaColaboradorCompetencia);
     }
 }

@@ -25,4 +25,12 @@ public class TurmaColaboradorCompetenciaService {
         return ResponseEntity.ok("Resgistro incluído com Sucesso!");
     }
 
+    public ResponseEntity<String> update(TurmaColaboradorCompetencia turmaColaboradorCompetencia){
+
+        turmaColaboradorCompetenciaRepository.save(turmaColaboradorCompetencia);
+
+        return ResponseEntity.ok("Resgistro atualizado com Sucesso!");
+    }
+
+
 }

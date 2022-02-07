@@ -28,5 +28,6 @@ public class Competencia implements Serializable {
     private String descricao;
 
     @Enumerated(EnumType.ORDINAL)
+    @Column(name = "id_categoria")
     private CategoriaEnum categoria;
 }

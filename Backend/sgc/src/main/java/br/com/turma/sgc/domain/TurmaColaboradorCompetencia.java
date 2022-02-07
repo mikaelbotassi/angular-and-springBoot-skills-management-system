@@ -19,4 +19,8 @@ public class TurmaColaboradorCompetencia implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private NivelEnum nivel;
+
+    public TurmaColaboradorCompetencia(){
+        this.id = new TurmaColaboradorCompetenciaPK();
+    }
 }
