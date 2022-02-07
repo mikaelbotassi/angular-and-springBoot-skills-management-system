@@ -2,6 +2,7 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.CompetenciaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
+@RequiredArgsConstructor
 @Service
 public class CompetenciaService {
     @Autowired
