@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/competencia")
@@ -31,8 +30,8 @@ public class CompetenciaResource {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Competencia>> findById(@PathVariable Integer id){
-        return competenciaService.findById(id);
+    public ResponseEntity<Competencia> findById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(competenciaService.findById(id));
     }
 
     @DeleteMapping("{id}")

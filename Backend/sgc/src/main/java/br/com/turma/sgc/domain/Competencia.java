@@ -1,11 +1,8 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.enums.CategoriaEnum;
-import br.com.turma.sgc.enums.SenioridadeEnum;
-import ch.qos.logback.classic.db.names.TableName;
 import lombok.Getter;
 import lombok.Setter;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +25,6 @@ public class Competencia implements Serializable {
     private String descricao;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "id_categoria")
+    @Column(name = "categoria")
     private CategoriaEnum categoria;
 }
