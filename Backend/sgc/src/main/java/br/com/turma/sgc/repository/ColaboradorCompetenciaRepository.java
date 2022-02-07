@@ -1,8 +1,10 @@
 package br.com.turma.sgc.repository;
 
+import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
-import br.com.turma.sgc.service.ColaboradorCompetenciaService;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ColaboradorCompetenciaRepository extends JpaRepository<ColaboradorCompetenciaService, ColaboradorCompetenciaPK> {
+@Repository
+public interface ColaboradorCompetenciaRepository extends JpaRepository<ColaboradorCompetencia, ColaboradorCompetenciaPK> {
 }

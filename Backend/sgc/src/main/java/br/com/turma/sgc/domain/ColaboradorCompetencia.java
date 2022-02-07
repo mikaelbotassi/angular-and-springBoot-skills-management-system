@@ -1,7 +1,7 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
-import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
+import br.com.turma.sgc.enums.NivelEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +11,11 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "turma_colaborador_competencia")
+@Table(name = "colaborador_competencia")
 public class ColaboradorCompetencia implements Serializable {
 
     @EmbeddedId
     private ColaboradorCompetenciaPK id;
-
 
     @ManyToOne
     @MapsId("idColaborador")
@@ -28,11 +27,7 @@ public class ColaboradorCompetencia implements Serializable {
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
 
-    public ColaboradorCompetencia(){}
-
-    public ColaboradorCompetencia(ColaboradorCompetenciaPK id,  Colaborador colaborador, Competencia competencia) {
-        this.id = id;
-        this.colaborador = colaborador;
-        this.competencia = competencia;
-    }
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "nivel")
+    private NivelEnum nivel;
 }
