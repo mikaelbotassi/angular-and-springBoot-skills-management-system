@@ -1,0 +1,53 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="Layla.Couto">
+
+        <createTable tableName="senioridade">
+
+            <column name="id" type="NUMBER" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nome" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addPrimaryKey tableName="senioridade" columnNames="id" constraintName="pk_senioridade"/>
+
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="2">
+        <insert tableName="senioridade">
+            <column name="id" value="1"/>
+            <column name="nome" value="Estagiário"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="3">
+        <insert tableName="senioridade">
+            <column name="id" value="2"/>
+            <column name="nome" value="Junior"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="4">
+        <insert tableName="senioridade">
+            <column name="id" value="3"/>
+            <column name="nome" value="Pleno"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Layla.Couto" id="5">
+        <insert tableName="senioridade">
+            <column name="id" value="4"/>
+            <column name="nome" value="Sênior"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
