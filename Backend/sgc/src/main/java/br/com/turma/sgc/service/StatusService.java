@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class StatusService {
+
     private final StatusRepository repository;
 
     public List<Status> procurarTodos(){
