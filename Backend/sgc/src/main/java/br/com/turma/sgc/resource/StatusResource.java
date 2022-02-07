@@ -20,13 +20,13 @@ public class StatusResource {
     private final StatusService service;
 
     @GetMapping
-    public ResponseEntity<List<Status>> findAll(){
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<Status>> procurarTodos(){
+        return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Status> findById(@PathVariable int id){
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<Status> procurarPorId(@PathVariable int id){
+        return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
 
