@@ -1,17 +1,27 @@
 package br.com.turma.sgc.service;
-import br.com.turma.sgc.enums.StatusEnum;
+
+import br.com.turma.sgc.domain.Status;
+import br.com.turma.sgc.repository.StatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+import java.util.Optional;
+
 @RequiredArgsConstructor
+@Service
 public class StatusService {
-    public StatusEnum[] findAll(){
-        return StatusEnum.values();
+
+
+    private final StatusRepository repository;
+
+    public List<Status> findAll(){
+        return repository.findAll();
     }
 
-    public StatusEnum findById(int id){
-        return StatusEnum.valueOf(id);
+    public Status findById(int id){
+        Optional<Status> obj = repository.findById(id);
+        return obj.get();
     }
 
 }
