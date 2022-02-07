@@ -1,6 +1,6 @@
 package br.com.turma.sgc.domain;
 
-import br.com.turma.sgc.enums.CategoriaEnum;
+import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.enums.NivelEnum;
 import lombok.Getter;
 import lombok.Setter;

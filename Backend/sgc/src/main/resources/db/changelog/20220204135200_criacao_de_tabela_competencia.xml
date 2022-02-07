@@ -15,25 +15,21 @@
             <column name="nome" type="VARCHAR(12)">
                 <constraints nullable="false"/>
             </column>
-            <column name="id_categoria" type="NUMBER">
+
+            <column name="descricao" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+
+            <column name="categoria" type="NUMBER">
                 <constraints nullable="false" />
             </column>
 
         </createTable>
 
+        <createSequence sequenceName="serial_competencia" startValue="1"/>
+
         <addPrimaryKey tableName="competencia" columnNames="id" constraintName="pk_competencia"/>
 
-
-    </changeSet>
-    <changeSet id="202202042051" author="Renan.Frassi">
-        <addColumn tableName="competencia">
-            <column name="descricao" type="varchar(100)" >
-                <constraints nullable="false" />
-            </column>
-        </addColumn>
     </changeSet>
 
-    <changeSet id="202202042128" author="Renan.Frassi">
-        <createSequence sequenceName="serial_competencia" startValue="1"/>
-    </changeSet>
 </databaseChangeLog>
