@@ -2,6 +2,7 @@ package br.com.turma.sgc.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class Colaborador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_COLAB")
-    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", initialValue = 2, allocationSize = 1)
+    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", allocationSize = 1)
     private int id;
 
     @Column(name = "nome_colaborador")
@@ -29,6 +30,7 @@ public class Colaborador implements Serializable {
 
     @Lob
     @Column(name = "foto")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] foto;
 
     @Column(name = "email")
