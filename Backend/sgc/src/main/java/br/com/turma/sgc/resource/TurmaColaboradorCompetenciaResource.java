@@ -22,8 +22,9 @@ public class TurmaColaboradorCompetenciaResource {
         return service.procurarTodos();
     }
 
-    @GetMapping(value = "/turma-{idTurma}/colaborador-{idColaborador}-competencia/{idCompetencia}")
-    public ResponseEntity<TurmaColaboradorCompetencia> procurarPorId(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
+    @GetMapping(value = "/turma-{idTurma}/colaborador-{idColaborador}/competencia-{idCompetencia}")
+    public ResponseEntity<TurmaColaboradorCompetencia> procurarPorId(@PathVariable int idTurma,
+                                                                     @PathVariable int idColaborador, @PathVariable int idCompetencia){
         return ResponseEntity.ok().body(service.procurarPorId(idTurma, idColaborador, idCompetencia));
     }
 

@@ -1,19 +1,18 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-				   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 	<changeSet author="Gustavo.Canicali" id="3" >
 
 		<createTable tableName="categoria">
 
 			<column name="id" type="NUMBER" >
-				<constraints primaryKey="true"></constraints>
             		</column>
 
 			<column name="nome" type="VARCHAR(40)" >
-				<constraints nullable="false"></constraints>
+				<constraints nullable="false"/>
             		</column>
 		</createTable>
+		<addPrimaryKey tableName="categoria" columnNames="id" constraintName="pk_categoria"/>
 	</changeSet>
 </databaseChangeLog>
