@@ -27,4 +27,13 @@
     <include file="db/changelog/202202065420_criacao_de_tabela_turma_colaborador_competencia.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="db/changelog/202202071830_criacao_tabela_categoria.xml"
+             relativeToChangelogFile="false"/>
+
+    <include file="db/changelog/202202071840_insert_categoria.xml"
+             relativeToChangelogFile="false"/>
+
+    <include file="db/changelog/222002071856_alter_competencia.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

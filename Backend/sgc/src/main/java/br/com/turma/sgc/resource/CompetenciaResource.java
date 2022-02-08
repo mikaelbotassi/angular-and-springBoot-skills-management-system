@@ -29,12 +29,12 @@ public class CompetenciaResource {
         return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Competencia> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Integer id){
         return ResponseEntity.noContent().build();
     }
