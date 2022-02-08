@@ -1,10 +1,11 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
+import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.service.ColaboradorCompetenciaService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import br.com.turma.sgc.service.dto.ColaboradorCompetenciaDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,33 +16,32 @@ import java.util.List;
 @RequestMapping("/api/ColaboradoresCompetencias")
 public class ColaboradorCompetenciaResource {
 
+    @Autowired
     private final ColaboradorCompetenciaService service;
 
-
     @GetMapping
-    public ResponseEntity<List<ColaboradorCompetencia>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
-    }
+    public ResponseEntity<List<ColaboradorCompetenciaDTO>> buscarTodos(){
+        return ResponseEntity.ok().body(service.buscarTodos());
+    }//OK
 
-    @GetMapping(value = "/colaborador-{idColaborador}/competencia-{idCompetencia}")
-    public ResponseEntity<ColaboradorCompetencia> procurarPorId(@PathVariable int idColaborador, @PathVariable int idCompetencia){
-        return ResponseEntity.ok().body(service.procurarPorId(idColaborador, idCompetencia));
-    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ColaboradorCompetenciaDTO> buscarPorId(ColaboradorCompetenciaPK id) throws Exception {
+        return ResponseEntity.ok().body(service.buscarPorId(id));
+    } //OK
 
     @PostMapping
-    public ColaboradorCompetencia inserir(ColaboradorCompetencia ColaboradorCompetencia){
+    public ColaboradorCompetenciaDTO inserir(ColaboradorCompetencia ColaboradorCompetencia){
         return service.inserir(ColaboradorCompetencia);
-    }
+    } //OK
 
-    @DeleteMapping(value = "/colaborador-{idColaborador}/competencia-{idCompetencia}")
-    public ResponseEntity<Void> deletar(@PathVariable int idColaborador, @PathVariable int idCompetencia){
-        service.deletar(idColaborador, idCompetencia);
+    @DeleteMapping
+    public ResponseEntity<Void> excluir(ColaboradorCompetenciaPK id){
+        service.excluir(id);
         return ResponseEntity.noContent().build();
-    }
+    } //OK
 
     @PutMapping
-    public ResponseEntity<ColaboradorCompetencia> atualizar(@RequestBody ColaboradorCompetencia c){
-        return ResponseEntity.ok().body(service.atualizar(c));
-    }
-
+    public ResponseEntity<ColaboradorCompetenciaDTO> atualizar() {
+        return ResponseEntity.ok().body(service.atualizar());
+    } //OK
 }
