@@ -2,6 +2,8 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.CompetenciaRepository;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,11 @@ import java.util.Optional;
 @Service
 public class CompetenciaService {
     private final CompetenciaRepository repository;
+    private final CompetenciaMapper competenciaMapper;
 
-    public List<Competencia> procurarTodos(){
-        return repository.findAll();
+    public List<CompetenciaDTO> procurarTodos(){
+        List<Competencia> competencias = repository.findAll();
+        return competenciaMapper.toDto(competencias);
     }
 
     public Competencia procurarPorId(Integer id){
@@ -26,9 +30,10 @@ public class CompetenciaService {
             throw new NoSuchElementException("Elemento não encontrado!");
     }
 
-    public Competencia inserir(Competencia competencia){
+    public void inserir(CompetenciaDTO dto){
 
-        return repository.save(competencia);
+        repository.save(competenciaMapper.toEntity(dto));
+
     }
 
     public Competencia atualizar(Competencia competencia){

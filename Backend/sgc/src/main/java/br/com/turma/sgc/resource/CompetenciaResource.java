@@ -2,26 +2,31 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.service.CompetenciaService;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/competencia")
 public class CompetenciaResource {
-    @Autowired
-    CompetenciaService competenciaService;
+
+    private final CompetenciaService competenciaService;
 
     @GetMapping()
-    public ResponseEntity<List<Competencia>> procurarTodos(){
+    public ResponseEntity<List<CompetenciaDTO>> procurarTodos(){
         return ResponseEntity.ok().body(competenciaService.procurarTodos());
     }
 
     @PostMapping
-    public ResponseEntity<Competencia> inserir(@RequestBody Competencia competencia) {
-        return ResponseEntity.ok().body(competenciaService.inserir(competencia));
+    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
+        competencia competencia;
+
+        return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
     }
 
     @PutMapping
