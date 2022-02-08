@@ -27,7 +27,4 @@ public class CategoriaResource {
     public ResponseEntity<Categoria> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
-
-
-
 }
