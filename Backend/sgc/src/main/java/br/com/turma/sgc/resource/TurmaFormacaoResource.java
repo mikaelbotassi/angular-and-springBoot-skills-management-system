@@ -2,10 +2,13 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.service.TurmaFormacaoService;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.service.entity.TurmaFormacaoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/turma-formacao")
@@ -13,14 +16,15 @@ import java.util.List;
 public class TurmaFormacaoResource {
 
     private final TurmaFormacaoService service;
+    private  final TurmaFormacaoMapper mapper;
 
     @GetMapping
-    public ResponseEntity<List<TurmaFormacao>> procurarTodos(){
+    public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id){
+    public ResponseEntity<Optional<TurmaFormacao>> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
