@@ -40,11 +40,15 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="senioridade" type="INT">
+            <column name="id_senioridade" type="INT">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName="fk_senioridade"
+                                 referencedTableName="senioridade"
+                                 referencedColumnNames="id"/>
 
         <addPrimaryKey tableName="colaborador" columnNames="id" constraintName="pk_colaborador"/>
 
