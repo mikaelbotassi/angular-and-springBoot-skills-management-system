@@ -1,36 +1,33 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.enums.CategoriaEnum;
-import br.com.turma.sgc.service.CategoriaServices;
+import br.com.turma.sgc.domain.Categoria;
+import br.com.turma.sgc.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/*
-@Controller representa uma classe com endpoints (URIs que serão expostas pela API
-a classe indica que o valor retornado pelos métodos devem ser vinculados ao corpo da resposta (response body).
-*/
+import java.util.List;
 
-@SpringBootApplication
-@RequiredArgsConstructor
+@RequestMapping("api/categoria")
 @RestController
-@RequestMapping("/api/categoria")
+@RequiredArgsConstructor
 public class CategoriaResource {
 
-    @Autowired
-    private final CategoriaServices categoriaServices;
+    private final CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<CategoriaEnum[]> findAll(){
-        return ResponseEntity.ok().body(categoriaServices.findAll());
+    public ResponseEntity<List<Categoria>> procurarTodos(){
+        return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoriaEnum> findById(@PathVariable int id){
-        return ResponseEntity.ok().body(categoriaServices.findById(id));
+    public ResponseEntity<Categoria> procurarPorId(@PathVariable int id){
+        return ResponseEntity.ok().body(service.procurarPorId(id));
     }
+
+
+
 }
-
-

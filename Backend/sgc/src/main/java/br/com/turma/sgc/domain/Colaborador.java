@@ -1,8 +1,8 @@
 package br.com.turma.sgc.domain;
 
-import br.com.turma.sgc.enums.SenioridadeEnum;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public class Colaborador implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_COLAB")
-    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", initialValue = 2, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_COLAB")
+    @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", allocationSize = 1)
     private int id;
 
     @Column(name = "nome_colaborador")
@@ -30,6 +30,7 @@ public class Colaborador implements Serializable {
 
     @Lob
     @Column(name = "foto")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] foto;
 
     @Column(name = "email")
@@ -41,6 +42,10 @@ public class Colaborador implements Serializable {
     @Column(name = "data_admissao")
     private LocalDate dataAdmissao;
 
-    @Enumerated(EnumType.ORDINAL)
-    private SenioridadeEnum senioridade;
+    @ManyToOne
+    @JoinColumn(name = "id_senioridade")
+    private Senioridade senioridade;
+
+
+
 }

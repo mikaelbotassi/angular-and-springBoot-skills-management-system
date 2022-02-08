@@ -1,0 +1,7 @@
+Se estiver dando erro na RequiredArguments, ou o Compilador nao executa o Loombock
+
+Siga no IntelliJ
+
+File | Settings | Build, Execution, Deployment | Compiler | Build process VM options field.
+
+-Djps.track.ap.dependencies=false

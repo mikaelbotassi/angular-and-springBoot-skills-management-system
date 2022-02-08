@@ -1,26 +1,32 @@
-Exemplo Inseert Colaborador:
+Exemplo Insert Colaborador:
 {
-  "nomeColaborador": "teste4",
-  "sobrenomeColaborador": "teste 4",
-  "cpf": "3364",
-  "foto": "MTAxMDEwMQ==",
-  "email": "fre",
-  "dataNascimento": "2001-11-08",
-  "dataAdmissao": "2022-08-11",
-  "senioridade": "JUNIOR"
+"nomeColaborador": "Mikael",
+"sobrenomeColaborador": "Botassi",
+"cpf": "134244",
+"foto": "bXkvZmlsZS5uYW1l",
+"email": "svd",
+"dataNascimento": "2001-11-08",
+"dataAdmissao": "2022-10-02",
+"senioridade": {
+"id": 1,
+"nome": "Estagiário"
+}
 }
 
 Exemplo Update Colaborador:
 {
-  "id": 1,
-  "nomeColaborador": "teste5",
-  "sobrenomeColaborador": "teste 5",
-  "cpf": "3364",
-  "foto": "MTAxMDEwMQ==",
-  "email": "fre",
-  "dataNascimento": "2001-11-08",
-  "dataAdmissao": "2022-08-11",
-  "senioridade": "JUNIOR"
+"id": 1,
+"nomeColaborador": "Mikael",
+"sobrenomeColaborador": "Botassi",
+"cpf": "134244",
+"foto": "bXkvZmlsZS5uYW1l",
+"email": "Mikael@gmail.com",
+"dataNascimento": "2001-11-08",
+"dataAdmissao": "2022-10-02",
+"senioridade": {
+"id": 2,
+"nome": "Júnior"
+}
 }
 
 Exemplo Turma Formação:
@@ -30,15 +36,82 @@ Inserção:
   "descricao": "teste Insert 2",
   "inicio": "2001-11-08",
   "termino": "2022-08-11",
-  "status": "INICIADA"
+  "status":{
+  "id": 1,
+    "nome": "Pendente"
+}
 }
 
 Update:
+
 {
-  "id": 3,
-  "nome": "testeInsert 2",
-  "descricao": "teste Insert 2",
-  "inicio": "2001-11-08",
-  "termino": "2022-08-11",
-  "status": "INICIADA"
+"id": 1,
+"nome": "testeInsert 2",
+"descricao": "teste Insert 2",
+"inicio": "2001-11-08",
+"termino": "2022-08-11",
+"status": {
+"id": 1,
+"nome": "Concluída"
+}
+}
+
+EXEMPLO COMPETÊNCIA:
+INSERT:
+{
+"nome": "testeInsert",
+"descricao": "teste Insert 1",
+"categoria": {
+"id": 1,
+"nome": "Backend"
+}
+}
+
+UPDATE:
+{
+"id": 1,
+"nome": "testeUpdate",
+"descricao": "teste Update 1",
+"categoria": {
+"id": 1,
+"nome": "Backend"
+}
+}
+EXEMPLO TURMA COLABORADOR COMPETENCIA:
+{
+  "idTurmaFormacao": 3,
+  "idColaborador": 1,
+  "idCompetencia": 1
+}
+
+TESTE COLABORADOR_COMPETENCIA:
+{
+"id": {
+"idColaborador": 1,
+"idCompetencia": 1
+},
+"colaborador": {
+"id": 1,
+"nomeColaborador": "Mikael",
+"sobrenomeColaborador": "Botassi",
+"cpf": "134244",
+"foto": "bXkvZmlsZS5uYW1l",
+"email": "Mikael@gmail.com",
+"dataNascimento": "2001-11-08",
+"dataAdmissao": "2022-10-02",
+"senioridade": {
+"id": 2,
+"nome": "Junior"
+}
+},
+"competencia": {
+"id": 1,
+"nome": "testeUpdate",
+"descricao": "teste Update 1",
+"categoria": {
+"id": 1,
+"nome": "Backend"
+}
+},
+"nivel": "NIVEL3"
 }

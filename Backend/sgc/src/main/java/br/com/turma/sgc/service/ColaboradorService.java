@@ -14,11 +14,11 @@ public class ColaboradorService {
 
     private final ColaboradorRepository repository;
 
-    public List<Colaborador> findAll(){
+    public List<Colaborador> procurarTodos(){
         return repository.findAll();
     }
 
-    public Colaborador findById(int id){
+    public Colaborador procurarPorId(int id){
         Optional<Colaborador> obj = repository.findById(id);
         if(obj.isPresent()){
             return obj.get();
@@ -29,15 +29,15 @@ public class ColaboradorService {
 
     }
 
-    public Colaborador insert(Colaborador colab){
+    public Colaborador inserir(Colaborador colab){
         return repository.save(colab);
     }
 
-    public void delete(int id){
+    public void deletar(int id){
         repository.deleteById(id);
     }
 
-    public Colaborador update(Colaborador c){
+    public Colaborador atualizar(Colaborador c){
         return repository.save(c);
     }
 

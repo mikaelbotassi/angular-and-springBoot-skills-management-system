@@ -1,19 +1,26 @@
 package br.com.turma.sgc.service;
 
-import br.com.turma.sgc.enums.SenioridadeEnum;
+import br.com.turma.sgc.domain.Senioridade;
+import br.com.turma.sgc.repository.SenioridadeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SenioridadeService {
 
-    public SenioridadeEnum[] findAll(){
-        return SenioridadeEnum.values();
+    private final SenioridadeRepository repository;
+
+    public List<Senioridade> procurarTodos(){
+        return repository.findAll();
     }
 
-    public SenioridadeEnum findById(int id){
-        return SenioridadeEnum.valueOf(id);
+    public Senioridade procurarPorId(int id){
+        Optional<Senioridade> obj = repository.findById(id);
+        return obj.get();
     }
 
 }
