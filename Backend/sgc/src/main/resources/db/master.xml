@@ -4,11 +4,22 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    
+    <include file = "db/changelog/20220207203400_criacao_de_tabela_status.xml" relativeToChangelogFile="false"/>
+
+    <include file = "db/changelog/20220207203400_insercao_tabela_status.xml" relativeToChangelogFile="false"/>
+
+    <include file="db/changelog/20220207184100_criacao_de_tabela_senioridade.xml"
+             relativeToChangelogFile="false"/>
+    
+    <include file="db/changelog/20220207183000_criacao_tabela_categoria.xml" relativeToChangelogFile="false"/>
+    
+    <include file="db/changelog/20220207184000_insert_categoria.xml" relativeToChangelogFile="false"/>
 
     <include file="db/changelog/20220204193200_criacao_tabela_colaborador.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="db/changelog/20220205191700_criacao_de_tabela_turma_formacao.xml"
+    <include file="db/changelog/20220205191700_criacao_tabela_turma_formacao.xml"
              relativeToChangelogFile="false"/>
 
     <include file="db/changelog/20220204135200_criacao_de_tabela_competencia.xml"
@@ -17,10 +28,7 @@
     <include file="db/changelog/20220207163300_criacao_de_tabela_colaborador_competencia.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="db/changelog/202202065420_criacao_de_tabela_turma_colaborador_competencia.xml"
-             relativeToChangelogFile="false"/>
-
-    <include file="db/changelog/20220207184100_criacao_de_tabela_senioridade.xml"
+    <include file="db/changelog/20220206174200_criacao_de_tabela_turma_colaborador_competencia.xml"
              relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

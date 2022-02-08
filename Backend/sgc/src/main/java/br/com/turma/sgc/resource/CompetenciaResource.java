@@ -22,24 +22,19 @@ public class CompetenciaResource {
         return ResponseEntity.ok().body(competenciaService.procurarTodos());
     }
 
-    @PostMapping
-    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
-        competencia competencia;
 
-        return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
-    }
 
     @PutMapping
     public ResponseEntity<Competencia> atualizar(@RequestBody Competencia competencia) {
         return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Competencia> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Integer id){
         return ResponseEntity.noContent().build();
     }

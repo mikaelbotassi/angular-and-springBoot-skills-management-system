@@ -14,11 +14,11 @@ public class SenioridadeService {
 
     private final SenioridadeRepository repository;
 
-    public List<Senioridade> findAll(){
+    public List<Senioridade> procurarTodos(){
         return repository.findAll();
     }
 
-    public Senioridade findById(int id){
+    public Senioridade procurarPorId(int id){
         Optional<Senioridade> obj = repository.findById(id);
         return obj.get();
     }
