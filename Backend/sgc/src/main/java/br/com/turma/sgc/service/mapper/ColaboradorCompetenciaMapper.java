@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 public interface ColaboradorCompetenciaMapper extends EntityMapper <ColaboradorCompetenciaDTO, ColaboradorCompetencia> {
     
     @Override
-    @Mapping(source = "colaborador_competencia.nivel", target = "nivel")
+    @Mapping(source = "colaborador_competencia.nome", target = "nivel")
     ColaboradorCompetenciaDTO toDto (ColaboradorCompetencia entity);
     
     @Override
