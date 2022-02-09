@@ -15,6 +15,7 @@ public class TurmaFormacaoResource {
 
     private final TurmaFormacaoService service;
 
+
     @GetMapping
     public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());

@@ -1,4 +1,4 @@
-package br.com.turma.sgc.service;
+package br.com.turma.sgc.service.resource.exception;
 
 public class RegraNegocioException extends RuntimeException {
 
