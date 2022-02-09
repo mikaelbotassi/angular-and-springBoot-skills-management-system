@@ -2,6 +2,7 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.service.TurmaFormacaoService;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +16,17 @@ public class TurmaFormacaoResource {
     private final TurmaFormacaoService service;
 
     @GetMapping
-    public ResponseEntity<List<TurmaFormacao>> procurarTodos(){
+    public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id){
+    public ResponseEntity<TurmaFormacaoDTO> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacao turma){
         return ResponseEntity.ok().body(service.inserir(turma));
     }
 
@@ -36,7 +37,7 @@ public class TurmaFormacaoResource {
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody TurmaFormacao turma){
         return ResponseEntity.ok().body(service.atualizar(turma));
     }
 

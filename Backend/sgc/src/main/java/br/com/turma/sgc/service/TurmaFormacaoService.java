@@ -2,6 +2,8 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +16,30 @@ import java.util.Optional;
 public class TurmaFormacaoService {
 
     private final TurmaFormacaoRepository repository;
+    private final TurmaFormacaoMapper mapper;
 
-    public List<TurmaFormacao> procurarTodos(){
-        return repository.findAll();
+    public List<TurmaFormacaoDTO> procurarTodos(){
+        return mapper.toDto(repository.findAll());
     }
 
-    public TurmaFormacao procurarPorId(int id){
+    public TurmaFormacaoDTO procurarPorId(int id){
         Optional<TurmaFormacao> obj = repository.findById(id);
         if(obj.isPresent())
-            return obj.get();
+            return mapper.toDto(obj.get());
         else
             throw new NoSuchElementException("Turma não encontrado!");
     }
 
-    public TurmaFormacao inserir(TurmaFormacao turma){
-        return repository.save(turma);
+    public TurmaFormacaoDTO inserir(TurmaFormacao turma){
+        return mapper.toDto(repository.save(turma));
     }
 
     public void deletar(int id){
         repository.deleteById(id);
     }
 
-    public TurmaFormacao atualizar(TurmaFormacao turma){
-        return repository.save(turma);
+    public TurmaFormacaoDTO atualizar(TurmaFormacao turma){
+        return mapper.toDto(repository.save(turma));
     }
 
 }
