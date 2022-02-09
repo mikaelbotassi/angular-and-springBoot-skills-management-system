@@ -35,20 +35,26 @@ public class TurmaColaboradorCompetenciaService {
 
     }
 
-    public TurmaColaboradorCompetencia inserirPorPK(TurmaColaboradorCompetenciaPK pk){
-        return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.procurarPorId(pk.getIdTurmaFormacao()),
-                colaboradorService.procurarPorId(pk.getIdColaborador()), competenciaService.procurarPorId(pk.getIdCompetencia()));
-    }
-
-    public TurmaColaboradorCompetencia inserir(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
-
-        TurmaColaboradorCompetencia novo = inserirPorPK(turmaColaboradorCompetenciaPK);
-
-        return turmaColaboradorCompetenciaRepository.save(novo);
-    }
-
-
-    public void deletar(int idTurma, int idColaborador, int idCompetencia) {
-        turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
-    }
+//    public TurmaColaboradorCompetencia inserirPorPK(TurmaColaboradorCompetenciaPK pk){
+//        return new TurmaColaboradorCompetencia(
+//                pk,
+//                turmaFormacaoService.procurarPorId(
+//                        pk.getIdTurmaFormacao()
+//                ),
+//                colaboradorService.procurarPorId(pk.getIdColaborador()),
+//                competenciaService.procurarPorId(pk.getIdCompetencia())
+//        );
+//    }
+//
+//    public TurmaColaboradorCompetencia inserir(TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
+//
+//        TurmaColaboradorCompetencia novo = inserirPorPK(turmaColaboradorCompetenciaPK);
+//
+//        return turmaColaboradorCompetenciaRepository.save(novo);
+//    }
+//
+//
+//    public void deletar(int idTurma, int idColaborador, int idCompetencia) {
+//        turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+//    }
 }

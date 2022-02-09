@@ -1,6 +1,7 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Competencia;
+import br.com.turma.sgc.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,27 +16,28 @@ public class CompetenciaResource {
     CompetenciaService competenciaService;
 
     @GetMapping()
-    public ResponseEntity<List<Competencia>> procurarTodos(){
+    public ResponseEntity<List<CompetenciaDTO>> procurarTodos(){
         return ResponseEntity.ok().body(competenciaService.procurarTodos());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CompetenciaDTO> procurarPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
+    }
+
     @PostMapping
-    public ResponseEntity<Competencia> inserir(@RequestBody Competencia competencia) {
+    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody Competencia competencia) {
         return ResponseEntity.ok().body(competenciaService.inserir(competencia));
     }
 
     @PutMapping
-    public ResponseEntity<Competencia> atualizar(@RequestBody Competencia competencia) {
+    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody Competencia competencia) {
         return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Competencia> procurarPorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Integer id){
+        competenciaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 }
