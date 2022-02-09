@@ -5,11 +5,12 @@ import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -26,12 +27,7 @@ public class TurmaColaboradorCompetenciaService {
 
     public TurmaColaboradorCompetenciaDTO procurarPorId(int idTurma, int idColaborador, int idCompetencia){
         Optional<TurmaColaboradorCompetencia> obj = turmaColaboradorCompetenciaRepository.findById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
-        if(obj.isPresent()){
-            return mapper.toDto(obj.get());
-        }
-        else{
-            throw new NoSuchElementException("Elemento não encontrado!");
-        }
+        return mapper.toDto(obj.orElseThrow(()->new RegraNegocioException("Disciplina não existe")));
 
     }
 
@@ -63,8 +59,22 @@ public class TurmaColaboradorCompetenciaService {
         return turmaColaboradorCompetenciaRepository.save(novo);
     }
 
+    */
+    /*public void deletar(int idTurma, int idColaborador, int idCompetencia) {
+        try {
+            turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+        }
+        catch (RuntimeException r){
+            r.printStackTrace();
+        }
+    }*/
 
     public void deletar(int idTurma, int idColaborador, int idCompetencia) {
-        turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
-    }*/
+        try {
+            turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+        } catch (EmptyResultDataAccessException erro) {
+            throw new RegraNegocioException("Elemento não encontrado", erro);
+        }
+    }
+
 }
