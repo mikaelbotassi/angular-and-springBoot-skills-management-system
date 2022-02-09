@@ -13,7 +13,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import javax.validation.ConstraintViolationException;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -48,7 +47,7 @@ public class ValidationHandler extends ResponseEntityExceptionHandler{
         return getExceptionResponseEntity(HttpStatus.BAD_REQUEST, request, validationErrors);
     }
 
-    @ExceptionHandler(RegraNegocioException.class)
+    @ExceptionHandler(RegraNegocioException.class)// Este método vai interceptar qual excessão do tipo dentro da Anottattion
     public ResponseEntity<Object> handleException(RegraNegocioException exception, WebRequest request) {
         return getExceptionResponseEntity(HttpStatus.BAD_REQUEST, request, Collections.singletonList(exception.getMessage()));
     }
