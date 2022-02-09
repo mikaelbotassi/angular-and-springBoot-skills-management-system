@@ -2,8 +2,6 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.service.ColaboradorCompetenciaService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +27,8 @@ public class ColaboradorCompetenciaResource {
     }
 
     @PostMapping
-    public ColaboradorCompetencia inserir(ColaboradorCompetencia ColaboradorCompetencia){
-        return service.inserir(ColaboradorCompetencia);
+    public ColaboradorCompetencia inserir(ColaboradorCompetencia colaboradorCompetencia){
+        return service.inserir(colaboradorCompetencia);
     }
 
     @DeleteMapping(value = "/colaborador-{idColaborador}/competencia-{idCompetencia}")

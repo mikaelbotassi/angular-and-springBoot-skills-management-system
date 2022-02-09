@@ -3,8 +3,9 @@ package br.com.turma.sgc.service;
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
+import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,18 +17,17 @@ import java.util.Optional;
 public class TurmaColaboradorCompetenciaService {
 
     private final TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
-    private final TurmaFormacaoService turmaFormacaoService;
-    private final ColaboradorService colaboradorService;
-    private final CompetenciaService competenciaService;
+    private final TurmaColaboradorCompetenciaMapper mapper;
 
-    public ResponseEntity<List<TurmaColaboradorCompetencia>> procurarTodos(){
-        return ResponseEntity.ok().body(turmaColaboradorCompetenciaRepository.findAll());
+    public List<TurmaColaboradorCompetenciaDTO> procurarTodos() {
+        List<TurmaColaboradorCompetencia> colaboradorCompetencias = turmaColaboradorCompetenciaRepository.findAll();
+        return mapper.toDto(colaboradorCompetencias);
     }
 
-    public TurmaColaboradorCompetencia procurarPorId(int idTurma, int idColaborador, int idCompetencia){
+    public TurmaColaboradorCompetenciaDTO procurarPorId(int idTurma, int idColaborador, int idCompetencia){
         Optional<TurmaColaboradorCompetencia> obj = turmaColaboradorCompetenciaRepository.findById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
         if(obj.isPresent()){
-            return obj.get();
+            return mapper.toDto(obj.get());
         }
         else{
             throw new NoSuchElementException("Elemento não encontrado!");
@@ -35,6 +35,22 @@ public class TurmaColaboradorCompetenciaService {
 
     }
 
+    public List<TurmaColaboradorCompetenciaDTO> procurarTodosPorIdTurma(Integer idTurma){
+        List<TurmaColaboradorCompetencia> entitys = turmaColaboradorCompetenciaRepository.procurarTodosPorIdTurma(idTurma);
+        return mapper.toDto(entitys);
+    }
+
+    public List<TurmaColaboradorCompetenciaDTO> procurarTodosPorIdColaborador(Integer idColaborador){
+        List<TurmaColaboradorCompetencia> entitys = turmaColaboradorCompetenciaRepository.procurarTodosPorIdColaborador(idColaborador);
+        return mapper.toDto(entitys);
+    }
+
+    public List<TurmaColaboradorCompetenciaDTO> procurarTodosPorIdCompetencia(Integer idCompetencia){
+        List<TurmaColaboradorCompetencia> entitys = turmaColaboradorCompetenciaRepository.procurarTodosPorIdCompetencia(idCompetencia);
+        return mapper.toDto(entitys);
+    }
+
+    /*
     public TurmaColaboradorCompetencia inserirPorPK(TurmaColaboradorCompetenciaPK pk){
         return new TurmaColaboradorCompetencia(pk, turmaFormacaoService.procurarPorId(pk.getIdTurmaFormacao()),
                 colaboradorService.procurarPorId(pk.getIdColaborador()), competenciaService.procurarPorId(pk.getIdCompetencia()));
@@ -50,5 +66,5 @@ public class TurmaColaboradorCompetenciaService {
 
     public void deletar(int idTurma, int idColaborador, int idCompetencia) {
         turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
-    }
+    }*/
 }
