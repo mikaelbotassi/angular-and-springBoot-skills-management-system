@@ -38,6 +38,9 @@ public class CompetenciaService {
     }
 
     public CompetenciaDTO atualizar(Competencia competencia) {
+        competenciaRepository
+                .findById(competencia.getId())
+                .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
         return competenciaMapper.toDto(
                 competenciaRepository.save(competencia)
         );
