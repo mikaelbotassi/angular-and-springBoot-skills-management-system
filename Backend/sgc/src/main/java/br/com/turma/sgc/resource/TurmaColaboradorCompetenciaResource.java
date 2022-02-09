@@ -47,13 +47,11 @@ public class TurmaColaboradorCompetenciaResource {
     public TurmaColaboradorCompetencia inserir(@RequestBody TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK){
         return service.inserir(turmaColaboradorCompetenciaPK);
     }
-
+    */
     @DeleteMapping(value = "/turma/{idTurma}/colaborador/{idColaborador}/competencia/{idCompetencia}")
     public ResponseEntity<Void> deletar(@PathVariable int idTurma, @PathVariable int idColaborador, @PathVariable int idCompetencia){
         service.deletar(idTurma, idColaborador, idCompetencia);
         return ResponseEntity.noContent().build();
     }
-
-     */
 
 }

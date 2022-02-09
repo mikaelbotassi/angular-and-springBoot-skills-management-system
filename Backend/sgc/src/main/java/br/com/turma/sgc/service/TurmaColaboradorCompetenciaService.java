@@ -7,6 +7,7 @@ import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,8 +59,22 @@ public class TurmaColaboradorCompetenciaService {
         return turmaColaboradorCompetenciaRepository.save(novo);
     }
 
+    */
+    /*public void deletar(int idTurma, int idColaborador, int idCompetencia) {
+        try {
+            turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+        }
+        catch (RuntimeException r){
+            r.printStackTrace();
+        }
+    }*/
 
     public void deletar(int idTurma, int idColaborador, int idCompetencia) {
-        turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
-    }*/
+        try {
+            turmaColaboradorCompetenciaRepository.deleteById(new TurmaColaboradorCompetenciaPK(idTurma, idColaborador, idCompetencia));
+        } catch (EmptyResultDataAccessException erro) {
+            throw new RegraNegocioException("Elemento não encontrado", erro);
+        }
+    }
+
 }
