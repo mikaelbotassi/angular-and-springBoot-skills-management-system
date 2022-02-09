@@ -87,6 +87,11 @@
 			<artifactId>postgresql</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>br.com.turma</groupId>
+			<artifactId>sgc</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
