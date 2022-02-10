@@ -24,7 +24,7 @@ public class CategoriaResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> procurarPorId(@PathVariable int id){
+    public ResponseEntity<Categoria> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 

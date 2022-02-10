@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/turma-formacao")
+@RequestMapping("/api/turmaFormacao")
 @RequiredArgsConstructor
 public class TurmaFormacaoResource {
 
@@ -22,24 +22,29 @@ public class TurmaFormacaoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacaoDTO> procurarPorId(@PathVariable int id){
+    public ResponseEntity<TurmaFormacaoDTO> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacaoDTO turma){
         return ResponseEntity.ok().body(service.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id){
+    public ResponseEntity<Void> deletar(@PathVariable Integer id){
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody TurmaFormacaoDTO turma){
         return ResponseEntity.ok().body(service.atualizar(turma));
+    }
+
+    @GetMapping(value = "/procurarTodosPorIdStatus/{id}")
+    public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodosPorIdStatus (@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.procurarTodosPorIdStatus(id));
     }
 
 }

@@ -11,10 +11,10 @@ public enum StatusEnum {
     INICIADA(2, "Iniciada"),
     CONCLUIDA(3, "Concluida");
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    StatusEnum(int id, String nome){
+    StatusEnum(Integer id, String nome){
         this.id = id;
         this.nome = nome;
     }
@@ -28,7 +28,7 @@ public enum StatusEnum {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static StatusEnum valueOf(int id){
+    public static StatusEnum valueOf(Integer id){
         for(StatusEnum value : StatusEnum.values()){
             if(value.getId() == id){
                 return value;

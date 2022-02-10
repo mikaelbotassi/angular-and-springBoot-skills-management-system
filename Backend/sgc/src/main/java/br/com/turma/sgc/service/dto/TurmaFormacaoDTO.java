@@ -3,7 +3,10 @@ package br.com.turma.sgc.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @Getter
@@ -15,5 +18,7 @@ public class TurmaFormacaoDTO implements Serializable {
     private Integer id;
     private String nome;
     private String descricao;
-    private String statusNome;
+    private LocalDate inicio;
+    private LocalDate termino;
+    private Integer statusId;
 }

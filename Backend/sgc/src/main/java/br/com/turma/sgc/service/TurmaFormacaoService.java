@@ -26,23 +26,24 @@ public class TurmaFormacaoService {
     }
 
 
-    public TurmaFormacaoDTO procurarPorId(@Valid int id){
-//        Optional<TurmaFormacao> obj = repository.findById(id);
-//        obj.orElseThrow(()-> new RegraNegocioException("não encontrado"));
-//        return mapper.toDto(obj.get());
+    public TurmaFormacaoDTO procurarPorId(@Valid Integer id){
         return mapper.toDto( repository.findById(id).orElseThrow(()-> new RegraNegocioException("nao encontrado")));
     }
 
-    public TurmaFormacaoDTO inserir(@Valid TurmaFormacao turma){
-        return mapper.toDto(repository.save(turma));
+    public TurmaFormacaoDTO inserir(@Valid TurmaFormacaoDTO turma){
+        return mapper.toDto(repository.save(mapper.toEntity(turma)));
     }
 
-    public void deletar(@Valid int id){
+    public void deletar(@Valid Integer id){
         repository.deleteById(id);
     }
 
-    public TurmaFormacaoDTO atualizar(@Valid TurmaFormacao turma){
-        return mapper.toDto(repository.save(turma));
+    public TurmaFormacaoDTO atualizar(@Valid TurmaFormacaoDTO turma){
+        return mapper.toDto(repository.save(mapper.toEntity(turma)));
+    }
+
+    public List<TurmaFormacaoDTO> procurarTodosPorIdStatus(@Valid Integer id){
+        return mapper.toDto(repository.procurarTodosPorIdStatus(id));
     }
 
 }

@@ -18,7 +18,7 @@ public class StatusService {
         return repository.findAll();
     }
 
-    public Status procurarPorId(int id){
+    public Status procurarPorId(Integer id){
         Optional<Status> obj = repository.findById(id);
         return obj.get();
     }

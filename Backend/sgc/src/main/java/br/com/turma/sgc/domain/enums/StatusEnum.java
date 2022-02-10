@@ -13,7 +13,7 @@ public enum StatusEnum {
     INICIADA(2, "Iniciada"),
     CONCLUIDA(3, "Concluida");
 
-    private int id;
+    private Integer id;
     private String nome;
 
     public static StatusEnum pegaEnumPorNome(String status) {
@@ -25,7 +25,7 @@ public enum StatusEnum {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static StatusEnum pegaEnumPorId(int id){
+    public static StatusEnum pegaEnumPorId(Integer id){
         for(StatusEnum value : StatusEnum.values()){
             if(value.getId() == id){
                 return value;

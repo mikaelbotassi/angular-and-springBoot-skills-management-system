@@ -20,10 +20,10 @@ public enum CategoriaEnum {
     DEVOPS(8, "Devops"),
     LIDERANCA(9, "Liderança");
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    public static CategoriaEnum PegaEnumPorId(int id){
+    public static CategoriaEnum PegaEnumPorId(Integer id){
         for(CategoriaEnum value : CategoriaEnum.values()){
             if(value.getId() == id){
                 return value;

@@ -18,7 +18,7 @@ public class ColaboradorService {
         return repository.findAll();
     }
 
-    public Colaborador procurarPorId(int id){
+    public Colaborador procurarPorId(Integer id){
         Optional<Colaborador> obj = repository.findById(id);
         if(obj.isPresent()){
             return obj.get();
@@ -33,7 +33,7 @@ public class ColaboradorService {
         return repository.save(colab);
     }
 
-    public void deletar(int id){
+    public void deletar(Integer id){
         repository.deleteById(id);
     }
 
