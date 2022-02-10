@@ -1,4 +1,4 @@
-package br.com.turma.sgc.domain.enums;
+package br.com.turma.sgc.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

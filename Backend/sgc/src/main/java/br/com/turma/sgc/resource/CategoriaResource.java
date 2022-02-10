@@ -1,33 +1,43 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Categoria;
 import br.com.turma.sgc.service.CategoriaService;
+import br.com.turma.sgc.service.dto.CategoriaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/categoria")
+@RequestMapping("/api/categoria")
 @RestController
 @RequiredArgsConstructor
 public class CategoriaResource {
 
     private final CategoriaService service;
 
-    @GetMapping
-    public ResponseEntity<List<Categoria>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
-    }
-
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> procurarPorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.procurarPorId(id));
+    public ResponseEntity<CategoriaDTO> buscarCategoriaPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.buscarCategoriaPorId(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> listarTodasCategorias(){
+        return ResponseEntity.ok().body(service.listarTodasCategorias());
+    }
 
+    @PostMapping
+    public ResponseEntity<CategoriaDTO> inserirCategoria(@RequestBody CategoriaDTO dto) {
+        return ResponseEntity.ok().body(service.inserirCategoria(dto));
+    }
 
+    @PutMapping
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@RequestBody CategoriaDTO dto) {
+        return ResponseEntity.ok().body(service.atualizarCategoria(dto));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> excluirCategoria(@PathVariable Integer id) {
+        service.excluirCategoria(id);
+        return ResponseEntity.noContent().build();
+    }
 }
