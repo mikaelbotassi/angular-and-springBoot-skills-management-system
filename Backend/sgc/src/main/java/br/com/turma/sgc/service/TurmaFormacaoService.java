@@ -36,7 +36,7 @@ public class TurmaFormacaoService {
 
     public void deletar(@Valid Integer id){
         TurmaFormacao turma = repository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
-        if(turmaColaboradorCompetenciaRepository.procurarTodosPorIdTurma(turma.getId()).isEmpty())
+        if(!(turmaColaboradorCompetenciaRepository.procurarTodosPorIdTurma(turma.getId()).isEmpty()))
             throw new RegraNegocioException("Essa turma está associada a um colaborador");
         repository.deleteById(id);
     }

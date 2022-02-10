@@ -4,7 +4,6 @@ package br.com.turma.sgc.service.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.time.LocalDate;
 
