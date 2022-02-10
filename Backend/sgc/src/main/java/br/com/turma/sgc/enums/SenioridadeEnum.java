@@ -1,10 +1,14 @@
 package br.com.turma.sgc.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public enum SenioridadeEnum implements Serializable {
 
@@ -15,11 +19,6 @@ public enum SenioridadeEnum implements Serializable {
 
     private Integer id;
     private String nome;
-
-    SenioridadeEnum(Integer id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
 
     public static SenioridadeEnum findByName(String senioridade) {
         for(SenioridadeEnum value : SenioridadeEnum.values()){

@@ -2,11 +2,14 @@ package br.com.turma.sgc.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public enum NivelEnum{
 
     NIVEL1(1, "Júnior"),
@@ -16,7 +19,7 @@ public enum NivelEnum{
     private Integer id;
     private String nome;
 
-    public static NivelEnum PegaEnumPorNome(String nivel) {
+    public static NivelEnum pegaEnumPorNome(String nivel) {
         for(NivelEnum value : NivelEnum.values()){
             if(Objects.equals(value.getNome(), nivel)){
                 return value;
