@@ -17,7 +17,7 @@ public class Colaborador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_COLAB")
     @SequenceGenerator(name = "SQ_COLAB", sequenceName = "sq_colaborador", allocationSize = 1)
-    private int id;
+    private Integer id;
 
     @Column(name = "nome_colaborador")
     private String nomeColaborador;

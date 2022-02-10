@@ -32,6 +32,6 @@ public class ColaboradorCompetencia implements Serializable {
     private Competencia competencia;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "nivel")
+    @Column(name = "nivel", insertable=false, updatable=false)
     private NivelEnum nivel;
 }

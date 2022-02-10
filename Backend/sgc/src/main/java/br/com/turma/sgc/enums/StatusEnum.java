@@ -1,9 +1,14 @@
 package br.com.turma.sgc.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public enum StatusEnum {
 
@@ -11,13 +16,8 @@ public enum StatusEnum {
     INICIADA(2, "Iniciada"),
     CONCLUIDA(3, "Concluida");
 
-    private int id;
+    private Integer id;
     private String nome;
-
-    StatusEnum(int id, String nome){
-        this.id = id;
-        this.nome = nome;
-    }
 
     public static StatusEnum findByName(String status) {
         for(StatusEnum value : StatusEnum.values()){
@@ -28,7 +28,7 @@ public enum StatusEnum {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static StatusEnum valueOf(int id){
+    public static StatusEnum valueOf(Integer id){
         for(StatusEnum value : StatusEnum.values()){
             if(value.getId() == id){
                 return value;

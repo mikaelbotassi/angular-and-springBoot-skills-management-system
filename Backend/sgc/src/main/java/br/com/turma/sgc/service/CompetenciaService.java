@@ -1,7 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
-import br.com.turma.sgc.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
@@ -41,8 +41,7 @@ public class CompetenciaService {
 
     public CompetenciaDTO atualizar(CompetenciaDTO competenciaDTO) {
         competenciaRepository
-                .findById(competenciaDTO.getId())
-                .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
+                .findById(competenciaDTO.getId()).orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
         return competenciaMapper.toDto(
                 competenciaRepository.save(
                         competenciaMapper.toEntity(competenciaDTO)
