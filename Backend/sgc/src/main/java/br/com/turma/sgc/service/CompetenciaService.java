@@ -31,18 +31,22 @@ public class CompetenciaService {
         return competenciaMapper.toDto(competencia);
     }
 
-    public CompetenciaDTO inserir(Competencia competencia) {
+    public CompetenciaDTO inserir(CompetenciaDTO competenciaDTO) {
         return competenciaMapper.toDto(
-                competenciaRepository.save(competencia)
+                competenciaRepository.save(
+                        competenciaMapper.toEntity(competenciaDTO)
+                )
         );
     }
 
-    public CompetenciaDTO atualizar(Competencia competencia) {
+    public CompetenciaDTO atualizar(CompetenciaDTO competenciaDTO) {
         competenciaRepository
-                .findById(competencia.getId())
+                .findById(competenciaDTO.getId())
                 .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
         return competenciaMapper.toDto(
-                competenciaRepository.save(competencia)
+                competenciaRepository.save(
+                        competenciaMapper.toEntity(competenciaDTO)
+                )
         );
     }
 

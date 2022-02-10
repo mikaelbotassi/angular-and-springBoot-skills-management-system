@@ -6,8 +6,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CompetenciaMapper extends EntityMapper<Competencia, CompetenciaDTO>{
+public interface CompetenciaMapper extends EntityMapper<CompetenciaDTO, Competencia>{
     @Override
-    @Mapping(source = "categoria.nome", target = "categoriaNome")
+    @Mapping(source = "categoria.id", target = "categoriaId")
     CompetenciaDTO toDto(Competencia entity);
+
+    @Override
+    @Mapping(source = "categoriaId", target = "categoria.id")
+    Competencia toEntity(CompetenciaDTO dto);
 }

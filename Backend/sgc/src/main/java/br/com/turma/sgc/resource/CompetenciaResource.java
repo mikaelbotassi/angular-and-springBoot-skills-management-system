@@ -26,13 +26,13 @@ public class CompetenciaResource {
     }
 
     @PostMapping
-    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody Competencia competencia) {
-        return ResponseEntity.ok().body(competenciaService.inserir(competencia));
+    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
+        return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
     }
 
     @PutMapping
-    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody Competencia competencia) {
-        return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
+    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody CompetenciaDTO competenciaDTO) {
+        return ResponseEntity.ok().body(competenciaService.atualizar(competenciaDTO));
     }
 
     @DeleteMapping("/{id}")
