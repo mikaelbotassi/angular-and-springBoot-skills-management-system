@@ -1,6 +1,5 @@
 package br.com.turma.sgc.domain;
 
-import br.com.turma.sgc.domain.enums.CategoriaEnum;
 import lombok.Getter;
 import lombok.Setter;
 

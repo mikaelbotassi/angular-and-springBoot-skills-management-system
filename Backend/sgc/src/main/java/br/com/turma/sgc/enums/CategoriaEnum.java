@@ -1,10 +1,7 @@
-package br.com.turma.sgc.domain.enums;
+package br.com.turma.sgc.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.io.Serializable;
-import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
@@ -20,10 +17,10 @@ public enum CategoriaEnum {
     DEVOPS(8, "Devops"),
     LIDERANCA(9, "Liderança");
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    public static CategoriaEnum PegaEnumPorId(int id){
+    public static CategoriaEnum PegaEnumPorId(Integer id){
         for(CategoriaEnum value : CategoriaEnum.values()){
             if(value.getId() == id){
                 return value;

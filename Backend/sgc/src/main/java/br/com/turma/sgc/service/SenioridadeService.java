@@ -18,7 +18,7 @@ public class SenioridadeService {
         return repository.findAll();
     }
 
-    public Senioridade procurarPorId(int id){
+    public Senioridade procurarPorId(Integer id){
         Optional<Senioridade> obj = repository.findById(id);
         return obj.get();
     }

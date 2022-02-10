@@ -18,7 +18,7 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public Categoria procurarPorId(int id){
+    public Categoria procurarPorId(Integer id){
         Optional<Categoria> obj = repository.findById(id);
         if(obj.isPresent()){
             return obj.get();
