@@ -1,6 +1,5 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,10 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Status;
 import br.com.turma.sgc.service.StatusService;
+import br.com.turma.sgc.service.dto.StatusDTO;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,16 +15,30 @@ public class StatusResource {
 
     private final StatusService service;
 
-    @GetMapping
-    public ResponseEntity<List<Status>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
-    }
-
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Status> procurarPorId(@PathVariable int id){
-        return ResponseEntity.ok().body(service.procurarPorId(id));
+    public ResponseEntity<StatusDTO> buscarStatusPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.buscarStatusPorId(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<StatusDTO>> listarTodosStatus(){
+        return ResponseEntity.ok().body(service.listarTodosStatus());
+    }
 
+    @PostMapping
+    public ResponseEntity<StatusDTO> inserirStatus(@RequestBody StatusDTO dto) {
+        return ResponseEntity.ok().body(service.inserirStatus(dto));
+    }
+
+    @PutMapping
+    public ResponseEntity<StatusDTO> atualizarStatus(@RequestBody StatusDTO dto) {
+        return ResponseEntity.ok().body(service.atualizarStatus(dto));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> excluirStatus(@PathVariable Integer id) {
+        service.excluirStatus(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

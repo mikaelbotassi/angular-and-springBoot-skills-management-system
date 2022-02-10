@@ -7,12 +7,12 @@ import org.mapstruct.Mapping;
 public interface CategoriaMapper extends EntityMapper <CategoriaDTO, Categoria> {
 
     @Override
-    @Mapping(source = "categoria.id", target = "id")
+    @Mapping(source = "categoria.id", target = "categoriaId")
     @Mapping(source = "categoria.nome", target = "descricao")
     CategoriaDTO toDto (Categoria entity);
 
     @Override
-    @Mapping(source = "id", target = "categoria.id")
+    @Mapping(source = "categoriaId", target = "categoria.id")
     @Mapping(source = "descricao", target = "categoria.nome")
     Categoria toEntity (CategoriaDTO dto);
 }
