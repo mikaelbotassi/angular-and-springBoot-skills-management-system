@@ -24,7 +24,7 @@ public class TurmaFormacaoService {
         if(obj.isPresent())
             return obj.get();
         else
-            throw new NoSuchElementException("Elemento não encontrado!");
+            throw new NoSuchElementException("Turma não encontrado!");
     }
 
     public TurmaFormacao inserir(TurmaFormacao turma){

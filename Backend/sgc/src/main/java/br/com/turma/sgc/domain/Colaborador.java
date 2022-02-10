@@ -2,6 +2,7 @@ package br.com.turma.sgc.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,6 +30,7 @@ public class Colaborador implements Serializable {
 
     @Lob
     @Column(name = "foto")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] foto;
 
     @Column(name = "email")

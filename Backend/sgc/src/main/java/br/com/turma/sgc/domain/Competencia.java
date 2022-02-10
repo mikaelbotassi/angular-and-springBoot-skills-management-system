@@ -1,7 +1,8 @@
 package br.com.turma.sgc.domain;
 
-import br.com.turma.sgc.domain.enums.CategoriaEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ import java.io.Serializable;
 @Table(name = "competencia")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Competencia implements Serializable {
 
     @Id
@@ -24,7 +27,7 @@ public class Competencia implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "categoria")
-    private CategoriaEnum categoria;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 }

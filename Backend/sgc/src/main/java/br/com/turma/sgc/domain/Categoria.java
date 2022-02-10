@@ -1,6 +1,7 @@
 package br.com.turma.sgc.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -12,13 +13,11 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "status")
-public class Status implements Serializable {
-
+@NoArgsConstructor
+@Table(name = "categoria")
+public class Categoria implements Serializable {
     @Id
-    private int id;
-
+    private Integer id;
     @Column(name = "nome")
     private String nome;
-
 }
