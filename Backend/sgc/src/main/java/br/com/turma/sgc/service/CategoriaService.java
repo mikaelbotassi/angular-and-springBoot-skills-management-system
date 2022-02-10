@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +19,7 @@ public class CategoriaService {
     }
 
     public Categoria procurarPorId(Integer id){
-        Optional<Categoria> obj = repository.findById(id);
-        obj.orElseThrow(()-> throw new )
+        return repository.findById(id).orElseThrow(()-> new NoSuchElementException("Categoria não encontrada"));
     }
 
 }
