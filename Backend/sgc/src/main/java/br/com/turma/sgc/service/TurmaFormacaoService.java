@@ -1,6 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
+import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import javax.validation.Validation;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,14 +18,16 @@ public class TurmaFormacaoService {
 
     private final TurmaFormacaoRepository repository;
     private final TurmaFormacaoMapper mapper;
+    private final TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
 
     public List<TurmaFormacaoDTO> procurarTodos(){
         return mapper.toDto(repository.findAll());
+
     }
 
 
     public TurmaFormacaoDTO procurarPorId(@Valid Integer id){
-        return mapper.toDto( repository.findById(id).orElseThrow(()-> new RegraNegocioException("nao encontrado")));
+        return mapper.toDto( repository.findById(id).orElseThrow(()-> new RegraNegocioException("turma nao encontrada")));
     }
 
     public TurmaFormacaoDTO inserir(@Valid TurmaFormacaoDTO turma){
@@ -35,6 +35,9 @@ public class TurmaFormacaoService {
     }
 
     public void deletar(@Valid Integer id){
+        TurmaFormacao turma = repository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if(turmaColaboradorCompetenciaRepository.procurarTodosPorIdTurma(turma.getId()).isEmpty())
+            throw new RegraNegocioException("Essa turma está associada a um colaborador");
         repository.deleteById(id);
     }
 

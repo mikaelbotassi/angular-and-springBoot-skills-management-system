@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface TurmaColaboradorCompetenciaRepository extends JpaRepository<TurmaColaboradorCompetencia, TurmaColaboradorCompetenciaPK> {
 
-
+    @Query(value = "select t from TurmaColaboradorCompetencia t where t.idTurmaFormacao  = :idTurma")
+    List<TurmaColaboradorCompetencia> procurarTodosPorIdTurma (@Param("idTurma") Integer id);
 
 }
