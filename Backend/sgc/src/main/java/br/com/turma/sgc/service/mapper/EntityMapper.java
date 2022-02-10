@@ -1,5 +1,7 @@
 package br.com.turma.sgc.service.mapper;
 
+import org.mapstruct.Mapper;
+
 import java.util.List;
 
 public interface EntityMapper <D, E>{

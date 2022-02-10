@@ -1,7 +1,7 @@
 package br.com.turma.sgc.resource;
-
-import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.service.ColaboradorService;
+import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,24 @@ public class ColaboradorResource {
 
     private final ColaboradorService service;
 
+
     @GetMapping
-    public ResponseEntity<List<Colaborador>> procurarTodos(){
+    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
+    @GetMapping("competencias/{idCompetencia}")
+    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarColaboradorPorCompetencia(Integer id){
+        return ResponseEntity.ok().body(service.procurarColaboradorPorCompetencia(id));
+    }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Colaborador> procurarPorId(@PathVariable int id){
+    public ResponseEntity<ColaboradorDTO> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Colaborador> inserir(@RequestBody Colaborador colab){
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
         return ResponseEntity.ok().body(service.inserir(colab));
     }
 
@@ -39,7 +45,7 @@ public class ColaboradorResource {
     }
 
     @PutMapping
-    public ResponseEntity<Colaborador> atualizar(@RequestBody Colaborador c){
+    public ResponseEntity<ColaboradorDTO> atualizar(@RequestBody ColaboradorDTO c){
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 
