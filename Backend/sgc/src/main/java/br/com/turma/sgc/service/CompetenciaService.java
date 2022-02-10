@@ -2,10 +2,10 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.dto.CompetenciaDTO;
+import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +14,9 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 public class CompetenciaService {
-    @Autowired
+
     private final CompetenciaRepository competenciaRepository;
+    private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
     private final CompetenciaMapper competenciaMapper;
 
     public List<CompetenciaDTO> procurarTodos() {
@@ -43,6 +44,12 @@ public class CompetenciaService {
                 .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
         return competenciaMapper.toDto(
                 competenciaRepository.save(competencia)
+        );
+    }
+
+    public List<CompetenciaDTO> buscarCompetenciasMaximasPorIdColaborador(Integer idColaborador){
+        return competenciaMapper.toDto(
+                colaboradorCompetenciaRepository.buscarCompetenciasMaximasPorIdColaborador(idColaborador)
         );
     }
 

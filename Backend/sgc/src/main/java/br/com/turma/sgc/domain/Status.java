@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class Status implements Serializable {
 
     @Id
-    private int id;
+    private Integer id;
 
     @Column(name = "nome")
     private String nome;

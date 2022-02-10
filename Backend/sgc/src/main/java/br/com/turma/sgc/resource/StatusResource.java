@@ -25,7 +25,7 @@ public class StatusResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Status> procurarPorId(@PathVariable int id){
+    public ResponseEntity<Status> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 

@@ -1,7 +1,6 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Senioridade;
-import br.com.turma.sgc.enums.SenioridadeEnum;
 import br.com.turma.sgc.service.SenioridadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class SenioridadeResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Senioridade> procurarPorId(@PathVariable int id){
+    public ResponseEntity<Senioridade> procurarPorId(@PathVariable Integer id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 

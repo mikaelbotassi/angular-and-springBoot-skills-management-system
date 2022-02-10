@@ -17,13 +17,13 @@ import java.util.Objects;
 public class TurmaColaboradorCompetenciaPK implements Serializable {
 
     @Column(name = "id_turma_formacao")
-    private int idTurmaFormacao;
+    private Integer idTurmaFormacao;
 
     @Column(name = "id_colaborador")
-    private int idColaborador;
+    private Integer idColaborador;
 
     @Column(name = "id_competencia")
-    private int idCompetencia;
+    private Integer idCompetencia;
 
     @Override
     public boolean equals(Object o) {

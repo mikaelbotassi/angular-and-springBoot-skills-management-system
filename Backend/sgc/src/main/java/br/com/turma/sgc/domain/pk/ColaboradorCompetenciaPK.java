@@ -20,10 +20,10 @@ import java.util.Objects;
 public class ColaboradorCompetenciaPK implements Serializable{
 
     @Column(name = "id_colaborador")
-    private int idColaborador;
+    private Integer idColaborador;
 
     @Column(name = "id_competencia")
-    private int idCompetencia;
+    private Integer idCompetencia;
 
     @Override
     public boolean equals(Object o) {

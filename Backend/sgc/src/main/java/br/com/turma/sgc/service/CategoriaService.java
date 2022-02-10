@@ -18,14 +18,9 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public Categoria procurarPorId(int id){
+    public Categoria procurarPorId(Integer id){
         Optional<Categoria> obj = repository.findById(id);
-        if(obj.isPresent()){
-            return obj.get();
-        }
-        else{
-            throw new IllegalArgumentException("Não existe nenhuma categoria com este ID");
-        }
+        obj.orElseThrow(()-> throw new )
     }
 
 }

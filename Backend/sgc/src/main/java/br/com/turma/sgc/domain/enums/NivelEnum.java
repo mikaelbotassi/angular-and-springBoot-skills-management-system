@@ -13,10 +13,10 @@ public enum NivelEnum{
     NIVEL2(2, "Pleno"),
     NIVEL3(3, "Sênior).");
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    public static NivelEnum PegaEnumPorNome(String nivel) {
+    public static NivelEnum pegaEnumPorNome(String nivel) {
         for(NivelEnum value : NivelEnum.values()){
             if(Objects.equals(value.getNome(), nivel)){
                 return value;
@@ -25,7 +25,7 @@ public enum NivelEnum{
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static NivelEnum pegaEnumPorId(int id){
+    public static NivelEnum pegaEnumPorId(Integer id){
         for(NivelEnum value : NivelEnum.values()){
             if(value.getId() == id){
                 return value;
