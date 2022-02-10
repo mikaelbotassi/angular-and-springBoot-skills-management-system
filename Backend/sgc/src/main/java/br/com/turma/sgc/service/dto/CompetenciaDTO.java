@@ -1,4 +1,4 @@
-package br.com.turma.sgc.dto;
+package br.com.turma.sgc.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;

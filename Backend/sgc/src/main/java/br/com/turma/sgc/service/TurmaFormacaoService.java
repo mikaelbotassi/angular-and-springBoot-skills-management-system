@@ -19,7 +19,7 @@ public class TurmaFormacaoService {
         return repository.findAll();
     }
 
-    public TurmaFormacao procurarPorId(int id){
+    public TurmaFormacao procurarPorId(Integer id){
         Optional<TurmaFormacao> obj = repository.findById(id);
         if(obj.isPresent())
             return obj.get();
@@ -31,7 +31,7 @@ public class TurmaFormacaoService {
         return repository.save(turma);
     }
 
-    public void deletar(int id){
+    public void deletar(Integer id){
         repository.deleteById(id);
     }
 

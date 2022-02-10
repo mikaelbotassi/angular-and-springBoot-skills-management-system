@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class SenioridadeDTO implements Serializable {
-    private int id;
+    private Integer id;
     private String descricao;
 }
