@@ -12,5 +12,5 @@ public interface ColaboradorBuscaMapper extends EntityMapper<ColaboradorBuscaDTO
 
     @Override
     @Mapping(source = "senioridade.nome", target = "nomeSenioridade")
-    ColaboradorBuscaDTO toDTO(Colaborador entityList);
+    ColaboradorBuscaDTO toDto(Colaborador entityList);
 }

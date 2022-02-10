@@ -23,10 +23,10 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
-    @GetMapping("competencias/{idCompetencia}")
-    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarColaboradorPorCompetencia(Integer id){
-        return ResponseEntity.ok().body(service.procurarColaboradorPorCompetencia(id));
-    }
+//    @GetMapping("competencias/{idCompetencia}")
+//    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarColaboradorPorCompetencia(Integer id){
+//        return ResponseEntity.ok().body(service.procurarColaboradorPorCompetencia(id));
+//    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ColaboradorDTO> procurarPorId(@PathVariable int id){

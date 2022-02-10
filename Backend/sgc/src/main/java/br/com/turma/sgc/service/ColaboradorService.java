@@ -26,17 +26,17 @@ public class ColaboradorService {
     private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
     public List<ColaboradorBuscaDTO> procurarTodos(){
-        return colaboradorBuscaMapper.toDTO(repository.findAll());
+        return colaboradorBuscaMapper.toDto(repository.findAll());
     }
 
-    public List<ColaboradorBuscaDTO> procurarColaboradorPorCompetencia(Integer id){
-        return colaboradorBuscaMapper.toDTO(colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id));
-    }
+//    public List<ColaboradorBuscaDTO> procurarColaboradorPorCompetencia(Integer id){
+//        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id));
+//    }
 
     public ColaboradorDTO procurarPorId(int id){
         Optional<Colaborador> obj = repository.findById(id);
         if(obj.isPresent()){
-            return colaboradorMapper.toDTO(obj.get());
+            return colaboradorMapper.toDto(obj.get());
         }
         else{
             throw new NoSuchElementException("Elemento não encontrado!");
@@ -46,7 +46,7 @@ public class ColaboradorService {
 
     public ColaboradorDTO inserir(ColaboradorDTO colab){
 
-        return colaboradorMapper.toDTO(repository.save(colaboradorMapper.toEntity(colab)));
+        return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
     }
 
     public void deletar(int id){
@@ -54,7 +54,7 @@ public class ColaboradorService {
     }
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
-        return colaboradorMapper.toDTO(repository.save(colaboradorMapper.toEntity(c)));
+        return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
     }
 
 }
