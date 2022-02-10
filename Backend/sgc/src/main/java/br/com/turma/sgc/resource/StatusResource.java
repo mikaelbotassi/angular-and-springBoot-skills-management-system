@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("api/status")
+@RequestMapping("/api/status")
 @RestController
 @RequiredArgsConstructor
 public class StatusResource {
