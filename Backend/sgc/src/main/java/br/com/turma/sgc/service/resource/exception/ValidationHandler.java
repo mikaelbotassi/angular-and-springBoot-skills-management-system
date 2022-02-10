@@ -1,4 +1,4 @@
-package br.com.turma.sgc.exeption;
+package br.com.turma.sgc.service.resource.exception;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

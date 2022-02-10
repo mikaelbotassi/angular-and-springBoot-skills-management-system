@@ -6,12 +6,13 @@ import br.com.turma.sgc.enums.CategoriaEnum;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.CompetenciaService;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Collection;
 
+@Component
 public class CompetenciaBuilder extends ConstrutorDeEntidade<Competencia>{
 
     @Autowired
@@ -28,7 +29,8 @@ public class CompetenciaBuilder extends ConstrutorDeEntidade<Competencia>{
         Competencia competencia = new Competencia();
         competencia.setNome("Git");
         competencia.setDescricao("Versionamento de código");
-        competencia.setCategoria(new Categoria(CategoriaEnum.BACKEND));
+        Categoria categoria = new Categoria(CategoriaEnum.ARQUITETURA);
+        competencia.setCategoria(categoria);
         return competencia;
     }
 
