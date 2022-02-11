@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ColaboradorCompetenciaRepository extends JpaRepository<ColaboradorCompetencia, ColaboradorCompetenciaPK> {
 
-    @Query(value = "select cc.competencia from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador and cc.nivel = :idNivel")
-    List<Competencia> buscarCompetenciasMaximasPorIdColaborador(@Param("idColaborador") Integer idColaborador, @Param("idNivel") Integer idNivel);
+    @Query(value = "select cc.competencia from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador and cc.nivel = br.com.turma.sgc.enums.NivelEnum.NIVEL3")
+    List<Competencia> buscarCompetenciasPorNivelEPorIdColaborador(@Param("idColaborador") Integer idColaborador/*, @Param("idNivel") Integer idNivel*/);
 
 }

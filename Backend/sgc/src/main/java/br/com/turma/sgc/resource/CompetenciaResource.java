@@ -41,8 +41,8 @@ public class CompetenciaResource {
     }
 
     @GetMapping("/colaborador/{idColaborador}")
-    public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciasMaximasPorIdColaborador(@PathVariable Integer idColaborador){
-        List<CompetenciaDTO> dto = competenciaService.buscarCompetenciasMaximasPorIdColaborador(idColaborador);
+    public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciasMaximasPorIdColaborador(@PathVariable Integer idColaborador/*, @PathVariable Integer idNivel*/){
+        List<CompetenciaDTO> dto = competenciaService.buscarCompetenciasMaximasPorIdColaborador(idColaborador/*, idNivel*/);
         return ResponseEntity.ok().body(dto);
     }
 }

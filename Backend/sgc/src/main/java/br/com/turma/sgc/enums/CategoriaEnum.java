@@ -1,10 +1,7 @@
-package br.com.turma.sgc.domain.enums;
+package br.com.turma.sgc.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.io.Serializable;
-import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
@@ -25,7 +22,7 @@ public enum CategoriaEnum {
 
     public static CategoriaEnum pegaEnumPorId(Integer id){
         for(CategoriaEnum value : CategoriaEnum.values()){
-            if(value.getId() == id){
+            if(value.getId().equals(id)){
                 return value;
             }
         }

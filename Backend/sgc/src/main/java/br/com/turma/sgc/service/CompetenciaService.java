@@ -1,11 +1,11 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
+import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +16,10 @@ import java.util.NoSuchElementException;
 public class CompetenciaService {
 
     private final CompetenciaRepository competenciaRepository;
+
     private final CompetenciaMapper competenciaMapper;
+
+    private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
     public List<CompetenciaDTO> procurarTodos() {
         return competenciaMapper.toDto(competenciaRepository.findAll());
@@ -42,7 +45,7 @@ public class CompetenciaService {
     public CompetenciaDTO atualizar(CompetenciaDTO competencia) {
         if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
             throw new NoSuchElementException("Competência não encontrada");
-        return competenciaMapper.toDto(competenciaMapper.toDto(
+        return competenciaMapper.toDto(
                 competenciaRepository.save(competenciaMapper.toEntity(competencia)));
     }
 
@@ -50,4 +53,8 @@ public class CompetenciaService {
         competenciaRepository.deleteById(id);
     }
 
+    public List<CompetenciaDTO> buscarCompetenciasMaximasPorIdColaborador(Integer idColaborador/*, Integer idNivel*/) {
+        List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador/*,idNivel*/);
+        return competenciaMapper.toDto(competencias);
+    }
 }
