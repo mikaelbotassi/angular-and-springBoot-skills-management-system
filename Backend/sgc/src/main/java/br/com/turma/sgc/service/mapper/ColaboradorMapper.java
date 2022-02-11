@@ -11,7 +11,7 @@ public interface ColaboradorMapper extends EntityMapper<ColaboradorDTO, Colabora
     @Override
     @Mapping(source = "senioridade.nome", target = "nomeSenioridade")
     @Mapping(source = "senioridade.id", target = "idSenioridade")
-    ColaboradorDTO toDTO(Colaborador entity);
+    ColaboradorDTO toDto(Colaborador entity);
 
     @Override
     @Mapping(source = "idSenioridade", target = "senioridade.id")

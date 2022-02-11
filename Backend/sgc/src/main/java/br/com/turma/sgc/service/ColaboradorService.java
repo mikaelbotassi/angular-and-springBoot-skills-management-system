@@ -29,9 +29,9 @@ public class ColaboradorService {
         return colaboradorBuscaMapper.toDto(repository.findAll());
     }
 
-//    public List<ColaboradorBuscaDTO> procurarColaboradorPorCompetencia(Integer id){
-//        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id));
-//    }
+    public List<ColaboradorBuscaDTO> procurarColaboradorPorCompetencia(Integer id){
+        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id));
+    }
 
     public ColaboradorDTO procurarPorId(int id){
         Optional<Colaborador> obj = repository.findById(id);

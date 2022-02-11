@@ -14,9 +14,7 @@ import java.util.List;
 @Repository
 public interface ColaboradorCompetenciaRepository extends JpaRepository<ColaboradorCompetencia, ColaboradorCompetenciaPK> {
 
-    @Query("select c from ColaboradorCompetencia cc, Colaborador c\n" +
-            "where cc.id_colaborador = c.id\n" +
-            "and cc.id_colaborador = :id")
+    @Query(value = "select cc.colaborador from ColaboradorCompetencia cc where cc.competencia.id = :id")
     List<Colaborador> buscarColaboradoresPorCompetencia(@Param("id") Integer id);
 
 }
