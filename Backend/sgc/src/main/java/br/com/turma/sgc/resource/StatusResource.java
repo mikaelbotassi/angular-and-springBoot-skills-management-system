@@ -1,7 +1,7 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Status;
 import br.com.turma.sgc.service.StatusService;
+import br.com.turma.sgc.service.dto.StatusDTO;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ public class StatusResource {
 
     private final StatusService service;
 
-    @GetMapping
-    public ResponseEntity<List<Status>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<StatusDTO> buscarStatusPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.buscarStatusPorId(id));
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Status> procurarPorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.procurarPorId(id));
+    @GetMapping
+    public ResponseEntity<List<StatusDTO>> listarTodosStatus(){
+        return ResponseEntity.ok().body(service.listarTodosStatus());
     }
 
 

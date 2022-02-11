@@ -1,26 +1,34 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Senioridade;
+import br.com.turma.sgc.exeption.RegraNegocioException;
 import br.com.turma.sgc.repository.SenioridadeRepository;
+import br.com.turma.sgc.service.dto.SenioridadeDTO;
+import br.com.turma.sgc.service.mapper.SenioridadeMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SenioridadeService {
 
     private final SenioridadeRepository repository;
+    private final SenioridadeMapper mapper;
 
-    public List<Senioridade> procurarTodos(){
-        return repository.findAll();
+    @SneakyThrows(RegraNegocioException.class)
+
+    public SenioridadeDTO buscarSenioridadePorId(Integer id) {
+        Senioridade senioridade = repository.findById(id)
+                .orElseThrow(()-> new RegraNegocioException("Senioridade não encontrada"));
+        return mapper.toDto(senioridade);
     }
 
-    public Senioridade procurarPorId(Integer id){
-        Optional<Senioridade> obj = repository.findById(id);
-        return obj.get();
+    public List<SenioridadeDTO> listarTodasSenioridades() {
+        List<Senioridade> list = repository.findAll();
+        return mapper.toDto(list);
     }
 
 }

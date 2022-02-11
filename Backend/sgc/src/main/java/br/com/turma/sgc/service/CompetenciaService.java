@@ -1,11 +1,11 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
-import br.com.turma.sgc.dto.CompetenciaDTO;
-import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +16,6 @@ import java.util.NoSuchElementException;
 public class CompetenciaService {
 
     private final CompetenciaRepository competenciaRepository;
-    private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
     private final CompetenciaMapper competenciaMapper;
 
     public List<CompetenciaDTO> procurarTodos() {
@@ -32,24 +31,19 @@ public class CompetenciaService {
         return competenciaMapper.toDto(competencia);
     }
 
-    public CompetenciaDTO inserir(Competencia competencia) {
+    public CompetenciaDTO inserir(CompetenciaDTO competenciaDTO) {
         return competenciaMapper.toDto(
-                competenciaRepository.save(competencia)
+                competenciaRepository.save(
+                        competenciaMapper.toEntity(competenciaDTO)
+                )
         );
     }
 
-    public CompetenciaDTO atualizar(Competencia competencia) {
+    public CompetenciaDTO atualizar(CompetenciaDTO competencia) {
         if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
             throw new NoSuchElementException("Competência não encontrada");
-        return competenciaMapper.toDto(
-                competenciaRepository.save(competencia)
-        );
-    }
-
-    public List<CompetenciaDTO> buscarCompetenciasPorNivelEPorIdColaborador(Integer idColaborador, Integer idNivel){
-        return competenciaMapper.toDto(
-                colaboradorCompetenciaRepository.buscarCompetenciasMaximasPorIdColaborador(idColaborador, idNivel)
-        );
+        return competenciaMapper.toDto(competenciaMapper.toDto(
+                competenciaRepository.save(competenciaMapper.toEntity(competencia)));
     }
 
     public void deletar(Integer id) {

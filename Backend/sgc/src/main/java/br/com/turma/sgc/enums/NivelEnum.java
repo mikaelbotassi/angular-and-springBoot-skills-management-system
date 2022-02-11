@@ -1,12 +1,15 @@
-package br.com.turma.sgc.domain.enums;
+package br.com.turma.sgc.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public enum NivelEnum{
 
     NIVEL1(1, "Júnior"),

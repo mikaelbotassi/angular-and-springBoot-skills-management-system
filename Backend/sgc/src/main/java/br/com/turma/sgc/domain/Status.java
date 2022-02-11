@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "senioridade")
+@Table(name = "status")
 public class Status implements Serializable {
 
     @Id

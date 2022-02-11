@@ -1,7 +1,6 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Competencia;
-import br.com.turma.sgc.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +25,13 @@ public class CompetenciaResource {
     }
 
     @PostMapping
-    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody Competencia competencia) {
-        return ResponseEntity.ok().body(competenciaService.inserir(competencia));
+    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
+        return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
     }
 
     @PutMapping
-    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody Competencia competencia) {
-        return ResponseEntity.ok().body(competenciaService.atualizar(competencia));
+    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody CompetenciaDTO competenciaDTO) {
+        return ResponseEntity.ok().body(competenciaService.atualizar(competenciaDTO));
     }
 
     @DeleteMapping("/{id}")

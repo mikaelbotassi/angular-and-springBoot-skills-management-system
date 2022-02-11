@@ -1,7 +1,7 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Senioridade;
 import br.com.turma.sgc.service.SenioridadeService;
+import br.com.turma.sgc.service.dto.SenioridadeDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,13 @@ public class SenioridadeResource {
     private final SenioridadeService service;
 
     @GetMapping
-    public ResponseEntity<List<Senioridade>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
+    public ResponseEntity<List<SenioridadeDTO>> procurarTodos(){
+        return ResponseEntity.ok().body(service.listarTodasSenioridades());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Senioridade> procurarPorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.procurarPorId(id));
+    public ResponseEntity<SenioridadeDTO> procurarPorId(@PathVariable int id){
+        return ResponseEntity.ok().body(service.buscarSenioridadePorId(id));
     }
 
 }
