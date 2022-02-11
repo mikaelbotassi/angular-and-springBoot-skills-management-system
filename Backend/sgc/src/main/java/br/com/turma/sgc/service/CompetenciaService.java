@@ -2,6 +2,7 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.dto.CompetenciaDTO;
+import br.com.turma.sgc.exeption.RegraNegocioException;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,6 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 public class CompetenciaService {
-    @Autowired
     private final CompetenciaRepository competenciaRepository;
     private final CompetenciaMapper competenciaMapper;
 
@@ -26,7 +26,7 @@ public class CompetenciaService {
         Competencia competencia = competenciaRepository
                 .findById(id)
                 .orElseThrow(
-                        () -> new NoSuchElementException("Elemento não encontrado!")
+                        () -> new RegraNegocioException("Competencia Não Encontrada!")
                 );
         return competenciaMapper.toDto(competencia);
     }
@@ -42,7 +42,9 @@ public class CompetenciaService {
     public CompetenciaDTO atualizar(CompetenciaDTO competenciaDTO) {
         competenciaRepository
                 .findById(competenciaDTO.getId())
-                .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
+                .orElseThrow(
+                        () -> new RegraNegocioException("Competencia Não Encontrada!")
+                );
         return competenciaMapper.toDto(
                 competenciaRepository.save(
                         competenciaMapper.toEntity(competenciaDTO)

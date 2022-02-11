@@ -1,12 +1,12 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,22 +21,22 @@ public class CompetenciaResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompetenciaDTO> procurarPorId(@PathVariable Integer id){
+    public ResponseEntity<CompetenciaDTO> procurarPorId(@Valid @PathVariable Integer id){
         return ResponseEntity.ok().body(competenciaService.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
+    public ResponseEntity<CompetenciaDTO> inserir(@Valid @RequestBody CompetenciaDTO competenciaDTO) {
         return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
     }
 
     @PutMapping
-    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody CompetenciaDTO competenciaDTO) {
+    public ResponseEntity<CompetenciaDTO> atualizar(@Valid @RequestBody CompetenciaDTO competenciaDTO) {
         return ResponseEntity.ok().body(competenciaService.atualizar(competenciaDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id){
+    public ResponseEntity<Void> deletar(@Valid @PathVariable Integer id){
         competenciaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
