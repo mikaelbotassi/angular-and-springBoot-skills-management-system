@@ -1,7 +1,6 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
-import br.com.turma.sgc.enums.NivelEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +30,6 @@ public class ColaboradorCompetencia implements Serializable {
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "nivel", insertable=false, updatable=false)
-    private NivelEnum nivel;
+    @Column(name = "nivel")
+    private Integer nivel;
 }

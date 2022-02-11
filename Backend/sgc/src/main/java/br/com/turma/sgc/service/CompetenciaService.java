@@ -53,8 +53,8 @@ public class CompetenciaService {
         competenciaRepository.deleteById(id);
     }
 
-    public List<CompetenciaDTO> buscarCompetenciasMaximasPorIdColaborador(Integer idColaborador/*, Integer idNivel*/) {
-        List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador/*,idNivel*/);
+    public List<CompetenciaDTO> buscarCompetenciasPorNivelEPorIdColaborador(Integer idColaborador, Integer idNivel) {
+        List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador,idNivel);
         return competenciaMapper.toDto(competencias);
     }
 }
