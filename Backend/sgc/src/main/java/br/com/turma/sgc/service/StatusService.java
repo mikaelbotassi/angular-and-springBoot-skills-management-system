@@ -1,7 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Status;
-import br.com.turma.sgc.exeption.RegraNegocioException;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.repository.StatusRepository;
 import br.com.turma.sgc.service.dto.StatusDTO;
 import br.com.turma.sgc.service.mapper.StatusMapper;
