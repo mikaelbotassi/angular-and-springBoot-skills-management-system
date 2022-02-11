@@ -17,10 +17,10 @@ public enum SenioridadeEnum implements Serializable {
     PLENO(3, "Pleno"),
     SENIOR(4, "Sênior");
 
-    private Integer id;
+    private int id;
     private String nome;
 
-    public static SenioridadeEnum findByName(String senioridade) {
+    public static SenioridadeEnum buscarPorNome(String senioridade) {
         for(SenioridadeEnum value : SenioridadeEnum.values()){
             if(Objects.equals(value.getNome(), senioridade)){
                 return value;
@@ -29,7 +29,7 @@ public enum SenioridadeEnum implements Serializable {
         throw new IllegalArgumentException("Código não encontrado");
     }
 
-    public static SenioridadeEnum valueOf(Integer id){
+    public static SenioridadeEnum retornarValorPorId(Integer id){
         for(SenioridadeEnum value : SenioridadeEnum.values()){
             if(value.getId() == id){
                 return value;

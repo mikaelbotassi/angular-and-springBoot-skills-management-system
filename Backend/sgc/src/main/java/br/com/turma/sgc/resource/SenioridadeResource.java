@@ -15,30 +15,14 @@ public class SenioridadeResource {
 
     private final SenioridadeService service;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<SenioridadeDTO> buscarSenioridadePorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.buscarSenioridadePorId(id));
-    }
-
     @GetMapping
-    public ResponseEntity<List<SenioridadeDTO>> listarTodasSenioridades(){
+    public ResponseEntity<List<SenioridadeDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.listarTodasSenioridades());
     }
 
-    @PostMapping
-    public ResponseEntity<SenioridadeDTO> inserirSenioridade(@RequestBody SenioridadeDTO dto) {
-        return ResponseEntity.ok().body(service.inserirSenioridade(dto));
-    }
-
-    @PutMapping
-    public ResponseEntity<SenioridadeDTO> atualizarSenioridade(@RequestBody SenioridadeDTO dto) {
-        return ResponseEntity.ok().body(service.atualizarSenioridade(dto));
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> excluirSenioridade(@PathVariable Integer id) {
-        service.excluirSenioridade(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<SenioridadeDTO> procurarPorId(@PathVariable int id){
+        return ResponseEntity.ok().body(service.buscarSenioridadePorId(id));
     }
 
 }

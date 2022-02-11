@@ -30,7 +30,7 @@ public enum NivelEnum{
 
     public static NivelEnum pegaEnumPorId(Integer id){
         for(NivelEnum value : NivelEnum.values()){
-            if(value.getId() == id){
+            if(value.getId().equals(id)){
                 return value;
             }
         }

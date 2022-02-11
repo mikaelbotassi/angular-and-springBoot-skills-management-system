@@ -1,6 +1,5 @@
 package br.com.turma.sgc.service;
 
-
 import br.com.turma.sgc.domain.Status;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.repository.StatusRepository;
@@ -11,11 +10,12 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class StatusService {
+
     private final StatusRepository repository;
     private final StatusMapper mapper;
 
@@ -32,20 +32,4 @@ public class StatusService {
         return mapper.toDto(list);
     }
 
-    public StatusDTO inserirStatus(StatusDTO dto) {
-        Status status = mapper.toEntity(dto);
-        status = repository.save(status);
-        return mapper.toDto(status);
-    }
-
-    public StatusDTO atualizarStatus(StatusDTO dto) {
-        Status status = mapper.toEntity(dto);
-        status = repository.save(status);
-        return mapper.toDto(status);
-    }
-
-    public void excluirStatus(Integer id) {
-        repository.deleteById(id);
-        throw new RegraNegocioException("Não foi possível deletar a senioridade informada");
-    }
 }

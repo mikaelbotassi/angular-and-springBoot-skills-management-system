@@ -25,9 +25,6 @@ public class ColaboradorCompetenciaPK implements Serializable{
     @Column(name = "id_competencia")
     private Integer idCompetencia;
 
-    @Column(name = "nivel")
-    private Integer nivel;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

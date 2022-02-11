@@ -30,22 +30,5 @@ public class CategoriaService {
                 .orElseThrow(()-> new RegraNegocioException("Categoria não encontrada"));
         return mapper.toDto(categoria);
     }
-
-    public CategoriaDTO inserirCategoria(CategoriaDTO dto) {
-        Categoria categoria = mapper.toEntity(dto);
-        categoria = repository.save(categoria);
-        return mapper.toDto(categoria);
-    }
-
-    public CategoriaDTO atualizarCategoria(CategoriaDTO dto) {
-        Categoria categoria = mapper.toEntity(dto);
-        categoria = repository.save(categoria);
-        return mapper.toDto(categoria);
-    }
-
-    public void excluirCategoria(Integer id) {
-        repository.deleteById(id);
-        throw new RegraNegocioException("Não foi possível deletar a categoria informada");
-    }
 }
 
