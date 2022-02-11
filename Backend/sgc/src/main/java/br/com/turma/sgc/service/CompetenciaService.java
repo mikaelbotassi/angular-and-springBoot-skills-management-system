@@ -39,17 +39,16 @@ public class CompetenciaService {
     }
 
     public CompetenciaDTO atualizar(Competencia competencia) {
-        competenciaRepository
-                .findById(competencia.getId())
-                .orElseThrow(() -> new NoSuchElementException("Competencia Não Encontrada"));
+        if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
+            throw new NoSuchElementException("Competência não encontrada");
         return competenciaMapper.toDto(
                 competenciaRepository.save(competencia)
         );
     }
 
-    public List<CompetenciaDTO> buscarCompetenciasMaximasPorIdColaborador(Integer idColaborador){
+    public List<CompetenciaDTO> buscarCompetenciasPorNivelEPorIdColaborador(Integer idColaborador, Integer idNivel){
         return competenciaMapper.toDto(
-                colaboradorCompetenciaRepository.buscarCompetenciasMaximasPorIdColaborador(idColaborador)
+                colaboradorCompetenciaRepository.buscarCompetenciasMaximasPorIdColaborador(idColaborador, idNivel)
         );
     }
 
