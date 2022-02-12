@@ -22,11 +22,6 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
-    @GetMapping("competencia/{idCompetencia}")
-    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarColaboradorPorCompetencia(@PathVariable Integer idCompetencia){
-        return ResponseEntity.ok().body(service.procurarColaboradorPorCompetencia(idCompetencia));
-    }
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<ColaboradorDTO> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
