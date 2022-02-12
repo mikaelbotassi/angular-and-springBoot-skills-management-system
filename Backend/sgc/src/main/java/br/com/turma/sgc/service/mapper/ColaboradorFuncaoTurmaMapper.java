@@ -9,12 +9,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ColaboradorFuncaoTurmaMapper extends EntityMapper<ColaboradorFuncaoTurmaDTO, TurmaColaboradorCompetencia> {
     @Override
-    @Mapping(source = "colaborador.nomeColaborador", target = "colaboradorNome")
+    @Mapping(source = "colaborador.nome", target = "colaboradorNome")
     @Mapping(source = "competencia.nome", target = "nomeCompetencia")
     ColaboradorFuncaoTurmaDTO toDto(TurmaColaboradorCompetencia entity);
 
     @Override
-    @Mapping(source = "colaboradorNome", target = "colaborador.nomeColaborador")
+    @Mapping(source = "colaboradorNome", target = "colaborador.nome")
     @Mapping(source = "nomeCompetencia", target = "competencia.nome")
     TurmaColaboradorCompetencia toEntity(ColaboradorFuncaoTurmaDTO dto);
 

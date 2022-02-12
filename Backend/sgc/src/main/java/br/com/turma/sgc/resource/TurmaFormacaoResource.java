@@ -2,8 +2,10 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.service.TurmaFormacaoService;
 import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
+import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -55,5 +57,10 @@ public class TurmaFormacaoResource {
     @GetMapping(value = "/procurarTodosInstrutoresPorIdTurma/{id}")
     public ResponseEntity<List<ColaboradorFuncaoTurmaDTO>> procurarTodosInstrutoresPorIdTurma (@PathVariable Integer id){
         return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresPorIdTurma(id));
+    }
+
+    @GetMapping(value = "/procurarTodosInstrutoresCompetenciaPorIdTurma/{id}")
+    public ResponseEntity<List<InstrutorCompetenciaTurmaDTO>> procurarTodosInstrutoresCompetenciaPorIdTurma (@PathVariable Integer id){
+     return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresCompetenciaPorIdTurma(id));
     }
 }
