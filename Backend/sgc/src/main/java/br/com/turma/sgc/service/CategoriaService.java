@@ -2,10 +2,10 @@ package br.com.turma.sgc.service;
 
 
 import br.com.turma.sgc.domain.Categoria;
-import br.com.turma.sgc.exeption.RegraNegocioException;
 import br.com.turma.sgc.repository.CategoriaRepository;
 import br.com.turma.sgc.service.dto.CategoriaDTO;
 import br.com.turma.sgc.service.mapper.CategoriaMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

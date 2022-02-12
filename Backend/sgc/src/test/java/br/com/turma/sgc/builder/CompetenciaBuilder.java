@@ -4,6 +4,7 @@ import br.com.turma.sgc.domain.Categoria;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.CompetenciaService;
+import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,9 @@ public class CompetenciaBuilder extends  ConstrutorDeEntidade<Competencia>{
 
     @Autowired
     private CompetenciaService competenciaService;
+
+    @Autowired
+    private CompetenciaMapper competenciaMapper;
 
 
     @Override
@@ -46,6 +50,6 @@ public class CompetenciaBuilder extends  ConstrutorDeEntidade<Competencia>{
 
     @Override
     protected Competencia obterPorId(Long id) {
-        return competenciaService.procurarPorId(id.intValue());
+        return competenciaMapper.toEntity(competenciaService.procurarPorId(id.intValue())) ;
     }
 }

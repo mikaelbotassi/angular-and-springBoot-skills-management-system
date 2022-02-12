@@ -2,10 +2,10 @@ package br.com.turma.sgc.service;
 
 
 import br.com.turma.sgc.domain.Status;
-import br.com.turma.sgc.exeption.RegraNegocioException;
 import br.com.turma.sgc.repository.StatusRepository;
 import br.com.turma.sgc.service.dto.StatusDTO;
 import br.com.turma.sgc.service.mapper.StatusMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

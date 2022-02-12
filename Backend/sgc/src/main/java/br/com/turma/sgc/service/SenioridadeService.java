@@ -2,10 +2,10 @@ package br.com.turma.sgc.service;
 
 
 import br.com.turma.sgc.domain.Senioridade;
-import br.com.turma.sgc.exeption.RegraNegocioException;
 import br.com.turma.sgc.repository.SenioridadeRepository;
 import br.com.turma.sgc.service.dto.SenioridadeDTO;
 import br.com.turma.sgc.service.mapper.SenioridadeMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

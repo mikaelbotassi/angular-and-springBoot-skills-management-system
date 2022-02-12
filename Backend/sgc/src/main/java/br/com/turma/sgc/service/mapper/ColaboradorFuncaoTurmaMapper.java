@@ -1,0 +1,21 @@
+package br.com.turma.sgc.service.mapper;
+
+import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
+import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+
+@Mapper(componentModel = "spring")
+public interface ColaboradorFuncaoTurmaMapper extends EntityMapper<ColaboradorFuncaoTurmaDTO, TurmaColaboradorCompetencia> {
+    @Override
+    @Mapping(source = "colaborador.nomeColaborador", target = "colaboradorNome")
+    @Mapping(source = "competencia.nome", target = "nomeCompetencia")
+    ColaboradorFuncaoTurmaDTO toDto(TurmaColaboradorCompetencia entity);
+
+    @Override
+    @Mapping(source = "colaboradorNome", target = "colaborador.nomeColaborador")
+    @Mapping(source = "nomeCompetencia", target = "competencia.nome")
+    TurmaColaboradorCompetencia toEntity(ColaboradorFuncaoTurmaDTO dto);
+
+}
