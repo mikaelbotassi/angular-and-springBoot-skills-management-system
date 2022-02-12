@@ -3,8 +3,10 @@ package br.com.turma.sgc.service.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -21,6 +23,7 @@ public class ColaboradorDTO implements Serializable {
     private String sobrenomeColaborador;
 
     @NotBlank(message = "O CPF do Colaborador é obrigatório!")
+    @Size(min = 11, max = 11, message = "O CPF deve conter 11 dígitos")
     private String cpf;
 
     private byte[] foto;
