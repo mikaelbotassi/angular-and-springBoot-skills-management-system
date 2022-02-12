@@ -39,5 +39,14 @@ public class TurmaFormacaoResource {
     public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma){
         return ResponseEntity.ok().body(service.atualizar(turma));
     }
-
+        /*
+    *@RequestyMapping("/porAutor/{nome}")
+    public List<Post> byAutor( @PathVatiable(value = "nome") String nome) {
+	return postService.byAutor(nome);
+    }
+     */
+    @GetMapping("/turma")
+    public ResponseEntity<List<TurmaFormacao>> buscaTurmaFinalizada() {
+        return ResponseEntity.ok().body(service.buscaTurmaFinalizada());
+    }
 }

@@ -1,6 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Colaborador;
+import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.ColaboradorRepository;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
@@ -22,6 +23,8 @@ public class ColaboradorService {
 
     private final ColaboradorMapper colaboradorMapper;
 
+    private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
+
     public List<ColaboradorBuscaDTO> procurarTodos(){
         return colaboradorBuscaMapper.toDto(repository.findAll());
     }
@@ -34,11 +37,9 @@ public class ColaboradorService {
         else{
             throw new NoSuchElementException("Elemento não encontrado!");
         }
-
     }
 
     public ColaboradorDTO inserir(ColaboradorDTO colab){
-
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
     }
 
@@ -48,6 +49,14 @@ public class ColaboradorService {
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
+    }
+
+    public List<Colaborador> buscarColaboradorPraAplicarCompetecia(String competencia) {
+        return colaboradorCompetenciaRepository.buscarColaboradorPraAplicarCompetecia(competencia);
+    }
+
+    public List<Integer> buscarColaboradorAplicarCompeteciaID(Integer competenciaId) {
+        return colaboradorCompetenciaRepository.buscarColaboradorAplicarCompeteciaID(competenciaId);
     }
 
 }

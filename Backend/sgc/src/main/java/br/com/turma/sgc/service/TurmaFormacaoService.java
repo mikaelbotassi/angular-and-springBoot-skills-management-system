@@ -39,4 +39,7 @@ public class TurmaFormacaoService {
         return repository.save(turma);
     }
 
+    public List<TurmaFormacao> buscaTurmaFinalizada() {
+        return repository.buscaTurmaFinalizada();
+    }
 }
