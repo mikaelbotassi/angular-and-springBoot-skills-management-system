@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @Transactional
@@ -33,7 +34,7 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
+    public ResponseEntity<ColaboradorDTO> inserir(@Valid @RequestBody ColaboradorDTO colab){
         return ResponseEntity.ok().body(service.inserir(colab));
     }
 

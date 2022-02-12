@@ -9,6 +9,8 @@ import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
