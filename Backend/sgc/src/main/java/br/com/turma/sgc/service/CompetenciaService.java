@@ -26,27 +26,17 @@ public class CompetenciaService {
     }
 
     public CompetenciaDTO procurarPorId(Integer id) {
-        Competencia competencia = competenciaRepository
-                .findById(id)
-                .orElseThrow(
-                        () -> new NoSuchElementException("Elemento não encontrado!")
-                );
-        return competenciaMapper.toDto(competencia);
+        return competenciaMapper.toDto(competenciaRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Elemento não encontrado!")));
     }
 
     public CompetenciaDTO inserir(CompetenciaDTO competenciaDTO) {
-        return competenciaMapper.toDto(
-                competenciaRepository.save(
-                        competenciaMapper.toEntity(competenciaDTO)
-                )
-        );
+        return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competenciaDTO)));
     }
 
     public CompetenciaDTO atualizar(CompetenciaDTO competencia) {
         if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
             throw new NoSuchElementException("Competência não encontrada");
-        return competenciaMapper.toDto(
-                competenciaRepository.save(competenciaMapper.toEntity(competencia)));
+        return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competencia)));
     }
 
     public void deletar(Integer id) {

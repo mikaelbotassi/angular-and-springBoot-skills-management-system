@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/turmaFormacao")
@@ -30,7 +33,7 @@ public class TurmaFormacaoResource {
 
     @PostMapping
     public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacaoDTO turma){
-        return ResponseEntity.ok().body(turmaFormacaoService.inserir(turma));
+        return ResponseEntity.created(URI.create("./api/turmaFormacao")).body(turmaFormacaoService.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")

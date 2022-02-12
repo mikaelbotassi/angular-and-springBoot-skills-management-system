@@ -6,6 +6,7 @@ import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -27,13 +28,7 @@ public class ColaboradorService {
     }
 
     public ColaboradorDTO procurarPorId(int id){
-        Optional<Colaborador> obj = repository.findById(id);
-        if(obj.isPresent()){
-            return colaboradorMapper.toDto(obj.get());
-        }
-        else{
-            throw new NoSuchElementException("Elemento não encontrado!");
-        }
+        return colaboradorMapper.toDto(repository.findById(id).orElseThrow( () -> new RegraNegocioException("Elemento nao encontrado!")));
 
     }
 

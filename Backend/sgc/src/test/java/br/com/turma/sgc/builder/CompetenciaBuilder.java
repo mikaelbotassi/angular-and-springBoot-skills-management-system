@@ -25,11 +25,11 @@ public class CompetenciaBuilder extends ConstrutorDeEntidade<CompetenciaDTO>{
     private CompetenciaMapper competenciaMapper;
 
     @Override
-    public CompetenciaDTO construirEntidade() throws ParseException {
+    public CompetenciaDTO construirEntidade() {
         CompetenciaDTO competencia = new CompetenciaDTO();
         competencia.setNome("Git");
         competencia.setDescricao("Versionamento de código");
-        competencia.setCategoriaId(CategoriaEnum.ARQUITETURA.getId());
+        competencia.setCategoriaId(1);
         return competencia;
     }
 
