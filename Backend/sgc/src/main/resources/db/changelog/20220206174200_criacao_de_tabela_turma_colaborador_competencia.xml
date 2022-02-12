@@ -23,17 +23,17 @@
 
         <addForeignKeyConstraint baseTableName="turma_colaborador_competencia"
                                  baseColumnNames="id_competencia"
-                                 constraintName="fk_competencia" referencedTableName="competencia"
+                                 constraintName="fk_turma_colaborador_competencia_competencia" referencedTableName="competencia"
                                  referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="turma_colaborador_competencia"
                                  baseColumnNames="id_colaborador"
-                                 constraintName="fk_colaborador" referencedTableName="colaborador"
+                                 constraintName="fk_turma_colaborador_competencia_colaborador" referencedTableName="colaborador"
                                  referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="turma_colaborador_competencia"
                                  baseColumnNames="id_turma_formacao"
-                                 constraintName="fk_turma" referencedTableName="turma_formacao"
+                                 constraintName="fk_turma_colaborador_competencia_turma" referencedTableName="turma_formacao"
                                  referencedColumnNames="id"/>
     </changeSet>
 
