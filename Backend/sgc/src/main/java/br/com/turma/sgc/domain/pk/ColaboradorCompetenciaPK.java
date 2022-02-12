@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,4 +22,9 @@ public class ColaboradorCompetenciaPK implements Serializable{
 
     @Column(name = "id_competencia")
     private Integer idCompetencia;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idColaborador, idCompetencia);
+    }
 }

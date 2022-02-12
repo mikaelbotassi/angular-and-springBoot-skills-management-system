@@ -1,5 +1,6 @@
 package br.com.turma.sgc.domain;
 
+import br.com.turma.sgc.enums.CategoriaEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,4 +21,10 @@ public class Categoria implements Serializable {
     private Integer id;
     @Column(name = "nome")
     private String nome;
+
+    public Categoria(CategoriaEnum categoria){
+        this.id = categoria.getId();
+        this.nome = categoria.getNome();
+    }
+
 }

@@ -24,20 +24,4 @@ public class CategoriaResource {
     public ResponseEntity<List<CategoriaDTO>> listarTodasCategorias(){
         return ResponseEntity.ok().body(service.listarTodasCategorias());
     }
-
-    @PostMapping
-    public ResponseEntity<CategoriaDTO> inserirCategoria(@RequestBody CategoriaDTO dto) {
-        return ResponseEntity.ok().body(service.inserirCategoria(dto));
-    }
-
-    @PutMapping
-    public ResponseEntity<CategoriaDTO> atualizarCategoria(@RequestBody CategoriaDTO dto) {
-        return ResponseEntity.ok().body(service.atualizarCategoria(dto));
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> excluirCategoria(@PathVariable Integer id) {
-        service.excluirCategoria(id);
-        return ResponseEntity.noContent().build();
-    }
 }

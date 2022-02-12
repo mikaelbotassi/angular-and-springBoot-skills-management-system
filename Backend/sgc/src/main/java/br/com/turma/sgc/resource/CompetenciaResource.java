@@ -39,4 +39,10 @@ public class CompetenciaResource {
         competenciaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/colaborador/{idColaborador}/nivel/{idNivel}")
+    public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciasMaximasPorIdColaborador(@PathVariable Integer idColaborador, @PathVariable Integer idNivel){
+        List<CompetenciaDTO> dto = competenciaService.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador, idNivel);
+        return ResponseEntity.ok().body(dto);
+    }
 }

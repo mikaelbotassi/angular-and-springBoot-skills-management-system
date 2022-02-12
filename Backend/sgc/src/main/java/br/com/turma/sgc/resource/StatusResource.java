@@ -3,12 +3,16 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.service.StatusService;
 import br.com.turma.sgc.service.dto.StatusDTO;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/api/status")
+@RequestMapping("api/status")
 @RestController
 @RequiredArgsConstructor
 public class StatusResource {
@@ -25,20 +29,6 @@ public class StatusResource {
         return ResponseEntity.ok().body(service.listarTodosStatus());
     }
 
-    @PostMapping
-    public ResponseEntity<StatusDTO> inserirStatus(@RequestBody StatusDTO dto) {
-        return ResponseEntity.ok().body(service.inserirStatus(dto));
-    }
 
-    @PutMapping
-    public ResponseEntity<StatusDTO> atualizarStatus(@RequestBody StatusDTO dto) {
-        return ResponseEntity.ok().body(service.atualizarStatus(dto));
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> excluirStatus(@PathVariable Integer id) {
-        service.excluirStatus(id);
-        return ResponseEntity.noContent().build();
-    }
 
 }
