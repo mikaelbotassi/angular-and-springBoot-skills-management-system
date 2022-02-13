@@ -17,10 +17,10 @@ public class ColaboradorDTO implements Serializable {
     private Integer id;
 
     @NotBlank(message = "O nome do Colaborador é obrigatório!")
-    private String nomeColaborador;
+    private String nome;
 
     @NotBlank(message = "O sobrenome do Colaborador é obrigatório!")
-    private String sobrenomeColaborador;
+    private String sobrenome;
 
     @NotBlank(message = "O CPF do Colaborador é obrigatório!")
     @Size(min = 11, max = 11, message = "O CPF deve conter 11 dígitos")

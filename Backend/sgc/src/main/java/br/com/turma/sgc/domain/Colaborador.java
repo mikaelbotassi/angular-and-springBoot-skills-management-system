@@ -29,10 +29,10 @@ public class Colaborador implements Serializable {
     private Integer id;
 
     @Column(name = "nome_colaborador")
-    private String nomeColaborador;
+    private String nome;
 
     @Column(name = "sobrenome_colaborador")
-    private String sobrenomeColaborador;
+    private String sobrenome;
 
     @Column(name = "cpf")
     private String cpf;

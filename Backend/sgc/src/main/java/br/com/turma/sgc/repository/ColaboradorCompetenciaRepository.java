@@ -1,6 +1,4 @@
 package br.com.turma.sgc.repository;
-
-import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;

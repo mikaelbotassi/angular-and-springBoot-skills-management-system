@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +55,6 @@ public class ColaboradorService {
 
         return colaboradorCompetenciaRepository.buscaColaboradorInstrutor(nivelMax);
     }
-
 
     public ColaboradorDTO inserir(ColaboradorDTO colab){
 

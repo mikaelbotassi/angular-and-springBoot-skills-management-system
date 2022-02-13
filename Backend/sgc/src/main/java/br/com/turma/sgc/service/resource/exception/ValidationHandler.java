@@ -30,7 +30,7 @@ public class ValidationHandler extends ResponseEntityExceptionHandler{
                                                                   WebRequest request) {
         Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach((error) ->{
+        ex.getBindingResult().getAllErrors().forEach(error ->{
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
@@ -47,7 +47,7 @@ public class ValidationHandler extends ResponseEntityExceptionHandler{
         return getExceptionResponseEntity(HttpStatus.BAD_REQUEST, request, validationErrors);
     }
 
-    @ExceptionHandler(RegraNegocioException.class)
+    @ExceptionHandler(RegraNegocioException.class)// Este método vai interceptar qual excessão do tipo dentro da Anottattion
     public ResponseEntity<Object> handleException(RegraNegocioException exception, WebRequest request) {
         return getExceptionResponseEntity(HttpStatus.BAD_REQUEST, request, Collections.singletonList(exception.getMessage()));
     }
