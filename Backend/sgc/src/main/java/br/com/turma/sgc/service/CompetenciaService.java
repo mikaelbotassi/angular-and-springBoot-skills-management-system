@@ -4,12 +4,15 @@ import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.*;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,8 @@ public class CompetenciaService {
     private final TurmaFormacaoRepository turmaFormacaoRepository;
 
     private final ColaboradorRepository colaboradorRepository;
+
+    private final CategoriaRepository categoriaRepository;
 
     private final CompetenciaMapper competenciaMapper;
 
@@ -53,11 +58,16 @@ public class CompetenciaService {
         List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador,idNivel);
         return competenciaMapper.toDto(competencias);
     }
-
-//    public List<CompetenciaDTO> buscarCompetenciaPorCategoria(Integer categoriaId) {
-//        List<Competencia> competencias = competenciaRepository.buscarCompetenciaPorCategoria(categoriaId);
-//        return competenciaMapper.toDto(competencias);
-//    }
+/*
+    //*****************************************************
+    public List<CompetenciaDTO> buscarCompetenciaPorIdCategoria(Integer idCategoria) {
+        Optional<Competencia> obj = competenciaRepository.findById(idCategoria);
+        if (obj.isPresent())
+            return competenciaMapper.toDto(competenciaRepository.buscarCompetenciaPorIdCategoria(idCategoria));
+        else
+            throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCATEGORIA);
+    }
+ */
 
     public List<CompetenciaDTO> pegarTodasCompetenciasDoColaboradorNaTurma(Integer idTurma, Integer idColaborador){
         if(!(turmaFormacaoRepository.findById(idTurma).isPresent()))

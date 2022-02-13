@@ -43,13 +43,9 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 
-//    @GetMapping("/aplicarCategoria/{competencia}")
-//    public ResponseEntity<List<Colaborador>> buscarColaboradorPraAplicarCompetecia(@PathVariable String competencia) {
-//        return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompetecia(competencia));
-//    }
-//
-//    @GetMapping("/aplicarCategoria/{id}")
-//    public ResponseEntity<List<Integer>> buscarColaboradorAplicarCompeteciaID(@PathVariable Integer id) {
-//        return ResponseEntity.ok().body(service.buscarColaboradorAplicarCompeteciaID(id));
-//    }
+    @GetMapping(value = "/aplicarCompetencia/{idCompetencia}") //OK
+    public ResponseEntity<List<ColaboradorDTO>> buscarColaboradorPraAplicarCompeteciaPorId(@PathVariable Integer idCompetencia) {
+        return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompeteciaPorId(idCompetencia));
+    }
+
 }

@@ -128,5 +128,14 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
         getMockMvc().perform(get(URL + "/procurarTodosInstrutoresCompetenciaPorIdTurma/" + dto.getId())).andExpect(status().isOk());
     }
 
+    @Test
+    @SneakyThrows
+    public void buscaTurmaFinalizada() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/buscaTurmaFinalizada/" + dto.getId())).andExpect(status().isOk());
+    }
+
 
 }
