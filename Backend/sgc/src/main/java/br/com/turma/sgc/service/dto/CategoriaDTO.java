@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class CategoriaDTO implements Serializable {
+
     private Integer id;
     private String descricao;
 }

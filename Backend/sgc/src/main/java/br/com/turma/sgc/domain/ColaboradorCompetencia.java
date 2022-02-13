@@ -12,16 +12,15 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "colaborador_competencia")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "colaborador_competencia")
 public class ColaboradorCompetencia implements Serializable {
 
     @EmbeddedId
     private ColaboradorCompetenciaPK id;
 
     @ManyToOne
-    @MapsId("idColaborador")
     @JoinColumn(name = "id_colaborador")
     private Colaborador colaborador;
 

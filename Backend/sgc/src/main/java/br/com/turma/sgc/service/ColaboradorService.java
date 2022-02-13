@@ -6,6 +6,7 @@ import br.com.turma.sgc.repository.ColaboradorRepository;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
+import br.com.turma.sgc.service.mapper.ColaboradorCompetenciaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class ColaboradorService {
 
     private final ColaboradorMapper colaboradorMapper;
 
+    private final ColaboradorCompetenciaMapper colaboradorCompetenciaMapper;
+
     private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
     public List<ColaboradorBuscaDTO> procurarTodos(){
@@ -39,16 +42,16 @@ public class ColaboradorService {
         }
     }
 
-    public ColaboradorDTO inserir(ColaboradorDTO colab){
-        return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
-    }
-
     public void deletar(int id){
         repository.deleteById(id);
     }
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
+    }
+
+    public ColaboradorDTO inserir(ColaboradorDTO colab) {
+        return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
     }
 
 //    public List<Colaborador> buscarColaboradorPraAplicarCompetecia(String competencia) {

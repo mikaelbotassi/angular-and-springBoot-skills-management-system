@@ -1,7 +1,9 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
+import br.com.turma.sgc.builder.ColaboradorBuilder;
 import br.com.turma.sgc.builder.CompetenciaBuilder;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.util.IntTestComum;
@@ -29,6 +31,9 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Autowired
     private CompetenciaBuilder competenciaBuilder;
+
+    @Autowired
+    private ColaboradorBuilder colaboradorBuilder;
 
     @Before
     public void inicializaTeste(){

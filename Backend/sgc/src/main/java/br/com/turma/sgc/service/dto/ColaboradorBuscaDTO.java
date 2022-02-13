@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,4 +19,6 @@ public class ColaboradorBuscaDTO implements Serializable {
     private LocalDate dataAdmissao;
 
     private String nomeSenioridade;
+
+    private Set<ColaboradorCompetenciaDTO> competenciasDTO;
 }

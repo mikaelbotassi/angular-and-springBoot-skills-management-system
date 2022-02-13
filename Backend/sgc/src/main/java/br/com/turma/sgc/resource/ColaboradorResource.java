@@ -3,10 +3,12 @@ import br.com.turma.sgc.service.ColaboradorService;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @Transactional
@@ -28,8 +30,8 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
-        return ResponseEntity.ok().body(service.inserir(colab));
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody @Valid ColaboradorDTO colab){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.inserir(colab));
     }
 
     @DeleteMapping(value = "/{id}")
