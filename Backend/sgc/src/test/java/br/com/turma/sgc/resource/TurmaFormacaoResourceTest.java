@@ -1,7 +1,7 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
-import br.com.turma.sgc.builder.CompetenciaBuilder;
+import br.com.turma.sgc.builder.TurmaFormacaoBuilder;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.util.IntTestComum;
@@ -23,22 +23,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SgcApplication.class)
 @Transactional
-public class CompetenciaResourceTest extends IntTestComum {
+public class TurmaFormacaoResourceTest extends IntTestComum {
 
-    private static final String URL = "/api/competencia";
+    private static final String URL = "/api/turmaFormacao";
 
     @Autowired
-    private CompetenciaBuilder competenciaBuilder;
+    private TurmaFormacaoBuilder turmaFormacaoBuilder;
 
     @Before
     public void inicializaTeste(){
-        competenciaBuilder.setCustomizacao(null);
+        turmaFormacaoBuilder.setCustomizacao(null);
     }
 
     @Test
     @SneakyThrows
     public void pegarTodosTest(){
-        competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
 
         getMockMvc()
                 .perform(get(URL))
@@ -53,7 +53,7 @@ public class CompetenciaResourceTest extends IntTestComum {
         //Como customizar o builder
 //        CompetenciaDTO dto = competenciaBuilder.customizar(competencia -> competencia.setNome("Java")).construir();
 
-        CompetenciaDTO dto = competenciaBuilder.construirEntidade();
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.construirEntidade();
 
         getMockMvc().perform(post(URL)
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -63,9 +63,9 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Test
     @SneakyThrows
-    public void atualizarTest() {
+    public void atualizarTest(){
 
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
 
         getMockMvc().perform(put(URL)
                         .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -75,31 +75,59 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Test
     @SneakyThrows
-    public void procurarPorIdTest(){
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
-
-        getMockMvc().perform(get(URL + "/" + dto.getId())).andExpect(status().isOk());
-
-    }
-
-    @Test
-    @SneakyThrows
     public void deletarTest() {
 
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
 
         getMockMvc().perform(delete(URL + "/" + dto.getId())).andExpect(status().isNoContent());
     }
 
+
     @Test
     @SneakyThrows
-    public void procurarCompetenciaNivelColaboradorTest() {
-//"/colaborador/{idColaborador}/nivel/{idNivel}"
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+    public void procurarPorIdTest() {
 
-        getMockMvc().perform(get(URL + "/colaborador/" + 1 +"/nivel/" + 3)).andExpect(status().isOk());
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/" + dto.getId())).andExpect(status().isOk());
     }
 
+    @Test
+    @SneakyThrows
+    public void procurarPorIdStatusTest() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/procurarTodosPorIdStatus/" + dto.getId())).andExpect(status().isOk());
+    }
+
+
+    @Test
+    @SneakyThrows
+    public void procurarAlunosPorIdTurmaTest() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/procurarTodosAlunosPorIdTurma/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarInstrutorPorIdTurmaTest() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/procurarTodosInstrutoresPorIdTurma/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarInstrutorCompetenciaPorIdTurmaTest() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/procurarTodosInstrutoresCompetenciaPorIdTurma/" + dto.getId())).andExpect(status().isOk());
+    }
 
 
 }

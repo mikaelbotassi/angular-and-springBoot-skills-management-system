@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class CompetenciaResource {
 
     @PostMapping
     public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
-        return ResponseEntity.ok().body(competenciaService.inserir(competenciaDTO));
+        return ResponseEntity.created(URI.create("/api/competencia")).body(competenciaService.inserir(competenciaDTO));
     }
 
     @PutMapping

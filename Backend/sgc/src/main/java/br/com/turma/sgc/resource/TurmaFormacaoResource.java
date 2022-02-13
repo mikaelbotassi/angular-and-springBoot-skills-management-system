@@ -12,41 +12,52 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TurmaFormacaoResource {
 
-    private final TurmaFormacaoService service;
+    private final TurmaFormacaoService turmaFormacaoService;
+
 
     @GetMapping
-    public ResponseEntity<List<TurmaFormacao>> procurarTodos(){
-        return ResponseEntity.ok().body(service.procurarTodos());
+    public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodos(){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.procurarPorId(id));
+    public ResponseEntity<TurmaFormacaoDTO> procurarPorId(@PathVariable Integer id){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma){
-        return ResponseEntity.ok().body(service.inserir(turma));
+    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacaoDTO turma){
+        return ResponseEntity.created(URI.create("./api/turmaFormacao")).body(turmaFormacaoService.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Integer id){
-        service.deletar(id);
+        turmaFormacaoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma){
-        return ResponseEntity.ok().body(service.atualizar(turma));
+    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody TurmaFormacaoDTO turma){
+        return ResponseEntity.ok().body(turmaFormacaoService.atualizar(turma));
     }
-        /*
-    *@RequestyMapping("/porAutor/{nome}")
-    public List<Post> byAutor( @PathVatiable(value = "nome") String nome) {
-	return postService.byAutor(nome);
+
+    @GetMapping(value = "/procurarTodosPorIdStatus/{id}")
+    public ResponseEntity<List<TurmaFormacaoDTO>> procurarTodosPorIdStatus (@PathVariable Integer id){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosPorIdStatus(id));
     }
-     */
-    @GetMapping("/turma")
-    public ResponseEntity<List<TurmaFormacao>> buscaTurmaFinalizada() {
-        return ResponseEntity.ok().body(service.buscaTurmaFinalizada());
+
+    @GetMapping(value = "/procurarTodosAlunosPorIdTurma/{id}")
+    public ResponseEntity<List<ColaboradorFuncaoTurmaDTO>> procurarTodosAlunosPorIdTurma (@PathVariable Integer id){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosAlunosPorIdTurma(id));
+    }
+
+    @GetMapping(value = "/procurarTodosInstrutoresPorIdTurma/{id}")
+    public ResponseEntity<List<ColaboradorFuncaoTurmaDTO>> procurarTodosInstrutoresPorIdTurma (@PathVariable Integer id){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresPorIdTurma(id));
+    }
+
+    @GetMapping(value = "/procurarTodosInstrutoresCompetenciaPorIdTurma/{id}")
+    public ResponseEntity<List<InstrutorCompetenciaTurmaDTO>> procurarTodosInstrutoresCompetenciaPorIdTurma (@PathVariable Integer id){
+     return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresCompetenciaPorIdTurma(id));
     }
 }
