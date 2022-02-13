@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Component
-public class ColaborarBuilder extends ConstrutorDeEntidade<ColaboradorDTO>{
+public class ColaboradorBuilder extends ConstrutorDeEntidade<ColaboradorDTO>{
 
     @Autowired
     private ColaboradorRepository colaboradorRepository;
@@ -24,7 +24,6 @@ public class ColaborarBuilder extends ConstrutorDeEntidade<ColaboradorDTO>{
     private ColaboradorMapper colaboradorMapper;
 
     @Override
-
     public ColaboradorDTO construirEntidade() {
         ColaboradorDTO colaborador = new ColaboradorDTO();
         colaborador.setNome("Arthur");
@@ -35,7 +34,6 @@ public class ColaborarBuilder extends ConstrutorDeEntidade<ColaboradorDTO>{
         colaborador.setDataNascimento(LocalDate.parse("2000-05-10"));
         colaborador.setDataAdmissao(LocalDate.parse("2022-01-06"));
         colaborador.setIdSenioridade(1);
-        colaborador.setNomeSenioridade("Estagiário");
         return colaborador;
     }
 
