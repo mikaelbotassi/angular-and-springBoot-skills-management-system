@@ -28,6 +28,18 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
+    @GetMapping("instrutores")
+    public ResponseEntity<List<ColaboradorBuscaDTO>> buscaColaboradorInstrutor(){
+        return ResponseEntity.ok().body(service.buscaColaboradorInstrutor());
+    }
+
+    @GetMapping("competencias/{idCompetencia}")
+    public ResponseEntity<List<ColaboradorBuscaDTO>> buscarColaboradoresPorCompetencia(@PathVariable    ("idCompetencia") Integer idCompetencia){
+
+        return ResponseEntity.ok().body(service.buscarColaboradoresPorCompetencia(idCompetencia));
+
+    }
+
     @PostMapping
     public ResponseEntity<ColaboradorDTO> inserir(@Valid @RequestBody ColaboradorDTO colab){
         return ResponseEntity.ok().body(service.inserir(colab));

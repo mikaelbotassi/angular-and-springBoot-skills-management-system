@@ -57,4 +57,10 @@ public class CompetenciaService {
         List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador,idNivel);
         return competenciaMapper.toDto(competencias);
     }
+
+    public List<CompetenciaDTO> buscaCompetenciaNivel(Integer idColaborador){
+
+        return colaboradorCompetenciaRepository.buscaCompetenciaNivel(idColaborador);
+
+    }
 }
