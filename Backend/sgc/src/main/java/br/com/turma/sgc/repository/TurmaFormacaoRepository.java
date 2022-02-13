@@ -14,10 +14,10 @@ public interface TurmaFormacaoRepository extends JpaRepository<TurmaFormacao, In
 
     //Query para pegar as turmas em andamento.(Mikael)
     @Query(value = "select t from TurmaFormacao t where t.status.id = 2")
-    List<TurmaFormacao> buscaTurmaAndamento();
+    List<TurmaFormacao> buscarTurmaAndamento();
 
     //Query para pegar as turmas de determinado intervalo de tempo.
-    @Query(value = "select t from TurmaFormacao t where :inicio <= t.inicio and :fim <= t.termino")
+    @Query(value = "select t from TurmaFormacao t where :inicio <= t.inicio and t.termino <= :fim")
     List<TurmaFormacao> buscarTodasTurmasPorIntervalo(@Param("inicio") LocalDate inicio, @Param("fim") LocalDate fim);
 
     @Query(value = "select t from TurmaFormacao t where t.status.id = :idStatus")

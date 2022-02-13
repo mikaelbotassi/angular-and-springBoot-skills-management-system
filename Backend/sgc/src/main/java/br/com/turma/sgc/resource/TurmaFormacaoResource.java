@@ -69,4 +69,14 @@ public class TurmaFormacaoResource {
         return ResponseEntity.ok().body(turmaFormacaoService.buscaTurmaFinalizada());
     }
 
+    @GetMapping(value = "/turmasEmAndamento")
+    public ResponseEntity<List<TurmaFormacaoDTO>> buscaTurmaAndamento(){
+        return ResponseEntity.ok().body(turmaFormacaoService.buscarTurmaAndamento());
+    }
+
+    @GetMapping(value = "/inicio/{inicio}/fim/{fim}")
+    public ResponseEntity<List<TurmaFormacaoDTO>> buscarTodasTurmasPorIntervalo(@PathVariable String inicio,@PathVariable String fim){
+        return ResponseEntity.ok().body(turmaFormacaoService.buscarTodasTurmasPorIntervalo(inicio, fim));
+    }
+
 }

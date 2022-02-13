@@ -11,9 +11,9 @@ public class ColaboradorDTO implements Serializable {
 
     private Integer id;
 
-    private String nomeColaborador;
+    private String nome;
 
-    private String sobrenomeColaborador;
+    private String sobrenome;
 
     private String cpf;
 

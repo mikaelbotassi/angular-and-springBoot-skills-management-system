@@ -1,5 +1,6 @@
 package br.com.turma.sgc.service;
 
+import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -81,8 +84,26 @@ public class TurmaFormacaoService {
         return instrutorCompetenciaTurmaMapper.toDto(turmaColaboradorCompetenciaRepository.procurarTodosInstrutoresPorIdTurma(id));
     }
 
+    public List<TurmaFormacaoDTO> buscarTurmaAndamento(){
+        List<TurmaFormacao> turmas = turmaFormacaoRepository.buscarTurmaAndamento();
+        return turmaFormacaoMapper.toDto(turmas);
+    }
+
     public List<TurmaFormacaoDTO> buscaTurmaFinalizada() {
 
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.buscaTurmaFinalizada());
+    }
+
+    public List<TurmaFormacaoDTO> buscarTodasTurmasPorIntervalo(String inicio, String fim){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataInicio = LocalDate.parse(inicio, formatter);
+        LocalDate dataFim = LocalDate.parse(fim, formatter);
+
+        if (dataFim.isBefore(dataInicio))
+            throw new RegraNegocioException("DATA INVÁLIDA: A data de inicio deve preceder a data de fim");
+
+        List<TurmaFormacao> turmas = turmaFormacaoRepository.buscarTodasTurmasPorIntervalo(dataInicio, dataFim);
+        return turmaFormacaoMapper.toDto(turmas);
     }
 }
