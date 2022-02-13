@@ -51,12 +51,12 @@ public class ColaboradorService {
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
     }
 
-    public List<Colaborador> buscarColaboradorPraAplicarCompetecia(String competencia) {
-        return colaboradorCompetenciaRepository.buscarColaboradorPraAplicarCompetecia(competencia);
-    }
-
-    public List<Integer> buscarColaboradorAplicarCompeteciaID(Integer competenciaId) {
-        return colaboradorCompetenciaRepository.buscarColaboradorAplicarCompeteciaID(competenciaId);
-    }
+//    public List<Colaborador> buscarColaboradorPraAplicarCompetecia(String competencia) {
+//        return colaboradorCompetenciaRepository.buscarColaboradorPraAplicarCompetecia(competencia);
+//    }
+//
+//    public List<Integer> buscarColaboradorAplicarCompeteciaID(Integer competenciaId) {
+//        return colaboradorCompetenciaRepository.buscarColaboradorAplicarCompeteciaID(competenciaId);
+//    }
 
 }

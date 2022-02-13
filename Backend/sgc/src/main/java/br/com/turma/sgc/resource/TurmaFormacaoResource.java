@@ -1,14 +1,18 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.service.TurmaFormacaoService;
+import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
+import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/turma-formacao")
+@RequestMapping("/api/turmaFormacao")
 @RequiredArgsConstructor
 public class TurmaFormacaoResource {
 
@@ -60,4 +64,9 @@ public class TurmaFormacaoResource {
     public ResponseEntity<List<InstrutorCompetenciaTurmaDTO>> procurarTodosInstrutoresCompetenciaPorIdTurma (@PathVariable Integer id){
      return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresCompetenciaPorIdTurma(id));
     }
+    @GetMapping(value = "/turmasFinalizadas")
+    public ResponseEntity<List<TurmaFormacaoDTO>> buscaTurmaFinalizada(){
+        return ResponseEntity.ok().body(turmaFormacaoService.buscaTurmaFinalizada());
+    }
+
 }

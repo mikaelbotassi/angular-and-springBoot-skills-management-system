@@ -9,6 +9,7 @@ import br.com.turma.sgc.service.mapper.ColaboradorFuncaoTurmaMapper;
 import br.com.turma.sgc.service.mapper.InstrutorCompetenciaTurmaMapper;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
+import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class TurmaFormacaoService {
 
 
     public TurmaFormacaoDTO procurarPorId(@Valid Integer id) throws RegraNegocioException{
-        return turmaFormacaoMapper.toDto( turmaFormacaoRepository.findById(id).orElseThrow(()-> new RegraNegocioException("turma nao encontrada")));
+        return turmaFormacaoMapper.toDto( turmaFormacaoRepository.findById(id).orElseThrow(()-> new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA)));
     }
 
     public TurmaFormacaoDTO inserir(@Valid TurmaFormacaoDTO turma){
@@ -39,14 +40,19 @@ public class TurmaFormacaoService {
     }
 
     public void deletar(@Valid Integer id){
-        turmaFormacaoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if(!(turmaFormacaoRepository.findById(id).isPresent()))
+            throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
+
         if(!(turmaColaboradorCompetenciaRepository.procurarTodasTurmasPorIdTurma(id).isEmpty()))
             throw new RegraNegocioException("Essa turma está associada a um colaborador");
+
         turmaFormacaoRepository.deleteById(id);
     }
 
     public TurmaFormacaoDTO atualizar(@Valid TurmaFormacaoDTO turma){
-        turmaFormacaoRepository.findById(turma.getId()).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if (!(turmaFormacaoRepository.findById(turma.getId()).isPresent()))
+            throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
+
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacaoMapper.toEntity(turma)));
     }
 
@@ -55,22 +61,28 @@ public class TurmaFormacaoService {
     }
 
     public List<ColaboradorFuncaoTurmaDTO> procurarTodosAlunosPorIdTurma(@Valid Integer id){
-        turmaFormacaoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if (!(turmaFormacaoRepository.findById(id).isPresent()))
+            throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
 
         return colaboradorFuncaoTurmaMapper.toDto(turmaColaboradorCompetenciaRepository.procurarTodosAlunosPorIdTurma(id));
     }
 
     public List<ColaboradorFuncaoTurmaDTO> procurarTodosInstrutoresPorIdTurma(@Valid Integer id){
-        turmaFormacaoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if (!(turmaFormacaoRepository.findById(id).isPresent()))
+            throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
+
         return colaboradorFuncaoTurmaMapper.toDto(turmaColaboradorCompetenciaRepository.procurarTodosInstrutoresPorIdTurma(id));
     }
 
     public List<InstrutorCompetenciaTurmaDTO> procurarTodosInstrutoresCompetenciaPorIdTurma (@Valid Integer id){
-        turmaFormacaoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        if(!(turmaFormacaoRepository.findById(id).isPresent()))
+            throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
+
         return instrutorCompetenciaTurmaMapper.toDto(turmaColaboradorCompetenciaRepository.procurarTodosInstrutoresPorIdTurma(id));
     }
 
-    public List<TurmaFormacao> buscaTurmaFinalizada() {
-        return repository.buscaTurmaFinalizada();
+    public List<TurmaFormacaoDTO> buscaTurmaFinalizada() {
+
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.buscaTurmaFinalizada());
     }
 }

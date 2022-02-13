@@ -48,8 +48,8 @@ public class CompetenciaService {
         return competenciaMapper.toDto(competencias);
     }
 
-    public List<CompetenciaDTO> buscarCompetenciaPorCategoria(Integer categoriaId) {
-        List<Competencia> competencias = competenciaRepository.buscarCompetenciaPorCategoria(categoriaId);
-        return competenciaMapper.toDto(competencias);
-    }
+//    public List<CompetenciaDTO> buscarCompetenciaPorCategoria(Integer categoriaId) {
+//        List<Competencia> competencias = competenciaRepository.buscarCompetenciaPorCategoria(categoriaId);
+//        return competenciaMapper.toDto(competencias);
+//    }
 }

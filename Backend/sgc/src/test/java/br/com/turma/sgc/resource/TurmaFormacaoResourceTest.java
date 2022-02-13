@@ -2,7 +2,6 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
 import br.com.turma.sgc.builder.TurmaFormacaoBuilder;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;

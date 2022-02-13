@@ -1,5 +1,4 @@
 package br.com.turma.sgc.resource;
-import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.service.ColaboradorService;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
@@ -44,13 +43,13 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 
-    @GetMapping("/aplicarCategoria/{competencia}")
-    public ResponseEntity<List<Colaborador>> buscarColaboradorPraAplicarCompetecia(@PathVariable String competencia) {
-        return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompetecia(competencia));
-    }
-
-    @GetMapping("/aplicarCategoria/{id}")
-    public ResponseEntity<List<Integer>> buscarColaboradorAplicarCompeteciaID(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(service.buscarColaboradorAplicarCompeteciaID(id));
-    }
+//    @GetMapping("/aplicarCategoria/{competencia}")
+//    public ResponseEntity<List<Colaborador>> buscarColaboradorPraAplicarCompetecia(@PathVariable String competencia) {
+//        return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompetecia(competencia));
+//    }
+//
+//    @GetMapping("/aplicarCategoria/{id}")
+//    public ResponseEntity<List<Integer>> buscarColaboradorAplicarCompeteciaID(@PathVariable Integer id) {
+//        return ResponseEntity.ok().body(service.buscarColaboradorAplicarCompeteciaID(id));
+//    }
 }

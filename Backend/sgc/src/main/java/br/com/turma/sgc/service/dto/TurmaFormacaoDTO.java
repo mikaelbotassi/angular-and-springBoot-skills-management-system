@@ -12,13 +12,16 @@ import java.time.LocalDate;
 @Setter
 public class TurmaFormacaoDTO implements Serializable {
 
-
-
     private Integer id;
+
     private String nome;
+
     private String descricao;
+
     private LocalDate inicio;
+
     private LocalDate termino;
+
     private Integer statusId;
 
 }
