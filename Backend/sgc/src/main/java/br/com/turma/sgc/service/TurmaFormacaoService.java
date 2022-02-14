@@ -90,7 +90,6 @@ public class TurmaFormacaoService {
     }
 
     public List<TurmaFormacaoDTO> buscaTurmaFinalizada() {
-
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.buscaTurmaFinalizada());
     }
 

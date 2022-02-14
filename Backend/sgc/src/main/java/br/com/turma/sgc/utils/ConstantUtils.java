@@ -8,6 +8,8 @@ public class ConstantUtils {
 
     public static final String ERRO_ENCONTRAR_IDCOLABORADOR = "Colaborador não existe";
 
+    public static final String ERRO_ENCONTRAR_IDCATEGORIA = "Categoria não existe";
+
     private ConstantUtils(){}
 
 }

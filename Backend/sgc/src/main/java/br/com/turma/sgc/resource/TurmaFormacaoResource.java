@@ -64,6 +64,7 @@ public class TurmaFormacaoResource {
     public ResponseEntity<List<InstrutorCompetenciaTurmaDTO>> procurarTodosInstrutoresCompetenciaPorIdTurma (@PathVariable Integer id){
      return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresCompetenciaPorIdTurma(id));
     }
+
     @GetMapping(value = "/turmasFinalizadas")
     public ResponseEntity<List<TurmaFormacaoDTO>> buscaTurmaFinalizada(){
         return ResponseEntity.ok().body(turmaFormacaoService.buscaTurmaFinalizada());
