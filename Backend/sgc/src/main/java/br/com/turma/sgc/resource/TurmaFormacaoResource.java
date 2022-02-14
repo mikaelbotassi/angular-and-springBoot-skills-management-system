@@ -3,6 +3,7 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.service.TurmaFormacaoService;
 import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
 import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -65,5 +66,10 @@ public class TurmaFormacaoResource {
     @GetMapping(value = "/procurarTodosInstrutoresCompetenciaPorIdTurma/{id}")
     public ResponseEntity<List<InstrutorCompetenciaTurmaDTO>> procurarTodosInstrutoresCompetenciaPorIdTurma (@PathVariable Integer id){
      return ResponseEntity.ok().body(turmaFormacaoService.procurarTodosInstrutoresCompetenciaPorIdTurma(id));
+    }
+
+    @PostMapping(value = "/inserirColaborador")
+    public ResponseEntity<TurmaColaboradorCompetenciaDTO> inserirColaboradorTurma (@RequestBody TurmaColaboradorCompetenciaDTO turmaColaboradorCompetenciaDTO) {
+        return ResponseEntity.created(URI.create("./api/turmaFormacao/inserirColaborador")).body(turmaFormacaoService.inserirColaboradorTurma(turmaColaboradorCompetenciaDTO));
     }
 }

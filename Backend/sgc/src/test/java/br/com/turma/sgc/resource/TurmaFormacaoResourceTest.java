@@ -1,8 +1,12 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
+import br.com.turma.sgc.builder.ColaboradorBuilder;
+import br.com.turma.sgc.builder.CompetenciaBuilder;
+import br.com.turma.sgc.builder.TurmaColaboradorCompetenciaBuilder;
 import br.com.turma.sgc.builder.TurmaFormacaoBuilder;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
@@ -29,6 +33,15 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
 
     @Autowired
     private TurmaFormacaoBuilder turmaFormacaoBuilder;
+
+    @Autowired
+    private TurmaColaboradorCompetenciaBuilder turmaColaboradorCompetenciaBuilder;
+
+    @Autowired
+    private ColaboradorBuilder colaboradorBuilder;
+
+    @Autowired
+    private CompetenciaBuilder competenciaBuilder;
 
     @Before
     public void inicializaTeste(){
@@ -129,5 +142,18 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
         getMockMvc().perform(get(URL + "/procurarTodosInstrutoresCompetenciaPorIdTurma/" + dto.getId())).andExpect(status().isOk());
     }
 
+    @Test
+    @SneakyThrows
+    public void inserirColaboradorTurma() {
+
+        colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+        competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+        TurmaColaboradorCompetenciaDTO dto = turmaColaboradorCompetenciaBuilder.persistir(turmaColaboradorCompetenciaBuilder.construirEntidade());
+
+        getMockMvc().perform(post(URL + "/inserirColaborador").contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(dto))).andExpect(status().isCreated());
+
+    }
 
 }

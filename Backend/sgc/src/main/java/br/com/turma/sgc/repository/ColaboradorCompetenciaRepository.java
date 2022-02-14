@@ -14,4 +14,6 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
 
     @Query(value = "select cc.competencia from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador and cc.nivel = :idNivel")
     List<Competencia> buscarCompetenciasPorNivelEPorIdColaborador(@Param("idColaborador") Integer idColaborador, @Param("idNivel") Integer idNivel);
+
+
 }

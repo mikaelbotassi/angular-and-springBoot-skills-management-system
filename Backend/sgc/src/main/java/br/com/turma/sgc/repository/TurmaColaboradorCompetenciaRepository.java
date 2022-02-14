@@ -24,4 +24,6 @@ public interface TurmaColaboradorCompetenciaRepository extends JpaRepository<Tur
     @Query ("select tcc from TurmaColaboradorCompetencia tcc inner join ColaboradorCompetencia cc" +
             " on cc.nivel = 3 and cc.colaborador.id = tcc.colaborador.id where tcc.turma.id = :idTurma")
     List<TurmaColaboradorCompetencia> procurarTodosInstrutoresPorIdTurma (@Param("idTurma") Integer id);
+
+
 }

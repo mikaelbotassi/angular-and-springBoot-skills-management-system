@@ -6,6 +6,7 @@ import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.CompetenciaService;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ public class CompetenciaBuilder extends ConstrutorDeEntidade<CompetenciaDTO>{
     @Override
     public CompetenciaDTO construirEntidade() {
         CompetenciaDTO competencia = new CompetenciaDTO();
+        competencia.setId(1);
         competencia.setNome("Git");
         competencia.setDescricao("Versionamento de código");
         competencia.setCategoriaId(1);

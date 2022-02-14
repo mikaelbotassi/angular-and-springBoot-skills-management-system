@@ -9,9 +9,9 @@ import java.time.LocalDate;
 @Setter
 public class ColaboradorBuscaDTO implements Serializable {
 
-    private String nomeColaborador;
+    private String nome;
 
-    private String sobrenomeColaborador;
+    private String sobrenome;
 
     private LocalDate dataNascimento;
 
