@@ -8,11 +8,14 @@ import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
+import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -41,6 +44,13 @@ public class ColaboradorService {
 
     }
 
+    public CompetenciaColaboradorDTO buscarColaborador(Integer id){
+        CompetenciaColaboradorDTO dto = repository.buscarColaborador(id);
+        dto.setCompetenciasDTO(colaboradorCompetenciaRepository.buscaCompetenciaNivel(id));
+        return dto;
+
+    }
+
     public List<ColaboradorBuscaDTO> buscarColaboradoresPorCompetencia(Integer id){
 
         return colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id);
@@ -56,7 +66,6 @@ public class ColaboradorService {
     }
 
     public ColaboradorDTO inserir(ColaboradorDTO colab){
-
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
     }
 
@@ -68,13 +77,12 @@ public class ColaboradorService {
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
     }
 
-    public CompetenciaColaboradorDTO buscarColaborador(Integer id){
-
-        CompetenciaColaboradorDTO competenciaColaboradorDTO = repository.buscarColaborador(id);
-
-        competenciaColaboradorDTO.setCompetenciasDTO(colaboradorCompetenciaRepository.buscaCompetenciaNivel(id));
-
-        return competenciaColaboradorDTO;
+    //OK
+    public List<ColaboradorDTO> buscarColaboradorPraAplicarCompeteciaPorId(@PathVariable Integer idCompetencia) {
+        Optional<Colaborador> obj = repository.findById(idCompetencia);
+        if(obj.isPresent())
+            return colaboradorMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradorPraAplicarCompeteciaPorId(idCompetencia));
+        else
+            throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCOMPETENCIA);
     }
-
 }

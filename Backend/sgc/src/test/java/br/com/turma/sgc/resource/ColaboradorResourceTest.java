@@ -1,9 +1,8 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
-import br.com.turma.sgc.builder.CompetenciaBuilder;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.builder.ColaboradorBuilder;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
 import lombok.SneakyThrows;
@@ -23,22 +22,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SgcApplication.class)
 @Transactional
-public class CompetenciaResourceTest extends IntTestComum {
+public class ColaboradorResourceTest extends IntTestComum {
 
-    private static final String URL = "/api/competencia";
+    private static final String URL = "/api/colaborador";
 
     @Autowired
-    private CompetenciaBuilder competenciaBuilder;
+    private ColaboradorBuilder colaboradorBuilder;
 
     @Before
     public void inicializaTeste(){
-        competenciaBuilder.setCustomizacao(null);
+        colaboradorBuilder.setCustomizacao(null);
     }
 
     @Test
     @SneakyThrows
     public void pegarTodosTest(){
-        competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 
         getMockMvc()
                 .perform(get(URL))
@@ -49,15 +48,13 @@ public class CompetenciaResourceTest extends IntTestComum {
     @Test
     @SneakyThrows
     public void salvarTest() {
-
-        //Como customizar o builder
-//        CompetenciaDTO dto = competenciaBuilder.customizar(competencia -> competencia.setNome("Java")).construir();
-
-        CompetenciaDTO dto = competenciaBuilder.construirEntidade();
+        ColaboradorDTO dto = colaboradorBuilder.construirEntidade();
 
         getMockMvc().perform(post(URL)
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(dto))).andExpect(status().isCreated());
+                .content(TestUtil.convertObjectToJsonBytes(dto)))
+                .andExpect(status().isOk());
+        //.andExpect(status().isCreated());
     }
 
 
@@ -65,7 +62,7 @@ public class CompetenciaResourceTest extends IntTestComum {
     @SneakyThrows
     public void atualizarTest() {
 
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 
         getMockMvc().perform(put(URL)
                         .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -75,8 +72,8 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Test
     @SneakyThrows
-    public void procurarPorIdTest(){
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+    public void procurarTodosTest(){
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 
         getMockMvc().perform(get(URL + "/" + dto.getId())).andExpect(status().isOk());
 
@@ -84,26 +81,37 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Test
     @SneakyThrows
-    public void deletarTest() {
+    public void procurarPorIdTest() {
 
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 
         getMockMvc().perform(delete(URL + "/" + dto.getId())).andExpect(status().isNoContent());
     }
 
     @Test
     @SneakyThrows
-    public void procurarCompetenciaNivelColaboradorTest() {
-//"/colaborador/{idColaborador}/nivel/{idNivel}"
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+    public void inserirTest() {
 
-        getMockMvc().perform(get(URL + "/colaborador/" + 1 +"/nivel/" + 3)).andExpect(status().isOk());
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(delete(URL + "/" + dto.getId())).andExpect(status().isNoContent());
     }
 
     @Test
     @SneakyThrows
-    public void buscarCompetenciaPorIdCategoria() {
-        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
-        getMockMvc().perform(get(URL + "/categoria/{idCategoria}" + dto.getId())).andExpect(status().isOk());
+    public void deletarTest() {
+
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(delete(URL + "/" + dto.getId())).andExpect(status().isNoContent());
+    }
+
+    @Test
+    @SneakyThrows
+    public void buscarColaboradorPraAplicarCompeteciaPorIdTest() {
+
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(delete(URL + "/" + dto.getId())).andExpect(status().isNoContent());
     }
 }
