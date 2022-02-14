@@ -52,11 +52,10 @@ public class CompetenciaResource {
         List<CompetenciaDTO> dto = competenciaService.pegarTodasCompetenciasDoColaboradorNaTurma(idTurma, idColaborador);
         return ResponseEntity.ok().body(dto);
     }
-/*
-    //*****************************************************
-    @GetMapping(value = "/competencias/{idCategoria}")
+
+    @GetMapping("/categoria/{idCategoria}") //ok
     public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciaPorIdCategoria(@PathVariable Integer idCategoria) {
         return ResponseEntity.ok().body(competenciaService.buscarCompetenciaPorIdCategoria(idCategoria));
     }
- */
+
 }

@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface CompetenciaRepository extends JpaRepository<Competencia, Integer> {
-/*
-    //Query para pegar as competências de determinada categoria.(Layla)
-    @Query(value = "select c.competencia from Competencia c where c.categoria.id = :idCategoria")
+
+    //Query para pegar as competências de determinada categoria.(Layla) OK
+    @Query(value = "select c from Competencia c join Categoria ca on ca.id = :idCategoria")
     List<Competencia> buscarCompetenciaPorIdCategoria(@Param("idCategoria") Integer idCategoria);
- */
+
 }

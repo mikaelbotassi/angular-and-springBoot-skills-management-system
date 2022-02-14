@@ -58,16 +58,13 @@ public class CompetenciaService {
         List<Competencia> competencias = colaboradorCompetenciaRepository.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador,idNivel);
         return competenciaMapper.toDto(competencias);
     }
-/*
-    //*****************************************************
-    public List<CompetenciaDTO> buscarCompetenciaPorIdCategoria(Integer idCategoria) {
-        Optional<Competencia> obj = competenciaRepository.findById(idCategoria);
-        if (obj.isPresent())
-            return competenciaMapper.toDto(competenciaRepository.buscarCompetenciaPorIdCategoria(idCategoria));
-        else
+
+    public List<CompetenciaDTO> buscarCompetenciaPorIdCategoria(Integer idCategoria) { //ok
+        if (!(categoriaRepository.findById(idCategoria).isPresent()))
             throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCATEGORIA);
+        return competenciaMapper.toDto(competenciaRepository.buscarCompetenciaPorIdCategoria(idCategoria));
     }
- */
+
 
     public List<CompetenciaDTO> pegarTodasCompetenciasDoColaboradorNaTurma(Integer idTurma, Integer idColaborador){
         if(!(turmaFormacaoRepository.findById(idTurma).isPresent()))

@@ -7,7 +7,6 @@ import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
-import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
