@@ -1,12 +1,15 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Colaborador;
+import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.ColaboradorRepository;
+import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -43,11 +46,13 @@ public class ColaboradorService {
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(colab)));
     }
 
-    public void deletar(int id){
+    public void deletar(Integer id){
+        procurarPorId(id);
         repository.deleteById(id);
     }
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
+        procurarPorId(c.getId());
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
     }
 

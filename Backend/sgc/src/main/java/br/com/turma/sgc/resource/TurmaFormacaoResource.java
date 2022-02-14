@@ -3,6 +3,7 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.service.TurmaFormacaoService;
 import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
 import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

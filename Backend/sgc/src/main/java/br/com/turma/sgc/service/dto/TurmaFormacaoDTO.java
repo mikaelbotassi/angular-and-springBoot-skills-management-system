@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -23,5 +24,9 @@ public class TurmaFormacaoDTO implements Serializable {
     private LocalDate termino;
 
     private Integer statusId;
+
+    private String nomeStatus;
+
+    private List<TurmaColaboradorCompetenciaDTO> colaboradorCompetenciaDTOs;
 
 }

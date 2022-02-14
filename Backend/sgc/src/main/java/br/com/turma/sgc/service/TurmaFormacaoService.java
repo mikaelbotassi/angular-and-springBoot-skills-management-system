@@ -1,13 +1,16 @@
 package br.com.turma.sgc.service;
 
+import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
 import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorFuncaoTurmaMapper;
 import br.com.turma.sgc.service.mapper.InstrutorCompetenciaTurmaMapper;
+import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
@@ -25,6 +28,7 @@ public class TurmaFormacaoService {
 
     private final TurmaFormacaoRepository turmaFormacaoRepository;
     private final TurmaFormacaoMapper turmaFormacaoMapper;
+    private final TurmaColaboradorCompetenciaMapper turmaColaboradorCompetenciaMapper;
     private final TurmaColaboradorCompetenciaRepository turmaColaboradorCompetenciaRepository;
     private final ColaboradorFuncaoTurmaMapper colaboradorFuncaoTurmaMapper;
     private final InstrutorCompetenciaTurmaMapper instrutorCompetenciaTurmaMapper;
@@ -33,13 +37,36 @@ public class TurmaFormacaoService {
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.findAll());
     }
 
-
     public TurmaFormacaoDTO procurarPorId(@Valid Integer id) throws RegraNegocioException{
         return turmaFormacaoMapper.toDto( turmaFormacaoRepository.findById(id).orElseThrow(()-> new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA)));
     }
 
+    public List<TurmaColaboradorCompetenciaDTO> setIdTurmaEmColaboradorCompetencia(List<TurmaColaboradorCompetenciaDTO> competenciaDTOS, Integer id){
+
+        for (int i = 0; i < competenciaDTOS.size(); i++){
+            competenciaDTOS.get(i).setIdTurma(id);
+        }
+
+        return competenciaDTOS;
+
+    }
+
     public TurmaFormacaoDTO inserir(@Valid TurmaFormacaoDTO turma){
-        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacaoMapper.toEntity(turma)));
+
+        TurmaFormacao entidade = (turmaFormacaoRepository.save(
+                turmaFormacaoMapper.toEntity(turma)
+        ));
+
+        List<TurmaColaboradorCompetencia> turmaColaboradorCompetencias = turmaColaboradorCompetenciaRepository
+                .saveAll(turmaColaboradorCompetenciaMapper
+                .toEntity(setIdTurmaEmColaboradorCompetencia(turma.getColaboradorCompetenciaDTOs(), entidade.getId())));
+
+        TurmaFormacaoDTO dto = turmaFormacaoMapper.toDto(entidade);
+
+        dto.setColaboradorCompetenciaDTOs(turmaColaboradorCompetenciaMapper.toDto(turmaColaboradorCompetencias));
+
+        return dto;
+
     }
 
     public void deletar(@Valid Integer id){

@@ -8,7 +8,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CompetenciaMapper extends EntityMapper<CompetenciaDTO, Competencia>{
     @Override
-    @Mapping(source = "categoria.id", target = "categoriaId")
+//    @Mapping(source = "categoria.id", target = "categoriaId")
+    @Mapping(source = "categoria.nome", target = "nomeCategoria")
     CompetenciaDTO toDto(Competencia entity);
 
     @Override

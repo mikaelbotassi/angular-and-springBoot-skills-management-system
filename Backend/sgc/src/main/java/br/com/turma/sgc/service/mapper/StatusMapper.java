@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface StatusMapper extends EntityMapper <StatusDTO, Status> {
+
     @Override
     @Mapping(source = "nome", target = "descricao")
     StatusDTO toDto (Status entity);

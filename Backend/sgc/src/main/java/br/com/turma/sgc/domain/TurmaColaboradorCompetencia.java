@@ -1,6 +1,7 @@
 package br.com.turma.sgc.domain;
 
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
+import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

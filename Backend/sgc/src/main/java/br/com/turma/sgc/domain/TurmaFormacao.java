@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,4 +41,5 @@ public class TurmaFormacao implements Serializable {
     @JoinColumn(name = "id_status")
     @NotNull(message = "O STATUS DA TURMA NAO PODE SER NULL")
     private Status status;
+
 }
