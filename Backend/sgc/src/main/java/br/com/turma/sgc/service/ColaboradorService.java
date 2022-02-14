@@ -50,12 +50,6 @@ public class ColaboradorService {
     public ColaboradorDTO inserir(CadastrarColaboradorDTO colab){
         ColaboradorDTO colaboradorDTO = colaboradorMapper.toDto(repository.save(cadastrarColaboradorMapper.toEntity(colab)));
         ColaboradorCompetencia colaboradorCompetencia = new ColaboradorCompetencia();
-
-
-        if(colab.getCompetencia().isEmpty())
-            return colaboradorDTO;
-
-
         colab.getCompetencia().forEach(cadastrarCompetencia -> {
             colaboradorCompetencia.setColaborador(colaboradorMapper.toEntity(colaboradorDTO));
             colaboradorCompetencia.setCompetencia(competenciaMapper.toEntity(competenciaService.procurarPorId(cadastrarCompetencia.getId())));
