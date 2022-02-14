@@ -6,6 +6,7 @@ import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.ColaboradorRepository;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -46,8 +47,6 @@ public class ColaboradorService {
 
     }
 
-
-
     public List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(){
 
         Integer nivelMax = Arrays.stream(NivelEnum.values()).map(NivelEnum::getId)
@@ -67,6 +66,15 @@ public class ColaboradorService {
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
+    }
+
+    public CompetenciaColaboradorDTO buscarColaborador(Integer id){
+
+        CompetenciaColaboradorDTO competenciaColaboradorDTO = repository.buscarColaborador(id);
+
+        competenciaColaboradorDTO.setCompetenciasDTO(colaboradorCompetenciaRepository.buscaCompetenciaNivel(id));
+
+        return competenciaColaboradorDTO;
     }
 
 }
