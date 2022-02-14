@@ -1,6 +1,6 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +39,11 @@ public class CompetenciaResource {
     public ResponseEntity<Void> deletar(@Valid @PathVariable Integer id){
         competenciaService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/colaborador/{idColaborador}/nivel/{idNivel}")
+    public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciasMaximasPorIdColaborador(@PathVariable Integer idColaborador, @PathVariable Integer idNivel){
+        List<CompetenciaDTO> dto = competenciaService.buscarCompetenciasPorNivelEPorIdColaborador(idColaborador, idNivel);
+        return ResponseEntity.ok().body(dto);
     }
 }

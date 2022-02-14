@@ -22,7 +22,7 @@ public class TurmaFormacaoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id) {
+    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable Integer id) {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
@@ -31,13 +31,18 @@ public class TurmaFormacaoResource {
         return ResponseEntity.ok().body(service.queryTurmaFormacaoIniciada());
     }
 
+    @GetMapping("/buscarContemColaborador/{idColaborador}")
+    public ResponseEntity<List<TurmaFormacaoDTO>> buscarContemColaborador(@PathVariable Integer idColaborador) {
+        return ResponseEntity.ok().body(service.buscarContemColaborador(idColaborador));
+    }
+
     @PostMapping
     public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma) {
         return ResponseEntity.ok().body(service.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }

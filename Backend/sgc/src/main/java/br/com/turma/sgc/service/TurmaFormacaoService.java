@@ -2,6 +2,7 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +16,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TurmaFormacaoService {
 
-    private final TurmaFormacaoRepository repository;
+    private final TurmaFormacaoRepository turmaFormacaoRepository;
     private final TurmaFormacaoMapper turmaFormacaoMapper;
 
     public List<TurmaFormacao> procurarTodos() {
-        return repository.findAll();
+        return turmaFormacaoRepository.findAll();
     }
 
     public TurmaFormacao procurarPorId(int id) {
-        Optional<TurmaFormacao> obj = repository.findById(id);
+        Optional<TurmaFormacao> obj = turmaFormacaoRepository.findById(id);
         if (obj.isPresent())
             return obj.get();
         else
@@ -31,18 +32,22 @@ public class TurmaFormacaoService {
     }
 
     public TurmaFormacao inserir(TurmaFormacao turma) {
-        return repository.save(turma);
+        return turmaFormacaoRepository.save(turma);
     }
 
     public void deletar(int id) {
-        repository.deleteById(id);
+        turmaFormacaoRepository.deleteById(id);
     }
 
     public TurmaFormacao atualizar(TurmaFormacao turma) {
-        return repository.save(turma);
+        return turmaFormacaoRepository.save(turma);
     }
 
     public List<TurmaFormacaoDTO> queryTurmaFormacaoIniciada() {
-        return turmaFormacaoMapper.toDto(repository.queryTurmaFormacaoIniciada());
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.queryTurmaFormacaoIniciada());
+    }
+
+    public List<TurmaFormacaoDTO> buscarContemColaborador(Integer idColaborador) {
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.buscarContemColaborador(idColaborador));
     }
 }

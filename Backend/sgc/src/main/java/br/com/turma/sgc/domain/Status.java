@@ -12,11 +12,11 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "senioridade")
+@Table(name = "status")
 public class Status implements Serializable {
 
     @Id
-    private int id;
+    private Integer id;
 
     @Column(name = "nome")
     private String nome;

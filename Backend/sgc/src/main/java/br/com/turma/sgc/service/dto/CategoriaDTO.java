@@ -1,4 +1,4 @@
-package br.com.turma.sgc.dto;
+package br.com.turma.sgc.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,9 +7,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class CompetenciaDTO implements Serializable {
+public class CategoriaDTO implements Serializable {
     private Integer id;
-    private String nome;
     private String descricao;
-    private Integer categoriaId;
 }

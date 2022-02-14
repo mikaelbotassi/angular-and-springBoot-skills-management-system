@@ -1,6 +1,5 @@
-package br.com.turma.sgc.config;
+package br.com.turma.sgc.service.resource.exception;
 
-import br.com.turma.sgc.exeption.RegraNegocioException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
