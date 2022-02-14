@@ -45,4 +45,9 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 
+    @GetMapping(value = "/aplicarCompetencia/{idCompetencia}") //OK
+    public ResponseEntity<List<ColaboradorDTO>> buscarColaboradorPraAplicarCompeteciaPorId(@PathVariable Integer idCompetencia) {
+        return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompeteciaPorId(idCompetencia));
+    }
+
 }

@@ -26,5 +26,4 @@ public class Categoria implements Serializable {
         this.id = categoria.getId();
         this.nome = categoria.getNome();
     }
-
 }

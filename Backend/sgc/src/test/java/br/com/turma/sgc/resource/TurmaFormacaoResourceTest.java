@@ -156,4 +156,15 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
 
     }
 
+    /*
+    @Test
+    @SneakyThrows
+    public void buscaTurmaFinalizada() {
+
+        TurmaFormacaoDTO dto = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+        //.andExpect(status().isNoContent());
+        getMockMvc().perform(get(URL + "/buscaTurmaFinalizada/" + dto.getId())).andExpect(status().isNoContent());
+    }
+ */
+
 }

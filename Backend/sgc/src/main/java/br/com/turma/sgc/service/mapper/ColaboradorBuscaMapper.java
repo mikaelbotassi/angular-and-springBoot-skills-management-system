@@ -5,8 +5,6 @@ import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface ColaboradorBuscaMapper extends EntityMapper<ColaboradorBuscaDTO, Colaborador> {
 

@@ -14,8 +14,12 @@ import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
+import br.com.turma.sgc.utils.ConstantUtils;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -70,6 +74,12 @@ public class ColaboradorService {
         return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
     }
 
-
-
+    //OK
+    public List<ColaboradorDTO> buscarColaboradorPraAplicarCompeteciaPorId(@PathVariable Integer idCompetencia) {
+        Optional<Colaborador> obj = repository.findById(idCompetencia);
+        if(obj.isPresent())
+            return colaboradorMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradorPraAplicarCompeteciaPorId(idCompetencia));
+        else
+            throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCOMPETENCIA);
+    }
 }
