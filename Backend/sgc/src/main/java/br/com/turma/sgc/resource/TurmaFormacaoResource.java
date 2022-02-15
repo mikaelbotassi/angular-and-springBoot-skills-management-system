@@ -31,6 +31,11 @@ public class TurmaFormacaoResource {
         return ResponseEntity.ok().body(service.buscarContemColaborador(idColaborador));
     }
 
+    @GetMapping("/qTFIniciada")
+    public ResponseEntity<List<TurmaFormacaoDTO>> queryTurmaFormacaoIniciada() {
+        return ResponseEntity.ok().body(service.queryTurmaFormacaoIniciada());
+    }
+
     @PostMapping
     public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma) {
         return ResponseEntity.ok().body(service.inserir(turma));

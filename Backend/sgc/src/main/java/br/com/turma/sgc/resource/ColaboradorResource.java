@@ -18,28 +18,33 @@ public class ColaboradorResource {
     private final ColaboradorService service;
 
     @GetMapping
-    public ResponseEntity<List<Colaborador>> procurarTodos(){
+    public ResponseEntity<List<Colaborador>> procurarTodos() {
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Colaborador> procurarPorId(@PathVariable int id){
+    public ResponseEntity<Colaborador> procurarPorId(@PathVariable int id) {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
+    @GetMapping(value = "/senioridade/{idSenioridade}")
+    public ResponseEntity<List<ColaboradorDTO>> procurarPorSenioridadeId(@PathVariable Integer idSenioridade) {
+        return ResponseEntity.ok().body(service.procurarPorSenioridadeId(idSenioridade));
+    }
+
     @PostMapping
-    public ResponseEntity<Colaborador> inserir(@RequestBody Colaborador colab){
+    public ResponseEntity<Colaborador> inserir(@RequestBody Colaborador colab) {
         return ResponseEntity.ok().body(service.inserir(colab));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id){
+    public ResponseEntity<Void> deletar(@PathVariable int id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<Colaborador> atualizar(@RequestBody Colaborador c){
+    public ResponseEntity<Colaborador> atualizar(@RequestBody Colaborador c) {
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 
