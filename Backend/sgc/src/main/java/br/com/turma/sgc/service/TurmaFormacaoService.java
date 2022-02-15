@@ -2,6 +2,7 @@ package br.com.turma.sgc.service;
 
 
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
+import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
@@ -85,6 +86,28 @@ public class TurmaFormacaoService {
             throw new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA);
 
         return instrutorCompetenciaTurmaMapper.toDto(turmaColaboradorCompetenciaRepository.procurarTodosInstrutoresPorIdTurma(id));
+    }
+
+    public List<TurmaFormacaoDTO> buscarTurmaAndamento(){
+        List<TurmaFormacao> turmas = turmaFormacaoRepository.buscarTurmaAndamento();
+        return turmaFormacaoMapper.toDto(turmas);
+    }
+
+    public List<TurmaFormacaoDTO> buscaTurmaFinalizada() {
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.buscaTurmaFinalizada());
+    }
+
+    public List<TurmaFormacaoDTO> buscarTodasTurmasPorIntervalo(String inicio, String fim){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataInicio = LocalDate.parse(inicio, formatter);
+        LocalDate dataFim = LocalDate.parse(fim, formatter);
+
+        if (dataFim.isBefore(dataInicio))
+            throw new RegraNegocioException("DATA INVÁLIDA: A data de inicio deve preceder a data de fim");
+
+        List<TurmaFormacao> turmas = turmaFormacaoRepository.buscarTodasTurmasPorIntervalo(dataInicio, dataFim);
+        return turmaFormacaoMapper.toDto(turmas);
     }
 
     public TurmaColaboradorCompetenciaDTO inserirColaboradorTurma(TurmaColaboradorCompetenciaDTO turmaColaboradorCompetenciaDTO){
