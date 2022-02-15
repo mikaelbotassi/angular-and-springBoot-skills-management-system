@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface ColaboradorMapper extends EntityMapper<ColaboradorDTO, Colaborador> {
+public interface ColaboradorMapper extends EntityMapper<ColaboradorDTO, Colaborador>{
 
     @Override
     @Mapping(source = "senioridade.nome", target = "nomeSenioridade")

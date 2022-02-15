@@ -13,8 +13,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "turma_colaborador_competencia")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class TurmaColaboradorCompetencia implements Serializable {
 
     @EmbeddedId
@@ -34,5 +34,6 @@ public class TurmaColaboradorCompetencia implements Serializable {
     @MapsId("idCompetencia")
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
+
 
 }
