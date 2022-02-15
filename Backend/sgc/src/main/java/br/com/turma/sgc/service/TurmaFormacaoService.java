@@ -59,7 +59,7 @@ public class TurmaFormacaoService {
     }
 
     public TurmaFormacaoDTO atualizar(@Valid TurmaFormacaoDTO turma){
-        turmaFormacaoRepository.findById(turma.getId()).orElseThrow(() -> new RegraNegocioException("turma nao existe"));
+        turmaFormacaoRepository.findById(turma.getId()).orElseThrow(() -> new RegraNegocioException(ConstantUtils.ERRO_ENCONTRAR_IDTURMA));
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacaoMapper.toEntity(turma)));
     }
 
