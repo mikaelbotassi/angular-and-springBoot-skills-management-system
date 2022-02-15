@@ -41,8 +41,8 @@ public class TurmaFormacaoBuilder extends ConstrutorDeEntidade<TurmaFormacaoDTO>
 
     @Override
     public TurmaFormacaoDTO persistir(TurmaFormacaoDTO entidade) {
-        TurmaFormacao competencia = turmaFormacaoMapper.toEntity(entidade);
-        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(competencia));
+        TurmaFormacao turmaFormacao = turmaFormacaoMapper.toEntity(entidade);
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacao));
     }
 
     @Override

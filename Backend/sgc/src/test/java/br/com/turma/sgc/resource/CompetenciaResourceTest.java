@@ -104,6 +104,6 @@ public class CompetenciaResourceTest extends IntTestComum {
     @SneakyThrows
     public void buscarCompetenciaPorIdCategoria() {
         CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
-        getMockMvc().perform(get(URL + "/categoria/{idCategoria}" + dto.getId())).andExpect(status().isOk());
+        getMockMvc().perform(get(URL + "/categoria/" + dto.getId())).andExpect(status().isOk());
     }
 }

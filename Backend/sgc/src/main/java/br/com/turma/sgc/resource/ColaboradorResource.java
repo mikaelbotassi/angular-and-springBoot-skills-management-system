@@ -1,5 +1,6 @@
 package br.com.turma.sgc.resource;
 import br.com.turma.sgc.service.ColaboradorService;
+import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @Transactional
@@ -49,8 +51,8 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@Valid @RequestBody ColaboradorDTO colab){
-        return ResponseEntity.ok().body(service.inserir(colab));
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
+        return ResponseEntity.created(URI.create("./api/colaborador")) .body(service.inserir(colab));
     }
 
     @DeleteMapping(value = "/{id}")
