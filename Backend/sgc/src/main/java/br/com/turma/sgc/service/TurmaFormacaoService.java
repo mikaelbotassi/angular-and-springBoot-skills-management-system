@@ -3,7 +3,6 @@ package br.com.turma.sgc.service;
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
-import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -2,6 +2,7 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.service.ColaboradorService;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
