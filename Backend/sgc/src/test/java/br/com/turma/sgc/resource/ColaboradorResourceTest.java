@@ -13,6 +13,7 @@ import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class ColaboradorResourceTest extends IntTestComum {
 
     @Autowired
     private CompetenciaBuilder competenciaBuilder;
+
+    @Before
+    public void inicializaTeste(){
+        colaboradorBuilder.setCustomizacao(null);
+    }
 
     @Test
     @SneakyThrows
@@ -113,6 +119,15 @@ public class ColaboradorResourceTest extends IntTestComum {
     @Test
     @SneakyThrows
     public void procurarPorIdTest() {
+
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarPorIdcompetenciaTest() {
 
         ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 

@@ -26,7 +26,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ColaboradorService {
+public class
+ColaboradorService {
 
     private final ColaboradorRepository repository;
 
@@ -82,4 +83,5 @@ public class ColaboradorService {
         else
             throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCOMPETENCIA);
     }
+
 }
