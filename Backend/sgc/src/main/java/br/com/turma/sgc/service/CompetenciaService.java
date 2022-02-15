@@ -79,4 +79,6 @@ public class CompetenciaService {
         return competenciaMapper.toDto(turmaColaboradorCompetenciaRepository.pegarTodasCompetenciasDoColaboradorNaTurma(idTurma, idColaborador));
 
     }
+
+
 }
