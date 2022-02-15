@@ -2,9 +2,11 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.service.TurmaFormacaoService;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,28 +17,33 @@ public class TurmaFormacaoResource {
     private final TurmaFormacaoService service;
 
     @GetMapping
-    public ResponseEntity<List<TurmaFormacao>> procurarTodos(){
+    public ResponseEntity<List<TurmaFormacao>> procurarTodos() {
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id){
+    public ResponseEntity<TurmaFormacao> procurarPorId(@PathVariable int id) {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
+    @GetMapping("/buscarContemColaborador/{idColaborador}")
+    public ResponseEntity<List<TurmaFormacaoDTO>> buscarContemColaborador(@PathVariable Integer idColaborador) {
+        return ResponseEntity.ok().body(service.buscarContemColaborador(idColaborador));
+    }
+
     @PostMapping
-    public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacao> inserir(@RequestBody TurmaFormacao turma) {
         return ResponseEntity.ok().body(service.inserir(turma));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id){
+    public ResponseEntity<Void> deletar(@PathVariable int id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma){
+    public ResponseEntity<TurmaFormacao> atualizar(@RequestBody TurmaFormacao turma) {
         return ResponseEntity.ok().body(service.atualizar(turma));
     }
 
