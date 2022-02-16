@@ -47,6 +47,13 @@ public class CompetenciaResource {
         return ResponseEntity.ok().body(dto);
     }
 
+    @GetMapping("colaboradores/{idColaborador}")
+    public ResponseEntity<List<CompetenciaDTO>> buscaCompetenciaNivel(@PathVariable Integer idColaborador){
+
+        return ResponseEntity.ok(competenciaService.buscaCompetenciaNivel(idColaborador));
+
+    }
+
     @GetMapping("/turma/{idTurma}/colaborador/{idColaborador}")
     public ResponseEntity<List<CompetenciaDTO>> pegarTodasCompetenciasDoColaboradorNaTurma(@PathVariable Integer idTurma, @PathVariable Integer idColaborador){
         List<CompetenciaDTO> dto = competenciaService.pegarTodasCompetenciasDoColaboradorNaTurma(idTurma, idColaborador);

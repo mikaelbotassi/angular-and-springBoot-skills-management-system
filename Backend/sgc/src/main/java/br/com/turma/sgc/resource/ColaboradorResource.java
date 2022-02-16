@@ -3,11 +3,13 @@ import br.com.turma.sgc.service.ColaboradorService;
 import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,6 +29,25 @@ public class ColaboradorResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ColaboradorDTO> procurarPorId(@PathVariable int id){
         return ResponseEntity.ok().body(service.procurarPorId(id));
+    }
+
+    @GetMapping("instrutores")
+    public ResponseEntity<List<ColaboradorBuscaDTO>> buscaColaboradorInstrutor(){
+        return ResponseEntity.ok().body(service.buscaColaboradorInstrutor());
+    }
+
+    @GetMapping("competencias/{idCompetencia}")
+    public ResponseEntity<List<ColaboradorBuscaDTO>> buscarColaboradoresPorCompetencia(@PathVariable    ("idCompetencia") Integer idCompetencia){
+
+        return ResponseEntity.ok().body(service.buscarColaboradoresPorCompetencia(idCompetencia));
+
+    }
+
+    @GetMapping("colaborador/{idColaborador}")
+    public ResponseEntity<CompetenciaColaboradorDTO> buscarColaborador(@PathVariable("idColaborador") Integer idColaborador){
+
+        return ResponseEntity.ok().body(service.buscarColaborador(idColaborador));
+
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Colaborador;
+import br.com.turma.sgc.enums.NivelEnum;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
@@ -8,6 +9,7 @@ import br.com.turma.sgc.repository.ColaboradorRepository;
 import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CadastrarColaboradorMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
@@ -17,7 +19,10 @@ import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -26,12 +31,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class
-ColaboradorService {
+public class ColaboradorService {
 
     private final ColaboradorRepository repository;
-
-    private final ColaboradorBuscaMapper colaboradorBuscaMapper;
 
     private final ColaboradorMapper colaboradorMapper;
 
@@ -44,12 +46,38 @@ ColaboradorService {
     private final CadastrarColaboradorMapper cadastrarColaboradorMapper;
 
     public List<ColaboradorBuscaDTO> procurarTodos(){
-        return colaboradorBuscaMapper.toDto(repository.findAll());
+
+        return repository.buscarTodosColaboradores();
+
     }
 
     public ColaboradorDTO procurarPorId(int id){
-        return colaboradorMapper.toDto(repository.findById(id).orElseThrow( () -> new RegraNegocioException("Elemento nao encontrado!")));
+        Colaborador obj = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Elemento não encontrado!"));
 
+        return colaboradorMapper.toDto(obj);
+
+    }
+
+    public CompetenciaColaboradorDTO buscarColaborador(Integer id){
+        CompetenciaColaboradorDTO dto = repository.buscarColaborador(id);
+        dto.setCompetenciasDTO(colaboradorCompetenciaRepository.buscaCompetenciaNivel(id));
+        return dto;
+
+    }
+
+    public List<ColaboradorBuscaDTO> buscarColaboradoresPorCompetencia(Integer id){
+
+        return colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id);
+
+    }
+
+    public List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(){
+
+        Integer nivelMax = Arrays.stream(NivelEnum.values()).map(NivelEnum::getId)
+                .max(Integer::compareTo).orElse(NivelEnum.NIVEL3.getId());
+
+        return colaboradorCompetenciaRepository.buscaColaboradorInstrutor(nivelMax);
     }
 
     public ColaboradorDTO inserir(CadastrarColaboradorDTO colab){
@@ -83,5 +111,4 @@ ColaboradorService {
         else
             throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCOMPETENCIA);
     }
-
 }

@@ -3,6 +3,8 @@ import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
+import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +18,20 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
     @Query(value = "select cc.competencia from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador and cc.nivel = :idNivel")
     List<Competencia> buscarCompetenciasPorNivelEPorIdColaborador(@Param("idColaborador") Integer idColaborador, @Param("idNivel") Integer idNivel);
 
+    @Query("select new br.com.turma.sgc.service.dto.ColaboradorBuscaDTO(cc.colaborador.nome, cc.colaborador.sobrenome," +
+            "cc.colaborador.dataNascimento, cc.colaborador.dataAdmissao, cc.colaborador.senioridade.nome)  " +
+            " from ColaboradorCompetencia cc where cc.competencia.id = :idCompetencia")
+    List<ColaboradorBuscaDTO> buscarColaboradoresPorCompetencia(@Param("idCompetencia") Integer idCompetencia);
+
+    @Query("select new br.com.turma.sgc.service.dto.ColaboradorBuscaDTO(cc.colaborador.nome, cc.colaborador.sobrenome, " +
+            "cc.colaborador.dataNascimento, cc.colaborador.dataAdmissao, cc.colaborador.senioridade.nome)  " +
+            "from ColaboradorCompetencia cc where cc.nivel = :nivelMax")
+    List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(@Param("nivelMax") Integer nivelMax);
+
+    @Query("select new br.com.turma.sgc.service.dto.CompetenciaDTO(cc.competencia.id, cc.competencia.nome," +
+            "cc.competencia.descricao, cc.competencia.categoria.id) " +
+            "from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador")
+    List<CompetenciaDTO> buscaCompetenciaNivel (@Param("idColaborador") Integer idColaborador);
     //Query para retornar todos os colaboradores que podem dar uma determinada competência.(Layla) OK
     @Query(value = "select cc.colaborador from ColaboradorCompetencia cc " +
             "where cc.competencia.id = :idCompetencia and cc.nivel = 3")
