@@ -51,7 +51,7 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody CadastrarColaboradorDTO colab){
         return ResponseEntity.created(URI.create("./api/colaborador")) .body(service.inserir(colab));
     }
 
