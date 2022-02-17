@@ -1,11 +1,37 @@
-<div class="card">
-<P-table>
+<div class="card" >
+
+    <button pButton type="button" class="new-button" icon="pi pi-plus" iconPos="left" (click)="showDialog()"></button>
+    <button pButton type="button" class="delete-button" icon="pi pi-times " iconPos="left" disabled></button>
+
+    <p-dialog header="Nova Turma dialog-turma " [(visible)]="display" >
+        <div class="card" >
+            <form>
+                <div class="card ui-grid-col-12">
+                    <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
+                    <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
+                    <input pInputText placeholder="nome turma" class="registrar-turma ui-grid-col-3 " type="text" />
+                    <textarea [rows]="1" [cols]="30"  pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
+                </div>
+                <form>
+                    <p-fieldset legend="Adicionar colaborador"  [toggleable]="true" [collapsed]="true" >
+                        <p>duvida sobre painel dinamico</p>
+                    </p-fieldset>
+                </form>
+            </form>
+
+
+
+        </div>
+        
+
+    </p-dialog>
+
+
     <tr>
         <th>
-            aa
+           
         </th>
     </tr>
-</P-table>
-</div>
 
+</div>
 

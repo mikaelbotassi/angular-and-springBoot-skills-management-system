@@ -1,4 +1,3 @@
-import { TurmaFormacaoModule } from './modules/turma-formacao/turma-formacao.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
