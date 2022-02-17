@@ -4,12 +4,16 @@
 
         <h1 style="text-align: center;">COMPETÊNCIAS</h1>
 
+        <div class = "container-search">
+            <input type="text" size="30" class="pesquisa"/>
+            <p-button icon="pi pi-search"></p-button>
+        </div>
+
         <div class="ui-g">
             <p-card *ngFor="let competencia of competencias" class="card-competencia col-sm-12 col-md-6 col-lg-2" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
-                    <p class="nome-categoria">{{competencia.categoria.nome|uppercase}}</p>
                 </div>
             </p-card>
         </div>

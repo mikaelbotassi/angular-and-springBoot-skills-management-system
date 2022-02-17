@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CompetenciaService } from '../competencia.service';
+import { CompetenciaService } from '../service/competencia.service';
 import { CompetenciaModel } from '../models/competencia.model';
 
 @Component({
@@ -15,7 +15,14 @@ export class CompetenciaListarComponent implements OnInit {
   constructor(private competenciaService: CompetenciaService) {}
 
   ngOnInit(): void {
-      this.competencias = this.competenciaService.getCompetencias();
+    this.listarCompetencias();
+  }
+
+  listarCompetencias(){
+    this.competenciaService.obterTodasCompetenciasComURL('competencia').subscribe(competencias => {
+        this.competencias = competencias;
+        console.log(this.competencias);
+    })
   }
 
 }
