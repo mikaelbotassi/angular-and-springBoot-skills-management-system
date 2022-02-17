@@ -7,3 +7,8 @@
     font-family: "Montserrat-ExtraLight";
     src: url(../fonts/montserrat/Montserrat-ExtraLight.ttf);
 }
+
+@font-face {
+    font-family: "OpenSans-Light";
+    src: url(../fonts/openSans/OpenSans-Light.ttf);
+}
