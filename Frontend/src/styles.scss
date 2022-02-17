@@ -1,1 +1,12 @@
+@import "assets/layout/css/definicoes-font.css";
 /* You can add global styles to this file, and also import other style files */
+p-card.card-competencia div.ui-card{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.50);
+    border: 0px;
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(41, 41, 41));
+}
+
+p-card{
+    margin: 5px 0 0 5px;
+}

@@ -1,0 +1,43 @@
+.titulo-competencia{
+    font-family: "BebasNeue";
+    font-size: 40px;
+    color: rgb(228, 135, 48);
+    margin: 10px 2px 2px 2px;
+    text-align: left;
+}
+
+.descricao-competencia{
+    font-family: "Montserrat-ExtraLight";
+    font-size: 25px;
+    text-align: left;
+    color: white;
+    margin: 10px 2px 2px 2px;
+}
+
+.nome-categoria{
+    font-family: "Roboto";
+    font-size:15px;
+    text-align: left;
+    color: white;
+    margin: 5px 2px 2px 5px;
+}
+
+.div-tela-sombreada{
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+body{
+
+}
+
+/* .container-competencias-card p{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+} */
+
