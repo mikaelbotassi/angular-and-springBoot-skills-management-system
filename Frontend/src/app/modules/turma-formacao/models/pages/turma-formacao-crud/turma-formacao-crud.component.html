@@ -3,7 +3,9 @@
     <button pButton type="button" class="new-button" icon="pi pi-plus" iconPos="left" (click)="showDialog()"></button>
     <button pButton type="button" class="delete-button" icon="pi pi-times " iconPos="left" disabled></button>
 
-    <p-dialog header="Nova Turma dialog-turma " [(visible)]="display" >
+    <p-dialog class="dialog-turma" [modal]="true" [maximizable]="true" [(visible)]="display" >
+        <ng-template pTemplate="header">Cadastrar turma</ng-template>
+
         <div class="card" >
             <form>
                 <div class="card ui-grid-col-12">
@@ -18,8 +20,6 @@
                     </p-fieldset>
                 </form>
             </form>
-
-
 
         </div>
         
