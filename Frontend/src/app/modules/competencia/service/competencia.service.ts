@@ -10,7 +10,7 @@ export class CompetenciaService{
     //exemplo constante
     // private static readonly constExample
 
-    private competencias: CompetenciaModel[] = [];
+    competencias: CompetenciaModel[] = [];
 
     constructor(private httpClient: HttpClient){
     }

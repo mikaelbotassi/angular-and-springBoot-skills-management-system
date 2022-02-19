@@ -10,6 +10,12 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FieldsetModule} from 'primeng/fieldset';
+import {CardModule} from 'primeng/card';
+import { turmaFormacaoService } from './service/turma-formacao.service';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+
+
 
 
 @NgModule({
@@ -22,7 +28,12 @@ import {FieldsetModule} from 'primeng/fieldset';
     DialogModule,
     InputTextModule,
     InputTextareaModule,
-    FieldsetModule
-  ]
+    FieldsetModule,
+    CardModule,
+    TableModule,
+    ToastModule
+  ],
+  exports:[TurmaFormacaoCrudComponent],
+  providers: [turmaFormacaoService]
 })
 export class TurmaFormacaoModule { }

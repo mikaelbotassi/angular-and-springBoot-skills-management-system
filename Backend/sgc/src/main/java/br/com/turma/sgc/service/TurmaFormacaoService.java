@@ -45,7 +45,10 @@ public class TurmaFormacaoService {
     }
 
     public TurmaFormacaoDTO inserir(@Valid TurmaFormacaoDTO turma){
-        return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacaoMapper.toEntity(turma)));
+        TurmaFormacao turmat = turmaFormacaoMapper.toEntity(turma);
+        return turmaFormacaoMapper.toDto(turmaFormacaoRepository
+                .save(turmaFormacaoMapper
+                .toEntity(turma)));
     }
 
     public void deletar(@Valid Integer id){

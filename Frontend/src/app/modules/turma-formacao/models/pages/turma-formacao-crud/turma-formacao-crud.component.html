@@ -1,37 +1,85 @@
 <div class="card" >
+    <p-toast position="top-right" [key]="succes" ></p-toast>
+    <button pButton class="new-button" id="botaoDisplay" icon="pi pi-plus" label="Nova turma" iconPos="left" (click)="showDialog()"> </button>
 
-    <button pButton type="button" class="new-button" icon="pi pi-plus" iconPos="left" (click)="showDialog()"></button>
-    <button pButton type="button" class="delete-button" icon="pi pi-times " iconPos="left" disabled></button>
+    <h1 style="text-align: center;">Turmas</h1>
 
-    <p-dialog class="dialog-turma" [modal]="true" [maximizable]="true" [(visible)]="display" >
-        <ng-template pTemplate="header">Cadastrar turma</ng-template>
 
-        <div class="card" >
-            <form>
+    <p-dialog class="titulo-turma" header="Cadastrar turma" [modal]="true" [maximizable]="true" [(visible)]="display"  >
+        <form id="cadastrarTurma">
+
+        <div class="card table-colab"  >
                 <div class="card ui-grid-col-12">
                     <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
                     <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                    <input pInputText placeholder="nome turma" class="registrar-turma ui-grid-col-3 " type="text" />
-                    <textarea [rows]="1" [cols]="30"  pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
+                    <input pInputText placeholder="nome turma"  class="registrar-turma ui-grid-col-3 " type="text"  #nome/>
+                    <textarea [rows]="1" [cols]="30" #descricao type="text" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
                 </div>
+
                 <form>
-                    <p-fieldset legend="Adicionar colaborador"  [toggleable]="true" [collapsed]="true" >
-                        <p>duvida sobre painel dinamico</p>
+                    <p-fieldset legend="Adicionar colaborador"   [toggleable]="true" [collapsed]="true" >
+                        <div class="ui-g-4" >
+                        <p  class="registrar-turma ">Colaborador</p>
+                        <input class="registrar-turma" placeholder="Colaborador" pInputText />
+                        <p  class="registrar-turma ">Competencia</p>
+                        <input class="registrar-turma" placeholder="Competencia" pInputText />
+                        <button pButton class="commit-button-colab  " icon="pi pi-plus" label="Adicionar" iconPos="left" > </button>
+                        
+                    </div>
+
+
+                       <div class="ui-g-8" >
+                      <p-table>
+                            <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    Colaborador
+                                </th>
+                                <th>
+                                    Competencia
+                                </th>
+                            </tr>
+                        </ng-template>
+                        </p-table>
+                    </div> 
+                        
                     </p-fieldset>
                 </form>
-            </form>
-
         </div>
-        
+        <button pButton class="commit-button" type="button" icon="pi pi-plus" label="Cadastrar" iconPos="left" (click)="inserirTurma(nome.value,descricao.value);nome.value = ''; descricao.value = '' " > </button>
+ 
+
+    </form>
 
     </p-dialog>
 
 
-    <tr>
-        <th>
-           
-        </th>
-    </tr>
 
+
+
+
+    
+        <p-table [value]="turmas" [globalFilterFields]="">
+            <ng-template pTemplate="header" >
+                <tr>
+                    <th>nome</th>
+                    <th>descricao</th>
+                    <th>status</th>
+                    <th>ação</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-turma class="ui-grid-col-12" >
+                <tr >
+                    <td >{{turma.nome}}</td>
+                    <td >{{turma.descricao}}</td>
+                    <td >{{turma.statusId}}</td>
+                    <td >
+                        <button pButton icon="ui-icon-pencil"  ></button>
+                        <button pButton class="button-table" icon="ui-icon-trash"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            
+        </p-table>
 </div>
 
