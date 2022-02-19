@@ -5,7 +5,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: '/api',
+    apiUrl: '/api/',
     auth: {
         baseUrl: '',
         loginUrl: '/api/sso/login',
