@@ -2,7 +2,7 @@ import { CompetenciaModel } from './../models/competencia.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { API_PATH } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CompetenciaService{
@@ -16,7 +16,7 @@ export class CompetenciaService{
     }
 
     obterTodasCompetenciasComURL(url: String): Observable<CompetenciaModel[]>{
-        return this.httpClient.get<CompetenciaModel[]>(API_PATH + url);
+        return this.httpClient.get<CompetenciaModel[]>(environment.apiUrl + url);
     }
 
 }

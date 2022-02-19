@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +12,8 @@ import { ColaboradorListaComponent } from './components/colaborador-lista/colabo
   ],
   imports: [
     CommonModule,
-    ColaboradorRoutingModule
+    ColaboradorRoutingModule,
+    SharedModule
   ]
 })
 export class ColaboradorModule { }
