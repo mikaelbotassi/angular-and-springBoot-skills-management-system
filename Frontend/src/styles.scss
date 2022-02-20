@@ -38,18 +38,26 @@ p-button button.ui-button span.pi{
     color: rgb(228, 135, 48);
 }
 
-p-dialog div.ui-dialog{
-    pointer-events: all;
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon{
+    width: 0.8em;
+    height: 0.8em;
+    margin: 80% 0;
+    position: relative;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon:hover{
+    background-color: rgba(228, 135, 48, 0);
 }
 
 p-dialog div.ui-dialog div.ui-dialog-titlebar {
 
     font-family: "BebasNeue";
-    font-size: 40px;
-    color: rgba(0, 0, 0, 0.877);
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.877);
     text-align: left;
     background-image: linear-gradient(to bottom right, rgb(228, 135, 48), rgba(228, 135, 48, 0.849));
-    padding: 2px 10px;
+    padding: 0px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 }
 
 ui-widget, .ui-widget{
@@ -62,13 +70,15 @@ ui-widget, .ui-widget{
 p-dialog div.ui-dialog.ui-shadow {
     width: 25%;
 }
-p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
-    color: rgb(255, 255, 255);
-}
 
 //X do botão close
 p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
+    position: relative;
     color: rgb(255, 255, 255);
     font-size: 30px;
-    margin: 20px 20px;
+    margin: 50% 0px;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
+    position: relative;
 }

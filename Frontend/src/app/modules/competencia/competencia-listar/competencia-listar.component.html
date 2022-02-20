@@ -10,7 +10,7 @@
         </div>
 
         <div class="ui-g">
-            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-8 col-lg-2" (click) = "showDialog(competencia)" >
+            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
@@ -19,6 +19,7 @@
         </div>
 
         <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}">
+            <p>{{competenciaDetalhada.descricao}}</p>
         </p-dialog>
 
     </div>
