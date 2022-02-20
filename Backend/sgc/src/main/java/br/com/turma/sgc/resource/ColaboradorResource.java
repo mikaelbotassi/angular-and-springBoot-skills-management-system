@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -31,10 +30,10 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
-    @GetMapping("instrutores")
-    public ResponseEntity<List<ColaboradorBuscaDTO>> buscaColaboradorInstrutor(){
-        return ResponseEntity.ok().body(service.buscaColaboradorInstrutor());
-    }
+//    @GetMapping("instrutores")
+//    public ResponseEntity<List<ColaboradorBuscaDTO>> buscaColaboradorInstrutor(){
+//        return ResponseEntity.ok().body(service.buscaColaboradorInstrutor());
+//    }
 
     @GetMapping("competencias/{idCompetencia}")
     public ResponseEntity<List<ColaboradorBuscaDTO>> buscarColaboradoresPorCompetencia(@PathVariable    ("idCompetencia") Integer idCompetencia){

@@ -19,7 +19,9 @@
         </div>
 
         <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}">
-            <p>{{competenciaDetalhada.descricao}}</p>
+            <p class="tipo-dado" >ID DA COMPETÊNCIA: <span class = "dado-competencia"> {{competenciaDetalhada.id}} </span> </p>
+            <p class="tipo-dado" >DESCRIÇÃO DA COMPETÊNCIA: <span class = "dado-competencia">{{competenciaDetalhada.descricao}}</span> </p>
+            <p class="tipo-dado" >CATEGORIA: <span class = "dado-competencia">{{competenciaDetalhada.categoriaNome}}</span> </p>
         </p-dialog>
 
     </div>
