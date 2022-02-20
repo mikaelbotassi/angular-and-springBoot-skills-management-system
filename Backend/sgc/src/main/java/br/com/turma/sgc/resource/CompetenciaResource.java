@@ -2,7 +2,7 @@ package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +10,11 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/competencia")
 public class CompetenciaResource {
-    @Autowired
-    CompetenciaService competenciaService;
+
+    private final CompetenciaService competenciaService;
 
     @GetMapping()
     public ResponseEntity<List<CompetenciaDTO>> procurarTodos(){
