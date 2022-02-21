@@ -1,1 +1,53 @@
-<p-table></p-table>
+<p-dialog visible="true" [style]="{width: '450px'}" header="Colaborador">
+<form [formGroup]="formGroup">
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="Nome" name="nome" formControlName="nome"
+            id="nome">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="Sobrenome" name="sobrenome" formControlName="sobrenome"
+            id="sobrenome">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="CPF" name="cpf" formControlName="cpf"
+            id="cpf">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="Email" name="email" formControlName="email"
+            id="email">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <p-calendar type="text" pInputText placeholder="Data Nascimento" name="dataNascimento" formControlName="dataNascimento"
+            id="dataNascimento"></p-calendar>         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <p-calendar type="text" pInputText placeholder="Data Admissão" name="dataAdmissao" formControlName="dataAdmissao"
+            id="dataAdmissao"></p-calendar>         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="Senioridade" name="idSenioridade" formControlName="idSenioridade"
+            id="idSenioridade">         
+        </div>
+    </div>
+</form>
+</p-dialog>
