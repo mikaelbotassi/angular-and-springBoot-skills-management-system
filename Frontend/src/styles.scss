@@ -1,18 +1,84 @@
 @import "assets/layout/css/definicoes-font.css";
 /* You can add global styles to this file, and also import other style files */
 p-card.card-competencia div.ui-card{
-
+    padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.50);
     border: 0px;
-    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(41, 41, 41));
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgba(0, 0, 0, 0.877));
 }
 
 p-card{
     margin: 5px 0 0 5px;
+    cursor: pointer;
 }
 
 input.pesquisa{
-    border: 1px black solid;
-    border-radius: 30px 0 0 30px;
+
+    height: 100%;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: none;
     cursor: pointer;
+}
+
+p-button button.ui-button.ui-button-icon-only{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 25;
+}
+
+p-button button.ui-button{
+
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+p-button button.ui-button span.pi{
+    color: rgb(228, 135, 48);
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon{
+    width: 0.8em;
+    height: 0.8em;
+    margin: 80% 0;
+    position: relative;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon:hover{
+    background-color: rgba(228, 135, 48, 0);
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar {
+
+    font-family: "BebasNeue";
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.877);
+    text-align: left;
+    background-image: linear-gradient(to bottom right, rgb(228, 135, 48), rgba(228, 135, 48, 0.849));
+    padding: 0px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+}
+
+ui-widget, .ui-widget{
+    box-sizing: border-box;
+    width: 500px;
+}
+
+// Botão Close p-dialog
+
+p-dialog div.ui-dialog.ui-shadow {
+    width: 25%;
+}
+
+//X do botão close
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
+    position: relative;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin: 50% 0px;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
+    position: relative;
 }

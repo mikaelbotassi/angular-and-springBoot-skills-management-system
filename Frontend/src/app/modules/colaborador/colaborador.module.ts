@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     CommonModule,
     ColaboradorRoutingModule,
+<<<<<<< HEAD
     DialogModule,
     ButtonModule,
     FormsModule,
@@ -26,6 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     ColaboradorService,
+=======
+    SharedModule
+>>>>>>> cfb7427820b1bf5f102d0c984834dd4b8215b3fd
   ]
 })
 export class ColaboradorModule { }

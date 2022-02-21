@@ -1,7 +1,6 @@
 package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Colaborador;
-import br.com.turma.sgc.enums.NivelEnum;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
@@ -10,19 +9,15 @@ import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CadastrarColaboradorMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
-import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -40,6 +35,8 @@ public class ColaboradorService {
     private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
     private final CompetenciaService competenciaService;
+
+    private final ColaboradorBuscaMapper colaboradorBuscaMapper;
 
     private final CompetenciaMapper competenciaMapper;
 
@@ -68,17 +65,17 @@ public class ColaboradorService {
 
     public List<ColaboradorBuscaDTO> buscarColaboradoresPorCompetencia(Integer id){
 
-        return colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id);
+        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscarColaboradoresPorCompetencia(id));
 
     }
-
-    public List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(){
-
-        Integer nivelMax = Arrays.stream(NivelEnum.values()).map(NivelEnum::getId)
-                .max(Integer::compareTo).orElse(NivelEnum.NIVEL3.getId());
-
-        return colaboradorCompetenciaRepository.buscaColaboradorInstrutor(nivelMax);
-    }
+//
+//    public List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(){
+//
+//        Integer nivelMax = Arrays.stream(NivelEnum.values()).map(NivelEnum::getId)
+//                .max(Integer::compareTo).orElse(NivelEnum.NIVEL3.getId());
+//
+//        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscaColaboradorInstrutor(nivelMax));
+//    }
 
     public ColaboradorDTO inserir(CadastrarColaboradorDTO colab){
         ColaboradorDTO colaboradorDTO = colaboradorMapper.toDto(repository.save(cadastrarColaboradorMapper.toEntity(colab)));

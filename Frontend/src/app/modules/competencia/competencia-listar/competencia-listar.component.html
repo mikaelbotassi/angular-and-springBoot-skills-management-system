@@ -2,21 +2,27 @@
 
     <div class = "div-tela-sombreada">
 
-        <h1 style="text-align: center;">COMPETÊNCIAS</h1>
+        <h1 style="text-align: center; font-size: 40px;">COMPETÊNCIAS</h1>
 
-        <div class = "container-search">
-            <input type="text" size="30" class="pesquisa"/>
-            <p-button icon="pi pi-search"></p-button>
+        <div class="box">
+            <input type="text" name="search" class  = "form-control" placeholder="Pesquisar..." #search />
+            <p-button type="submit" class="button" icon="pi pi-search" (onClick)="obterCompetencias(search.value)" ></p-button>
         </div>
 
         <div class="ui-g">
-            <p-card *ngFor="let competencia of competencias" class="card-competencia col-sm-12 col-md-6 col-lg-2" >
+            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
                 </div>
             </p-card>
         </div>
+
+        <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}">
+            <p class="tipo-dado" >ID DA COMPETÊNCIA: <span class = "dado-competencia"> {{competenciaDetalhada.id}} </span> </p>
+            <p class="tipo-dado" >DESCRIÇÃO DA COMPETÊNCIA: <span class = "dado-competencia">{{competenciaDetalhada.descricao}}</span> </p>
+            <p class="tipo-dado" >CATEGORIA: <span class = "dado-competencia">{{competenciaDetalhada.categoriaNome}}</span> </p>
+        </p-dialog>
 
     </div>
 

@@ -7,7 +7,6 @@ import { CompetenciaListarComponent } from './competencia-listar/competencia-lis
 import {CardModule} from 'primeng/card';
 import { CompetenciaService } from './service/competencia.service';
 import {InputTextModule} from 'primeng/inputtext';
-
 @NgModule({
   declarations: [CompetenciaListarComponent],
   imports: [
