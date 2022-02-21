@@ -19,4 +19,8 @@ export class CompetenciaService{
         return this.httpClient.get<CompetenciaModel[]>(environment.apiUrl + url);
     }
 
+    atualizarCompetencia(competencia: CompetenciaModel):Observable<CompetenciaModel>{
+        return this.httpClient.put<CompetenciaModel>(environment.apiUrl + 'competencia', competencia);
+    }
+
 }

@@ -1,4 +1,9 @@
 @import "assets/layout/css/definicoes-font.css";
+
+$corLaranja: rgb(228, 135, 48);
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+
 /* You can add global styles to this file, and also import other style files */
 p-card.card-competencia div.ui-card{
     padding: 10px;
@@ -7,7 +12,7 @@ p-card.card-competencia div.ui-card{
     background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgba(0, 0, 0, 0.877));
 }
 
-p-card{
+p-card.card-competencia{
     margin: 5px 0 0 5px;
     cursor: pointer;
 }
@@ -21,43 +26,21 @@ input.pesquisa{
     cursor: pointer;
 }
 
-p-button button.ui-button.ui-button-icon-only{
+p-button.botao-pesquisa button.ui-button.ui-button-icon-only{
 
     width: 50px;
     height: 50px;
     border-radius: 25;
 }
 
-p-button button.ui-button{
+p-button.botao-pesquisa button.ui-button{
 
     box-shadow: none;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: $corPreta;
 }
 
-p-button button.ui-button span.pi{
-    color: rgb(228, 135, 48);
-}
-
-p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon{
-    width: 0.8em;
-    height: 0.8em;
-    margin: 80% 0;
-    position: relative;
-}
-
-p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon:hover{
-    background-color: rgba(228, 135, 48, 0);
-}
-
-p-dialog div.ui-dialog div.ui-dialog-titlebar {
-
-    font-family: "BebasNeue";
-    font-size: 50px;
-    color: rgba(255, 255, 255, 0.877);
-    text-align: left;
-    background-image: linear-gradient(to bottom right, rgb(228, 135, 48), rgba(228, 135, 48, 0.849));
-    padding: 0px 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+p-button.botao-pesquisa button.ui-button span.pi{
+    color: $corLaranja;
 }
 
 ui-widget, .ui-widget{
@@ -65,20 +48,103 @@ ui-widget, .ui-widget{
     width: 500px;
 }
 
+//=========================== Style do Dialog de competência mostrar
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon{
+    width: 0.8em;
+    height: 0.8em;
+    margin: 80% 0;
+    position: relative;
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon:hover{
+    background-color: $corTransparente;
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar {
+
+    font-family: "BebasNeue";
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.877);
+    text-align: left;
+    background-image: linear-gradient(to bottom right, $corLaranja, rgba(228, 135, 48, 0.849));
+    padding: 0px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+}
+
 // Botão Close p-dialog
 
-p-dialog div.ui-dialog.ui-shadow {
-    width: 25%;
+p-dialog.dialog-competencia div.ui-dialog.ui-shadow {
+    width: 40%;
 }
 
 //X do botão close
-p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
     position: relative;
     color: rgb(255, 255, 255);
     font-size: 30px;
     margin: 50% 0px;
 }
 
-p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
     position: relative;
 }
+
+//----------------Botão atualizar de competência---------------------------------
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-editar{
+
+    font-family: 'Roboto';
+    color: $corLaranja;
+    background-color: $corPreta;
+
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-editar:hover{
+
+    font-family: 'Roboto';
+    color: white;
+    background-color: rgba(0, 0, 0, 0.726);
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-editar span.ui-button-icon-left{
+
+    color: $corLaranja;
+
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-editar:hover span.ui-button-icon-left{
+
+    color: white;
+
+}
+//-------------------- fim -----------------------------------------------------
+
+//----------------Botão excluir de competência---------------------------------
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-excluir{
+
+    font-family: 'Roboto';
+    color: $corPreta;
+    background-color: $corLaranja;
+
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-excluir:hover{
+
+    font-family: 'Roboto';
+    color: white;
+    background-color: rgba(228, 135, 48, 0.849);
+    box-shadow: inset 0px 0px 10px rgba(189, 104, 24, 0.884);
+
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-excluir:hover span.ui-button-icon-left{
+    color: white;
+}
+
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.botao-excluir span.ui-button-icon-left{
+    color: $corPreta;
+}
+
+//-------------------- fim -----------------------------------------------------

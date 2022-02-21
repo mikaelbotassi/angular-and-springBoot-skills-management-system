@@ -15,6 +15,5 @@ public class CompetenciaDTO implements Serializable {
     private Integer id;
     private String nome;
     private String descricao;
-    private Integer categoriaId;
-    private String categoriaNome;
+    private CategoriaDTO categoria;
 }

@@ -5,14 +5,11 @@ import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CategoriaMapper.class})
 public interface CompetenciaMapper extends EntityMapper<CompetenciaDTO, Competencia>{
     @Override
-    @Mapping(source = "categoria.id", target = "categoriaId")
-    @Mapping(source = "categoria.nome", target = "categoriaNome")
     CompetenciaDTO toDto(Competencia entity);
 
     @Override
-    @Mapping(source = "categoriaId", target = "categoria.id")
     Competencia toEntity(CompetenciaDTO dto);
 }
