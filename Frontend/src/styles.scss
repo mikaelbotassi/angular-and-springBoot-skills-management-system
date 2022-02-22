@@ -1,4 +1,9 @@
 @import "assets/layout/css/definicoes-font.css";
+
+$corLaranja: rgb(228, 135, 48);
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+
 /* You can add global styles to this file, and also import other style files */
 p-card.card-competencia div.ui-card{
     padding: 10px;
@@ -7,7 +12,7 @@ p-card.card-competencia div.ui-card{
     background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgba(0, 0, 0, 0.877));
 }
 
-p-card{
+p-card.card-competencia{
     margin: 5px 0 0 5px;
     cursor: pointer;
 }
