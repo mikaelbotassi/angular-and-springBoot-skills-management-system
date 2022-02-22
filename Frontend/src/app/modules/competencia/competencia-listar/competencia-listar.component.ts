@@ -58,9 +58,5 @@ export class CompetenciaListarComponent implements OnInit {
       this.displayEdit = true;
   }
 
-  getCompetenciaDetalhada():CompetenciaModel{
-    return this.competenciaDetalhada;
-  }
-
 
 }

@@ -30,22 +30,7 @@
         </p-dialog>
 
         <p-dialog [(visible)]="displayEdit" *ngIf="!!competenciaEditada" header="{{competenciaDetalhada.nome}} EDIT" class="dialog-competencia dialog-edit">
-            <!-- <form #editCompetencia = "ngForm" (ngSubmit)="atualizarCompetencia(editCompetencia)">
-
-                <div class="form-group">
-                    <label for = "nome">Nome</label>
-                    <input type = "text" class="nome-competencia-edit" id="nome" name="nome" [(ngModel)] = "competenciaEditada.nome">
-                </div>
-
-                <div class="form-group">
-                    <label for = "descricao">Descrição</label>
-                    <input type = "text" class="descricao-competencia-edit" id="descricao" name="descricao" [(ngModel)] = "competenciaEditada.descricao">
-                </div>
-
-                <button type="submit" pButton icon="pi pi-check" label="SALVAR" class = "botao-salvar"></button>
-
-            </form> -->
-            <app-form-competencia></app-form-competencia>
+            <app-form-competencia [competenciaEditada] = "competenciaEditada"></app-form-competencia>
         </p-dialog>
 
     </div>
