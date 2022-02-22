@@ -1,20 +1,19 @@
 <form [formGroup]="formCompetencia" (ngSubmit)="atualizarCompetencia()">
 
-    <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" class="form-control" name="name" id="nome" formControlName="nome">
+    <div class="ui-fluid">
+        <div class="p-field">
+            <label for="nome">Nome</label>
+            <input type="text" pInputText name="nome" formControlName="nome">
+        </div>
+        <div class="p-field">
+            <label for="descricao">Descrição</label>
+            <input type="text" pInputText name="descricao" formControlName="descricao">
+        </div>
     </div>
 
-
-    <div class="form-group">
-        <label for="nome">Descrição</label>
-        <input type="text" class="form-control" name="descrica" id="descricao" formControlName="descricao">
-    </div>
-
-      <h3 class="first">Categoria</h3>
+    <h3 class="first">Categoria</h3>
     <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" formControlName="categoria" placeholder="Selecione uma categoria"></p-dropdown>
-
-    <input type="submit" class="btn btn-primary mt-4" value="Salvar">
-    <a href="#" class="btn btn-secondary mt-4 ml-2">Cancelar</a>
+    <input type="submit" pButton class="btn btn-primary mt-4" value="Salvar">
+    <button href="#" pButton class="btn btn-secondary mt-4 ml-2">Cancelar</button>
 
 </form>

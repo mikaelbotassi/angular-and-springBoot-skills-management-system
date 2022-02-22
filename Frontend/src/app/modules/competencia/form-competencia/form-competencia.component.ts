@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CompetenciaListarComponent } from './../competencia-listar/competencia-listar.component';
@@ -15,24 +15,24 @@ import { SelectItem } from 'primeng';
 })
 export class FormCompetenciaComponent implements OnInit {
 
-    competenciaListar:CompetenciaListarComponent;
-    competenciaEditada:CompetenciaModel;
+    @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
 
     constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService) { }
 
     ngOnInit() {
-        this.competenciaEditada = this.competenciaListar.getCompetenciaDetalhada();
-        this.formCompetencia = this.createForm(this.competenciaEditada);
+        this.formCompetencia = this.createForm();
+        this.formCompetencia.patchValue(this.competenciaEditada);
         this.getCategorias();
     }
 
-    createForm(competencia: CompetenciaModel): FormGroup {
+    createForm(): FormGroup {
         return this.formBuilder.group({
-        nome: [competencia.nome, [Validators.required]],
-        descricao: [competencia.descricao, [Validators.required]],
-        categoria: [competencia.categoria, [Validators.required]],
+        id: [null, [Validators.required]],
+        nome: [null, [Validators.required]],
+        descricao: [null, [Validators.required]],
+        categoria: [null, [Validators.required]],
         });
     }
 
@@ -52,7 +52,10 @@ export class FormCompetenciaComponent implements OnInit {
 
     atualizarCompetencia(): void{
 
-        this.competenciaService.atualizarCompetencia(this.competenciaEditada).subscribe(
+        if(!this.formCompetencia.valid){
+            return;
+        }
+        this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue()).subscribe(
             resultado => {
               console.log('Competência alterada com sucesso.')
             },
