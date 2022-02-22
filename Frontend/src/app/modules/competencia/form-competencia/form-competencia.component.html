@@ -1,0 +1,20 @@
+<form [formGroup]="formCompetencia" (ngSubmit)="atualizarCompetencia()">
+
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" name="name" id="nome" formControlName="nome">
+    </div>
+
+
+    <div class="form-group">
+        <label for="nome">Descrição</label>
+        <input type="text" class="form-control" name="descrica" id="descricao" formControlName="descricao">
+    </div>
+
+      <h3 class="first">Categoria</h3>
+    <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" formControlName="categoria" placeholder="Selecione uma categoria"></p-dropdown>
+
+    <input type="submit" class="btn btn-primary mt-4" value="Salvar">
+    <a href="#" class="btn btn-secondary mt-4 ml-2">Cancelar</a>
+
+</form>

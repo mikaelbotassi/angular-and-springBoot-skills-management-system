@@ -4,8 +4,7 @@ export class CompetenciaModel{
     id:number;
     nome:string;
     descricao: string;
-    categoriaId: number;
-    categoriaNome: string;
+    categoria: CategoriaModel;
 
     getNome():string{
         return this.nome;

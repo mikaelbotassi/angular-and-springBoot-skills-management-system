@@ -4,11 +4,8 @@ const NOME_CATEGORIA: String[] = ["Backend", "Frontend", "Banco", "Arquitetura",
 export class CategoriaModel{
 
     id: number;
-    nome: String;
+    descricao: String;
 
-    constructor(id:number){
-
-        this.id = id;
-        this.nome = NOME_CATEGORIA[id-1];
+    constructor(){
     }
 }

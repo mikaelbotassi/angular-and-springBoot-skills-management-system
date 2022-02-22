@@ -6,7 +6,7 @@
 
         <div class="box">
             <input type="text" name="search" class  = "form-control" placeholder="Pesquisar..." #search />
-            <p-button type="submit" class="button" icon="pi pi-search" (onClick)="obterCompetencias(search.value)" ></p-button>
+            <p-button type="submit" class="button botao-pesquisa" icon="pi pi-search" (onClick)="obterCompetencias(search.value)" ></p-button>
         </div>
 
         <div class="ui-g">
@@ -18,10 +18,34 @@
             </p-card>
         </div>
 
-        <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}">
-            <p class="tipo-dado" >ID DA COMPETÊNCIA: <span class = "dado-competencia"> {{competenciaDetalhada.id}} </span> </p>
-            <p class="tipo-dado" >DESCRIÇÃO DA COMPETÊNCIA: <span class = "dado-competencia">{{competenciaDetalhada.descricao}}</span> </p>
-            <p class="tipo-dado" >CATEGORIA: <span class = "dado-competencia">{{competenciaDetalhada.categoriaNome}}</span> </p>
+        <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}" class="dialog-competencia">
+                <p class="tipo-dado" >ID DA COMPETÊNCIA: <span class = "dado-competencia"> {{competenciaDetalhada.id}} </span> </p>
+                <p class="tipo-dado" >DESCRIÇÃO DA COMPETÊNCIA: <span class = "dado-competencia">{{competenciaDetalhada.descricao}}</span> </p>
+                <p class="tipo-dado" >CATEGORIA: <span class = "dado-competencia">{{competenciaDetalhada.categoria.descricao}}</span> </p>
+                <p-footer>
+                    <button type="button" pButton icon="ui ui-icon-pencil" label="EDITAR" class="botao-editar" (click)="showDialogEdit()">
+                    </button>
+                    <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button>
+                </p-footer>
+        </p-dialog>
+
+        <p-dialog [(visible)]="displayEdit" *ngIf="!!competenciaEditada" header="{{competenciaDetalhada.nome}} EDIT" class="dialog-competencia dialog-edit">
+            <!-- <form #editCompetencia = "ngForm" (ngSubmit)="atualizarCompetencia(editCompetencia)">
+
+                <div class="form-group">
+                    <label for = "nome">Nome</label>
+                    <input type = "text" class="nome-competencia-edit" id="nome" name="nome" [(ngModel)] = "competenciaEditada.nome">
+                </div>
+
+                <div class="form-group">
+                    <label for = "descricao">Descrição</label>
+                    <input type = "text" class="descricao-competencia-edit" id="descricao" name="descricao" [(ngModel)] = "competenciaEditada.descricao">
+                </div>
+
+                <button type="submit" pButton icon="pi pi-check" label="SALVAR" class = "botao-salvar"></button>
+
+            </form> -->
+            <app-form-competencia></app-form-competencia>
         </p-dialog>
 
     </div>

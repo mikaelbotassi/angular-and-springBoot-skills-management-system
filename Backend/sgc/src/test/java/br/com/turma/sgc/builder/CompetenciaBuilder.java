@@ -4,6 +4,7 @@ import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.enums.CategoriaEnum;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.CompetenciaService;
+import br.com.turma.sgc.service.dto.CategoriaDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import org.junit.Before;
@@ -31,7 +32,7 @@ public class CompetenciaBuilder extends ConstrutorDeEntidade<CompetenciaDTO>{
         competencia.setId(1);
         competencia.setNome("Git");
         competencia.setDescricao("Versionamento de código");
-        competencia.setCategoriaId(1);
+        competencia.setCategoria(new CategoriaDTO(1, "Backend"));
         return competencia;
     }
 

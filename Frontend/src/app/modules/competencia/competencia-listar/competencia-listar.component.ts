@@ -1,8 +1,10 @@
+import { CategoriaService } from './../service/categoria.service';
 import { Component, OnInit } from '@angular/core';
 
 import { CompetenciaService } from '../service/competencia.service';
 import { CompetenciaModel } from '../models/competencia.model';
 
+const URL_COMPETENCIA:string = 'competencia';
 @Component({
   selector: 'app-competencia-listar',
   templateUrl: './competencia-listar.component.html',
@@ -13,7 +15,9 @@ export class CompetenciaListarComponent implements OnInit {
     competenciasTotal:CompetenciaModel[] = [];
     competenciasFiltrada: CompetenciaModel[] = [];
     display: boolean = false;
+    displayEdit:boolean = false;
     competenciaDetalhada: CompetenciaModel;
+    competenciaEditada: CompetenciaModel;
 
   constructor(private competenciaService: CompetenciaService) {}
 
@@ -22,9 +26,8 @@ export class CompetenciaListarComponent implements OnInit {
   }
 
 
-
   listarCompetencias(){
-    this.competenciaService.obterTodasCompetenciasComURL('competencia').subscribe(competencias => {
+    this.competenciaService.obterTodasCompetenciasComURL(URL_COMPETENCIA).subscribe(competencias => {
         this.competenciasTotal = competencias;
         this.competenciasFiltrada = competencias;
     })
@@ -44,9 +47,20 @@ export class CompetenciaListarComponent implements OnInit {
   }
 
   showDialog(competencia: CompetenciaModel){
-
+        console.log(competencia);
         this.competenciaDetalhada = competencia;
         this.display = true;
   }
+
+  showDialogEdit(){
+      this.competenciaEditada = this.competenciaDetalhada;
+      this.display = false;
+      this.displayEdit = true;
+  }
+
+  getCompetenciaDetalhada():CompetenciaModel{
+    return this.competenciaDetalhada;
+  }
+
 
 }
