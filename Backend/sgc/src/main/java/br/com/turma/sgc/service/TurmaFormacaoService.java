@@ -3,17 +3,13 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.TurmaFormacao;
+import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
+import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
-import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
-import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
-import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
-import br.com.turma.sgc.service.mapper.ColaboradorFuncaoTurmaMapper;
-import br.com.turma.sgc.service.mapper.InstrutorCompetenciaTurmaMapper;
-import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
-import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
+import br.com.turma.sgc.service.dto.*;
+import br.com.turma.sgc.service.mapper.*;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +31,8 @@ public class TurmaFormacaoService {
     private final ColaboradorFuncaoTurmaMapper colaboradorFuncaoTurmaMapper;
     private final InstrutorCompetenciaTurmaMapper instrutorCompetenciaTurmaMapper;
     private final TurmaColaboradorCompetenciaMapper turmaColaboradorCompetenciaMapper;
+    private final TurmaColaboradorCompetenciaNivelMapper turmaColaboradorCompetenciaNivelMapper;
+    private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
     public List<TurmaFormacaoDTO> procurarTodos(){
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.findAll());
@@ -123,6 +122,14 @@ public class TurmaFormacaoService {
           return turmaColaboradorCompetenciaMapper
                   .toDto(turmaColaboradorCompetenciaRepository
                   .save(turmaColaboradorCompetencia));
+    }
+
+    public List<TurmaColaboradorCompetenciaNivelDTO> procurarColaboradorCompetenciaEmTurma(Integer id){
+        return turmaColaboradorCompetenciaNivelMapper.toDto(turmaColaboradorCompetenciaRepository.procurarColaboradorCompetenciaPorTurma(id));
+    }
+
+    public List<TurmaColaboradorCompetenciaNivelDTO> listarColaboradorCompetencia(){
+        return  turmaColaboradorCompetenciaNivelMapper.toDto(colaboradorCompetenciaRepository.findAll());
     }
 
 }

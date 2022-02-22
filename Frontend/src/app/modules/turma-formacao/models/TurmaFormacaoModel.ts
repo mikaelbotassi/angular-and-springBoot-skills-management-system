@@ -14,4 +14,5 @@ public statusId: number,
 
 ){
 }
+public id: number;
 }

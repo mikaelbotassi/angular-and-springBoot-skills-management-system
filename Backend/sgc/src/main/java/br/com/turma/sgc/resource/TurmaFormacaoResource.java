@@ -1,10 +1,7 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.service.TurmaFormacaoService;
-import br.com.turma.sgc.service.dto.ColaboradorFuncaoTurmaDTO;
-import br.com.turma.sgc.service.dto.InstrutorCompetenciaTurmaDTO;
-import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -84,4 +81,15 @@ public class TurmaFormacaoResource {
     public ResponseEntity<List<TurmaFormacaoDTO>> buscarTodasTurmasPorIntervalo(@PathVariable String inicio,@PathVariable String fim){
         return ResponseEntity.ok().body(turmaFormacaoService.buscarTodasTurmasPorIntervalo(inicio, fim));
     }
+
+    @GetMapping(value = "/todosColaboradorCompetenciaTurma/{id}")
+    public ResponseEntity<List<TurmaColaboradorCompetenciaNivelDTO>> procurarTodasTurmasPorIdTurma (@PathVariable Integer id){
+        return  ResponseEntity.ok().body(turmaFormacaoService.procurarColaboradorCompetenciaEmTurma (id));
+    }
+
+    @GetMapping(value = "/Colaboradores")
+    public ResponseEntity<List<TurmaColaboradorCompetenciaNivelDTO>> listarTodosColaboradoresCompetencia(){
+        return ResponseEntity.ok().body(turmaFormacaoService.listarColaboradorCompetencia());
+    }
+
 }

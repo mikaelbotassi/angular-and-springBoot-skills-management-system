@@ -58,3 +58,55 @@
     float:right;
     padding: 0;
 }
+
+p-button button.ui-button.ui-button-icon-only{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 25;
+}
+
+p-button button.ui-button{
+
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+p-button button.ui-button span.pi{
+    color: rgb(228, 135, 48);
+}
+
+p-dialog div.ui-dialog{
+    pointer-events: all;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar {
+
+    font-family: "BebasNeue";
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.877);
+    text-align: left;
+    background-image: linear-gradient(to bottom right, rgb(228, 135, 48), rgba(228, 135, 48, 0.849));
+    padding: 2px 10px;
+}
+
+ui-widget, .ui-widget{
+    box-sizing: border-box;
+    width: 500px;
+}
+
+// Botão Close p-dialog
+
+p-dialog div.ui-dialog.ui-shadow {
+    width: 25%;
+}
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
+    color: rgb(255, 255, 255);
+}
+
+//X do botão close
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin: 20px 20px;
+}

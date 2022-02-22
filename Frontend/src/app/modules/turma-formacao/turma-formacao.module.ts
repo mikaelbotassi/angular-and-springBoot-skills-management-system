@@ -14,6 +14,8 @@ import {CardModule} from 'primeng/card';
 import { turmaFormacaoService } from './service/turma-formacao.service';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 
@@ -31,7 +33,9 @@ import {ToastModule} from 'primeng/toast';
     FieldsetModule,
     CardModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    TooltipModule,
+    AutoCompleteModule
   ],
   exports:[TurmaFormacaoCrudComponent],
   providers: [turmaFormacaoService]
