@@ -45,7 +45,7 @@ p-button.botao-pesquisa button.ui-button span.pi{
 
 ui-widget, .ui-widget{
     box-sizing: border-box;
-    width: 500px;
+    width: 100%;
 }
 
 p-dialog.dialog-competencia.dialog-edit div.ui-dialog.ui-shadow {
@@ -123,6 +123,7 @@ p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-footer button.ui-button.
     color: white;
 
 }
+
 //-------------------- fim -----------------------------------------------------
 
 //----------------Botão excluir de competência---------------------------------
