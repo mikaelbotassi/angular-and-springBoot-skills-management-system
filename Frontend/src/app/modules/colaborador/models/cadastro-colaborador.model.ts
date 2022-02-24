@@ -1,3 +1,5 @@
+import { CadastrarCompetenciaModel } from "../../competencia/models/cadastro-competencia.model";
+
 export class CadastrarColaboradorModel{
     constructor(
         public nome : String,
@@ -11,10 +13,12 @@ export class CadastrarColaboradorModel{
         public dataNascimento : Date,
     
         public dataAdmissao : Date,
+
+        public foto : String, 
     
         public  idSenioridade : number,
     
-        public competencia : Array<any> ,
+        public competencia : Array<CadastrarCompetenciaModel> ,
 
     ) {}
 }

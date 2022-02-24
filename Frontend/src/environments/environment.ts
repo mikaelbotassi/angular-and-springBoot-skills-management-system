@@ -17,8 +17,5 @@ export const environment = {
         loginSuccessRoute: '/#/login-success'
     }
 };
-<<<<<<< HEAD
 
 export const API_PATH = '/api/'
-=======
->>>>>>> cfb7427820b1bf5f102d0c984834dd4b8215b3fd

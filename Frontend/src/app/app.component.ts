@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ScrollPanel } from 'primeng';
 import { MenusService, MenuOrientation } from '@nuvem/primeng-components';
+import { SenioridadeService } from './shared/services/senioridade.service';
+import { SenioridadeModel } from './shared/model/senioridade.model';
 
 @Component({
     selector: 'app-root',
@@ -44,16 +46,26 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     rippleMouseDownListener: EventListenerOrEventListenerObject;
 
-    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService) { }
+    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService, 
+                private _senioridade : SenioridadeService) { }
 
     ngOnInit() {
         this.zone.runOutsideAngular(() => { this.bindRipple(); });
+
+        this.buscarSenioridades();
 
         this.menuService.itens = [
             { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] },
             { label: 'Competencias', icon: 'check_circle', routerLink: ['/competencia'] },
             { label: 'Colaboradores', icon: 'supervisor_account', routerLink: ['/colaborador'] }
         ];
+    }
+
+    public buscarSenioridades() : void {
+        this._senioridade.buscarSenioridades().subscribe(
+            res => localStorage.setItem('senioridade', JSON.stringify(res)),
+            err => console.error(err)
+        )
     }
 
     bindRipple() {

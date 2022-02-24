@@ -1,5 +1,6 @@
 package br.com.turma.sgc.resource;
 
+import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +65,11 @@ public class CompetenciaResource {
     @GetMapping("/categoria/{idCategoria}") //ok
     public ResponseEntity<List<CompetenciaDTO>> buscarCompetenciaPorIdCategoria(@PathVariable Integer idCategoria) {
         return ResponseEntity.ok().body(competenciaService.buscarCompetenciaPorIdCategoria(idCategoria));
+    }
+
+    @GetMapping("/dropdown")
+    public ResponseEntity<List<CadastrarCompetenciaDTO>> buscarCompetenciasDropdown(){
+        return ResponseEntity.ok().body(competenciaService.buscarCompetenciasDropdown());
     }
 
 }

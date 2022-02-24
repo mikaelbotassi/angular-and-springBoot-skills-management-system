@@ -20,6 +20,8 @@ public class CadastrarColaboradorDTO {
 
     private String cpf;
 
+    private byte[] foto;
+
     private String email;
 
     private LocalDate dataNascimento;
