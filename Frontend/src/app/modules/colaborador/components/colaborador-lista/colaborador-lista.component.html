@@ -1,0 +1,19 @@
+<h2>Colaboradores</h2>
+<p-table [paginator]="true" [columns]="coloumns" [rows]="rows" [rowsPerPageOptions]="[1,2,5,10]"
+         [value]="colaboradores">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let column of coloumns">
+                {{column.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-colaborador>
+        <tr>
+            <td>{{colaborador.nome}} {{colaborador.sobrenome}}</td>
+            <td>{{colaborador.dataNascimento}}</td>
+            <td>{{colaborador.dataAdmissao}}</td>
+            <td>{{colaborador.nomeSenioridade}}</td>
+        </tr>
+    </ng-template>
+</p-table>
