@@ -16,7 +16,9 @@ import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import {CheckboxModule} from 'primeng/checkbox';
+import {DropdownModule} from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -35,7 +37,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     TableModule,
     ToastModule,
     TooltipModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    CheckboxModule,
+    DropdownModule,
+    FormsModule
   ],
   exports:[TurmaFormacaoCrudComponent],
   providers: [turmaFormacaoService]

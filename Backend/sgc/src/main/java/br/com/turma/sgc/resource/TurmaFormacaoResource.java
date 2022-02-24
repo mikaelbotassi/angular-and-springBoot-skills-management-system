@@ -92,4 +92,14 @@ public class TurmaFormacaoResource {
         return ResponseEntity.ok().body(turmaFormacaoService.listarColaboradorCompetencia());
     }
 
+    @GetMapping(value = "/ColaboradorCompetencia/{idColaborador}/{idCompetencia}")
+    public ResponseEntity<TurmaColaboradorCompetenciaNivelDTO> procurarColaboradorCompetenciaPorIdColaboradorIdCompetencia(@PathVariable Integer idColaborador, @PathVariable Integer idCompetencia){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarNivelColaboradorCompetencia(idColaborador, idCompetencia));
+    }
+
+    @DeleteMapping (value = "/turmaColaboradorCompetenciaDeletar/{idTurma}/{idColaborador}/{idCompetencia}")
+    public ResponseEntity<Void> deletarTurmaColaboradorCompetencia(@PathVariable Integer idTurma, @PathVariable Integer idColaborador, @PathVariable Integer idCompetencia){
+        turmaFormacaoService.deletarTurmaColaboradorCompetencia(idTurma ,idColaborador, idCompetencia);
+        return ResponseEntity.noContent().build();
+    }
 }

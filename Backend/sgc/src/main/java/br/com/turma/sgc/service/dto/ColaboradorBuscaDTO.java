@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ColaboradorBuscaDTO implements Serializable {
 
+    private Integer id;
+
     private String nome;
 
     private String sobrenome;

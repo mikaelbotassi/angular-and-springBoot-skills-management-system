@@ -132,4 +132,13 @@ public class TurmaFormacaoService {
         return  turmaColaboradorCompetenciaNivelMapper.toDto(colaboradorCompetenciaRepository.findAll());
     }
 
+    public TurmaColaboradorCompetenciaNivelDTO procurarNivelColaboradorCompetencia(Integer colaboradorId, Integer competenciaId){
+        return turmaColaboradorCompetenciaNivelMapper.toDto( colaboradorCompetenciaRepository.buscarColaboradorCompetenciaPorIdColaboradorIdCompetencia(competenciaId, colaboradorId));
+    }
+
+    public void deletarTurmaColaboradorCompetencia(Integer turmaId, Integer colaboradorId, Integer competenciaId){
+        TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK = new TurmaColaboradorCompetenciaPK(turmaId, colaboradorId, competenciaId);
+         turmaColaboradorCompetenciaRepository.deleteById(turmaColaboradorCompetenciaPK);
+    }
+
 }

@@ -14,6 +14,7 @@ public interface TurmaColaboradorCompetenciaNivelMapper extends EntityMapper<Tur
     @Mapping(source = "colaborador.nome", target = "colaboradorNome")
     @Mapping(source = "colaborador.id", target = "colaboradorId")
     @Mapping(source = "competencia.id", target = "competenciaId")
+    @Mapping(source = "colaborador.sobrenome", target = "colaboradorSobrenome")
     TurmaColaboradorCompetenciaNivelDTO toDto(ColaboradorCompetencia entity);
 
     @Override
@@ -21,5 +22,6 @@ public interface TurmaColaboradorCompetenciaNivelMapper extends EntityMapper<Tur
     @Mapping(source = "colaboradorNome", target = "colaborador.nome")
     @Mapping(source = "colaboradorId", target = "colaborador.id")
     @Mapping(source = "competenciaId", target = "competencia.id")
+    @Mapping(source = "colaboradorSobrenome", target = "colaborador.sobrenome")
     ColaboradorCompetencia toEntity(TurmaColaboradorCompetenciaNivelDTO dto);
 }

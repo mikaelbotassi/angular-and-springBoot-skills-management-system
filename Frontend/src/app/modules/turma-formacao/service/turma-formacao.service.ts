@@ -51,4 +51,13 @@ export class turmaFormacaoService{
     listarCompetencia(): Observable<CompetenciaListaModel[]>{
         return this.httpClient.get<CompetenciaListaModel[]>(API_PATH + "competencia");
     }
+
+    procurarNivelColaboradorCompetencia(colaboradorId: number, competenciaId: number): Observable<TurmaColaboradorCompetenciaNivelModel>{
+        return this.httpClient.get<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/ColaboradorCompetencia/" + colaboradorId + "/" + competenciaId);
+    }
+
+    deletarTurmaColaboradorCompetencia(turmaColaboradorCompetenciaModel: TurmaColaboradorCompetenciaModel): Observable<TurmaColaboradorCompetenciaModel>{
+        return this.httpClient.delete<TurmaColaboradorCompetenciaModel>(API_PATH + this.url + "/turmaColaboradorCompetenciaDeletar/" + turmaColaboradorCompetenciaModel.turmaId + '/' + turmaColaboradorCompetenciaModel.colaboradorId + '/' + turmaColaboradorCompetenciaModel.competenciaId);
+    }
+
 }
