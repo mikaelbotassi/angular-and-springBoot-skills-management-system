@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 public class ColaboradorBuscaDTO implements Serializable {
-    private Integer id;
 
     private Integer id;
 
