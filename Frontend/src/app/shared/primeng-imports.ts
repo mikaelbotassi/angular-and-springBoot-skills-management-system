@@ -15,6 +15,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { EditorModule } from 'primeng/editor';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -80,6 +81,7 @@ export const PRIMENG_IMPORTS = [
     DataViewModule,
     DialogModule,
     DropdownModule,
+    DynamicDialogModule,
     EditorModule,
     FieldsetModule,
     FileUploadModule,

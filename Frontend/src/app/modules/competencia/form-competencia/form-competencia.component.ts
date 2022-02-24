@@ -1,20 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { CompetenciaListarComponent } from './../competencia-listar/competencia-listar.component';
 import { CategoriaService } from './../service/categoria.service';
 import { CompetenciaService } from './../service/competencia.service';
 import { CategoriaModel } from './../models/categoria.model';
 import { CompetenciaModel } from './../models/competencia.model';
 import { SelectItem } from 'primeng';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { finalize } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-form-competencia',
   templateUrl: './form-competencia.component.html',
   styleUrls: ['./form-competencia.component.scss']
 })
-export class FormCompetenciaComponent implements OnInit {
+export class FormCompetenciaComponent implements OnInit{
 
+    @BlockUI() block: NgBlockUI;
+    @Output() fechar:EventEmitter<CompetenciaModel> = new EventEmitter();
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
@@ -22,9 +26,10 @@ export class FormCompetenciaComponent implements OnInit {
     constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService) { }
 
     ngOnInit() {
+
         this.formCompetencia = this.createForm();
-        this.formCompetencia.patchValue(this.competenciaEditada);
         this.getCategorias();
+        this.formCompetencia.patchValue(this.competenciaEditada);
     }
 
     createForm(): FormGroup {
@@ -40,7 +45,6 @@ export class FormCompetenciaComponent implements OnInit {
         this.categoriaService.obterCategorias().subscribe(categorias => {
             this.categorias = categorias;
         })
-        console.log(this.categorias);
     }
 
     converterParaDropDown(categorias: CategoriaModel[], campoValue:string, campoLabel:string):SelectItem[]{
@@ -52,26 +56,38 @@ export class FormCompetenciaComponent implements OnInit {
 
     atualizarCompetencia(): void{
 
+        this.block.start('Carregando...')
         if(!this.formCompetencia.valid){
+
+            this.block.stop;
+            this.fechar.emit();
             return;
+
         }
-        this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue()).subscribe(
+        this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue()).pipe(finalize(()=> this.block.stop())).subscribe(
+
             resultado => {
-              console.log('Competência alterada com sucesso.')
+              console.log('Competência alterada com sucesso.');
+              this.fechar.emit(this.competenciaEditada);
             },
             erro => {
               switch(erro.status) {
                 case 400:
                   console.log(erro.error.mensagem);
+                  this.fechar.emit();
                   break;
                 case 404:
+                    this.fechar.emit();
                   console.log('Competência não localizada.');
                   break;
               }
             }
           );
-        this.formCompetencia.reset();
 
+    }
+
+    cancel(){
+        this.fechar.emit();
     }
 
 }

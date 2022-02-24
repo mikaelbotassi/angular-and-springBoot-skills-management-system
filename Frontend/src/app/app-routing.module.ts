@@ -9,9 +9,9 @@ import { ColaboradorModule } from './modules/colaborador/colaborador.module';
 const routes: Routes = [
     { path: 'diario-erros', component: DiarioErrosComponent, data: { breadcrumb: 'Diário de Erros'} },
     { path: 'login-success', component: LoginSuccessComponent },
-    { path: 'colaborador', loadChildren : () => ColaboradorModule},
     { path: 'turma', loadChildren : () => TurmaFormacaoModule},
-    {path: 'competencia', loadChildren: () => CompetenciaModule}
+    { path: 'colaborador', loadChildren : () => ColaboradorModule, data: {breadcrumb: 'Colaborador'}},
+    {path: 'competencia', loadChildren: () => CompetenciaModule, data: {breadcrumb: 'Competencia'}}
 ];
 
 @NgModule({
