@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ColaboradorRepository extends JpaRepository<Colaborador, Integer> {
 
-    @Query("select new br.com.turma.sgc.service.dto.ColaboradorBuscaDTO(nome, sobrenome, " +
+    @Query("select new br.com.turma.sgc.service.dto.ColaboradorBuscaDTO(id, nome, sobrenome, " +
             " dataNascimento, dataAdmissao, senioridade.nome) from Colaborador")
     List<ColaboradorBuscaDTO> buscarTodosColaboradores();
 

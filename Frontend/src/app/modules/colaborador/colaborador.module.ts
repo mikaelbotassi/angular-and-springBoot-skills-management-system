@@ -23,7 +23,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    InputTextModule,  
+    InputTextModule,
     CalendarModule,
     DropdownModule,
     CheckboxModule,
