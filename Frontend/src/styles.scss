@@ -241,7 +241,7 @@ p-dynamicdialog div.form-descricao-competencia{
 
     display: flex;
     position: relative;
-    margin: 40px 0 0 0px;
+    margin: 66px 0 0 -2.2px;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -280,10 +280,9 @@ div.form-descricao-competencia div.textArea-descricao-competencia textarea.ui-in
 p-dynamicdialog div.ui-fluid div.form-descricao-competencia label{
 
     display: block;
-    position: fixed;
     font-family: "Roboto";
     width: 60px;
-    height: 20px;
+    height: 25px;
     background-color: white;
     text-align: center;
     font-size: 12px;
@@ -296,39 +295,78 @@ p-dynamicdialog div.ui-fluid div.form-descricao-competencia label{
 
 //============================ ALTERAÇÕES DO DROPWDOWN CATEGORIAS ==============================
 
+div.dropdown-competencia{
+
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 0 0;
+
+}
+
 div.dropdown-categorias{
 
-    width: 35%;
+    z-index: 0;
+    margin: -12px 0 0 0;
+    width: 300px;
     background-color: white;
     border: solid 1px;
-    border-color: $corPreta;
+    border-color: #1e1e1e;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+    padding: 10px;
+
+}
+
+div.dropdown-competencia label{
+
+    z-index: 1;
+    background-color: white;
+    font-size: 12px;
+    font-family: 'Roboto';
+    width: 60px;
+    text-align: center;
+    margin: 0 0 0 6px;
 
 }
 
 div.dropdown-categorias p-dropdown{
-    width: 50%;
+    width: 100%;
 }
 
 div.dropdown-categorias p-dropdown div.ui-dropdown{
     background-image: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0 -13px;
+
 }
 
 div.dropdown-categorias p-dropdown div.ui-widget{
     width: 30%;
 }
 
+div.dropdown-categorias p-dropdown div.ui-dropdown div.ui-dropdown-label-container{
+
+    margin: 0 0 0 10px;
+
+}
+
+div.dropdown-categorias p-dropdown div.ui-dropdown div.ui-dropdown-label-container span.ui-dropdown-label{
+    font-family: 'OpenSans-Light';
+}
+
 div.dropdown-categorias p-dropdown div.ui-dropdown div.ui-dropdown-trigger{
-    margin-top: -0.5em;
-    margin-left: -5.2em;
+
+    position: relative;
+    margin: 0 6px 0 0;
 }
 
 div.dropdown-categorias p-dropdown div.ui-dropdown div.ui-dropdown-trigger span.ui-dropdown-trigger-icon{
 
     margin-top: -0.5em;
-    margin-left: -5.2em;
+    margin-left: -0.5em;
     background-color: $corTransparente;
 }
 
@@ -340,6 +378,12 @@ p-dynamicdialog div.ui-widget-overlay{
 
     background-color: rgba(255, 255, 255, 0.589);
     opacity: 1;
+
+}
+
+p-dynamicdialog div.ui-dialog div.ui-dialog-content{
+
+    padding: 40px 20px 40px 20px;
 
 }
 
@@ -356,3 +400,59 @@ p-dynamicdialog div.ui-dialog div.ui-dialog-titlebar{
 .width-100 {
     width: 50%;
 }
+
+
+//================================= ALTERAÇÕES NOS BOTÕES ======================================
+
+//BOTÃO SALVAR #################################################################################
+
+div.form-competencia div.ui-g{
+
+    min-width: 250px;
+    margin: 40px 0 0 0;
+}
+
+div.form-competencia div.ui-g div.botao-cancelar-competencia{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+
+div.form-competencia div.ui-g div.botao-cancelar-competencia button{
+
+    background-color: white;
+    box-shadow: none;
+    color: $corPreta;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+div.form-competencia div.ui-g div.botao-cancelar-competencia button:hover{
+
+    background-color: $corPreta;
+    color: white;
+}
+
+div.form-competencia div.ui-g div.botao-salvar-competencia{
+
+    margin: 0;
+}
+
+div.form-competencia div.ui-g div.botao-salvar-competencia button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #1e1e1e;
+    width: 100%;
+}
+
+div.form-competencia div.ui-g div.botao-salvar-competencia button:hover{
+    background-color: $corLaranja;
+}
+//==============================================================================================
