@@ -60,8 +60,9 @@ export class CompetenciaListarComponent implements OnInit {
         this.display = false;
 
         const ref = this.dialogService.open(FormCompetenciaModalComponent, {
+            //header: this.competenciaDetalhada.nome + 'EDIT',
 
-            header: this.competenciaDetalhada.nome + ' EDIT',
+            header: 'CADASTRO DE COMPETÊNCIAS',
             width: '40%',
             contentStyle: { "overflow": "auto"},
             data: {competencia: this.competenciaDetalhada}

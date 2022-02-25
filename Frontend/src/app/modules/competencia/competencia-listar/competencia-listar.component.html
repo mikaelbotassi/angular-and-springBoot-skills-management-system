@@ -9,8 +9,12 @@
             <p-button type="submit" class="button botao-pesquisa" icon="pi pi-search" (onClick)="obterCompetencias(search.value)" ></p-button>
         </div>
 
+        <div class="botao">
+            <button type="button" pButton icon="pi pi-plus" label="NOVO" class="botao-novo" (click)="showDialogEdit()" #form></button>
+        </div>
+
         <div class="ui-g">
-            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
+            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click)="showDialog(competencia)" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
@@ -28,10 +32,6 @@
                     <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button>
                 </p-footer>
         </p-dialog>
-
-        <!-- <p-dialog [(visible)]="displayEdit" *ngIf="!!competenciaEditada" header="{{competenciaDetalhada.nome}} EDIT" class="dialog-competencia dialog-edit">
-            <app-form-competencia></app-form-competencia>
-        </p-dialog> -->
 
     </div>
 

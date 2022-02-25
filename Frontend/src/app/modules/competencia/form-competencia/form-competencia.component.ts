@@ -20,6 +20,7 @@ export class FormCompetenciaComponent implements OnInit{
     @BlockUI() block: NgBlockUI;
     @Output() fechar:EventEmitter<CompetenciaModel> = new EventEmitter();
     @Input() competenciaEditada:CompetenciaModel;
+    visible: boolean = true;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
 
@@ -29,7 +30,7 @@ export class FormCompetenciaComponent implements OnInit{
 
         this.formCompetencia = this.createForm();
         this.getCategorias();
-        this.formCompetencia.patchValue(this.competenciaEditada);
+        this.formCompetencia.patchValue(this.finalizarFormulario);
     }
 
     createForm(): FormGroup {
@@ -90,4 +91,30 @@ export class FormCompetenciaComponent implements OnInit{
         this.fechar.emit();
     }
 
+    criarCompetencia(): void{
+        this.competenciaService.criarCompetencia(this.formCompetencia.getRawValue()).pipe(finalize(()=> this.block.stop())).subscribe(
+            resultado => {
+              console.log('Competência Criada.');
+              this.fechar.emit(this.competenciaEditada);
+            },
+            erro => {
+              switch(erro.status) {
+                case 400:
+                  console.log(erro.error.mensagem);
+                  this.fechar.emit();
+                  break;
+                case 404:
+                    this.fechar.emit();
+                  console.log('ERRO...Competência Pôde Ser Criada.');
+                  break;
+              }
+            }
+        );
+        this.formCompetencia.reset();
+    }
+
+    finalizarFormulario() :void {
+        this.visible ? this.criarCompetencia():this.atualizarCompetencia();
+        this.cancel();
+    }
 }
