@@ -105,7 +105,7 @@ export class FormCompetenciaComponent implements OnInit{
                   break;
                 case 404:
                     this.fechar.emit();
-                  console.log('ERRO...Competência Pôde Ser Criada.');
+                  console.log('ERRO...Competência Não Pôde Ser Criada.');
                   break;
               }
             }
