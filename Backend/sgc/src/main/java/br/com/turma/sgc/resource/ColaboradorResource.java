@@ -21,7 +21,7 @@ public class ColaboradorResource {
     private final ColaboradorService service;
 
     @GetMapping
-    public ResponseEntity<List<ColaboradorBuscaDTO>> procurarTodos(){
+    public ResponseEntity<List<ColaboradorDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 

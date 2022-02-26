@@ -42,10 +42,9 @@ public class ColaboradorService {
 
     private final CadastrarColaboradorMapper cadastrarColaboradorMapper;
 
-    public List<ColaboradorBuscaDTO> procurarTodos(){
-
-        return repository.buscarTodosColaboradores();
-
+    public List<ColaboradorDTO> procurarTodos(){
+        List<Colaborador> list = repository.findAll();
+        return colaboradorMapper.toDto(list);
     }
 
     public ColaboradorDTO procurarPorId(int id){
