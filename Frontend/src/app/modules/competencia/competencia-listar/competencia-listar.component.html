@@ -11,6 +11,13 @@
 
         <div class="ui-g div-cards-competencias">
             <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
+        <div class="botao-Create">
+            <button type="button" pButton icon="ui ui-icon-pencil" label="CRIAR" class="botao-create" (click)="showDialogEdit(true)"></button>
+        </div>
+
+
+        <div class="ui-g">
+            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click)="showDialog(competencia)" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
@@ -25,9 +32,13 @@
                 <p-footer>
                     <button type="button" pButton icon="ui ui-icon-pencil" label="EDITAR" class="botao-editar" (click)="showDialogEdit()">
                     </button>
-                    <!-- <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button> -->
+                    <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button>
                 </p-footer>
         </p-dialog>
+
+        <!-- <p-dialog [(visible)]="displayEdit" *ngIf="!!competenciaEditada" header="{{competenciaDetalhada.nome}} EDIT" class="dialog-competencia dialog-edit">
+            <app-form-competencia></app-form-competencia>
+        </p-dialog> -->
 
     </div>
 

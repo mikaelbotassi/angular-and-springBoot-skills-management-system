@@ -22,6 +22,7 @@ export class FormCompetenciaComponent implements OnInit{
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
+    visible: boolean;
 
     constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService) { }
 
@@ -29,7 +30,10 @@ export class FormCompetenciaComponent implements OnInit{
 
         this.formCompetencia = this.createForm();
         this.getCategorias();
-        this.formCompetencia.patchValue(this.competenciaEditada);
+        console.log(typeof this.competenciaEditada === "undefined");
+        if (! (typeof this.competenciaEditada === "undefined")) {
+            this.formCompetencia.patchValue(this.competenciaEditada);
+        }
     }
 
     createForm(): FormGroup {
@@ -90,4 +94,37 @@ export class FormCompetenciaComponent implements OnInit{
         this.fechar.emit();
     }
 
+    criarCompetencia(): void{
+        this.competenciaService.criarCompetencia(this.formCompetencia.getRawValue()).pipe(finalize(()=> this.block.stop())).subscribe(
+
+            resultado => {
+              console.log('Competência Criada.');
+              this.fechar.emit(this.competenciaEditada);
+            },
+            erro => {
+              switch(erro.status) {
+                case 400:
+                  console.log(erro.error.mensagem);
+                  this.fechar.emit();
+                  break;
+                case 404:
+                    this.fechar.emit();
+                  console.log('ERRO... Competência Não Pôde Ser Criada.');
+                  break;
+              }
+            }
+        );
+    }
+
+    finalizarFormulario() :void {
+        if (typeof this.competenciaEditada === "undefined") {
+            this.criarCompetencia();
+            this.fechar.emit();
+        }
+        else {
+            this.atualizarCompetencia();
+            this.fechar.emit();
+        }
+
+    }
 }
