@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ColaboradorModel} from '../../models/ColaboradorModel';
 import {ColaboradorService} from '../../service/colaborador.service';
-import {SenioridadeModel} from '../../../senioridade/models/SenioridadeModel';
 import {SenioridadeService} from '../../../senioridade/service/senioridade.service';
 
 @Component({
