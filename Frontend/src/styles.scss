@@ -17,9 +17,16 @@ p-card.card-competencia div.ui-card{
     background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgba(0, 0, 0, 0.877));
 }
 
+
+
 p-card.card-competencia{
+
+    width: 400px;
+    min-width: 300px;
+    height: 122px;
     margin: 5px 0 0 5px;
     cursor: pointer;
+    text-overflow: ellipsis;
 }
 
 input.pesquisa{
@@ -48,14 +55,14 @@ p-button.botao-pesquisa button.ui-button span.pi{
     color: $corLaranja;
 }
 
-
-p-dialog.dialog-competencia.dialog-edit div.ui-dialog.ui-shadow {
-    height: 60vh;
-}
-
 //=========================== Style do Dialog de competência mostrar
 
+p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-content{
+    overflow-wrap: anywhere;
+}
+
 p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon{
+
     width: 0.8em;
     height: 0.8em;
     margin: 80% 0;
@@ -79,9 +86,10 @@ p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar {
 
 // Botão Close p-dialog
 
-p-dialog.dialog-competencia div.ui-dialog.ui-shadow {
-    width: 40%;
-}
+// p-dialog.dialog-competencia div.ui-dialog.ui-shadow {
+//     width: 70vw;
+//     height: 50vh;
+// }
 
 //X do botão close
 p-dialog.dialog-competencia div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{

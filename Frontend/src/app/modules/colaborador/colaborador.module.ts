@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ColaboradorRoutingModule } from './colaborador-routing.module';
 import { ColaboradorListaComponent } from './components/colaborador-lista/colaborador-lista.component';
-
+import { ColaboradorService } from './service/colaborador.service';
 
 @NgModule({
   declarations: [
@@ -14,6 +14,7 @@ import { ColaboradorListaComponent } from './components/colaborador-lista/colabo
     CommonModule,
     ColaboradorRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [ColaboradorService]
 })
 export class ColaboradorModule { }
