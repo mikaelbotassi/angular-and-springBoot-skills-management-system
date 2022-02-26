@@ -11,17 +11,18 @@ import {CardModule} from 'primeng/card';
 import { CompetenciaService } from './service/competencia.service';
 import {InputTextModule} from 'primeng/inputtext';
 import { FormCompetenciaModalComponent } from './form-competencia/form-competencia-modal.component';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [CompetenciaListarComponent, FormCompetenciaComponent, FormCompetenciaModalComponent],
   imports: [
-    CommonModule,
-    CardModule,
-    SharedModule,
-    InputTextModule,
-    CompetenciaRoutingModule,
+        CommonModule,
+        CardModule,
+        SharedModule,
+        InputTextModule,
+        CompetenciaRoutingModule,
   ],
   exports:[CompetenciaListarComponent],
-  providers: [CompetenciaService, CategoriaService, DialogService],
+  providers: [CompetenciaService, CategoriaService, DialogService, MessageService],
   entryComponents:[FormCompetenciaModalComponent]
 })
 export class CompetenciaModule { }

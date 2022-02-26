@@ -1,10 +1,11 @@
 import { FormCompetenciaModalComponent } from './../form-competencia/form-competencia-modal.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { CompetenciaService } from '../service/competencia.service';
 import { CompetenciaModel } from '../models/competencia.model';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MessageService } from 'primeng';
 
 const URL_COMPETENCIA:string = 'competencia';
 @Component({
@@ -21,12 +22,16 @@ export class CompetenciaListarComponent implements OnInit {
     competenciaDetalhada: CompetenciaModel;
     competenciaEditada: CompetenciaModel;
 
-  constructor(private competenciaService: CompetenciaService, private dialogService: DialogService) {}
+  constructor(private competenciaService: CompetenciaService, private dialogService: DialogService, private messageService:MessageService) {}
 
   ngOnInit(): void {
     this.listarCompetencias();
   }
 
+
+  private showSucess(){
+    this.messageService.add({severity:'success', summary: 'Sucesso', detail:'Competência Salva'});
+  }
 
   listarCompetencias(){
 
@@ -71,6 +76,7 @@ export class CompetenciaListarComponent implements OnInit {
 
         ref.onClose.subscribe((competencia: CompetenciaModel)=>{
             if(competencia){
+                this.showSucess();
                 this.listarCompetencias();
             }
         })
