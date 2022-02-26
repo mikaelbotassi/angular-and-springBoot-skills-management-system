@@ -1,6 +1,7 @@
 package br.com.turma.sgc.service;
 
 
+import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.TurmaFormacao;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
@@ -15,6 +16,7 @@ import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +35,7 @@ public class TurmaFormacaoService {
     private final TurmaColaboradorCompetenciaMapper turmaColaboradorCompetenciaMapper;
     private final TurmaColaboradorCompetenciaNivelMapper turmaColaboradorCompetenciaNivelMapper;
     private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
+    private final ColaboradorCompetenciaMapper colaboradorCompetenciaMapper;
 
     public List<TurmaFormacaoDTO> procurarTodos(){
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.findAll());
@@ -139,6 +142,19 @@ public class TurmaFormacaoService {
     public void deletarTurmaColaboradorCompetencia(Integer turmaId, Integer colaboradorId, Integer competenciaId){
         TurmaColaboradorCompetenciaPK turmaColaboradorCompetenciaPK = new TurmaColaboradorCompetenciaPK(turmaId, colaboradorId, competenciaId);
          turmaColaboradorCompetenciaRepository.deleteById(turmaColaboradorCompetenciaPK);
+    }
+
+    public void subirNivelColaboradorCompetencia (Integer colaboradorId, Integer competenciaId){
+       if(!(procurarNivelColaboradorCompetencia(colaboradorId,competenciaId).getNivel() == 3)){
+           colaboradorCompetenciaRepository.aumentarNivelColaboradorCompetencia(colaboradorId,competenciaId);
+       }
+
+    }
+
+    public ColaboradorCompetenciaDTO inserirColaboradorCompetenciaZero(Integer colaboradorId, Integer competenciaId){
+        ColaboradorCompetenciaPK pk = new ColaboradorCompetenciaPK(colaboradorId, competenciaId);
+        ColaboradorCompetenciaDTO colaboradorCompetenciaDTO = new ColaboradorCompetenciaDTO(pk,colaboradorId,competenciaId,0);
+        return colaboradorCompetenciaMapper.toDto(colaboradorCompetenciaRepository.save(colaboradorCompetenciaMapper.toEntity(colaboradorCompetenciaDTO)));
     }
 
 }

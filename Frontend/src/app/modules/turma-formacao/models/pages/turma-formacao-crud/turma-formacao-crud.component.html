@@ -5,32 +5,38 @@
     <h1 style="text-align: center;">Turmas</h1>
 
 
-    <p-dialog class="titulo-turma"  (onHide)="limparHolderColaboradorCompetencia($event); filtroColaborador.value = ''; filtroCompetencia.value = ''" header="Cadastrar turma" [draggable]="false" [modal]="true" [(visible)]="display"  >
+    <p-dialog class="titulo-turma"  (onHide)="limparHolderColaboradorCompetencia($event)" header="Cadastrar turma" [draggable]="false" [modal]="true" [(visible)]="display"  >
         <form  >
 
         <div class="card table-colab"  >
                 <div class="card ui-grid-col-12">
                     <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
                     <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                    <input pInputText placeholder="nome turma"  class="registrar-turma ui-grid-col-3 " type="text"  #nome/>
-                    <textarea [rows]="1" [cols]="30" #descricao type="text" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
+                    <input pInputText placeholder="nome turma"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeDaTurma"  [(ngModel)]="inputNomeTurma" />
+                    <textarea [rows]="1" [cols]="30"  type="text" pInputTextarea autoResize="autoResize" name="descricaoDaTurma"  [(ngModel)]="inputDescricaoTurma" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
 
                 </div>
 
                 <form>
                     <p-fieldset  legend="Adicionar colaborador" [toggleable]="true" [collapsed]="true" >
                         <div class="ui-g-4"  >
+
                         <p  class="registrar-turma ">Colaborador</p>
-                        <p-autoComplete  [dropdown]="true" [(ngModel)]="colaboradorAutoComplete" completeOnFocus="true" class="registrar-turma" [suggestions]="colaboradoresDisponiveis" #filtroColaborador [forceSelection]="true" (completeMethod)="filtrarColaboradores($event)" 
-    placeholder="colaborador" field ="nome" (onSelect)="escolherColaborador($event)"   ></p-autoComplete>
+
+                        <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador" required="true"  
+                        name="colaboradorNomeDropDown" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
+                        </p-dropdown>
+                       
                         <p  class="registrar-turma ">Competencia</p>
-                        <p-autoComplete [dropdown]="true" [(ngModel)]="competenciaAutoComplete" completeOnFocus="true" class="registrar-turma" [suggestions]="competenciasDisponiveis" #filtroCompetencia [forceSelection]="true" (completeMethod)="filtrarCompetencias($event)" field="nome"
-    placeholder="colaborador" [disabled]="desabilitarInputCompetencia(filtroColaborador.value)"  (onSelect)="escolherCompetencia($event)"></p-autoComplete>
-    
+
+                        <p-dropdown name="competenciaNomeDropDown" [options]="competenciasTotal" placeholder="competencia" optionLabel="nome" 
+                        [(ngModel)]="competenciaDropDown" filter="true" >
+                        </p-dropdown>
+
                         <button pButton class="commit-button-colab"  
-                        (click)="inserirColaboradorCompetenciaHolder()"   
-    [disabled]="desabilitarAdicionarColaboradorCompetenciaPorCampo(filtroColaborador.value, filtroCompetencia.value)" icon="pi pi-plus" 
-    label="Adicionar" type="button" iconPos="left"  > </button>                        
+                        (click)="inserirColaboradorCompetenciaHolder()"   icon="pi pi-plus" 
+                        label="Adicionar" type="button" iconPos="left"  > </button>
+
                     </div>
 
 
@@ -58,8 +64,8 @@
                     </div> 
                         
                     </p-fieldset>
-                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar" iconPos="left" (click)="inserirTurma(nome.value,descricao.value);nome.value = ''; descricao.value = '' " > </button>
-                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar e iniciar" iconPos="left" (click)="inserirTurmaIniciando(nome.value,descricao.value);nome.value = ''; descricao.value = '' " > </button>
+                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar" iconPos="left" [disabled]="desabilitarCadastrar()" (click)="inserirTurma() " > </button>
+                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar e iniciar" iconPos="left" [disabled]="desabilitarCadastrarIniciando(0)" (click)="inserirTurmaIniciando()" > </button>
 
                 </form>
         </div>
@@ -70,7 +76,7 @@
 
 
     
-        <p-table #dt [value]="turmasFiltradas"  [rows]="10" [paginator]="true">
+        <p-table #dt [value]="turmasFiltradas"  [rows]="15" [paginator]="true">
             <ng-template pTemplate="header" >
                 <tr>
                     <th >nome
@@ -82,7 +88,7 @@
                         <br />
                         <input pInputText [maxLength]="1" class=".input-status-id" (input)="dt.filter($event.target.value, 'statusId','equals')" />
                     </th>
-                    <th>ação</th>
+                    <th class="coluna-menor">Modificar</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-turma class="ui-grid-col-12" >
@@ -94,25 +100,21 @@
                     <td >{{turma.statusId}}</td>
                     <td class="botao-acao">
                         <button pButton icon="ui-icon-pencil" pTooltip="Alterar turma"  (click)="showDialogAlt(turma); listarTurmaColaboradorCompetencia(turma.id)" ></button>
-                        <button pButton class="button-table" icon="ui-icon-trash" [disabled]="desabilitarDeletarTurma(turma.statusId)" pTooltip="Deletar turma" (click)="deletarTurma(turma.id)" ></button>
-                        <button pButton class="button-table" icon="ui-icon-play-arrow" pTooltip="Iniciar turma" (click)="iniciarTurma(turma)" [disabled]="desabilitarBotaoIniciar(turma.statusId)"></button>
-                        <button pButton class="button-table" icon="pi pi-times" pTooltip="Finalizar turma" (click)="finalizarTurma(turma)" [disabled]="desabilitarBotaoTerminar(turma.statusId)"></button>
                     </td>
                 </tr>
             </ng-template>
             
         </p-table>
 
-        <p-dialog class="titulo-turma" (onHide)="limparHolderColaboradorCompetencia($event) ;filtroColaboradorAlt.value = ''; filtroCompetenciaAlt.value = ''" header="Alterar turma" *ngIf="!!turmaDetalhada" [draggable]="false" [modal]="true" [(visible)]="displayAlt"  >
+        <p-dialog class="dialog-turma" (onHide)="limparHolderColaboradorCompetencia($event)" header="Alterar turma" *ngIf="!!turmaDetalhada" [draggable]="false" [modal]="true" [(visible)]="displayAlt"  >
             <form id="alterarTurma">
             <div class="card table-colab"  >
                     <div class="card ui-grid-col-12">
                         <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
                         <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                        <input pInputText placeholder="nome turma" value="{{turmaDetalhada.nome}}"  class="registrar-turma ui-grid-col-3 " type="text" #nomeAlt />
-                        <textarea [rows]="1" [cols]="30" type="text" value="{{turmaDetalhada.descricao}}" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." #descAlt ></textarea>
+                        <input pInputText placeholder="nome turma" value="{{turmaDetalhada.nome}}"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeTurmaAlt" [(ngModel)]="inputNomeTurma" />
+                        <textarea [rows]="1" [cols]="30" type="text" value="{{turmaDetalhada.descricao}}" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 " name="descricaoTurmaAlt" [(ngModel)]="inputDescricaoTurma"  placeholder="descricao..."  ></textarea>
                         <br/>
-                        <button pButton class="iniciar-button ui-grid-col-4" type="button" [disabled]="desabilitarBotaoIniciar(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Iniciar turma" iconPos="left" (click)="iniciarTurma(turmaDetalhada)" > </button>
                         <button pButton class="finalizar-button ui-grid-col-4" type="button" [disabled]="desabilitarBotaoTerminar(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Finalizar turma" iconPos="left" (click)="finalizarTurma(turmaDetalhada)" > </button>
 
 
@@ -122,18 +124,20 @@
                         <p-fieldset legend="Adicionar colaborador"   [toggleable]="true" collapsed="true" >
                             <div class="ui-g-4"  >
                                 <p  class="registrar-turma ">Colaborador</p>
-                                <p-autoComplete class="registrar-turma" [completeOnFocus]="true" [suggestions]="colaboradoresDisponiveis" #filtroColaboradorAlt 
-                                [forceSelection]="true" [disabled]="desabilitarBotaoColaboradorCompetencia(turmaDetalhada.statusId)" (completeMethod)="filtrarColaboradores($event)" field="nome"
-            placeholder="colaborador" [unique]="true"   (onSelect)="escolherColaborador($event)" ></p-autoComplete>
-                                <p  class="registrar-turma "  >Competencia</p>
-                                <p-autoComplete class="registrar-turma" [completeOnFocus]="true" [suggestions]="competenciasDisponiveis" #filtroCompetenciaAlt 
-                                [forceSelection]="true" (completeMethod)="filtrarCompetencias($event)" field="nome"
-            placeholder="Competencia" [unique]="true"  [disabled]="desabilitarInputCompetencia(filtroColaboradorAlt.value)" (onSelect)="escolherCompetencia($event)" ></p-autoComplete>
-                                
-            <button pButton class="commit-button-colab"  (click)="inserirColaboradorCompetenciaHolder(); filtroColaboradorAlt.inputFieldValue = ''; filtroCompetenciaAlt.inputFieldValue = ''" 
-                                
-                                [disabled]="desabilitarAdicionarColaboradorCompetenciaPorCampo(filtroColaboradorAlt.value, filtroCompetenciaAlt.value) " icon="pi pi-plus" 
-                                label="Adicionar" type="button" iconPos="left" > </button>
+                                <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador" required="true"  
+                        name="colaboradorNomeDropDownAlterar" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
+                        </p-dropdown>
+
+                        <p  class="registrar-turma ">Competencia</p>
+
+                        <p-dropdown name="competenciaNomeDropDownAlterar" [options]="competenciasTotal" placeholder="competencia" optionLabel="nome" 
+                        [(ngModel)]="competenciaDropDown" filter="true" >
+                        </p-dropdown>
+
+                        <button pButton class="commit-button-colab"  
+                        (click)="inserirColaboradorCompetenciaHolder()"   icon="pi pi-plus" 
+                        label="Adicionar" type="button" iconPos="left" [disabled]="desabilitarBotaoAdicionarColaborador(turmaDetalhada.id)"  > </button>   
+
                                 </div>
     
     
@@ -150,7 +154,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-colaborador>
                                 <tr>
-                                    <td>{{colaborador.colaboradorNome}}</td>
+                                    <td>{{colaborador.colaboradorNome}} {{colaborador.colaboradorSobrenome}} </td>
                                     <td>{{colaborador.competenciaNome}}</td>
                                     <td>{{colaborador.nivel}}</td>
                                     <td>
@@ -167,7 +171,8 @@
                         </p-fieldset>
                     </form>
             </div>
-            <button pButton class="commit-button" type="button"  icon="ui-icon-pencil" [disabled]="desabilitarBotaoColaboradorCompetencia(turmaDetalhada.statusId)"  label="Alterar" iconPos="left" (click)="alterarTurma(turmaDetalhada, nomeAlt.value, descAlt.value)" > </button>
+            <button pButton class="commit-button" type="button"  icon="ui-icon-pencil" [disabled]="desabilitarBotaoColaboradorCompetencia(turmaDetalhada.statusId)"  label="Alterar" iconPos="left" (click)="alterarTurma(turmaDetalhada)" > </button>
+            <button pButton class="commit-button ui-grid-col-4" type="button" [disabled]="desabilitarCadastrarIniciando(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Alterar e iniciar turma" iconPos="left" (click)="iniciarTurma(turmaDetalhada)" > </button>
      
     
         </form>

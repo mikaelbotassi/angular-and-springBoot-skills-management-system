@@ -8,6 +8,7 @@ import { turmaFormacaoService } from './../../../service/turma-formacao.service'
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TurmaColaboradorCompetenciaModel } from 'src/app/modules/turma-colaborador-competencia/models/TurmaColaboradorCompetenciaModel';
 import { TriStateCheckbox } from 'primeng';
+import { NgModel } from '@angular/forms';
 
 
 @Component({
@@ -33,8 +34,10 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   competenciasDisponiveis: CompetenciaListaModel[] = [];
   colaboradorCompetenciaHolder: TurmaColaboradorCompetenciaNivelModel[] = [];
   colaboradorHolder: TurmaColaboradorCompetenciaNivelModel;
-  colaboradorAutoComplete;
-  competenciaAutoComplete;
+  colaboradorDropDown: ColaboradorListaModel ;
+  competenciaDropDown: CompetenciaListaModel;
+  inputNomeTurma: String;
+  inputDescricaoTurma: String;
 
   
 
@@ -67,10 +70,12 @@ showColab(){
 showDialogAlt(turma: TurmaFormacaoModel){
   this.displayAlt = true;
 this.turmaDetalhada = turma;
+this.inputDescricaoTurma = turma.descricao;
+this.inputNomeTurma = turma.nome;
 }
 
-teste(event){
-console.log(event);
+teste(){
+console.log(this.colaboradorDropDown);
 }
 
 //Listar 
@@ -103,14 +108,15 @@ listarCompetenciasAutoComplete(){
 listarTurmaColaboradorCompetencia(turmaId: number){
   this.turmaFormacaoService.listarTurmaColaboradorCompetencia(turmaId).subscribe(colaborador => {
     this.colaboradorCompetenciaHolder = colaborador;
-    console.log("certo");
   })
 }
 
 //inserir
 
-inserirTurma(nome: String, descricao: String){
-  this.turmaFormacaoModel = new TurmaFormacaoModel(nome,descricao,new Date,null,1);
+inserirTurma(){
+  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,1);
+  this.inputNomeTurma = null;
+  this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
     turma => {
       return this.inserirListaColaborador(turma.id)
@@ -121,6 +127,7 @@ inserirTurma(nome: String, descricao: String){
 }
 
 inserirListaColaborador(turmaId:number){
+
   let turmaColaboradoresTemp: TurmaColaboradorCompetenciaModel[] = [];
     this.turmaFormacaoService.listarTurmaColaboradorCompetencia(turmaId).subscribe(colaboradoresTurma => {
       turmaColaboradoresTemp = colaboradoresTurma;
@@ -137,11 +144,15 @@ inserirListaColaborador(turmaId:number){
 
     )
   this.succes = true;
+  this.colaboradorCompetenciaHolder = [];
+  this.listarTurmas();
 
 }
 
-inserirTurmaIniciando(nome: String, descricao: String){
-  this.turmaFormacaoModel = new TurmaFormacaoModel(nome,descricao,new Date,null,2);
+inserirTurmaIniciando(){
+  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,2);
+  this.inputNomeTurma = null;
+  this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
     turma => {
       return this.inserirListaColaborador(turma.id)
@@ -151,16 +162,47 @@ inserirTurmaIniciando(nome: String, descricao: String){
 
 }
 
-inserirColaboradorCompetenciaHolder(){
-  console.log(this.colaboradorAutoComplete);
-  this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorHolder.colaboradorId, this.colaboradorHolder.competenciaId).subscribe(colaboradorTemp =>{
-    if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaborador.colaboradorId  === this.colaboradorHolder.colaboradorId && colaborador.competenciaId === this.colaboradorHolder.competenciaId) == -1) {
-      this.colaboradorCompetenciaHolder.push(colaboradorTemp);   
-    }
-    this.colaboradorHolder = new TurmaColaboradorCompetenciaNivelModel(null,null, null,null,null,null,null);
-  })
-  console.log(this.colaboradorCompetenciaHolder);
+
+
   
+
+inserirColaboradorCompetenciaHolder(){
+  let colaboradorObj = null;
+  this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorDropDown.id, this.competenciaDropDown.id)
+  .subscribe(colaboradorTempAdd =>{ 
+    colaboradorObj = colaboradorTempAdd;
+    if(colaboradorObj == null ){
+      this.turmaFormacaoService.cadastrarColaboradorCompetenciaZero(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(temp =>{
+        this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(colaboradorTemp =>{
+          if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaborador.colaboradorId  === this.colaboradorDropDown.id && colaborador.competenciaId === this.competenciaDropDown.id) == -1) {
+            console.log("adicao na lista");
+            console.log(colaboradorTemp);
+            this.colaboradorCompetenciaHolder.push(colaboradorTemp);   
+          }
+          this.colaboradorDropDown = new ColaboradorListaModel(null,null,null);
+        this.competenciaDropDown = new CompetenciaListaModel(null,null);
+        })  
+      })
+     } else{
+        this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(colaboradorTemp =>{
+          if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaborador.colaboradorId  === this.colaboradorDropDown.id && colaborador.competenciaId === this.competenciaDropDown.id) == -1) {
+            console.log("adicao na lista");
+            console.log(colaboradorTemp);
+            this.colaboradorCompetenciaHolder.push(colaboradorTemp);   
+          }
+          this.colaboradorDropDown = new ColaboradorListaModel(null,null,null);
+        this.competenciaDropDown = new CompetenciaListaModel(null,null);  
+      })
+     }
+  
+  
+  
+  
+  
+
+
+  
+})
 }
 
 
@@ -200,10 +242,8 @@ filtrarTurmaNome(value){
     return;
 }
   this.turmasFiltradas = this.turmas.filter((turma)=>
-    turma.nome.toLowerCase().indexOf(value.toLowerCase()) >=0
-  
-  );
-  console.log(this.turmasFiltradas);
+    turma.nome.toLowerCase().indexOf(value.toLowerCase()) >=0)
+    this.colaboradorCompetenciaHolder = [];
 }
 
 filtrarTurmaStatus(value){
@@ -239,13 +279,22 @@ finalizarTurma(turma: TurmaFormacaoModel){
         console.log("certo");
       }
     );
+
+    this.listarTurmaColaboradorCompetencia(turma.id);
+    this.colaboradorCompetenciaHolder.forEach(colaborador=>
+      this.turmaFormacaoService.subirNivelColaboradorCompetencia(colaborador.colaboradorId, colaborador.competenciaId).subscribe(retorno => {
+        console.log("certo");
+      })
+      )
   
   }
 
 
-alterarTurma(turma: TurmaFormacaoModel, nome: String, descricao: String){
-  turma.nome = nome;
-  turma.descricao = descricao;
+
+
+alterarTurma(turma: TurmaFormacaoModel){
+  turma.nome = this.inputNomeTurma;
+  turma.descricao = this.inputDescricaoTurma;
   this.turmaFormacaoService.alterarTurma(turma).subscribe(
     turma => {
       console.log("certo");
@@ -256,17 +305,11 @@ alterarTurma(turma: TurmaFormacaoModel, nome: String, descricao: String){
 
 limparHolderColaboradorCompetencia(event){
   this.colaboradorCompetenciaHolder = [];
+  this.inputNomeTurma = null;
+  this.inputDescricaoTurma = null;
 }
 
 //desabilitar
-
-desabilitarBotaoIniciar(status:number) : boolean{
-if(status == 1){
-  return false;
-} else{
-  return true;
-}
-}
 
 desabilitarBotaoPorColaborador(status:number) : boolean{
   if(status == 1){
@@ -282,6 +325,50 @@ desabilitarBotaoTerminar(status:number): boolean{
   } else{
     return true;
   }
+  }
+
+  desabilitarCadastrar(): boolean{
+    if(this.inputNomeTurma != null && this.inputDescricaoTurma != null){
+      return false;
+    }
+    return true;
+  }
+
+
+  validacaoTurma(): boolean{
+    let colaboradorCompetenciaMaterias: number[] = [];
+
+    if(this.colaboradorCompetenciaHolder.length == 0){
+      return false;
+    }
+
+    this.colaboradorCompetenciaHolder.forEach((colaborador) => {
+      if(colaborador.nivel == 3){
+        colaboradorCompetenciaMaterias.push(colaborador.competenciaId);
+      }
+    });
+
+    if(colaboradorCompetenciaMaterias.length == 0){
+      return false;
+    }
+
+    this.colaboradorCompetenciaHolder.forEach((colaborador)=>{
+      if( ( ( (colaborador.nivel != 3) && (colaboradorCompetenciaMaterias.indexOf(colaborador.competenciaId) == -1 ) ) || (colaborador == undefined) ) ){
+        return false;
+      }
+    });
+    return true;
+  }
+
+  desabilitarCadastrarIniciando(statusId: number){
+    if(statusId == 3){
+      return true;
+    }else{
+      if(!(this.desabilitarCadastrar()) && this.validacaoTurma()  ){
+        return false;
+      }
+    }
+    return true;
   }
 
   desabilitarInputCompetencia(valor:String): boolean{
@@ -314,6 +401,13 @@ desabilitarAdicionarColaboradorCompetenciaPorCampo(campo1: String, campo2: Strin
 
 desabilitarDeletarTurma(status:Number): boolean{
   if(status == 1){
+    return false;
+  }
+  return true;
+}
+
+desabilitarBotaoAdicionarColaborador(status:number){
+  if(status == 3 ||!(this.colaboradorDropDown != null && this.competenciaDropDown != null)){
     return true;
   }
   return false;
@@ -322,13 +416,7 @@ desabilitarDeletarTurma(status:Number): boolean{
 
 //deletar
 
-deletarTurma(turmaId: number){
-  this.turmaFormacaoService.deletarTurma(turmaId).subscribe(
-    turma => {
-      console.log("certo");
-    }
-  );
-}
+
 
 deletarColaboradorCompetenciaHolder(colaboradorSelecionado: TurmaColaboradorCompetenciaNivelModel){
   this.colaboradorCompetenciaHolder.splice(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaboradorSelecionado.colaboradorId === colaborador.colaboradorId && colaborador.competenciaId === colaboradorSelecionado.competenciaId ), 1);
@@ -341,25 +429,11 @@ deletarColaboradorCompetenciaHolderAlt(colaboradorSelecionado: TurmaColaboradorC
   if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaboradorSelecionado.colaboradorId === colaborador.colaboradorId &&
    colaborador.competenciaId === colaboradorSelecionado.competenciaId) !=-1){
      this.turmaFormacaoService.deletarTurmaColaboradorCompetencia(colaboradorSelecionado).subscribe();
-     console.log("testando");
    }
 
   this.colaboradorCompetenciaHolder.splice(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaboradorSelecionado.colaboradorId === colaborador.colaboradorId && colaborador.competenciaId === colaboradorSelecionado.competenciaId ), 1);
 }
 
-
-
-//associações
-
-escolherCompetencia(competencia: CompetenciaListaModel){
-  this.colaboradorHolder.competenciaId = competencia.id;
-  this.colaboradorHolder.competenciaNome = competencia.nome;
-}
-
-escolherColaborador(colaborador: ColaboradorListaModel){
-  this.colaboradorHolder.colaboradorId = colaborador.id;
-  this.colaboradorHolder.colaboradorNome = colaborador.nome;
-}
 
 
 }

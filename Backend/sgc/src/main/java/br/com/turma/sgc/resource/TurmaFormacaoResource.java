@@ -4,6 +4,7 @@ import br.com.turma.sgc.service.TurmaFormacaoService;
 import br.com.turma.sgc.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -102,4 +103,17 @@ public class TurmaFormacaoResource {
         turmaFormacaoService.deletarTurmaColaboradorCompetencia(idTurma ,idColaborador, idCompetencia);
         return ResponseEntity.noContent().build();
     }
+
+    @Transactional
+    @PutMapping(value = "colaboradorCompetencia/subirNivel/{idColaborador}/{idCompetencia}")
+    public ResponseEntity<Void> subirNivelColaboradorCompetencia(@PathVariable Integer idColaborador, @PathVariable Integer idCompetencia){
+        turmaFormacaoService.subirNivelColaboradorCompetencia(idColaborador,idCompetencia);
+      return ResponseEntity.accepted().build();
+    }
+
+    @PostMapping(value = "cadastrarColaboradorCompetenciaZero/{colaboradorId}/{competenciaId}")
+    public ResponseEntity<ColaboradorCompetenciaDTO> inserir(@PathVariable Integer colaboradorId, @PathVariable Integer competenciaId){
+        return ResponseEntity.created(URI.create("./api/turmaFormacao")).body(turmaFormacaoService.inserirColaboradorCompetenciaZero(colaboradorId, competenciaId));
+    }
+
 }

@@ -7,6 +7,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { API_PATH } from "src/environments/environment";
 import { CompetenciaListaModel } from '../models/CompetenciaListaModel';
+import { NumberValueAccessor } from '@angular/forms';
+import { cpuUsage } from 'process';
 
 @Injectable()
 export class turmaFormacaoService{
@@ -58,6 +60,14 @@ export class turmaFormacaoService{
 
     deletarTurmaColaboradorCompetencia(turmaColaboradorCompetenciaModel: TurmaColaboradorCompetenciaModel): Observable<TurmaColaboradorCompetenciaModel>{
         return this.httpClient.delete<TurmaColaboradorCompetenciaModel>(API_PATH + this.url + "/turmaColaboradorCompetenciaDeletar/" + turmaColaboradorCompetenciaModel.turmaId + '/' + turmaColaboradorCompetenciaModel.colaboradorId + '/' + turmaColaboradorCompetenciaModel.competenciaId);
+    }
+
+    subirNivelColaboradorCompetencia(colaboradorId: number, competenciaId: number ): Observable<TurmaColaboradorCompetenciaNivelModel>{
+        return this.httpClient.put<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/colaboradorCompetencia/subirNivel/" + colaboradorId + '/' + competenciaId,null);
+    }
+
+    cadastrarColaboradorCompetenciaZero(colaboradorId: number, competenciaId:number): Observable<TurmaColaboradorCompetenciaNivelModel>{
+        return this.httpClient.post<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/cadastrarColaboradorCompetenciaZero/" + colaboradorId + '/' + competenciaId,null);
     }
 
 }

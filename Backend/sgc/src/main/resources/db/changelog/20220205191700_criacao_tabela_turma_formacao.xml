@@ -19,7 +19,7 @@
             		</column>
 
 			<column name="inicio" type="DATE" >
-                		<constraints nullable="false"/>
+                		<constraints nullable="true"/>
             		</column>
 
 			<column name="termino" type="DATE" >
