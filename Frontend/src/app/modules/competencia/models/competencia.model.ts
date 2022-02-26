@@ -10,4 +10,8 @@ export class CompetenciaModel{
         return this.nome;
     }
 
+    constructor() {
+
+    }
+
 }
