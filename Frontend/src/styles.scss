@@ -4,12 +4,13 @@
     box-sizing: border-box;
 }
 
-$corLaranja: rgb(228, 135, 48);
+$corLaranja: #e48730;
 $corPreta: rgb(30, 30, 30);
 $corTransparente: rgba(0, 0, 0, 0);
 $sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 
 /* You can add global styles to this file, and also import other style files */
+
 p-card.card-competencia div.ui-card{
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.50);
