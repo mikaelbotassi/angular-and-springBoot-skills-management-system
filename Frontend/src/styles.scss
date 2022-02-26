@@ -464,3 +464,47 @@ div.form-competencia div.ui-g div.botao-salvar-competencia button:hover{
     background-color: $corLaranja;
 }
 //==============================================================================================
+//================================= ALTERAÇÃO TABELA COLABORADORES==============================
+.ui-paginator-current {
+    float: right;
+}
+
+th div p-dropdown div.ui-dropdown {
+    width: 100%;
+}
+
+p-paginator div p-dropdown div.ui-dropdown {
+    float: left;
+}
+
+tbody tr.ng-star-inserted td.botao-acao {
+    padding: 0;
+}
+
+.botao-acao-icon {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.botao-novo {
+    float: left;
+    line-height: normal;
+}
+
+body .botao-laranja .ui-button {
+    background-color: $corLaranja;
+}
+
+body .layout-wrapper.layout-compact .ui-table-caption {
+    line-height: 33px;
+}
+
+.coluna-acao {
+    width: 15%;
+}
+
+.coluna-senioridade {
+    width: 25%;
+}
+//==============================================================================================
