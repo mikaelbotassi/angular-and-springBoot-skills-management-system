@@ -5,7 +5,7 @@
 }
 
 $corLaranja: #e48730;
-$corPreta: rgb(30, 30, 30);
+$corPreta: #1e1e1e;
 $corTransparente: rgba(0, 0, 0, 0);
 $sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 
@@ -531,3 +531,16 @@ body .layout-wrapper.layout-compact .ui-table-caption {
     width: 25%;
 }
 //==============================================================================================
+
+.imagem-logo{
+    width: 50%;
+    height: 50%;
+
+}
+
+.layout-content div.layout-inicial{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+

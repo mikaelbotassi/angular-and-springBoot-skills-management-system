@@ -17,7 +17,7 @@ import { finalize} from 'rxjs/operators';
 export class FormCompetenciaComponent implements OnInit{
 
     @BlockUI() block: NgBlockUI;
-    @Output() fechar:EventEmitter<CompetenciaModel> = new EventEmitter();
+    @Output() fechar:EventEmitter<boolean> = new EventEmitter();
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
@@ -87,7 +87,7 @@ export class FormCompetenciaComponent implements OnInit{
 
             resultado => {
 
-                this.fechar.emit(this.competenciaEditada);
+                this.fechar.emit(true);
 
             },
             erro => {
@@ -131,7 +131,7 @@ export class FormCompetenciaComponent implements OnInit{
 
             resultado => {
 
-                this.fechar.emit(this.competenciaEditada);
+                this.fechar.emit(true);
             },
             erro => {
               switch(erro.status) {

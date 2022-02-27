@@ -21,4 +21,6 @@ public class TurmaColaboradorCompetenciaNivelDTO implements Serializable {
 
     private Integer competenciaId;
 
+    private String nivelNome;
+
 }

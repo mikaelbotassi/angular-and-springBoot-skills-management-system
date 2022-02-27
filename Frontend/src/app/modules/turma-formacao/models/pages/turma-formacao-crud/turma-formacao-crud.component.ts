@@ -48,7 +48,7 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   this.listarTurmas();
   this.listarColaboradoresAutoComplete();
   this.listarCompetenciasAutoComplete();
-  this.colaboradorHolder = new TurmaColaboradorCompetenciaNivelModel(null,null,null,null,null,null, null);
+  this.colaboradorHolder = new TurmaColaboradorCompetenciaNivelModel(null,null,null,null,null,null, null, null);
 }
 
 constructor(private turmaFormacaoService: turmaFormacaoService, private messageService: MessageService) {}
@@ -128,6 +128,20 @@ listarCompetenciasAutoComplete(){
 
 listarTurmaColaboradorCompetencia(turmaId: number){
   this.turmaFormacaoService.listarTurmaColaboradorCompetencia(turmaId).subscribe(colaborador => {
+    colaborador.forEach(colaboradorTemp => {
+      if(colaboradorTemp.nivel == 0){
+        colaboradorTemp.nivelNome = "Estagiario";
+      }
+      if(colaboradorTemp.nivel == 1){
+        colaboradorTemp.nivelNome = "Junior";
+      }
+      if(colaboradorTemp.nivel == 2){
+        colaboradorTemp.nivelNome = "Plenio";
+      }
+      if(colaboradorTemp.nivel == 3){
+        colaboradorTemp.nivelNome = "Senior";
+      }
+    })
     this.colaboradorCompetenciaHolder = colaborador;
   })
 }
@@ -222,8 +236,18 @@ inserirColaboradorCompetenciaHolder(){
       this.turmaFormacaoService.cadastrarColaboradorCompetenciaZero(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(temp =>{
         this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(colaboradorTemp =>{
           if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaborador.colaboradorId  === this.colaboradorDropDown.id && colaborador.competenciaId === this.competenciaDropDown.id) == -1) {
-            console.log("adicao na lista");
-            console.log(colaboradorTemp);
+            if(colaboradorTemp.nivel == 0){
+              colaboradorTemp.nivelNome = "Estagiario";
+            }
+            if(colaboradorTemp.nivel == 1){
+              colaboradorTemp.nivelNome = "Junior";
+            }
+            if(colaboradorTemp.nivel == 2){
+              colaboradorTemp.nivelNome = "Plenio";
+            }
+            if(colaboradorTemp.nivel == 3){
+              colaboradorTemp.nivelNome = "Senior";
+            }
             this.colaboradorCompetenciaHolder.push(colaboradorTemp);   
           }
           this.colaboradorDropDown = new ColaboradorListaModel(null,null,null);
@@ -233,8 +257,18 @@ inserirColaboradorCompetenciaHolder(){
      } else{
         this.turmaFormacaoService.procurarNivelColaboradorCompetencia(this.colaboradorDropDown.id, this.competenciaDropDown.id).subscribe(colaboradorTemp =>{
           if(this.colaboradorCompetenciaHolder.findIndex((colaborador) => colaborador.colaboradorId  === this.colaboradorDropDown.id && colaborador.competenciaId === this.competenciaDropDown.id) == -1) {
-            console.log("adicao na lista");
-            console.log(colaboradorTemp);
+            if(colaboradorTemp.nivel == 0){
+              colaboradorTemp.nivelNome = "Estagiario";
+            }
+            if(colaboradorTemp.nivel == 1){
+              colaboradorTemp.nivelNome = "Junior";
+            }
+            if(colaboradorTemp.nivel == 2){
+              colaboradorTemp.nivelNome = "Plenio";
+            }
+            if(colaboradorTemp.nivel == 3){
+              colaboradorTemp.nivelNome = "Senior";
+            }
             this.colaboradorCompetenciaHolder.push(colaboradorTemp);   
           }
           this.colaboradorDropDown = new ColaboradorListaModel(null,null,null);
