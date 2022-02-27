@@ -12,6 +12,8 @@ export class ColaboradorListaComponent implements OnInit {
     coloumns: any[] = [];
     rows: number = 2;
 
+    visivel : boolean = true;
+
     constructor(
         private colaboradorService: ColaboradorService
     ) {

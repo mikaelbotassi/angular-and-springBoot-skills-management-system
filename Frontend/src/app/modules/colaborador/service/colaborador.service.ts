@@ -3,9 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_PATH } from '../../../../environments/environment';
 import { CadastrarColaboradorModel } from '../models/cadastro-colaborador.model';
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {ColaboradorModel} from '../models/ColaboradorModel';
 
 @Injectable({
@@ -22,6 +19,10 @@ export class ColaboradorService {
   }
 
     getColaborador(): Observable<ColaboradorModel[]> {
-        return this._http.get<ColaboradorModel[]>(this.url);
+        return this._http.get<ColaboradorModel[]>(API_PATH + this.url);
+    }
+
+    atualizar(colaborador : CadastrarColaboradorModel): Observable<CadastrarColaboradorModel>{
+      return this._http.put<CadastrarColaboradorModel>(API_PATH + this.url, colaborador);
     }
 }

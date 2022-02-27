@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { SelectItemGroup } from 'primeng/api';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService, SelectItem } from 'primeng/api';
 import { CadastrarCompetenciaModel } from 'src/app/modules/competencia/models/cadastro-competencia.model';
 import { CompetenciaService } from 'src/app/modules/competencia/service/competencia.service';
 import { SenioridadeModel } from 'src/app/shared/model/senioridade.model';
@@ -8,18 +8,22 @@ import { CadastrarColaboradorModel } from '../../../models/cadastro-colaborador.
 import { ColaboradorService } from '../../../service/colaborador.service';
 
 @Component({
-  selector: 'app-colaborador-lista',
-  templateUrl: './colaborador-lista.component.html',
-  styleUrls: ['./colaborador-lista.component.css']
+  selector: 'app-colaborador-form',
+  templateUrl: './colaborador-form.component.html',
+  styleUrls: ['./colaborador-form.component.css']
 })
-export class ColaboradorListaComponent implements OnInit {
+export class ColaboradorFormComponent implements OnInit {
 
   file : FileReader = new FileReader(); 
+
   colaborador : CadastrarColaboradorModel;
+
   formBuilder : FormBuilder = new FormBuilder();
+
   formGroup : FormGroup;
 
   image;
+
 
   listaCompetencia : Array<CadastrarCompetenciaModel> = new Array(); 
 
@@ -27,10 +31,22 @@ export class ColaboradorListaComponent implements OnInit {
 
   listaSenioridade : Array<SenioridadeModel> = new Array();
 
-  dropdownSenioridade : SelectItemGroup[];
+  dropdownCompetencia : SelectItem[];
+
+  dropdownNivel : SelectItem[] = [
+    {value :1,label :  "Júnior"},
+    {value :2, label : "Pleno"},
+    {value :3, label : "Sênior"}
+  ];
+
+  competenciaId : number;
+  nivelId : number;
+
+  dropdownSenioridade : SelectItem[];
 
   constructor(private _colaborador : ColaboradorService,
-              private _competencia : CompetenciaService) { }
+              private _competencia : CompetenciaService,
+              private _messageService: MessageService) { }
 
   ngOnInit(): void {
     this.buscarCompetencia();
@@ -38,6 +54,11 @@ export class ColaboradorListaComponent implements OnInit {
 
     this.criaDropdownSenioridade();
 
+  }
+
+  adicionarListaCompetencia() : void {
+    this.listaCompetenciaSelecionado.push(new CadastrarCompetenciaModel(this.competenciaId, '', this.nivelId))
+    console.log(this.competenciaId);
   }
 
   public uploadImagem(event) : void{
@@ -74,35 +95,51 @@ export class ColaboradorListaComponent implements OnInit {
     this.colaborador = this.formGroup.getRawValue();
 
       this._colaborador.inserir(this.colaborador).subscribe(
-        res => console.log('Certo'),
-        err => console.log('Erro'),
+        res => {
+          this._messageService.add({severity:'success', summary:'Sucesso ao Inserir', 
+                                    detail:'O Colaborador e suas Competências foram inseridos com sucesso!'})
+        },
+        err => {
+          this._messageService.add({severity:'error', summary:'Ocorreu um error na busca', 
+          detail:'Error ao buscar!'})
+        },
     )
                                                     
   }
 
   public buscarCompetencia(): void {
     this._competencia.obterCompetenciasDropdown('competencia').subscribe(
-      res => this.listaCompetencia = res,
-
-      err => console.error(err)
+      res => {
+        this.listaCompetencia = res
+        this.dropdownCompetencia = res.map(
+            item => ({
+              label : item.nome,
+              value : item.id
+            })
+          )
+        },
+      err => {
+        this._messageService.add({severity:'error', summary:'Ocorreu um error na busca', 
+                                  detail:'Error ao buscar!'})
+      }
     )
   }
 
   public criarFormulario() : void{
     this.formGroup = this.formBuilder.group({
-      nome : [''],
+      nome : ['', [Validators.required]],
 
-      sobrenome : [''],
+      sobrenome : ['', [Validators.required]],
       
-      cpf : [''],
+      cpf : ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
     
-      email : [''],
+      email : ['', [Validators.required, Validators.email]],
   
-      dataNascimento : [''],
+      dataNascimento : ['', [Validators.required]],
   
-      dataAdmissao : [''],
+      dataAdmissao : ['', [Validators.required]],
   
-      idSenioridade : [null],
+      idSenioridade : [null, [Validators.required]],
 
       competencia : [[]],
 
