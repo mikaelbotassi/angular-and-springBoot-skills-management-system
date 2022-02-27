@@ -1,17 +1,14 @@
 package br.com.turma.sgc.builder;
 
 import br.com.turma.sgc.domain.Competencia;
-import br.com.turma.sgc.enums.CategoriaEnum;
 import br.com.turma.sgc.repository.CompetenciaRepository;
 import br.com.turma.sgc.service.CompetenciaService;
 import br.com.turma.sgc.service.dto.CategoriaDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.util.Collection;
 
 @Component

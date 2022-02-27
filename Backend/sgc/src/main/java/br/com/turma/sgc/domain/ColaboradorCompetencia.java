@@ -3,7 +3,6 @@ package br.com.turma.sgc.domain;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -20,7 +19,6 @@ import java.io.Serializable;
 @Setter
 @Table(name = "colaborador_competencia")
 @AllArgsConstructor
-@NoArgsConstructor
 public class ColaboradorCompetencia implements Serializable {
 
     @EmbeddedId
@@ -38,4 +36,8 @@ public class ColaboradorCompetencia implements Serializable {
 
     @Column(name = "nivel")
     private Integer nivel;
+
+    public ColaboradorCompetencia(){
+        this.id = new ColaboradorCompetenciaPK();
+    }
 }

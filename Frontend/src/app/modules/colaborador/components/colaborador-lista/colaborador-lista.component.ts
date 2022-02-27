@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ColaboradorModel} from '../../models/ColaboradorModel';
 import {ColaboradorService} from '../../service/colaborador.service';
 import {SenioridadeService} from '../../../senioridade/service/senioridade.service';
+import { CadastrarColaboradorModel } from '../../models/cadastro-colaborador.model';
+import { ColaboradorFormComponent } from './colaborador-form/colaborador-form.component';
 
 @Component({
     selector: 'app-colaborador-lista',
@@ -13,7 +15,13 @@ export class ColaboradorListaComponent implements OnInit {
     senioridades: any[] = [];
     coloumns: any[] = [];
 
+    colaboradorAlteracao : CadastrarColaboradorModel;
+
     @ViewChild('dtColaborador') table: ColaboradorModel;
+
+    @ViewChild('colaboradorForm') colaboradorForm: ColaboradorFormComponent;
+
+    visivel : boolean = false;
 
     constructor(
         private colaboradorService: ColaboradorService,
@@ -42,5 +50,14 @@ export class ColaboradorListaComponent implements OnInit {
                 label: senioridade.descricao,
                 value: senioridade.descricao
             })));
+    }
+
+    abrirDialogAlterar(colaborador : ColaboradorModel) : void {
+        this.visivel = !this.visivel;
+        this.colaboradorForm.buscarColaboradorPorId(colaborador.id); 
+    }
+
+    limparFormularioFilho() : void {
+        this.colaboradorForm.limparFormulario()
     }
 }

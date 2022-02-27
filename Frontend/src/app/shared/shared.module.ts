@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PRIMENG_IMPORTS } from './primeng-imports';
+import { SenioridadeService } from './services/senioridade.service';
 import { MessageService } from 'primeng';
 
 
@@ -12,7 +13,9 @@ import { MessageService } from 'primeng';
         ReactiveFormsModule,
         PRIMENG_IMPORTS,
     ],
-    providers: [MessageService],
+    providers: [
+        SenioridadeService,
+    ],
     exports: [
 
         FormsModule,

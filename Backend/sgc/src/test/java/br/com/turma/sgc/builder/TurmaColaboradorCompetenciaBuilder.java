@@ -4,7 +4,10 @@ import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.TurmaColaboradorCompetenciaRepository;
 import br.com.turma.sgc.service.TurmaFormacaoService;
+import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
+import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.service.mapper.TurmaColaboradorCompetenciaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,13 +27,26 @@ public class TurmaColaboradorCompetenciaBuilder  extends ConstrutorDeEntidade<Tu
     @Autowired
     private TurmaFormacaoService turmaFormacaoService;
 
+    @Autowired
+    private ColaboradorBuilder colaboradorBuilder;
+
+    @Autowired
+    private CompetenciaBuilder competenciaBuilder;
+
+    @Autowired
+    private TurmaFormacaoBuilder turmaFormacaoBuilder;
+
 
     @Override
     public TurmaColaboradorCompetenciaDTO construirEntidade() {
+        ColaboradorDTO colaborador = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+        CompetenciaDTO competencia = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        TurmaFormacaoDTO turma = turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
+
         TurmaColaboradorCompetenciaDTO turmaColaboradorCompetenciaDTO = new TurmaColaboradorCompetenciaDTO();
-        turmaColaboradorCompetenciaDTO.setColaboradorId(1);
-        turmaColaboradorCompetenciaDTO.setCompetenciaId(1);
-        turmaColaboradorCompetenciaDTO.setTurmaId(1);
+        turmaColaboradorCompetenciaDTO.setColaboradorId(colaborador.getId());
+        turmaColaboradorCompetenciaDTO.setCompetenciaId(competencia.getId());
+        turmaColaboradorCompetenciaDTO.setTurmaId(turma.getId());
 
         return turmaColaboradorCompetenciaDTO;
     }
@@ -41,8 +57,7 @@ public class TurmaColaboradorCompetenciaBuilder  extends ConstrutorDeEntidade<Tu
         turmaColaboradorCompetenciaPK.setIdCompetencia(entidade.getCompetenciaId());
         turmaColaboradorCompetenciaPK.setIdColaborador(entidade.getColaboradorId());
         turmaColaboradorCompetenciaPK.setIdTurmaFormacao(entidade.getTurmaId());
-        TurmaColaboradorCompetencia turma = new TurmaColaboradorCompetencia();
-        turma = turmaColaboradorCompetenciaMapper.toEntity(entidade);
+        TurmaColaboradorCompetencia turma = turmaColaboradorCompetenciaMapper.toEntity(entidade);
         turma.setId(turmaColaboradorCompetenciaPK);
 
         return turmaColaboradorCompetenciaMapper.toDto( turmaColaboradorCompetenciaRepository.save(turma) );

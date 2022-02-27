@@ -1,20 +1,32 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { API_PATH } from '../../../../environments/environment';
+import { CadastrarColaboradorModel } from '../models/cadastro-colaborador.model';
 import {ColaboradorModel} from '../models/ColaboradorModel';
-import {environment} from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ColaboradorService {
 
-    private url = environment.apiUrl + 'colaborador';
+  private url : String = 'colaborador'
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private _http : HttpClient) { }
+
+  public inserir (colaborador : CadastrarColaboradorModel): Observable<CadastrarColaboradorModel>{
+    return this._http.post<CadastrarColaboradorModel>(API_PATH + this.url, colaborador);
+  }
 
     getColaborador(): Observable<ColaboradorModel[]> {
-        return this.http.get<ColaboradorModel[]>(this.url);
+        return this._http.get<ColaboradorModel[]>(API_PATH + this.url);
+    }
+
+    atualizar(colaborador : CadastrarColaboradorModel): Observable<CadastrarColaboradorModel>{
+      return this._http.put<CadastrarColaboradorModel>(API_PATH + this.url, colaborador);
+    }
+
+    buscarColaboradorPorId(id : number) : Observable<CadastrarColaboradorModel>{
+      return this._http.get<CadastrarColaboradorModel>(API_PATH + this.url + '/' + id);
     }
 }

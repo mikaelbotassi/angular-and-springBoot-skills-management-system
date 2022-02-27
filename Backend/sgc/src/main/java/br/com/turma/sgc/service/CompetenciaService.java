@@ -2,6 +2,7 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.repository.*;
+import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
@@ -108,5 +109,7 @@ public class CompetenciaService {
 
     }
 
-
+    public List<CadastrarCompetenciaDTO> buscarCompetenciasDropdown(){
+        return competenciaRepository.buscarCompetenciasDropdown();
+    }
 }

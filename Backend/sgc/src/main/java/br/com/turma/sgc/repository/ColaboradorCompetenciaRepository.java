@@ -1,8 +1,10 @@
 package br.com.turma.sgc.repository;
+
 import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
+import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -39,5 +41,12 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
     @Query(value = "update ColaboradorCompetencia set nivel = nivel + 1 where colaborador.id = :colaboradorId and competencia.id = :competenciaId ")
     void aumentarNivelColaboradorCompetencia(@Param("colaboradorId") Integer colaboradorId, @Param("competenciaId") Integer competenciaId);
 
+    @Query("select new br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO(competencia.id, nivel, competencia.nome) from ColaboradorCompetencia " +
+            " where colaborador.id = :idColaborador")
+    List<CadastrarCompetenciaDTO> obterCompetenciaColaborador(@Param("idColaborador") Integer idColaborador);
+
+    @Modifying
+    @Query("delete from ColaboradorCompetencia where colaborador.id = :idColaborador and competencia.id not in :idsCompetencias")
+    void excluirCompetenciaColaborador(@Param("idColaborador") Integer idColaborador, @Param("idsCompetencias") List<Integer> idsCompetencias);
 
 }

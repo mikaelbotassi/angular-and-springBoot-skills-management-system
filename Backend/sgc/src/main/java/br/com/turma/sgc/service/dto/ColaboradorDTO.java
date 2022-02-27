@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,5 +43,7 @@ public class ColaboradorDTO implements Serializable {
 
     @NotNull(message = "A senioridade do Colaborador é obrigatória")
     private Integer idSenioridade;
+
+    private List<CadastrarCompetenciaDTO> competencia = new ArrayList<CadastrarCompetenciaDTO>();
 
 }

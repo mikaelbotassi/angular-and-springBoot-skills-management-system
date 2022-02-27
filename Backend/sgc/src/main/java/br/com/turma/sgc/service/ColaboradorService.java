@@ -2,29 +2,31 @@ package br.com.turma.sgc.service;
 
 import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
-import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.repository.ColaboradorCompetenciaRepository;
 import br.com.turma.sgc.repository.ColaboradorRepository;
-import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
+import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.ColaboradorListDTO;
 import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
-import br.com.turma.sgc.service.mapper.CadastrarColaboradorMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
+import br.com.turma.sgc.service.mapper.ColaboradorCompetenciaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
-import br.com.turma.sgc.service.mapper.CompetenciaMapper;
 import br.com.turma.sgc.utils.ConstantUtils;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ColaboradorService {
 
@@ -34,24 +36,22 @@ public class ColaboradorService {
 
     private final ColaboradorCompetenciaRepository colaboradorCompetenciaRepository;
 
-    private final CompetenciaService competenciaService;
-
     private final ColaboradorBuscaMapper colaboradorBuscaMapper;
 
-    private final CompetenciaMapper competenciaMapper;
+    private final ColaboradorCompetenciaMapper colaboradorCompetenciaMapper;
 
-    private final CadastrarColaboradorMapper cadastrarColaboradorMapper;
-
-    public List<ColaboradorDTO> procurarTodos(){
-        List<Colaborador> list = repository.findAll();
-        return colaboradorMapper.toDto(list);
+    public List<ColaboradorListDTO> procurarTodos(){
+        return repository.obterTodos();
     }
 
+    @Transactional(readOnly = true)
     public ColaboradorDTO procurarPorId(int id){
         Colaborador obj = repository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Elemento não encontrado!"));
 
-        return colaboradorMapper.toDto(obj);
+        ColaboradorDTO colaboradorDTO = colaboradorMapper.toDto(obj);
+        colaboradorDTO.setCompetencia(colaboradorCompetenciaRepository.obterCompetenciaColaborador(colaboradorDTO.getId()));
+        return colaboradorDTO;
 
     }
 
@@ -76,19 +76,27 @@ public class ColaboradorService {
 //        return colaboradorBuscaMapper.toDto(colaboradorCompetenciaRepository.buscaColaboradorInstrutor(nivelMax));
 //    }
 
-    public ColaboradorDTO inserir(CadastrarColaboradorDTO colab){
-        ColaboradorDTO colaboradorDTO = colaboradorMapper.toDto(repository.save(cadastrarColaboradorMapper.toEntity(colab)));
-        ColaboradorCompetencia colaboradorCompetencia = new ColaboradorCompetencia();
-        colab.getCompetencia().forEach(cadastrarCompetencia -> {
-            colaboradorCompetencia.setColaborador(colaboradorMapper.toEntity(colaboradorDTO));
-            colaboradorCompetencia.setCompetencia(competenciaMapper.toEntity(competenciaService.procurarPorId(cadastrarCompetencia.getId())));
-            colaboradorCompetencia.setNivel(cadastrarCompetencia.getNivel());
-            ColaboradorCompetenciaPK colaboradorCompetenciaPK = new ColaboradorCompetenciaPK(colaboradorCompetencia.getColaborador().getId(), colaboradorCompetencia.getCompetencia().getId());
-            colaboradorCompetencia.setId( colaboradorCompetenciaPK);
-            colaboradorCompetenciaRepository.save(colaboradorCompetencia);
-        });
-        return colaboradorDTO;
+    public ColaboradorDTO inserir(ColaboradorDTO colab){
+        Colaborador colaborador = repository.save(colaboradorMapper.toEntity(colab));
+        return colaboradorMapper.toDto(colaborador);
+    }
 
+    private void salvarCompetencias(Colaborador colaborador, List<CadastrarCompetenciaDTO> competencias){
+        List<Integer> idsCompetencias = new ArrayList<>(Collections.singletonList(-1));
+        idsCompetencias.addAll(competencias.stream().map(CadastrarCompetenciaDTO::getId).collect(Collectors.toList()));
+        colaboradorCompetenciaRepository.excluirCompetenciaColaborador(colaborador.getId(), idsCompetencias);
+
+        List<ColaboradorCompetencia> colaboradorCompetencias = competencias.stream().map(competencia -> {
+            ColaboradorCompetencia colabCompetencia = new ColaboradorCompetencia();
+            colabCompetencia.getId().setIdCompetencia(competencia.getId());
+            colabCompetencia.getId().setIdColaborador(colaborador.getId());
+            colabCompetencia.setNivel(competencia.getNivel());
+
+            colabCompetencia.setColaborador(colaborador);
+            colabCompetencia.setCompetencia(colaboradorCompetenciaMapper.toEntity(competencia));
+            return colabCompetencia;
+        }).collect(Collectors.toList());
+        colaboradorCompetenciaRepository.saveAll(colaboradorCompetencias);
     }
 
     public void deletar(int id){
@@ -96,7 +104,9 @@ public class ColaboradorService {
     }
 
     public ColaboradorDTO atualizar(ColaboradorDTO c){
-        return colaboradorMapper.toDto(repository.save(colaboradorMapper.toEntity(c)));
+        Colaborador colaborador = repository.save(colaboradorMapper.toEntity(c));
+        salvarCompetencias(colaborador, c.getCompetencia());
+        return colaboradorMapper.toDto(colaborador);
     }
 
     //OK
