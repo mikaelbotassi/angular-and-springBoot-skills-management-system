@@ -12,8 +12,8 @@
                 <div class="card ui-grid-col-12">
                     <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
                     <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                    <input pInputText placeholder="nome turma"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeDaTurma"  [(ngModel)]="inputNomeTurma" />
-                    <textarea [rows]="1" [cols]="30"  type="text" pInputTextarea autoResize="autoResize" name="descricaoDaTurma"  [(ngModel)]="inputDescricaoTurma" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
+                    <input pInputText placeholder="nome turma" maxlength="40" class="registrar-turma ui-grid-col-3 " type="text" name="nomeDaTurma"  [(ngModel)]="inputNomeTurma" />
+                    <textarea [rows]="1" [cols]="30"  type="text" maxlength="255" pInputTextarea autoResize="autoResize" name="descricaoDaTurma"  [(ngModel)]="inputDescricaoTurma" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
 
                 </div>
 
@@ -121,8 +121,8 @@
                     <div class="card ui-grid-col-12">
                         <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
                         <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                        <input pInputText placeholder="nome turma" value="{{turmaDetalhada.nome}}"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeTurmaAlt" [(ngModel)]="inputNomeTurma" />
-                        <textarea [rows]="1" [cols]="30" type="text" value="{{turmaDetalhada.descricao}}" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 " name="descricaoTurmaAlt" [(ngModel)]="inputDescricaoTurma"  placeholder="descricao..."  ></textarea>
+                        <input pInputText placeholder="nome turma" maxlength="40" value="{{turmaDetalhada.nome}}"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeTurmaAlt" [(ngModel)]="inputNomeTurma" />
+                        <textarea [rows]="1" [cols]="30" type="text" maxlength="255" value="{{turmaDetalhada.descricao}}" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 " name="descricaoTurmaAlt" [(ngModel)]="inputDescricaoTurma"  placeholder="descricao..."  ></textarea>
                         <br/>
                         <button pButton class="finalizar-button ui-grid-col-4" type="button" [disabled]="desabilitarBotaoTerminar(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Finalizar turma" iconPos="left" (click)="finalizarTurma(turmaDetalhada)" > </button>
 
