@@ -4,6 +4,9 @@
     color: rgb(228, 135, 48);
     margin: 10px 2px 2px 2px;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .titulo-pagina-competencia{
