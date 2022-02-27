@@ -75,8 +75,8 @@ export class CompetenciaListarComponent implements OnInit {
 
             })
 
-            ref.onClose.subscribe((competencia: CompetenciaModel)=>{
-                if(competencia){
+            ref.onClose.subscribe((salvou: boolean)=>{
+                if(salvou){
                     this.showSucess();
                     this.listarCompetencias();
                 }
@@ -94,8 +94,8 @@ export class CompetenciaListarComponent implements OnInit {
 
         })
 
-        ref.onClose.subscribe((competencia: CompetenciaModel)=>{
-            if(competencia){
+        ref.onClose.subscribe((salvou: boolean)=>{
+            if(salvou){
                 this.showSucess();
                 this.listarCompetencias();
             }

@@ -6,7 +6,8 @@ export class TurmaColaboradorCompetenciaNivelModel {
     public competenciaNome: String,
     public nivel: number,
     public competenciaId: number,
-    public turmaId: number
+    public turmaId: number,
+    public nivelNome: String,
     ){
     }
     }

@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{colaborador.colaboradorNome}} {{colaborador.colaboradorSobrenome}} </td>
                                 <td>{{colaborador.competenciaNome}}</td>
-                                <td>{{colaborador.nivel}}</td>
+                                <td>{{colaborador.nivelNome}}</td>
                                 <td>
                                     <button pButton class="button-descarte" (click)="deletarColaboradorCompetenciaHolder(colaborador)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
                                 </td>
@@ -165,7 +165,7 @@
                                 <tr>
                                     <td>{{colaborador.colaboradorNome}} {{colaborador.colaboradorSobrenome}} </td>
                                     <td>{{colaborador.competenciaNome}}</td>
-                                    <td>{{colaborador.nivel}}</td>
+                                    <td>{{colaborador.nivelNome}}</td>
                                     <td>
                                         <button pButton class="button-descarte" [disabled]="desabilitarBotaoColaboradorCompetenciaAlt(turmaDetalhada.statusId, colaborador.nivel)" (click)="deletarColaboradorCompetenciaHolderAlt(colaborador, turmaDetalhada.id)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
                                     </td>

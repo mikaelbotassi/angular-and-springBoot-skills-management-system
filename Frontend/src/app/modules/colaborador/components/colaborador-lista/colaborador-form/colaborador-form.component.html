@@ -65,9 +65,9 @@
             <p-fieldset  legend="Competências" >
                 <div class="ui-g-4"  >
                     <p  class="registrar-competencia ">Competencia</p>
-                    <p-dropdown [options]="dropdownCompetencia" [(ngModel)]="competenciaId" [ngModelOptions]="{standalone : true}"></p-dropdown>
+                    <p-dropdown [options]="dropdownCompetencia" placeholder="Colaboradors" [(ngModel)]="competenciaId" [ngModelOptions]="{standalone : true}"></p-dropdown>
                     <p  class="registrar-nivel ">Nível</p>
-                    <p-dropdown [options]="dropdownNivel" [(ngModel)]="nivelId" [ngModelOptions]="{standalone : true}"></p-dropdown>
+                    <p-dropdown [options]="dropdownNivel" [(ngModel)]="nivelId" placeholder="Niveis" [ngModelOptions]="{standalone : true}"></p-dropdown>
 
                     <button pButton class="commit-button-colab"  
                         icon="pi pi-plus" 
