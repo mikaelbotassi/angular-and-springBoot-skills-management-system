@@ -12,7 +12,7 @@
             </column>
 
             <column name="nome" type="VARCHAR(31)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="descricao" type="varchar(101)" >
