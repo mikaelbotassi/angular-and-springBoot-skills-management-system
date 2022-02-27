@@ -7,7 +7,7 @@ import { CategoriaModel } from './../models/categoria.model';
 import { CompetenciaModel } from './../models/competencia.model';
 import { SelectItem, MessageService } from 'primeng';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { finalize, retry } from 'rxjs/operators';
+import { finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-competencia',
@@ -21,6 +21,7 @@ export class FormCompetenciaComponent implements OnInit{
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
+     visible: boolean;
 
     constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService, private messageService:MessageService) { }
 
@@ -28,7 +29,9 @@ export class FormCompetenciaComponent implements OnInit{
 
         this.formCompetencia = this.createForm();
         this.getCategorias();
-        this.formCompetencia.patchValue(this.competenciaEditada);
+        if (! (typeof this.competenciaEditada === "undefined")) {
+            this.formCompetencia.patchValue(this.competenciaEditada);
+        }
 
     }
 
@@ -51,21 +54,6 @@ export class FormCompetenciaComponent implements OnInit{
     clear() {
         this.messageService.clear();
     }
-
-    // createForm(): FormGroup {
-    //     return this.formBuilder.group({
-    //     id: [null, [Validators.required]],
-    //     nome: [null, [
-    //         Validators.required,
-    //         Validators.minLength(3)
-    //     ]],
-    //     descricao: [null, [
-    //         Validators.required,
-    //         Validators.minLength(5)
-    //     ]],
-    //     categoria: [null, [Validators.required]],
-    //     });
-    // }
 
     createForm(): FormGroup {
         return this.formBuilder.group({
@@ -91,18 +79,10 @@ export class FormCompetenciaComponent implements OnInit{
 
     atualizarCompetencia(): void{
 
-        this.block.start('Carregando...')
-        // if(!this.formCompetencia.valid){
-
-        //     this.block.stop();
-        //     this.fechar.emit();
-        //     console.log(this.formCompetencia.controls.nome.errors);
-        //     return;
-
-        // }
+        this.block.start('Carregando...');
 
         this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue())
-        .pipe(finalize(()=> this.block.stop(), ))
+        .pipe(finalize(()=> this.block.stop()))
         .subscribe(
 
             resultado => {
@@ -142,6 +122,53 @@ export class FormCompetenciaComponent implements OnInit{
 
     cancel(){
         this.fechar.emit();
+    }
+
+    criarCompetencia(): void{
+        this.competenciaService.criarCompetencia(this.formCompetencia.getRawValue())
+        .pipe(finalize(()=> this.block.stop()))
+        .subscribe(
+
+            resultado => {
+
+                this.fechar.emit(this.competenciaEditada);
+            },
+            erro => {
+              switch(erro.status) {
+                case 400:
+                    if(erro.error.ERRORS){
+                        this.showError(erro.error.ERRORS);
+                    }
+                    else if(erro.error.nome){
+                        this.showError(erro.error.nome);
+                    }
+
+                    else if(erro.error.descricao){
+                        this.showError(erro.error.descricao);
+                    }
+
+                    else if(erro.error.categoria){
+                        this.showError(erro.error.categoria);
+                    }
+                  break;
+                case 404:
+                    this.fechar.emit();
+                    console.log('Competência não localizada.');
+                    break;
+              }
+            }
+        );
+
+    }
+
+    finalizarFormulario() :void {
+        if (typeof this.competenciaEditada === "undefined") {
+            this.criarCompetencia();
+        }
+        else {
+            this.atualizarCompetencia();
+        }
+
     }
 
 }

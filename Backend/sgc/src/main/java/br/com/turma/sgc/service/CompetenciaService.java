@@ -41,6 +41,16 @@ public class CompetenciaService {
     }
 
     public CompetenciaDTO inserir(CompetenciaDTO competenciaDTO) {
+
+        if(competenciaDTO.getNome().length() < 3)
+            throw new RegraNegocioException("NOME INVÁLIDO! O Nome da competência deve ter mais de 2 caracteres.");
+
+        if(ePresent(competenciaDTO))
+            throw new RegraNegocioException("NOME INVÁLIDO! Este nome de competência já existe");
+
+        if(competenciaDTO.getDescricao().length() < 5)
+            throw new RegraNegocioException("DESCRIÇÃO INVÁLIDA! A Descrição da competência deve ter mais de 5 caracteres.");
+
         return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competenciaDTO)));
     }
 

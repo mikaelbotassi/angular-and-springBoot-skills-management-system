@@ -11,6 +11,24 @@ $sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 
 /* You can add global styles to this file, and also import other style files */
 
+div.botao-create{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.botao-create button.ui-button.ui-button-text-icon-left{
+    background-color: $corLaranja;
+    width: 200px;
+    margin: 30px 0 60px 0;
+}
+
+div.botao-create button.ui-button.ui-button-text-icon-left:hover{
+    background-color: $corPreta;
+    width: 206px;
+    height: 2.3em;
+}
+
 p-card.card-competencia div.ui-card{
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.50);
@@ -22,12 +40,12 @@ p-card.card-competencia div.ui-card{
 
 p-card.card-competencia{
 
+    line-height: 2.3em;
     width: 400px;
     min-width: 300px;
     height: 122px;
-    margin: 5px 0 0 5px;
+    margin: 30px 0 0 4px;
     cursor: pointer;
-    text-overflow: ellipsis;
 }
 
 input.pesquisa{

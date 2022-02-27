@@ -15,7 +15,7 @@
                 		<constraints nullable="false"/>
             		</column>
 
-			<column name="descricao" type="VARCHAR(40)" >
+			<column name="descricao" type="VARCHAR(255)" >
             		</column>
 
 			<column name="inicio" type="DATE" >
