@@ -21,6 +21,7 @@ export class FormCompetenciaComponent implements OnInit{
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
+     visible: boolean;
 
     constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService, private messageService:MessageService) { }
 
@@ -28,7 +29,11 @@ export class FormCompetenciaComponent implements OnInit{
 
         this.formCompetencia = this.createForm();
         this.getCategorias();
-        this.formCompetencia.patchValue(this.competenciaEditada);
+        //this.formCompetencia.patchValue(this.competenciaEditada);
+        console.log(typeof this.competenciaEditada === "undefined");
+        if (! (typeof this.competenciaEditada === "undefined")) {
+            this.formCompetencia.patchValue(this.competenciaEditada);
+        }
 
     }
 
@@ -142,6 +147,54 @@ export class FormCompetenciaComponent implements OnInit{
 
     cancel(){
         this.fechar.emit();
+    }
+
+    criarCompetencia(): void{
+        this.competenciaService.criarCompetencia(this.formCompetencia.getRawValue())
+        .pipe(finalize(()=> this.block.stop(), ))
+        .subscribe(
+
+            resultado => {
+                this.fechar.emit(this.competenciaEditada);
+            },
+            erro => {
+              switch(erro.status) {
+                case 400:
+                    if(erro.error.ERRORS){
+                        this.showError(erro.error.ERRORS);
+                    }
+                    else if(erro.error.nome){
+                        this.showError(erro.error.nome);
+                    }
+
+                    else if(erro.error.descricao){
+                        this.showError(erro.error.descricao);
+                    }
+
+                    else if(erro.error.categoria){
+                        this.showError(erro.error.categoria);
+                    }
+                  break;
+                case 404:
+                    this.fechar.emit();
+                    console.log('Competência não localizada.');
+                    break;
+              }
+            }
+        );
+
+    }
+
+    finalizarFormulario() :void {
+        if (typeof this.competenciaEditada === "undefined") {
+            this.criarCompetencia();
+            this.fechar.emit();
+        }
+        else {
+            this.atualizarCompetencia();
+            this.fechar.emit();
+        }
+
     }
 
 }

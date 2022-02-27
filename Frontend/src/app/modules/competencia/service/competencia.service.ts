@@ -24,4 +24,8 @@ export class CompetenciaService{
         return this.httpClient.put<CompetenciaModel>(environment.apiUrl + 'competencia', competencia);
     }
 
+    criarCompetencia(competencia: CompetenciaModel): Observable<CompetenciaModel[]>{
+        return this.httpClient.post<CompetenciaModel[]>(environment.apiUrl + 'competencia', competencia);
+    }
+
 }
