@@ -1,10 +1,16 @@
+
+$corLaranja: #e48730;
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+$sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+
 .new-button{
-    background-color: green;
+    background-color: $corLaranja;
     float: left;
 }
 
 .delete-button{
-    background-color: red;
+    background-color: $corLaranja;
     margin-left: 10px;
     float: left;
 }
@@ -39,14 +45,14 @@
     margin-left: 20px;
 }
 .commit-button{
-    background-color: green;
+    background-color: $corLaranja;
     margin-top: 20px;
     margin-right: 10px;
     float: right;
 }
 
 .commit-button-colab{
-    background-color: green;
+    background-color: $corLaranja;
     margin-top: 10px;
 }
 
@@ -56,11 +62,11 @@
 }
 .iniciar-button{
     margin-top: 20px;
-    background-color: green;
+    background-color: $corLaranja;
 }
 
 .finalizar-button{
-    background-color: red;
+    background-color: $corLaranja;
     float: right;
     margin-top: 20px;
 }
@@ -75,7 +81,7 @@
 
 .limpar-colaborador{
     margin-bottom: 15px;
-    background-color: red;
+    background-color: $corLaranja;
 }
 
 .coluna-media{

@@ -38,7 +38,7 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   competenciaDropDown: CompetenciaListaModel;
   inputNomeTurma: String;
   inputDescricaoTurma: String;
-  statusDisponiveis: TurmaFormacaoModel[] = [];  
+  statusDisponiveis: any[] = [];  
 
 
 @ViewChild('dt') table: TurmaFormacaoModel;
@@ -81,7 +81,17 @@ teste(evento){
 //Listar 
 
 listarTurmas(){
+
+  this.turmaFormacaoService.obterTodasTurmasComURL().subscribe(turmas => {
+      this.turmas = turmas;
+  })
   
+    this.turmaFormacaoService.listarStatus()
+        .subscribe( (status) => this.statusDisponiveis = status.map(status => ({
+            label: status.descricao,
+            value: status.descricao,
+        })));
+
 }
 
 

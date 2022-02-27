@@ -1,3 +1,4 @@
+import { StatusModel } from './../models/StatusModel';
 import { ColaboradorListaModel } from './../models/ColaboradorListaModel';
 import { TurmaColaboradorCompetenciaNivelModel } from './../../turma-colaborador-competencia/models/TurmaColaboradorCompetenciaNivelModel';
 import { TurmaColaboradorCompetenciaModel } from './../../turma-colaborador-competencia/models/TurmaColaboradorCompetenciaModel';
@@ -68,6 +69,10 @@ export class turmaFormacaoService{
 
     cadastrarColaboradorCompetenciaZero(colaboradorId: number, competenciaId:number): Observable<TurmaColaboradorCompetenciaNivelModel>{
         return this.httpClient.post<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/cadastrarColaboradorCompetenciaZero/" + colaboradorId + '/' + competenciaId,null);
+    }
+
+    listarStatus():Observable<StatusModel[]>{
+        return this.httpClient.get<StatusModel[]>(API_PATH + "status");
     }
 
 }

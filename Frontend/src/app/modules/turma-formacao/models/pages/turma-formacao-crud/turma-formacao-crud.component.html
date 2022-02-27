@@ -1,8 +1,8 @@
-<div class="card" >
-    <p-toast position="top-right" [key]="succes" ></p-toast>
-    <button pButton class="new-button" id="botaoDisplay" icon="pi pi-plus" label="Nova turma" iconPos="left" (click)="showDialog()"> </button>
 
-    <h1 style="text-align: center;">Turmas</h1>
+    <p-toast position="top-right" [key]="succes" ></p-toast>
+    
+
+    <h2>Turmas</h2>
 
 
     <p-dialog class="titulo-turma"  (onHide)="limparHolderColaboradorCompetencia($event)" header="Cadastrar turma" [draggable]="false" [modal]="true" [(visible)]="display"  >
@@ -76,7 +76,11 @@
 
 
     
-        <p-table #dt [value]="turmas"  [rows]="15" [paginator]="true">
+        <p-table #dt [value]="turmas"  [rows]="15"  [paginator]="true">
+            <ng-template pTemplate="caption">
+                <button pButton class="new-button" id="botaoDisplay" icon="pi pi-plus" label="Nova turma" iconPos="left" (click)="showDialog()"> </button>
+                Turmas
+            </ng-template>
             <ng-template pTemplate="header" >
                 <tr>
                     <th >nome
@@ -85,9 +89,13 @@
                     <th>descricao
                     </th>
                     <th  class="coluna-media">status
-                        <p-dropdown [options]="statusDisponiveis" class="drop-down-status" placeholder="colaborador" required="true"  
-                        name="colaboradorNomeDropDown" optionLabel="statusNome" (onChange)="dt.filter($event.value, 'statusNome','startsWith')"  >
-                        </p-dropdown>
+                        <p-dropdown [options]="statusDisponiveis"
+                        (onChange)="dt.filter($event.value, 'statusNome', 'equals')"
+                        placeholder="Status" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                    <span>{{option.label}}</span>
+                </ng-template>
+            </p-dropdown>
                     </th>
                     <th class="coluna-menor">Modificar</th>
                 </tr>
@@ -100,7 +108,7 @@
                     <td >{{turma.descricao}}</td>
                     <td >{{turma.statusNome}}</td>
                     <td class="botao-acao">
-                        <button pButton icon="ui-icon-pencil" pTooltip="Alterar turma"  (click)="showDialogAlt(turma); listarTurmaColaboradorCompetencia(turma.id)" ></button>
+                        <button pButton  icon="ui-icon-pencil" pTooltip="Alterar turma"  (click)="showDialogAlt(turma); listarTurmaColaboradorCompetencia(turma.id)" ></button>
                     </td>
                 </tr>
             </ng-template>
@@ -184,5 +192,4 @@
 
 
 
-</div>
 
