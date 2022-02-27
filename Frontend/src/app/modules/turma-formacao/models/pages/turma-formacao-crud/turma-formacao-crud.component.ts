@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { CompetenciaModel } from './../../../../competencia/models/competencia.model';
 import { ColaboradorModel } from './../../../../colaborador/models/ColaboradorModel';
 import { CompetenciaListaModel } from './../../CompetenciaListaModel';
@@ -7,7 +8,7 @@ import { TurmaFormacaoModel } from './../../TurmaFormacaoModel';
 import { turmaFormacaoService } from './../../../service/turma-formacao.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TurmaColaboradorCompetenciaModel } from 'src/app/modules/turma-colaborador-competencia/models/TurmaColaboradorCompetenciaModel';
-import { TriStateCheckbox } from 'primeng';
+import { TriStateCheckbox, SelectItem } from 'primeng';
 import { NgModel } from '@angular/forms';
 
 
@@ -21,7 +22,6 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   display: boolean = false;
   colab: boolean = false;
   turmas:TurmaFormacaoModel[] = [];
-  turmasFiltradas: TurmaFormacaoModel[] = [];
   turmaFormacaoModel: TurmaFormacaoModel;
   succes: boolean = false;
   displayAlt: boolean = false;
@@ -38,8 +38,7 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   competenciaDropDown: CompetenciaListaModel;
   inputNomeTurma: String;
   inputDescricaoTurma: String;
-
-  
+  statusDisponiveis: TurmaFormacaoModel[] = [];  
 
 
 @ViewChild('dt') table: TurmaFormacaoModel;
@@ -74,17 +73,15 @@ this.inputDescricaoTurma = turma.descricao;
 this.inputNomeTurma = turma.nome;
 }
 
-teste(){
-console.log(this.colaboradorDropDown);
+teste(evento){
+  console.log(evento.value.statusNome);
+   
 }
 
 //Listar 
 
 listarTurmas(){
-  this.turmaFormacaoService.obterTodasTurmasComURL().subscribe(turmas => {
-      this.turmas = turmas;
-      this.turmasFiltradas = turmas;
-  })
+  
 }
 
 
@@ -114,7 +111,7 @@ listarTurmaColaboradorCompetencia(turmaId: number){
 //inserir
 
 inserirTurma(){
-  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,1);
+  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,1, null);
   this.inputNomeTurma = null;
   this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
@@ -150,7 +147,7 @@ inserirListaColaborador(turmaId:number){
 }
 
 inserirTurmaIniciando(){
-  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,2);
+  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,2, null);
   this.inputNomeTurma = null;
   this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
@@ -235,28 +232,7 @@ filtrarCompetencias(event){
   );
 }
 
-filtrarTurmaNome(value){
 
-  if(value == undefined || value.trim() == ''){
-    this.turmasFiltradas = this.turmas;
-    return;
-}
-  this.turmasFiltradas = this.turmas.filter((turma)=>
-    turma.nome.toLowerCase().indexOf(value.toLowerCase()) >=0)
-    this.colaboradorCompetenciaHolder = [];
-}
-
-filtrarTurmaStatus(value){
-
-  if(value == undefined || value.trim() == ''){
-    this.turmasFiltradas = this.turmas;
-    return;
-}
-  this.turmasFiltradas = this.turmas.filter((turma)=>
-    turma.statusId == value
-  
-  );
-}
 
 //modificar
 

@@ -26,4 +26,6 @@ public class TurmaFormacaoDTO implements Serializable {
 
     private Integer statusId;
 
+    private String statusNome;
+
 }

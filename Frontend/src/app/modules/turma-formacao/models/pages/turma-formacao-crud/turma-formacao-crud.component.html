@@ -76,7 +76,7 @@
 
 
     
-        <p-table #dt [value]="turmasFiltradas"  [rows]="15" [paginator]="true">
+        <p-table #dt [value]="turmas"  [rows]="15" [paginator]="true">
             <ng-template pTemplate="header" >
                 <tr>
                     <th >nome
@@ -84,9 +84,10 @@
                     </th>
                     <th>descricao
                     </th>
-                    <th  class="coluna-menor">status
-                        <br />
-                        <input pInputText [maxLength]="1" class=".input-status-id" (input)="dt.filter($event.target.value, 'statusId','equals')" />
+                    <th  class="coluna-media">status
+                        <p-dropdown [options]="statusDisponiveis" class="drop-down-status" placeholder="colaborador" required="true"  
+                        name="colaboradorNomeDropDown" optionLabel="statusNome" (onChange)="dt.filter($event.value, 'statusNome','startsWith')"  >
+                        </p-dropdown>
                     </th>
                     <th class="coluna-menor">Modificar</th>
                 </tr>
@@ -97,7 +98,7 @@
                         
                     </td>
                     <td >{{turma.descricao}}</td>
-                    <td >{{turma.statusId}}</td>
+                    <td >{{turma.statusNome}}</td>
                     <td class="botao-acao">
                         <button pButton icon="ui-icon-pencil" pTooltip="Alterar turma"  (click)="showDialogAlt(turma); listarTurmaColaboradorCompetencia(turma.id)" ></button>
                     </td>

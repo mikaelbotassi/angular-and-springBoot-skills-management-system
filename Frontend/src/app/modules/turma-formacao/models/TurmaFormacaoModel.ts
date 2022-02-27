@@ -12,6 +12,8 @@ public termino: Date,
 
 public statusId: number,
 
+public statusNome: string
+
 ){
 }
 public id: number;
