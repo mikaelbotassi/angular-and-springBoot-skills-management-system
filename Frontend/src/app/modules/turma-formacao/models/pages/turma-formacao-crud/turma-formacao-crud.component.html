@@ -23,7 +23,7 @@
 
                         <p  class="registrar-turma ">Colaborador</p>
 
-                        <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador" required="true"  
+                        <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador"  
                         name="colaboradorNomeDropDown" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
                         </p-dropdown>
                        
@@ -133,7 +133,7 @@
                         <p-fieldset legend="Adicionar colaborador"   [toggleable]="true" collapsed="true" >
                             <div class="ui-g-4"  >
                                 <p  class="registrar-turma ">Colaborador</p>
-                                <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador" required="true"  
+                                <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador"
                         name="colaboradorNomeDropDownAlterar" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
                         </p-dropdown>
 
@@ -145,7 +145,7 @@
 
                         <button pButton class="commit-button-colab"  
                         (click)="inserirColaboradorCompetenciaHolder()"   icon="pi pi-plus" 
-                        label="Adicionar" type="button" iconPos="left" [disabled]="desabilitarBotaoAdicionarColaborador(turmaDetalhada.id)"  > </button>   
+                        label="Adicionar" type="button" iconPos="left" [disabled]="desabilitarBotaoAdicionarColaborador(turmaDetalhada.statusId)"  > </button>   
 
                                 </div>
     

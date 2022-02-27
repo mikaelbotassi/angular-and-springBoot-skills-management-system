@@ -8,7 +8,7 @@ import { TurmaFormacaoModel } from './../../TurmaFormacaoModel';
 import { turmaFormacaoService } from './../../../service/turma-formacao.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TurmaColaboradorCompetenciaModel } from 'src/app/modules/turma-colaborador-competencia/models/TurmaColaboradorCompetenciaModel';
-import { TriStateCheckbox, SelectItem } from 'primeng';
+import { TriStateCheckbox, SelectItem, MessageService } from 'primeng';
 import { NgModel } from '@angular/forms';
 
 
@@ -51,7 +51,7 @@ export class TurmaFormacaoCrudComponent implements OnInit {
   this.colaboradorHolder = new TurmaColaboradorCompetenciaNivelModel(null,null,null,null,null,null, null);
 }
 
-constructor(private turmaFormacaoService: turmaFormacaoService) {}
+constructor(private turmaFormacaoService: turmaFormacaoService, private messageService: MessageService) {}
 
 
 
@@ -65,6 +65,20 @@ showDialog(){
 showColab(){
  this.colab = true;
 }
+
+private showSucess(){
+  this.messageService.add({severity:'success', summary: 'Sucesso', detail:'turma Salva'});
+}
+
+private showSucessIniciada(){
+  this.messageService.add({severity:'success', summary: 'Sucesso', detail:'turma iniciada'});
+}
+
+private showSucessFinalizada(){
+  this.messageService.add({severity:'success', summary: 'Sucesso', detail:'turma finalizadda'});
+}
+
+
 
 showDialogAlt(turma: TurmaFormacaoModel){
   this.displayAlt = true;
@@ -126,7 +140,9 @@ inserirTurma(){
   this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
     turma => {
-      return this.inserirListaColaborador(turma.id)
+      this.showSucess();
+      return this.inserirListaColaboradorSemLimpar(turma.id)
+
     }
   );
   
@@ -156,12 +172,36 @@ inserirListaColaborador(turmaId:number){
 
 }
 
+inserirListaColaboradorSemLimpar(turmaId:number){
+
+  let turmaColaboradoresTemp: TurmaColaboradorCompetenciaModel[] = [];
+    this.turmaFormacaoService.listarTurmaColaboradorCompetencia(turmaId).subscribe(colaboradoresTurma => {
+      turmaColaboradoresTemp = colaboradoresTurma;
+    });
+  this.colaboradorCompetenciaHolder.forEach(colaborador =>{
+    let turmaTemp = new TurmaColaboradorCompetenciaModel(turmaId,colaborador.colaboradorId,colaborador.competenciaId);
+    if(turmaColaboradoresTemp.indexOf(turmaTemp) == -1){
+      this.turmaFormacaoService.registrarTurmaColaboradorCompetencia(turmaTemp).subscribe(retorno =>{
+        console.log("certo");
+      });
+    }
+  }
+
+
+    )
+  this.succes = true;
+  this.listarTurmas();
+
+}
+
 inserirTurmaIniciando(){
   this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,2, null);
   this.inputNomeTurma = null;
   this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
     turma => {
+      this.showSucess();
+
       return this.inserirListaColaborador(turma.id)
     }
   );
@@ -209,6 +249,8 @@ inserirColaboradorCompetenciaHolder(){
 
 
   
+},erro =>{
+
 })
 }
 
@@ -251,7 +293,7 @@ iniciarTurma(turma: TurmaFormacaoModel){
 turma.statusId = 2;
   this.turmaFormacaoService.alterarTurma(turma).subscribe(
     turma => {
-      console.log("certo");
+      this.showSucessIniciada();
     }
   );
 
@@ -262,14 +304,14 @@ finalizarTurma(turma: TurmaFormacaoModel){
   turma.termino = new Date;
     this.turmaFormacaoService.alterarTurma(turma).subscribe(
       turma => {
-        console.log("certo");
+        this.showSucessFinalizada();
+        this.listarTurmas();
       }
     );
 
     this.listarTurmaColaboradorCompetencia(turma.id);
     this.colaboradorCompetenciaHolder.forEach(colaborador=>
       this.turmaFormacaoService.subirNivelColaboradorCompetencia(colaborador.colaboradorId, colaborador.competenciaId).subscribe(retorno => {
-        console.log("certo");
       })
       )
   
@@ -372,6 +414,7 @@ desabilitarBotaoColaboradorCompetencia(valor:Number): boolean{
 }
 
 desabilitarBotaoColaboradorCompetenciaAlt(valor:Number): boolean{
+  console.log(valor);
   if(valor == 3){
     return true;
   }
@@ -393,7 +436,7 @@ desabilitarDeletarTurma(status:Number): boolean{
 }
 
 desabilitarBotaoAdicionarColaborador(status:number){
-  if(status == 3 ||!(this.colaboradorDropDown != null && this.competenciaDropDown != null)){
+  if(status == 3 ){
     return true;
   }
   return false;
