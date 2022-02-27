@@ -1,0 +1,17 @@
+$corLaranja: rgb(228, 135, 48);
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+$sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+
+div.topbar{
+    background-color: $corPreta;
+}
+
+div.topbar div.topbar-left{
+    background-color: $corLaranja;
+}
+
+div.topbar div.topbar-right #menu-button{
+    background-color: white;
+    color: $corPreta;
+}

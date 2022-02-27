@@ -1,7 +1,8 @@
+import { Injectable } from "@angular/core";
+
 import { CompetenciaModel } from './../models/competencia.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
 import { CadastrarCompetenciaModel } from '../models/cadastro-competencia.model';
 
@@ -11,7 +12,7 @@ export class CompetenciaService{
     //exemplo constante
     // private static readonly constExample
 
-    private competencias: CompetenciaModel[] = [];
+    competencias: CompetenciaModel[] = [];
 
     constructor(private httpClient: HttpClient){
     }

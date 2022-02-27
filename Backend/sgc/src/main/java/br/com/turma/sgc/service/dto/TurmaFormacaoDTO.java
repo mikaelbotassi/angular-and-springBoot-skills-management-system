@@ -1,11 +1,13 @@
 package br.com.turma.sgc.service.dto;
 
 
+import br.com.turma.sgc.domain.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -23,5 +25,7 @@ public class TurmaFormacaoDTO implements Serializable {
     private LocalDate termino;
 
     private Integer statusId;
+
+    private String statusNome;
 
 }

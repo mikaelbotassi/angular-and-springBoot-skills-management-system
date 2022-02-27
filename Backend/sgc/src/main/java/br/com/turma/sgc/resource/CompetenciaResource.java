@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CompetenciaResource {
     }
 
     @PutMapping
-    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody CompetenciaDTO competenciaDTO) {
+    public ResponseEntity<CompetenciaDTO> atualizar(@RequestBody @Valid CompetenciaDTO competenciaDTO) {
         return ResponseEntity.ok().body(competenciaService.atualizar(competenciaDTO));
     }
 

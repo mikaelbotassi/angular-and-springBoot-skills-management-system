@@ -1,5 +1,6 @@
 package br.com.turma.sgc.repository;
 
+import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
 import br.com.turma.sgc.domain.pk.TurmaColaboradorCompetenciaPK;
@@ -36,4 +37,10 @@ public interface TurmaColaboradorCompetenciaRepository extends JpaRepository<Tur
             "where tcc.colaborador.id = :idColaborador and tcc.turma.id = :idTurma")
     Optional<TurmaColaboradorCompetencia> procurarPorIdColaboradorTurma(@Param("idTurma") Integer idTurma,
                                                                         @Param("idColaborador") Integer idColaborador);
+
+    @Query(value = "select cc from ColaboradorCompetencia cc inner join TurmaColaboradorCompetencia tcc on cc.colaborador.id = tcc.colaborador.id" +
+            " and cc.competencia.id = tcc.competencia.id where tcc.turma.id  = :idTurma")
+    List<ColaboradorCompetencia> procurarColaboradorCompetenciaPorTurma(@Param("idTurma") Integer id);
+
+
 }

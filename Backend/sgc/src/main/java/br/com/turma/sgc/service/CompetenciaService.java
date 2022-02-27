@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 
 @Service
@@ -45,9 +44,22 @@ public class CompetenciaService {
         return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competenciaDTO)));
     }
 
+    private boolean ePresent(CompetenciaDTO competencia){
+        return competenciaRepository.buscarPorNome(competencia).isPresent();
+    }
+
     public CompetenciaDTO atualizar(CompetenciaDTO competencia) {
         if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
             throw new NoSuchElementException("Competência não encontrada");
+        if(competencia.getNome().length() < 3)
+            throw new RegraNegocioException("NOME INVÁLIDO! O Nome da competência deve ter mais de 2 caracteres.");
+
+        if(ePresent(competencia))
+            throw new RegraNegocioException("NOME INVÁLIDO! Este nome de competência já existe");
+
+        if(competencia.getDescricao().length() < 5)
+            throw new RegraNegocioException("DESCRIÇÃO INVÁLIDA! A Descrição da competência deve ter mais de 5 caracteres.");
+
         return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competencia)));
     }
 
@@ -66,10 +78,6 @@ public class CompetenciaService {
 
     }
 
-//    public List<CompetenciaDTO> buscarCompetenciaPorCategoria(Integer categoriaId) {
-//        List<Competencia> competencias = competenciaRepository.buscarCompetenciaPorCategoria(categoriaId);
-//        return competenciaMapper.toDto(competencias);
-//    }
     public List<CompetenciaDTO> buscarCompetenciaPorIdCategoria(Integer idCategoria) { //ok
         if (!(categoriaRepository.findById(idCategoria).isPresent()))
             throw new NoSuchElementException(ConstantUtils.ERRO_ENCONTRAR_IDCATEGORIA);

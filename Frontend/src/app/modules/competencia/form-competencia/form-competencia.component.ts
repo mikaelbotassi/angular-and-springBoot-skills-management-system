@@ -1,38 +1,78 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup, FormBuilder} from '@angular/forms';
 
-import { CompetenciaListarComponent } from './../competencia-listar/competencia-listar.component';
 import { CategoriaService } from './../service/categoria.service';
 import { CompetenciaService } from './../service/competencia.service';
 import { CategoriaModel } from './../models/categoria.model';
 import { CompetenciaModel } from './../models/competencia.model';
-import { SelectItem } from 'primeng';
+import { SelectItem, MessageService } from 'primeng';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { finalize, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-competencia',
   templateUrl: './form-competencia.component.html',
   styleUrls: ['./form-competencia.component.scss']
 })
-export class FormCompetenciaComponent implements OnInit {
+export class FormCompetenciaComponent implements OnInit{
 
+    @BlockUI() block: NgBlockUI;
+    @Output() fechar:EventEmitter<CompetenciaModel> = new EventEmitter();
     @Input() competenciaEditada:CompetenciaModel;
     formCompetencia: FormGroup;
     categorias: CategoriaModel[] = [];
 
-    constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService) { }
+    constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService, private messageService:MessageService) { }
 
     ngOnInit() {
+
         this.formCompetencia = this.createForm();
-        this.formCompetencia.patchValue(this.competenciaEditada);
         this.getCategorias();
+        this.formCompetencia.patchValue(this.competenciaEditada);
+
     }
+
+    showSuccess(mensagem: string) {
+        this.messageService.add({severity:'success', summary: 'Sucesso', detail:mensagem});
+    }
+
+    showInfo(mensagem: string) {
+        this.messageService.add({severity:'info', summary: 'Informações', detail:mensagem});
+    }
+
+    showWarn(mensagem: string) {
+        this.messageService.add({severity:'warn', summary: 'Atenção', detail:mensagem});
+    }
+
+    showError(mensagem: string) {
+        this.messageService.add({severity:'error', summary: 'Erro', detail:mensagem});
+    }
+
+    clear() {
+        this.messageService.clear();
+    }
+
+    // createForm(): FormGroup {
+    //     return this.formBuilder.group({
+    //     id: [null, [Validators.required]],
+    //     nome: [null, [
+    //         Validators.required,
+    //         Validators.minLength(3)
+    //     ]],
+    //     descricao: [null, [
+    //         Validators.required,
+    //         Validators.minLength(5)
+    //     ]],
+    //     categoria: [null, [Validators.required]],
+    //     });
+    // }
 
     createForm(): FormGroup {
         return this.formBuilder.group({
-        id: [null, [Validators.required]],
-        nome: [null, [Validators.required]],
-        descricao: [null, [Validators.required]],
-        categoria: [null, [Validators.required]],
+        id: [null],
+        nome: [null],
+        descricao: [null],
+        categoria: [null],
         });
     }
 
@@ -40,7 +80,6 @@ export class FormCompetenciaComponent implements OnInit {
         this.categoriaService.obterCategorias().subscribe(categorias => {
             this.categorias = categorias;
         })
-        console.log(this.categorias);
     }
 
     converterParaDropDown(categorias: CategoriaModel[], campoValue:string, campoLabel:string):SelectItem[]{
@@ -52,26 +91,57 @@ export class FormCompetenciaComponent implements OnInit {
 
     atualizarCompetencia(): void{
 
-        if(!this.formCompetencia.valid){
-            return;
-        }
-        this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue()).subscribe(
+        this.block.start('Carregando...')
+        // if(!this.formCompetencia.valid){
+
+        //     this.block.stop();
+        //     this.fechar.emit();
+        //     console.log(this.formCompetencia.controls.nome.errors);
+        //     return;
+
+        // }
+
+        this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue())
+        .pipe(finalize(()=> this.block.stop(), ))
+        .subscribe(
+
             resultado => {
-              console.log('Competência alterada com sucesso.')
+
+                this.fechar.emit(this.competenciaEditada);
+
             },
             erro => {
               switch(erro.status) {
                 case 400:
-                  console.log(erro.error.mensagem);
+                    if(erro.error.ERRORS){
+                        this.showError(erro.error.ERRORS);
+                    }
+                    else if(erro.error.nome){
+                        this.showError(erro.error.nome);
+                    }
+
+                    else if(erro.error.descricao){
+                        this.showError(erro.error.descricao);
+                    }
+
+                    else if(erro.error.categoria){
+                        this.showError(erro.error.categoria);
+                    }
+
+                //   this.fechar.emit();
                   break;
                 case 404:
-                  console.log('Competência não localizada.');
-                  break;
+                    this.fechar.emit();
+                    console.log('Competência não localizada.');
+                    break;
               }
             }
           );
-        this.formCompetencia.reset();
 
+    }
+
+    cancel(){
+        this.fechar.emit();
     }
 
 }

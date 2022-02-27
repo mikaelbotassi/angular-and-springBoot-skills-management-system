@@ -1,8 +1,11 @@
-import { CategoriaService } from './../service/categoria.service';
-import { Component, OnInit } from '@angular/core';
+import { FormCompetenciaModalComponent } from './../form-competencia/form-competencia-modal.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { Component, OnInit} from '@angular/core';
 
 import { CompetenciaService } from '../service/competencia.service';
 import { CompetenciaModel } from '../models/competencia.model';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MessageService } from 'primeng';
 
 const URL_COMPETENCIA:string = 'competencia';
 @Component({
@@ -12,30 +15,36 @@ const URL_COMPETENCIA:string = 'competencia';
 })
 export class CompetenciaListarComponent implements OnInit {
 
+    @BlockUI() block: NgBlockUI;
     competenciasTotal:CompetenciaModel[] = [];
     competenciasFiltrada: CompetenciaModel[] = [];
     display: boolean = false;
-    displayEdit:boolean = false;
     competenciaDetalhada: CompetenciaModel;
     competenciaEditada: CompetenciaModel;
 
-  constructor(private competenciaService: CompetenciaService) {}
+  constructor(private competenciaService: CompetenciaService, private dialogService: DialogService, private messageService:MessageService) {}
 
   ngOnInit(): void {
     this.listarCompetencias();
   }
 
 
+  private showSucess(){
+    this.messageService.add({severity:'success', summary: 'Sucesso', detail:'Competência Salva'});
+  }
+
   listarCompetencias(){
+
+    this.block.start('Carregando...')
     this.competenciaService.obterTodasCompetenciasComURL(URL_COMPETENCIA).subscribe(competencias => {
         this.competenciasTotal = competencias;
         this.competenciasFiltrada = competencias;
     })
+    this.block.stop();
   }
 
   obterCompetencias(filtro){
 
-    console.log(filtro);
     if(filtro == undefined || filtro.trim() == ''){
         this.competenciasFiltrada = this.competenciasTotal;
         return;
@@ -47,15 +56,30 @@ export class CompetenciaListarComponent implements OnInit {
   }
 
   showDialog(competencia: CompetenciaModel){
-        console.log(competencia);
         this.competenciaDetalhada = competencia;
         this.display = true;
   }
 
   showDialogEdit(){
-      this.competenciaEditada = this.competenciaDetalhada;
-      this.display = false;
-      this.displayEdit = true;
+
+        this.display = false;
+
+        const ref = this.dialogService.open(FormCompetenciaModalComponent, {
+
+            header: this.competenciaDetalhada.nome + ' EDIT',
+            width: '600px',
+            height:'500px',
+            contentStyle: { "overflow": "auto"},
+            data: {competencia: this.competenciaDetalhada}
+
+        })
+
+        ref.onClose.subscribe((competencia: CompetenciaModel)=>{
+            if(competencia){
+                this.showSucess();
+                this.listarCompetencias();
+            }
+        })
   }
 
 

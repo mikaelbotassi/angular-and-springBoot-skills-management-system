@@ -6,12 +6,33 @@
     text-align: left;
 }
 
+.titulo-pagina-competencia{
+
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+
+}
+
+div.ui-g{
+
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    justify-content: center;
+
+}
+
 .descricao-competencia{
     font-family: "Montserrat-ExtraLight";
     font-size: 25px;
     text-align: left;
     color: white;
+    display: block;
     margin: 10px 2px 2px 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .nome-categoria{
@@ -29,36 +50,82 @@
 
 .box {
     /* border:1px solid #444; */
-    width:500px;
+    width: 90%;
     border-radius: 25px;
     margin: 7% auto;
     height: 50px;
     background-color: rgba(0, 0, 0, 0.877);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.295);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 30%);
+    display: flex;
+    padding: 0 0px 0 20px;
+    justify-content: space-between;
 }
 
 .box input {
-    display:inline-block;
-    outline:0;
-    width: 400px;
-    border:0;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0 0 0 / 0%);
+
+    outline: 0;
+    width: 90%;
+    border: 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
     font-size: 15px;
-    padding: 0px 20px;
-    height: 50px;
-    font-family: 'OpenSans-Light';
-    border-radius: 25px;
-}
-
-.box .button {
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    border:none;
-    float:right;
     padding: 0;
+    height: 50px;
+    font-family: "OpenSans-Light";
+    border-radius: 25px;
+
 }
 
+p-button button.ui-button.ui-button-icon-only{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 25;
+}
+
+p-button button.ui-button{
+
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+p-button button.ui-button span.pi{
+    color: rgb(228, 135, 48);
+}
+
+p-dialog div.ui-dialog{
+    pointer-events: all;
+}
+
+p-dialog div.ui-dialog div.ui-dialog-titlebar {
+
+    font-family: "BebasNeue";
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.877);
+    text-align: left;
+    background-image: linear-gradient(to bottom right, rgb(228, 135, 48), rgba(228, 135, 48, 0.849));
+    padding: 2px 10px;
+}
+
+ui-widget, .ui-widget{
+    box-sizing: border-box;
+    width: 500px;
+}
+
+// Botão Close p-dialog
+
+p-dialog div.ui-dialog.ui-shadow {
+    width: 25%;
+}
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi{
+    color: rgb(255, 255, 255);
+}
+
+//X do botão close
+p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.pi-times{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin: 20px 20px;
 .tipo-dado{
     font-family: 'Montserrat-ExtraLight';
     font-size: 18px;
@@ -67,4 +134,5 @@
 .dado-competencia{
     font-family: 'OpenSans-Light';
     font-size: 18px;
+}
 }

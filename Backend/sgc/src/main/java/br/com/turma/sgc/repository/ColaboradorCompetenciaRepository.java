@@ -5,6 +5,7 @@ import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
 import br.com.turma.sgc.service.dto.CompetenciaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -25,10 +26,18 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
 
     @Query("select cc from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador")
     List<CompetenciaDTO> buscaCompetenciaNivel (@Param("idColaborador") Integer idColaborador);
+
     //Query para retornar todos os colaboradores que podem dar uma determinada competência.(Layla) OK
     @Query(value = "select cc.colaborador from ColaboradorCompetencia cc " +
             "where cc.competencia.id = :idCompetencia and cc.nivel = 3")
     List<Colaborador> buscarColaboradorPraAplicarCompeteciaPorId(@Param("idCompetencia") Integer idCompetencia);
+
+    @Query(value = "select cc from ColaboradorCompetencia cc where cc.competencia.id = :idCompetencia and cc.colaborador.id = :idColaborador")
+    ColaboradorCompetencia buscarColaboradorCompetenciaPorIdColaboradorIdCompetencia(@Param("idCompetencia") Integer idCompetencia, @Param("idColaborador") Integer idColaborador);
+
+    @Modifying
+    @Query(value = "update ColaboradorCompetencia set nivel = nivel + 1 where colaborador.id = :colaboradorId and competencia.id = :competenciaId ")
+    void aumentarNivelColaboradorCompetencia(@Param("colaboradorId") Integer colaboradorId, @Param("competenciaId") Integer competenciaId);
 
 
 }

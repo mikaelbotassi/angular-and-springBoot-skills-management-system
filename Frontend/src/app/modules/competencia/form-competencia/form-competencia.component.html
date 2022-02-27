@@ -1,19 +1,43 @@
-<form [formGroup]="formCompetencia" (ngSubmit)="atualizarCompetencia()">
+<p-toast></p-toast>
+<form [formGroup]="formCompetencia">
 
-    <div class="ui-fluid">
-        <div class="p-field">
-            <label for="nome">Nome</label>
-            <input type="text" pInputText name="nome" formControlName="nome">
+    <div class="form-competencia bs-bb">
+
+        <div class="ui-fluid">
+            <div class="p-field form-nome-competencia">
+                <label for="nome">Nome</label>
+                <div class = "input-nome-competencia">
+                    <input type="text" pInputText name="nome" formControlName="nome" maxlength=30 required>
+                </div>
+            </div>
+            <div class="p-field form-descricao-competencia">
+                <label for="descricao">Descrição</label>
+                <div class="textArea-descricao-competencia">
+                    <textarea pInputTextarea name="descricao" formControlName="descricao" maxlength=100 required></textarea>
+                </div>
+            </div>
         </div>
-        <div class="p-field">
-            <label for="descricao">Descrição</label>
-            <input type="text" pInputText name="descricao" formControlName="descricao">
+
+        <div class="dropdown-competencia">
+        <label class="first label-categoria">Categoria</label>
+            <div class = "dropdown-categorias">
+                <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" appendTo = "body" formControlName="categoria" placeholder="Selecione uma categoria" required></p-dropdown>
+            </div>
         </div>
+
+        <div class = "ui-g">
+
+            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6 botao-cancelar-competencia">
+                <button pButton type="button" class="width-100" (click)="cancel()">CANCELAR</button>
+            </div>
+
+            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6 botao-salvar-competencia">
+                <button pButton type="button" class="width-100" (click)="atualizarCompetencia()">SALVAR</button>
+            </div>
+
+            <!-- <input type="submit" pButton class="btn btn-primary mt-4" value="Salvar">
+            <button (click)="resetaForm()" type = "button" pButton class="btn btn-secondary botao-cancelar-edit mt-4 ml-2">Cancelar</button> -->
+        </div>
+
     </div>
-
-    <h3 class="first">Categoria</h3>
-    <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" formControlName="categoria" placeholder="Selecione uma categoria"></p-dropdown>
-    <input type="submit" pButton class="btn btn-primary mt-4" value="Salvar">
-    <button href="#" pButton class="btn btn-secondary mt-4 ml-2">Cancelar</button>
-
 </form>

@@ -1,19 +1,43 @@
 <h2>Colaboradores</h2>
-<p-table [paginator]="true" [columns]="coloumns" [rows]="rows" [rowsPerPageOptions]="[1,2,5,10]"
-         [value]="colaboradores">
+<p-table #dtColaborador [paginator]="true" [columns]="coloumns" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
+         [value]="colaboradores" [showCurrentPageReport]="true" dataKey="id"
+         currentPageReportTemplate="Mostrando {first} á {last} de {totalRecords} entradas">
+    <ng-template pTemplate="caption">
+        <p-button class="botao-novo botao-laranja" label="Novo Colaborador" icon="pi pi-plus" iconPos="left"></p-button>
+        Colaboradores
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let column of coloumns">
-                {{column.header}}
+            <th>Nome
+                <p-sortIcon field="nome"></p-sortIcon>
+                <input pInputText type="text" (input)="dtColaborador.filter($event.target.value, 'nome', 'startsWith')"
+                       placeholder="Pesquisa por nome">
             </th>
+            <th class="coluna-senioridade">Senioridade
+                <p-sortIcon field="nomeSenioridade"></p-sortIcon>
+                <div>
+                    <p-dropdown [options]="senioridades"
+                                (onChange)="dtColaborador.filter($event.value, 'nomeSenioridade', 'equals')"
+                                placeholder="Senioridade" [showClear]="true">
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </th>
+            <th class="coluna-acao">Ação</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-colaborador>
         <tr>
             <td>{{colaborador.nome}} {{colaborador.sobrenome}}</td>
-            <td>{{colaborador.dataNascimento}}</td>
-            <td>{{colaborador.dataAdmissao}}</td>
             <td>{{colaborador.nomeSenioridade}}</td>
+            <td class="botao-acao">
+                <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-pencil"
+                                                        pTooltip="Alterar"></p-button></span>
+                <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-trash"
+                                                        pTooltip="Excluir"></p-button></span>
+            </td>
         </tr>
     </ng-template>
 </p-table>
