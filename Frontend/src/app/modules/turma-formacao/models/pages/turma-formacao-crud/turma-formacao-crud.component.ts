@@ -413,10 +413,29 @@ desabilitarBotaoColaboradorCompetencia(valor:Number): boolean{
   return true
 }
 
-desabilitarBotaoColaboradorCompetenciaAlt(valor:Number): boolean{
-  console.log(valor);
+desabilitarBotaoColaboradorCompetenciaAlt(valor:Number, nivelColaborador: number): boolean{
+  if(this.desabilitarPorTurmaFinalizada(valor)){
+    return true;
+  }
+  if(valor == 2){
+    if(this.desabilitarPorTurmaIniciada(nivelColaborador)){
+      return true;
+    }
+  }
+  return false;
+}
+
+
+desabilitarPorTurmaFinalizada(valor: Number): boolean{
   if(valor == 3){
     return true;
+  }
+  return false;
+}
+
+desabilitarPorTurmaIniciada(nivelColaborador: number){
+  if(nivelColaborador == 3){
+    return true
   }
   return false;
 }
