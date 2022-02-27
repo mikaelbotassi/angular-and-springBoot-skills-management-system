@@ -60,9 +60,29 @@ export class CompetenciaListarComponent implements OnInit {
         this.display = true;
   }
 
-  showDialogEdit(){
+  showDialogEdit(isNovo:boolean){
 
         this.display = false;
+        console.log(isNovo);
+        if(isNovo === true) {
+            const ref = this.dialogService.open(FormCompetenciaModalComponent, {
+
+                header: 'CADASTRAR COMPETENCIA',
+                width: '600px',
+                height:'500px',
+                contentStyle: { "overflow": "auto"},
+                data: {}
+
+            })
+
+            ref.onClose.subscribe((competencia: CompetenciaModel)=>{
+                if(competencia){
+                    this.showSucess();
+                    this.listarCompetencias();
+                }
+            })
+            return;
+        }
 
         const ref = this.dialogService.open(FormCompetenciaModalComponent, {
 
@@ -80,7 +100,5 @@ export class CompetenciaListarComponent implements OnInit {
                 this.listarCompetencias();
             }
         })
-  }
-
-
+    }
 }
