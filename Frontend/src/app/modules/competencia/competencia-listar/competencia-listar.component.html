@@ -10,14 +10,15 @@
             <p-button type="submit" class="button botao-pesquisa" icon="pi pi-search" (onClick)="obterCompetencias(search.value)" ></p-button>
         </div>
 
+        <div class="botao-create">
+            <button type="button" pButton icon="ui ui-icon-plus" label="CRIAR" (click)="showDialogEdit(true)"></button>
+        </div>
+
         <!-- <div class="botao-Create">
             <button type="button" pButton icon="ui ui-icon-pencil" label="CRIAR" class="botao-create" (click)="showDialogEdit(true)"></button>
         </div> -->
 
         <div class="ui-g div-cards-competencias">
-            <div class="botao-Create">
-                <button type="button" pButton icon="ui ui-icon-pencil" label="CRIAR" class="botao-create" (click)="showDialogEdit(true)"></button>
-            </div>
 
             <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
                 <div style="text-align: center;">

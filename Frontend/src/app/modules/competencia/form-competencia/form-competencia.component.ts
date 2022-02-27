@@ -7,7 +7,7 @@ import { CategoriaModel } from './../models/categoria.model';
 import { CompetenciaModel } from './../models/competencia.model';
 import { SelectItem, MessageService } from 'primeng';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { finalize, retry } from 'rxjs/operators';
+import { finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-competencia',
@@ -29,8 +29,6 @@ export class FormCompetenciaComponent implements OnInit{
 
         this.formCompetencia = this.createForm();
         this.getCategorias();
-        //this.formCompetencia.patchValue(this.competenciaEditada);
-        console.log(typeof this.competenciaEditada === "undefined");
         if (! (typeof this.competenciaEditada === "undefined")) {
             this.formCompetencia.patchValue(this.competenciaEditada);
         }
@@ -57,21 +55,6 @@ export class FormCompetenciaComponent implements OnInit{
         this.messageService.clear();
     }
 
-    // createForm(): FormGroup {
-    //     return this.formBuilder.group({
-    //     id: [null, [Validators.required]],
-    //     nome: [null, [
-    //         Validators.required,
-    //         Validators.minLength(3)
-    //     ]],
-    //     descricao: [null, [
-    //         Validators.required,
-    //         Validators.minLength(5)
-    //     ]],
-    //     categoria: [null, [Validators.required]],
-    //     });
-    // }
-
     createForm(): FormGroup {
         return this.formBuilder.group({
         id: [null],
@@ -96,18 +79,10 @@ export class FormCompetenciaComponent implements OnInit{
 
     atualizarCompetencia(): void{
 
-        this.block.start('Carregando...')
-        // if(!this.formCompetencia.valid){
-
-        //     this.block.stop();
-        //     this.fechar.emit();
-        //     console.log(this.formCompetencia.controls.nome.errors);
-        //     return;
-
-        // }
+        this.block.start('Carregando...');
 
         this.competenciaService.atualizarCompetencia(this.formCompetencia.getRawValue())
-        .pipe(finalize(()=> this.block.stop(), ))
+        .pipe(finalize(()=> this.block.stop()))
         .subscribe(
 
             resultado => {
@@ -151,10 +126,11 @@ export class FormCompetenciaComponent implements OnInit{
 
     criarCompetencia(): void{
         this.competenciaService.criarCompetencia(this.formCompetencia.getRawValue())
-        .pipe(finalize(()=> this.block.stop(), ))
+        .pipe(finalize(()=> this.block.stop()))
         .subscribe(
 
             resultado => {
+
                 this.fechar.emit(this.competenciaEditada);
             },
             erro => {
@@ -188,11 +164,9 @@ export class FormCompetenciaComponent implements OnInit{
     finalizarFormulario() :void {
         if (typeof this.competenciaEditada === "undefined") {
             this.criarCompetencia();
-            this.fechar.emit();
         }
         else {
             this.atualizarCompetencia();
-            this.fechar.emit();
         }
 
     }

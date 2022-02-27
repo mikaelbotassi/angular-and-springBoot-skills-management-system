@@ -28,7 +28,7 @@ public class CompetenciaResource {
     }
 
     @PostMapping
-    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody CompetenciaDTO competenciaDTO) {
+    public ResponseEntity<CompetenciaDTO> inserir(@RequestBody @Valid CompetenciaDTO competenciaDTO) {
         return ResponseEntity.created(URI.create("/api/competencia")).body(competenciaService.inserir(competenciaDTO));
     }
 
