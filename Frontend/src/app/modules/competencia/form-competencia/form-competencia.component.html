@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <form [formGroup]="formCompetencia">
 
     <div class="form-competencia bs-bb">
@@ -6,28 +7,34 @@
             <div class="p-field form-nome-competencia">
                 <label for="nome">Nome</label>
                 <div class = "input-nome-competencia">
-                    <input type="text" pInputText name="nome" formControlName="nome" maxlength=30 minlength="2">
+                    <input type="text" pInputText name="nome" formControlName="nome" maxlength=30 required>
                 </div>
             </div>
             <div class="p-field form-descricao-competencia">
                 <label for="descricao">Descrição</label>
                 <div class="textArea-descricao-competencia">
-                    <textarea pInputTextarea name="descricao" formControlName="descricao" maxlength=100></textarea>
+                    <textarea pInputTextarea name="descricao" formControlName="descricao" maxlength=100 required></textarea>
                 </div>
             </div>
         </div>
 
-        <h3 class="first">Categoria</h3>
-        <div class = "dropdown-categorias">
-            <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" appendTo = "body" formControlName="categoria" placeholder="Selecione uma categoria"></p-dropdown>
+        <div class="dropdown-competencia">
+        <label class="first label-categoria">Categoria</label>
+            <div class = "dropdown-categorias">
+                <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" appendTo = "body" formControlName="categoria" placeholder="Selecione uma categoria" required></p-dropdown>
+            </div>
         </div>
+
         <div class = "ui-g">
-            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6">
-                <button pButton type="button" class="width-100" (click)="atualizarCompetencia()">Salvar</button>
+
+            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6 botao-cancelar-competencia">
+                <button pButton type="button" class="width-100" (click)="cancel()">CANCELAR</button>
             </div>
-            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6">
-                <button pButton type="button" class="width-100" (click)="cancel()">Cancelar</button>
+
+            <div class="ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6 botao-salvar-competencia">
+                <button pButton type="button" class="width-100" (click)="atualizarCompetencia()">SALVAR</button>
             </div>
+
             <!-- <input type="submit" pButton class="btn btn-primary mt-4" value="Salvar">
             <button (click)="resetaForm()" type = "button" pButton class="btn btn-secondary botao-cancelar-edit mt-4 ml-2">Cancelar</button> -->
         </div>

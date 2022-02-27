@@ -47,6 +47,12 @@ public class CompetenciaService {
     public CompetenciaDTO atualizar(CompetenciaDTO competencia) {
         if(!(competenciaRepository.findById(competencia.getId()).isPresent()))
             throw new NoSuchElementException("Competência não encontrada");
+        if(competencia.getNome().length() < 3){
+            throw new RegraNegocioException("NOME INVÁLIDO! O Nome da competência deve ter mais de 2 caracteres.");
+        }
+        if(competencia.getDescricao().length() < 5){
+            throw new RegraNegocioException("DESCRIÇÃO INVÁLIDA! A Descrição da competência deve ter mais de 5 caracteres.");
+        }
         return competenciaMapper.toDto(competenciaRepository.save(competenciaMapper.toEntity(competencia)));
     }
 
