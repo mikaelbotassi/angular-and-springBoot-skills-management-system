@@ -30,7 +30,6 @@ public class TurmaFormacao implements Serializable {
     private String descricao;
 
     @Column(name = "inicio")
-    @NotNull(message = "A DATA DE INICIO DA TURMA NAO PODE SER NULL")
     private LocalDate inicio;
 
     @Column(name = "termino")

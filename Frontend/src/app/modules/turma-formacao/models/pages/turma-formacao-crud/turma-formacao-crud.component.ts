@@ -121,7 +121,7 @@ listarTurmaColaboradorCompetencia(turmaId: number){
 //inserir
 
 inserirTurma(){
-  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,new Date,null,1, null);
+  this.turmaFormacaoModel = new TurmaFormacaoModel(this.inputNomeTurma,this.inputDescricaoTurma,null,null,1, null);
   this.inputNomeTurma = null;
   this.inputDescricaoTurma = null;
   this.turmaFormacaoService.registrarTurma(this.turmaFormacaoModel).subscribe(
