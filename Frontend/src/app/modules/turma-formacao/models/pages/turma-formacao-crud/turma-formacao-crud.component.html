@@ -167,7 +167,7 @@
                                     <td>{{colaborador.competenciaNome}}</td>
                                     <td>{{colaborador.nivel}}</td>
                                     <td>
-                                        <button pButton class="button-descarte" [disabled]="desabilitarBotaoColaboradorCompetenciaAlt(turmaDetalhada.statusId)" (click)="deletarColaboradorCompetenciaHolderAlt(colaborador, turmaDetalhada.id)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
+                                        <button pButton class="button-descarte" [disabled]="desabilitarBotaoColaboradorCompetenciaAlt(turmaDetalhada.statusId, colaborador.nivel)" (click)="deletarColaboradorCompetenciaHolderAlt(colaborador, turmaDetalhada.id)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
                                     </td>
                                 </tr>
                                 <tr>
