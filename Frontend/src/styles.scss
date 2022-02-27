@@ -39,6 +39,10 @@ input.pesquisa{
     cursor: pointer;
 }
 
+p-dialog div.ui-widget-overlay{
+    opacity: 1;
+    background-color: #58575caa
+}
 p-button.botao-pesquisa button.ui-button.ui-button-icon-only{
 
     width: 50px;
