@@ -1,0 +1,94 @@
+$corLaranja: #e48730;
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+$sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+
+.margem-bottom{
+    margin-bottom: 13px;
+}
+
+.botao-rodape{
+    display: grid;
+    margin-top: 10px;
+    background-color: $corLaranja;
+}
+
+
+.new-button{
+    background-color: $corLaranja;
+    float: left;
+}
+
+.delete-button{
+    background-color: $corLaranja;
+    margin-left: 10px;
+    float: left;
+}
+
+.registrar-turma{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.registrar-turmar{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    float: right;
+}
+
+.input-turma{
+    margin-top: 10px;
+}
+
+.dialog-turma{
+    background-color: black;
+}
+
+.button-table{
+    margin-left: 20px;
+}
+.commit-button{
+    background-color: $corLaranja;
+    margin-top: 20px;
+    margin-right: 10px;
+    float: right;
+}
+
+.commit-button-colab{
+    background-color: $corLaranja;
+    margin-top: 10px;
+}
+
+.table-colab{
+    width: 50vw;
+  
+}
+.iniciar-button{
+    margin-top: 20px;
+    background-color: $corLaranja;
+}
+
+.finalizar-button{
+    background-color: $corLaranja;
+    float: right;
+    margin-top: 20px;
+}
+
+.botao-acao{
+    text-align: center;
+}
+
+.coluna-menor{
+    width: 10%;
+}
+
+.limpar-colaborador{
+    margin-bottom: 15px;
+    background-color: $corLaranja;
+}
+
+.coluna-media{
+ width: 15%;
+}

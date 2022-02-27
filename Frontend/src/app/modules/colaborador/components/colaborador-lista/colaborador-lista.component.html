@@ -3,7 +3,7 @@
          [value]="colaboradores" [showCurrentPageReport]="true" dataKey="id"
          currentPageReportTemplate="Mostrando {first} á {last} de {totalRecords} entradas">
     <ng-template pTemplate="caption">
-        <p-button class="botao-novo botao-laranja" label="Novo Colaborador" icon="pi pi-plus" iconPos="left"></p-button>
+        <p-button class="botao-novo botao-laranja" (onClick)="visivel = !visivel" label="Novo Colaborador" icon="pi pi-plus" iconPos="left"></p-button>
         Colaboradores
     </ng-template>
     <ng-template pTemplate="header">
@@ -33,7 +33,7 @@
             <td>{{colaborador.nome}} {{colaborador.sobrenome}}</td>
             <td>{{colaborador.nomeSenioridade}}</td>
             <td class="botao-acao">
-                <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-pencil"
+                <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-pencil" (onClick)="abrirDialogAlterar(colaborador)"
                                                         pTooltip="Alterar"></p-button></span>
                 <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-trash"
                                                         pTooltip="Excluir"></p-button></span>
@@ -42,7 +42,7 @@
     </ng-template>
 </p-table>
 
-<p-dialog [visible]="visivel" [style]="{width: '600px', height: '800px'}" header="Colaborador" class="dialog-competencia">
-    <app-colaborador-form></app-colaborador-form>
+<p-dialog (onHide)="limparFormularioFilho()" [(visible)]="visivel" [style]="{width: '700px', height: '800px'}" header="Colaborador" class="dialog-competencia">
+    <app-colaborador-form #colaboradorForm (atualizaListaColaborador)="getColaboradores()"></app-colaborador-form>
 </p-dialog>
 

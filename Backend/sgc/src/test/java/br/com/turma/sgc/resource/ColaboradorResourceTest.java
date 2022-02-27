@@ -3,11 +3,8 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.SgcApplication;
 import br.com.turma.sgc.builder.ColaboradorBuilder;
 import br.com.turma.sgc.builder.CompetenciaBuilder;
-import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
-import br.com.turma.sgc.service.mapper.CadastrarColaboradorMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
@@ -24,7 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,9 +37,6 @@ public class ColaboradorResourceTest extends IntTestComum {
 
     @Autowired
     private ColaboradorBuilder colaboradorBuilder;
-
-    @Autowired
-    private CadastrarColaboradorMapper cadastrarColaboradorMapper;
 
     @Autowired
     private ColaboradorMapper colaboradorMapper;
@@ -68,7 +65,7 @@ public class ColaboradorResourceTest extends IntTestComum {
     public void salvarTest() {
 
         ColaboradorDTO dto = colaboradorBuilder.construirEntidade();
-        CadastrarColaboradorDTO cadastrarColaboradorDTO = cadastrarColaboradorMapper
+        ColaboradorDTO cadastrarColaboradorDTO = colaboradorMapper
                 .toDto(colaboradorMapper.toEntity(dto));
         getMockMvc().perform(post(URL)
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -81,17 +78,15 @@ public class ColaboradorResourceTest extends IntTestComum {
         competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
 
         ColaboradorDTO dto = colaboradorBuilder.construirEntidade();
-        CadastrarColaboradorDTO cadastrarColaboradorDTO = cadastrarColaboradorMapper
-                .toDto(colaboradorMapper.toEntity(dto));
         List<CadastrarCompetenciaDTO> lista = new ArrayList<>();
         CadastrarCompetenciaDTO cadastrarCompetenciaDTO = new CadastrarCompetenciaDTO();
         cadastrarCompetenciaDTO.setId(1);
         cadastrarCompetenciaDTO.setNivel(1);
         lista.add(cadastrarCompetenciaDTO);
-        cadastrarColaboradorDTO.setCompetencia(lista);
+        dto.setCompetencia(lista);
         getMockMvc().perform(post(URL)
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(cadastrarColaboradorDTO))).andExpect(status().isCreated());
+                .content(TestUtil.convertObjectToJsonBytes(dto))).andExpect(status().isCreated());
     }
 
     @Test

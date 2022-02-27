@@ -2,6 +2,8 @@ import { CadastrarCompetenciaModel } from "../../competencia/models/cadastro-com
 
 export class CadastrarColaboradorModel{
     constructor(
+        public id : number,
+        
         public nome : String,
 
         public sobrenome : String,
@@ -14,7 +16,7 @@ export class CadastrarColaboradorModel{
     
         public dataAdmissao : Date,
 
-        public foto : String, 
+        public foto : string, 
     
         public  idSenioridade : number,
     

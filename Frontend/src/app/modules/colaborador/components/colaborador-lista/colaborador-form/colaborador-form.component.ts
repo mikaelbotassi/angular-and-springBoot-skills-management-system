@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService, SelectItem } from 'primeng/api';
 import { CadastrarCompetenciaModel } from 'src/app/modules/competencia/models/cadastro-competencia.model';
 import { CompetenciaService } from 'src/app/modules/competencia/service/competencia.service';
@@ -10,10 +11,10 @@ import { ColaboradorService } from '../../../service/colaborador.service';
 @Component({
   selector: 'app-colaborador-form',
   templateUrl: './colaborador-form.component.html',
-  styleUrls: ['./colaborador-form.component.css']
+  styleUrls: ['./colaborador-form.component.scss']
 })
 export class ColaboradorFormComponent implements OnInit {
-
+  @Output() atualizaListaColaborador : EventEmitter<boolean> = new EventEmitter();
   file : FileReader = new FileReader(); 
 
   colaborador : CadastrarColaboradorModel;
@@ -23,7 +24,6 @@ export class ColaboradorFormComponent implements OnInit {
   formGroup : FormGroup;
 
   image;
-
 
   listaCompetencia : Array<CadastrarCompetenciaModel> = new Array(); 
 
@@ -44,9 +44,10 @@ export class ColaboradorFormComponent implements OnInit {
 
   dropdownSenioridade : SelectItem[];
 
-  constructor(private _colaborador : ColaboradorService,
-              private _competencia : CompetenciaService,
-              private _messageService: MessageService) { }
+  constructor(private _colaboradorService : ColaboradorService,
+              private _competenciaService : CompetenciaService,
+              private _messageService: MessageService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.buscarCompetencia();
@@ -56,9 +57,30 @@ export class ColaboradorFormComponent implements OnInit {
 
   }
 
+  buscarColaboradorPorId(id : number) : void{
+    this._colaboradorService.buscarColaboradorPorId(id).subscribe(
+      res => {
+        this.criarFormulario();
+        this.formGroup.patchValue(res);
+        this.formGroup.get('dataNascimento').setValue(this.convertStringDate(res.dataNascimento.toString()));
+        this.formGroup.get('dataAdmissao').setValue(this.convertStringDate(res.dataAdmissao.toString()));
+        this.listaCompetenciaSelecionado = res.competencia;
+        this.file.readAsDataURL(new Blob([atob(res.foto)]));
+        this.file.onload = () => this.image = this.sanitizer.bypassSecurityTrustResourceUrl(this.file.result.toString());
+      },
+      err => console.error(err)
+    )
+  }
+
+  limparFormulario() : void {
+    this.colaborador = null;
+    this.criarFormulario();
+  }
+
   adicionarListaCompetencia() : void {
-    this.listaCompetenciaSelecionado.push(new CadastrarCompetenciaModel(this.competenciaId, '', this.nivelId))
-    console.log(this.competenciaId);
+    const itemCompetencia = this.dropdownCompetencia.find(item => item.value == this.competenciaId);
+    const nomeCompetencia = !!itemCompetencia ? itemCompetencia.label : "";
+    this.listaCompetenciaSelecionado.push(new CadastrarCompetenciaModel(this.competenciaId, nomeCompetencia, this.nivelId))
   }
 
   public uploadImagem(event) : void{
@@ -85,19 +107,22 @@ export class ColaboradorFormComponent implements OnInit {
 
   }
 
-  public inserirColaborador() : void {
-    this.listaCompetenciaSelecionado.forEach(item => {
-      item.nivel = 1
-    })
+  convertStringDate(strDate: string): Date {
+    if(!strDate) { return null; }
+    const splittedDate = strDate.split('-').map(e => +e);
+    return new Date(splittedDate[0], splittedDate[1], splittedDate[2]);
+}
 
+  public inserirColaborador() : void {
     this.formGroup.get('competencia').setValue(this.listaCompetenciaSelecionado);
 
     this.colaborador = this.formGroup.getRawValue();
 
-      this._colaborador.inserir(this.colaborador).subscribe(
+      this._colaboradorService.atualizar(this.colaborador).subscribe(
         res => {
           this._messageService.add({severity:'success', summary:'Sucesso ao Inserir', 
-                                    detail:'O Colaborador e suas Competências foram inseridos com sucesso!'})
+                                    detail:'O Colaborador e suas Competências foram inseridos com sucesso!'});
+          this.atualizaListaColaborador.emit(true);
         },
         err => {
           this._messageService.add({severity:'error', summary:'Ocorreu um error na busca', 
@@ -108,7 +133,7 @@ export class ColaboradorFormComponent implements OnInit {
   }
 
   public buscarCompetencia(): void {
-    this._competencia.obterCompetenciasDropdown('competencia').subscribe(
+    this._competenciaService.obterCompetenciasDropdown('competencia').subscribe(
       res => {
         this.listaCompetencia = res
         this.dropdownCompetencia = res.map(
@@ -125,8 +150,19 @@ export class ColaboradorFormComponent implements OnInit {
     )
   }
 
+  excluirCompetencia(competenciaId): void {
+    this.listaCompetenciaSelecionado = this.listaCompetenciaSelecionado.filter(item => item.id != competenciaId)
+  }
+
+  obterDescricaoNivel(nivel) {
+    const itemNivel = this.dropdownNivel.find(item => item.value == nivel);
+    return !!itemNivel ? itemNivel.label : "";
+  }
+
   public criarFormulario() : void{
     this.formGroup = this.formBuilder.group({
+      id : [0],
+
       nome : ['', [Validators.required]],
 
       sobrenome : ['', [Validators.required]],

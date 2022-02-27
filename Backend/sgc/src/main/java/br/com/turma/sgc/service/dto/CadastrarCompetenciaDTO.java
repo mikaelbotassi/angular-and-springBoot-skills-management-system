@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class CadastrarCompetenciaDTO {
     private Integer id;
@@ -17,5 +18,4 @@ public class CadastrarCompetenciaDTO {
         this.id = id;
         this.nome = nome;
     }
-
 }

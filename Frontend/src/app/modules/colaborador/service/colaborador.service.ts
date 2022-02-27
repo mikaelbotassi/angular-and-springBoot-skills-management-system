@@ -25,4 +25,8 @@ export class ColaboradorService {
     atualizar(colaborador : CadastrarColaboradorModel): Observable<CadastrarColaboradorModel>{
       return this._http.put<CadastrarColaboradorModel>(API_PATH + this.url, colaborador);
     }
+
+    buscarColaboradorPorId(id : number) : Observable<CadastrarColaboradorModel>{
+      return this._http.get<CadastrarColaboradorModel>(API_PATH + this.url + '/' + id);
+    }
 }

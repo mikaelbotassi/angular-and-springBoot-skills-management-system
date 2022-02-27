@@ -1,11 +1,8 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
-import br.com.turma.sgc.builder.ColaboradorBuilder;
-import br.com.turma.sgc.builder.CompetenciaBuilder;
 import br.com.turma.sgc.builder.TurmaColaboradorCompetenciaBuilder;
 import br.com.turma.sgc.builder.TurmaFormacaoBuilder;
-import br.com.turma.sgc.service.dto.ColaboradorDTO;
 import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
 import br.com.turma.sgc.util.IntTestComum;
@@ -20,7 +17,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,12 +36,6 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
 
     @Autowired
     private TurmaColaboradorCompetenciaBuilder turmaColaboradorCompetenciaBuilder;
-
-    @Autowired
-    private ColaboradorBuilder colaboradorBuilder;
-
-    @Autowired
-    private CompetenciaBuilder competenciaBuilder;
 
     @Before
     public void inicializaTeste(){
@@ -145,10 +139,6 @@ public class TurmaFormacaoResourceTest extends IntTestComum {
     @Test
     @SneakyThrows
     public void inserirColaboradorTurma() {
-
-        colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
-        competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
-        turmaFormacaoBuilder.persistir(turmaFormacaoBuilder.construirEntidade());
         TurmaColaboradorCompetenciaDTO dto = turmaColaboradorCompetenciaBuilder.persistir(turmaColaboradorCompetenciaBuilder.construirEntidade());
 
         getMockMvc().perform(post(URL + "/inserirColaborador").contentType(TestUtil.APPLICATION_JSON_UTF8)

@@ -1,64 +1,64 @@
     <form [formGroup]="formGroup">
         <div class="ui-g ui-fluid">
             <div class="ui-g-12">
-            <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText placeholder="Nome" name="nome" formControlName="nome"
-                    id="nome">      
+                <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Nome" name="nome" formControlName="nome"
+                        id="nome">      
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Sobrenome" name="sobrenome" formControlName="sobrenome"
+                        id="sobrenome">         
+                    </div>
                 </div>
             </div>
-            <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText placeholder="Sobrenome" name="sobrenome" formControlName="sobrenome"
-                    id="sobrenome">         
+            <div class="ui-g-6">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12 margem-bottom">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <p-inputMask type="text"  placeholder="CPF" name="cpf" formControlName="cpf" mask="999.999.999-99" [unmask]="true"
+                        id="cpf"></p-inputMask>         
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12 margem-bottom">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Email" name="email" formControlName="email"
+                        id="email">         
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12 margem-bottom">
+                    <div class="p-inputgroup">
+                        <p-dropdown [options]="dropdownSenioridade" placeholder="Senioridade" formControlName="idSenioridade"></p-dropdown>       
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="ui-g-6">
-            <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <p-inputMask type="text"  placeholder="CPF" name="cpf" formControlName="cpf" mask="999.999.999-99" [unmask]="true"
-                    id="cpf"></p-inputMask>         
+            <div class="ui-g-6">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                    <img  style="height: 80px; width: 300px;" [src]="image">
+                    <p-fileUpload mode="basic" name="myfile[]" (onSelect)="uploadImagem($event)"></p-fileUpload>
                 </div>
             </div>
-            <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText placeholder="Email" name="email" formControlName="email"
-                    id="email">         
+            <div class="ui-g-12">
+                <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <p-calendar type="text" pInputText placeholder="Data Nascimento" name="dataNascimento" formControlName="dataNascimento"
+                        id="dataNascimento"></p-calendar>         
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <p-calendar type="text" pInputText placeholder="Data Admissão" name="dataAdmissao" formControlName="dataAdmissao"
+                        id="dataAdmissao"></p-calendar>         
+                    </div>
                 </div>
             </div>
-            <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-                <div class="p-inputgroup">
-                    <p-dropdown [options]="dropdownSenioridade" placeholder="Senioridade" formControlName="idSenioridade"></p-dropdown>       
-                </div>
-            </div>
-        </div>
-        <div class="ui-g-6">
-            <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-                <img  style="height: 70px; width: 205px;" [src]="image">
-                <p-fileUpload mode="basic" name="myfile[]" (onSelect)="uploadImagem($event)"></p-fileUpload>
-            </div>
-        </div>
-        <div class="ui-g-12">
-            <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <p-calendar type="text" pInputText placeholder="Data Nascimento" name="dataNascimento" formControlName="dataNascimento"
-                    id="dataNascimento"></p-calendar>         
-                </div>
-            </div>
-            <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <p-calendar type="text" pInputText placeholder="Data Admissão" name="dataAdmissao" formControlName="dataAdmissao"
-                    id="dataAdmissao"></p-calendar>         
-                </div>
-            </div>
-        </div>
         </div>
 
         <div>
@@ -86,10 +86,10 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-competencia>
                     <tr>
-                        <td>{{competencia.id}}</td>
-                        <td>{{competencia.nivel}}</td>
+                        <td>{{competencia.nome}}</td>
+                        <td>{{obterDescricaoNivel(competencia.nivel)}}</td>
                         <td>
-                            <button pButton class="button-descarte"icon="ui-icon-trash" pTooltip="Descartar competencia"  ></button>
+                            <button pButton (click)="excluirCompetencia(competencia.id)" class="button-descarte"icon="ui-icon-trash" pTooltip="Descartar competencia"  ></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -100,7 +100,9 @@
 
     </form>
     <p-footer>
-        <p-button label="Salvar" (onClick)="inserirColaborador()" [disabled]="formGroup.invalid"></p-button>
+        <div class="ui-md-offset-10">
+            <p-button class="botao-rodape" label="Salvar" (onClick)="inserirColaborador()" [disabled]="formGroup.invalid"></p-button>
+        </div>
     </p-footer>
 
 

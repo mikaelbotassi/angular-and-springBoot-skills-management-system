@@ -1,12 +1,20 @@
 package br.com.turma.sgc.resource;
+
 import br.com.turma.sgc.service.ColaboradorService;
-import br.com.turma.sgc.service.dto.CadastrarColaboradorDTO;
 import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
 import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.ColaboradorListDTO;
 import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.net.URI;
@@ -21,7 +29,7 @@ public class ColaboradorResource {
     private final ColaboradorService service;
 
     @GetMapping
-    public ResponseEntity<List<ColaboradorDTO>> procurarTodos(){
+    public ResponseEntity<List<ColaboradorListDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
     }
 
@@ -50,7 +58,7 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody CadastrarColaboradorDTO colab){
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
         return ResponseEntity.created(URI.create("./api/colaborador")) .body(service.inserir(colab));
     }
 
