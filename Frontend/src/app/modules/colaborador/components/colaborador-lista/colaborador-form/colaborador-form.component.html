@@ -47,14 +47,14 @@
                 <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                        <p-calendar type="text" pInputText placeholder="Data Nascimento" name="dataNascimento" formControlName="dataNascimento"
+                        <p-calendar type="text" pInputText placeholder="Data Nascimento" name="dataNascimento" formControlName="dataNascimento" dateFormat="dd/mm/yy"
                         id="dataNascimento"></p-calendar>         
                     </div>
                 </div>
                 <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                        <p-calendar type="text" pInputText placeholder="Data Admissão" name="dataAdmissao" formControlName="dataAdmissao"
+                        <p-calendar type="text" pInputText placeholder="Data Admissão" name="dataAdmissao" formControlName="dataAdmissao" dateFormat="dd/mm/yy"
                         id="dataAdmissao"></p-calendar>         
                     </div>
                 </div>
@@ -64,9 +64,8 @@
         <div>
             <p-fieldset  legend="Competências" >
                 <div class="ui-g-4"  >
-                    <p  class="registrar-competencia ">Competencia</p>
-                    <p-dropdown [options]="dropdownCompetencia" placeholder="Colaboradors" [(ngModel)]="competenciaId" [ngModelOptions]="{standalone : true}"></p-dropdown>
-                    <p  class="registrar-nivel ">Nível</p>
+                    <p-dropdown [options]="dropdownCompetencia" placeholder="Competências" [(ngModel)]="competenciaId" [ngModelOptions]="{standalone : true}"></p-dropdown>
+                    <p  class="registrar-nivel "></p>
                     <p-dropdown [options]="dropdownNivel" [(ngModel)]="nivelId" placeholder="Niveis" [ngModelOptions]="{standalone : true}"></p-dropdown>
 
                     <button pButton class="commit-button-colab"  
@@ -79,8 +78,8 @@
               <p-table [value]="listaCompetenciaSelecionado">
                     <ng-template pTemplate="header">
                     <tr>
-                        <th>Competencia</th>
-                        <th>Nivel</th>
+                        <th>Competência</th>
+                        <th>Nível</th>
                         <th>Descartar</th>
                     </tr>
                 </ng-template>
@@ -101,7 +100,7 @@
     </form>
     <p-footer>
         <div class="ui-md-offset-10">
-            <p-button class="botao-rodape" label="Salvar" (onClick)="inserirColaborador()" [disabled]="formGroup.invalid"></p-button>
+            <p-button class="botao-rodape" label="Salvar" (onClick)="salvarColaborador()" [disabled]="formGroup.invalid"></p-button>
         </div>
     </p-footer>
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class ColaboradorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody ColaboradorDTO colab){
+    public ResponseEntity<ColaboradorDTO> inserir(@RequestBody @Valid ColaboradorDTO colab){
         return ResponseEntity.created(URI.create("./api/colaborador")) .body(service.inserir(colab));
     }
 
@@ -69,7 +70,7 @@ public class ColaboradorResource {
     }
 
     @PutMapping
-    public ResponseEntity<ColaboradorDTO> atualizar(@RequestBody ColaboradorDTO c){
+    public ResponseEntity<ColaboradorDTO> atualizar(@RequestBody @Valid ColaboradorDTO c){
         return ResponseEntity.ok().body(service.atualizar(c));
     }
 

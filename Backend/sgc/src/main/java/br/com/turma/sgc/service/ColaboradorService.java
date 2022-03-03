@@ -12,6 +12,7 @@ import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorBuscaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorCompetenciaMapper;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
+import br.com.turma.sgc.service.resource.exception.RegraNegocioException;
 import br.com.turma.sgc.utils.ConstantUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -77,7 +78,16 @@ public class ColaboradorService {
 //    }
 
     public ColaboradorDTO inserir(ColaboradorDTO colab){
+        if(repository.buscarPorCPF(colab.getCpf()).isPresent()){
+            throw new RegraNegocioException("Esse CPF já existe em outro Colaborador!");
+        }
+
+        if(repository.buscarPorEmail(colab.getEmail()).isPresent()){
+            throw new RegraNegocioException("Esse E-mail já existe em outro Colaborador!");
+        }
+
         Colaborador colaborador = repository.save(colaboradorMapper.toEntity(colab));
+        salvarCompetencias(colaborador, colab.getCompetencia());
         return colaboradorMapper.toDto(colaborador);
     }
 
