@@ -46,16 +46,17 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     rippleMouseDownListener: EventListenerOrEventListenerObject;
 
-    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService, 
+    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService,
                 private _senioridade : SenioridadeService) { }
 
     ngOnInit() {
+
         this.zone.runOutsideAngular(() => { this.bindRipple(); });
 
         this.buscarSenioridades();
 
         this.menuService.itens = [
-            { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] },
+            { label: 'Página Inicial', icon: 'home', routerLink: ['/'] },
             { label: 'Turma de formacao', icon: 'book', routerLink: ['/turma'] },
             { label: 'Competencias', icon: 'check_circle', routerLink: ['/competencia'] },
             { label: 'Colaboradores', icon: 'supervisor_account', routerLink: ['/colaborador'] }
