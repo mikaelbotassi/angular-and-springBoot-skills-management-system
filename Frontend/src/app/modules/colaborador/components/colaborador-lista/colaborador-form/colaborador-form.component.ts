@@ -54,19 +54,28 @@ export class ColaboradorFormComponent implements OnInit {
     this.criarFormulario();
 
     this.criaDropdownSenioridade();
+    
+  }
+
+  salvarColaborador() : void {
+    if(!this.colaborador){
+      this.inserirColaborador();
+      return
+    };
+    this.atualizarColaborador();
 
   }
 
   buscarColaboradorPorId(id : number) : void{
     this._colaboradorService.buscarColaboradorPorId(id).subscribe(
       res => {
+        this.colaborador = res;
         this.criarFormulario();
         this.formGroup.patchValue(res);
         this.formGroup.get('dataNascimento').setValue(this.convertStringDate(res.dataNascimento.toString()));
         this.formGroup.get('dataAdmissao').setValue(this.convertStringDate(res.dataAdmissao.toString()));
         this.listaCompetenciaSelecionado = res.competencia;
-        this.file.readAsDataURL(new Blob([atob(res.foto)]));
-        this.file.onload = () => this.image = this.sanitizer.bypassSecurityTrustResourceUrl(this.file.result.toString());
+        this.image = this.sanitizer.bypassSecurityTrustUrl('data:image/ext;base64,' + res.foto);
       },
       err => console.error(err)
     )
@@ -75,6 +84,10 @@ export class ColaboradorFormComponent implements OnInit {
   limparFormulario() : void {
     this.colaborador = null;
     this.criarFormulario();
+    this.listaCompetenciaSelecionado = [];
+    this.image = null;  
+    this.competenciaId = null;
+    this.nivelId = null;
   }
 
   adicionarListaCompetencia() : void {
@@ -110,7 +123,7 @@ export class ColaboradorFormComponent implements OnInit {
   convertStringDate(strDate: string): Date {
     if(!strDate) { return null; }
     const splittedDate = strDate.split('-').map(e => +e);
-    return new Date(splittedDate[0], splittedDate[1], splittedDate[2]);
+    return new Date(splittedDate[0], splittedDate[1] - 1, splittedDate[2]);
 }
 
   public inserirColaborador() : void {
@@ -118,15 +131,34 @@ export class ColaboradorFormComponent implements OnInit {
 
     this.colaborador = this.formGroup.getRawValue();
 
-      this._colaboradorService.atualizar(this.colaborador).subscribe(
+      this._colaboradorService.inserir(this.colaborador).subscribe(
         res => {
           this._messageService.add({severity:'success', summary:'Sucesso ao Inserir', 
                                     detail:'O Colaborador e suas Competências foram inseridos com sucesso!'});
           this.atualizaListaColaborador.emit(true);
         },
         err => {
-          this._messageService.add({severity:'error', summary:'Ocorreu um error na busca', 
-          detail:'Error ao buscar!'})
+          this._messageService.add({severity:'error', summary:'Ocorreu um error na Inclusão', 
+          detail:err.error.ERRORS})
+        },
+    )
+                                                    
+  }
+
+  public atualizarColaborador() : void {
+    this.formGroup.get('competencia').setValue(this.listaCompetenciaSelecionado);
+
+    this.colaborador = this.formGroup.getRawValue();
+
+      this._colaboradorService.atualizar(this.colaborador).subscribe(
+        res => {
+          this._messageService.add({severity:'success', summary:'Sucesso ao Alterar', 
+                                    detail:'O Colaborador e suas Competências foram alterados com sucesso!'});
+          this.atualizaListaColaborador.emit(true);
+        },
+        err => {
+          this._messageService.add({severity:'error', summary:'Ocorreu um error na Alteração', 
+          detail:err.error.ERRORS})
         },
     )
                                                     
