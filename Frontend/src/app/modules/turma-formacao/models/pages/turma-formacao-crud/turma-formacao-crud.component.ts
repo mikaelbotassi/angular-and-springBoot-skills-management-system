@@ -423,7 +423,7 @@ desabilitarBotaoTerminar(status:number): boolean{
   }
 
   desabilitarCadastrarIniciando(statusId: number){
-    if(statusId == 3){
+    if(statusId == 3 || statusId ==2){
       return true;
     }else{
       if(!(this.desabilitarCadastrar()) && this.validacaoTurma()  ){
