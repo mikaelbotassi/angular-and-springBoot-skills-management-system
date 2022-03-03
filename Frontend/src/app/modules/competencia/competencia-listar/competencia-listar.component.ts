@@ -63,7 +63,6 @@ export class CompetenciaListarComponent implements OnInit {
   showDialogEdit(isNovo:boolean){
 
         this.display = false;
-        console.log(isNovo);
         if(isNovo === true) {
             const ref = this.dialogService.open(FormCompetenciaModalComponent, {
 
