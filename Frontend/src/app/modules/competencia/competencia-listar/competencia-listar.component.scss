@@ -129,7 +129,8 @@ p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.
     color: rgb(255, 255, 255);
     font-size: 30px;
     margin: 20px 20px;
-.tipo-dado{
+}
+    .tipo-dado{
     font-family: 'Montserrat-ExtraLight';
     font-size: 18px;
 }
@@ -138,4 +139,11 @@ p-dialog div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-icon span.pi.
     font-family: 'OpenSans-Light';
     font-size: 18px;
 }
+
+.transition-size{
+    transition: transform 0.2s;
+}
+
+.transition-size:hover{
+    transform: scale(1.1);
 }

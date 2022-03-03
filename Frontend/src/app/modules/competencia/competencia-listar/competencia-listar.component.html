@@ -11,7 +11,7 @@
         </div>
 
         <div class="botao-create">
-            <button type="button" pButton icon="ui ui-icon-plus" label="CRIAR" (click)="showDialogEdit(true)"></button>
+            <button type="button" class = "transition-size" pButton icon="ui ui-icon-plus" label="CRIAR" (click)="showDialogEdit(true)"></button>
         </div>
 
         <!-- <div class="botao-Create">
@@ -20,7 +20,7 @@
 
         <div class="ui-g div-cards-competencias">
 
-            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2" (click) = "showDialog(competencia)" >
+            <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2 transition-size" (click) = "showDialog(competencia)" >
                 <div style="text-align: center;">
                     <p class="titulo-competencia">{{competencia.nome}}</p>
                     <p class="descricao-competencia">{{competencia.descricao}}</p>
