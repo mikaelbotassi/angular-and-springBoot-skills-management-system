@@ -10,7 +10,6 @@ $sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 .botao-rodape{
     display: grid;
     margin-top: 10px;
-    background-color: $corLaranja;
 }
 
 
@@ -91,4 +90,21 @@ $sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
 
 .coluna-media{
  width: 15%;
+}
+
+.modal-colaborador{
+    width: 50vw;
+}
+
+.dropdown{
+    margin-top: 15px;
+}
+
+.imagem{
+    width: 100px;
+    height: 100px;
+}
+
+.foto{
+    text-align: center;
 }

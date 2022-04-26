@@ -1,11 +1,13 @@
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationService } from 'primeng/api';
 import { FormCompetenciaModalComponent } from './../form-competencia/form-competencia-modal.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 
 import { CompetenciaService } from '../service/competencia.service';
 import { CompetenciaModel } from '../models/competencia.model';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { MessageService } from 'primeng';
+import { MessageService, ConfirmDialog } from 'primeng';
 
 const URL_COMPETENCIA:string = 'competencia';
 @Component({
@@ -15,6 +17,8 @@ const URL_COMPETENCIA:string = 'competencia';
 })
 export class CompetenciaListarComponent implements OnInit {
 
+    @ViewChild('dialogCompetencia') dialogAlterar: DialogModule;
+
     @BlockUI() block: NgBlockUI;
     competenciasTotal:CompetenciaModel[] = [];
     competenciasFiltrada: CompetenciaModel[] = [];
@@ -22,7 +26,7 @@ export class CompetenciaListarComponent implements OnInit {
     competenciaDetalhada: CompetenciaModel;
     competenciaEditada: CompetenciaModel;
 
-  constructor(private competenciaService: CompetenciaService, private dialogService: DialogService, private messageService:MessageService) {}
+  constructor(private competenciaService: CompetenciaService, private dialogService: DialogService, private messageService:MessageService, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.listarCompetencias();
@@ -33,6 +37,14 @@ export class CompetenciaListarComponent implements OnInit {
     this.messageService.add({severity:'success', summary: 'Sucesso', detail:'Competência Salva'});
   }
 
+  private showSucessDelete(){
+    this.messageService.add({severity:'success', summary: 'Sucesso', detail:'Competência deletada'});
+  }
+
+  showError(mensagem: string) {
+    this.messageService.add({severity:'error', summary: 'Erro', detail:mensagem});
+}
+
   listarCompetencias(){
 
     this.block.start('Carregando...')
@@ -40,6 +52,7 @@ export class CompetenciaListarComponent implements OnInit {
         this.competenciasTotal = competencias;
         this.competenciasFiltrada = competencias;
     })
+    this.confirmationService.close();
     this.block.stop();
   }
 
@@ -85,7 +98,7 @@ export class CompetenciaListarComponent implements OnInit {
 
         const ref = this.dialogService.open(FormCompetenciaModalComponent, {
 
-            header: this.competenciaDetalhada.nome + ' EDIT',
+            header: ' Edição ' + this.competenciaDetalhada.nome,
             width: '600px',
             height:'500px',
             contentStyle: { "overflow": "auto"},
@@ -100,4 +113,30 @@ export class CompetenciaListarComponent implements OnInit {
             }
         })
     }
+
+    deletarCompetencia(competencia: CompetenciaModel): void{
+        this.confirmationService.confirm({
+            message: 'Tem certeza que deseja excluir essa turma? essa ação não poderá ser desfeita',
+            header: 'Confirmação',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => this.callDeletarCompetencia(competencia)
+          });
+    }
+
+    callDeletarCompetencia(competencia: CompetenciaModel){
+        this.competenciaService.deletarCompetencia(competencia.id).subscribe(()=>
+        {
+            this.showSucessDelete();
+            this.listarCompetencias();
+            this.display = false;
+        },erro => {
+            switch(erro.status) {
+                case 400:
+                    
+                        this.showError(erro.error.ERRORS);
+              }
+        } )
+    }
+
+
 }

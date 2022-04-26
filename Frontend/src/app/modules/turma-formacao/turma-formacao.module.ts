@@ -1,3 +1,4 @@
+import { BlockUIService, BlockUIModule } from 'ng-block-ui';
 import { ButtonModule } from 'primeng/button';
 import { TurmaFormacaoCrudComponent } from './models/pages/turma-formacao-crud/turma-formacao-crud.component';
 import { NgModule, Output } from '@angular/core';
@@ -18,12 +19,16 @@ import {TooltipModule} from 'primeng/tooltip';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DropdownModule} from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CalendarModule} from 'primeng/calendar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import { TurmaFormacaoAlterarModalComponent } from './models/pages/turma-formacao-crud/turma-formacao-form-modal/turma-formacao-form-modal.component';
 
 
 
 @NgModule({
-  declarations: [TurmaFormacaoCrudComponent],
+  declarations: [TurmaFormacaoCrudComponent, TurmaFormacaoAlterarModalComponent],
   imports: [
     CommonModule,
     TurmaFormacaoRoutingModule,
@@ -40,9 +45,12 @@ import { FormsModule } from '@angular/forms';
     AutoCompleteModule,
     CheckboxModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    CalendarModule,
+    ConfirmDialogModule,
+    ReactiveFormsModule,
   ],
   exports:[TurmaFormacaoCrudComponent],
-  providers: [turmaFormacaoService]
+  providers: [turmaFormacaoService, ConfirmationService, BlockUIService]
 })
 export class TurmaFormacaoModule { }

@@ -1,6 +1,5 @@
 <p-toast></p-toast>
 <form [formGroup]="formCompetencia">
-
     <div class="form-competencia bs-bb">
 
         <div class="ui-fluid">
@@ -13,7 +12,7 @@
             <div class="p-field form-descricao-competencia">
                 <label for="descricao">Descrição</label>
                 <div class="textArea-descricao-competencia">
-                    <textarea pInputTextarea name="descricao" formControlName="descricao" maxlength=100 required></textarea>
+                    <textarea pInputTextarea name="descricao" class="descricao" [rows]="1" autoResize="autoResize" formControlName="descricao" maxlength=100 required></textarea>
                 </div>
             </div>
         </div>
@@ -21,7 +20,7 @@
         <div class="dropdown-competencia">
         <label class="first label-categoria">Categoria</label>
             <div class = "dropdown-categorias">
-                <p-dropdown [options]="converterParaDropDown(categorias, null, 'descricao')" appendTo = "body" formControlName="categoria" placeholder="Selecione uma categoria" required></p-dropdown>
+                <p-dropdown [options]="categorias" optionLabel="descricao" appendTo = "body" formControlName="categoria" placeholder="Selecione uma categoria" required></p-dropdown>
             </div>
         </div>
 
@@ -35,8 +34,6 @@
                 <button pButton type="button" class="width-100" (click)="finalizarFormulario()">SALVAR</button>
             </div>
 
-            <!-- <input type="submit" pButton class="btn btn-primary mt-4" value="Salvar">
-            <button (click)="resetaForm()" type = "button" pButton class="btn btn-secondary botao-cancelar-edit mt-4 ml-2">Cancelar</button> -->
         </div>
 
     </div>

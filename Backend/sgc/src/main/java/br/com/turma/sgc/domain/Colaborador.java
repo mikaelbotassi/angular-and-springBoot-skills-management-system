@@ -55,6 +55,7 @@ public class Colaborador implements Serializable {
     @JoinColumn(name = "id_senioridade")
     private Senioridade senioridade;
 
-
+    @Column(name = "ativo")
+    private Boolean ativo;
 
 }

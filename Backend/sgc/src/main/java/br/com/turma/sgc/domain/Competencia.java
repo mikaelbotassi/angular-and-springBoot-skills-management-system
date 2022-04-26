@@ -1,9 +1,7 @@
 package br.com.turma.sgc.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,4 +28,9 @@ public class Competencia implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
+
+    @Column(name = "ativo")
+    @Value("true")
+    private Boolean ativo;
 }

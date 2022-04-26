@@ -23,6 +23,9 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="ativo" defaultValueBoolean="true" type="boolean">
+            </column>
+
         </createTable>
 
         <createSequence sequenceName="serial_competencia" startValue="1"/>
@@ -33,6 +36,7 @@
 
         <addPrimaryKey tableName="competencia" columnNames="id" constraintName="pk_competencia"/>
 
+        <addDefaultValue tableName="competencia" columnName="ativo"  defaultValueBoolean="true" ></addDefaultValue>
     </changeSet>
 
 </databaseChangeLog>

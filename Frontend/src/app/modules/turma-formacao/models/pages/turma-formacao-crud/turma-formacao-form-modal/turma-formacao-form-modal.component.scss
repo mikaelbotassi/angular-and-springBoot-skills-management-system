@@ -1,0 +1,49 @@
+
+$corLaranja: #e48730;
+$corPreta: rgb(30, 30, 30);
+$corTransparente: rgba(0, 0, 0, 0);
+$sombra: 0 4px 8px 0 rgba(0, 0, 0, 0.329);
+
+.table-colab{
+    width: 50vw;
+  
+}
+
+.registrar-turmar{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    float: right;
+}
+
+.registrar-turma{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.finalizar-button{
+    background-color: $corLaranja;
+    float: right;
+    margin-top: 20px;
+}
+
+.commit-button-colab{
+    background-color: $corLaranja;
+    margin-top: 10px;
+}
+
+.commit-button{
+    background-color: $corLaranja;
+    margin-top: 20px;
+    margin-right: 10px;
+    float: right;
+}
+
+.coluna-botao{
+    text-align: center;
+}
+
+.dialog-button{
+    background-color: $corLaranja;
+}

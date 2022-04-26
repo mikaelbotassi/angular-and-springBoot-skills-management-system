@@ -43,6 +43,9 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="ativo" defaultValueBoolean="true" type="Boolean">
+            </column>
+
         </createTable>
 
         <addForeignKeyConstraint baseTableName="colaborador" baseColumnNames="id_senioridade" constraintName="fk_senioridade"
@@ -52,6 +55,8 @@
         <addPrimaryKey tableName="colaborador" columnNames="id" constraintName="pk_colaborador"/>
 
         <createSequence sequenceName="sq_colaborador" cycle="false" cacheSize="20" incrementBy="1" startValue="1"/>
+
+        <addDefaultValue tableName="colaborador" columnName="ativo" defaultValueBoolean="true" />
 
     </changeSet>
 

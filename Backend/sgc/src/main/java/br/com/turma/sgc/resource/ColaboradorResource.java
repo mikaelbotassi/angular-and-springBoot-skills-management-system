@@ -1,10 +1,11 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.service.ColaboradorService;
-import br.com.turma.sgc.service.dto.ColaboradorBuscaDTO;
-import br.com.turma.sgc.service.dto.ColaboradorDTO;
-import br.com.turma.sgc.service.dto.ColaboradorListDTO;
-import br.com.turma.sgc.service.dto.CompetenciaColaboradorDTO;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorBuscaDTO;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorListDTO;
+import br.com.turma.sgc.service.dto.Competencia.CompetenciaColaboradorDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,7 @@ public class ColaboradorResource {
 
     private final ColaboradorService service;
 
+
     @GetMapping
     public ResponseEntity<List<ColaboradorListDTO>> procurarTodos(){
         return ResponseEntity.ok().body(service.procurarTodos());
@@ -39,10 +41,6 @@ public class ColaboradorResource {
         return ResponseEntity.ok().body(service.procurarPorId(id));
     }
 
-//    @GetMapping("instrutores")
-//    public ResponseEntity<List<ColaboradorBuscaDTO>> buscaColaboradorInstrutor(){
-//        return ResponseEntity.ok().body(service.buscaColaboradorInstrutor());
-//    }
 
     @GetMapping("competencias/{idCompetencia}")
     public ResponseEntity<List<ColaboradorBuscaDTO>> buscarColaboradoresPorCompetencia(@PathVariable    ("idCompetencia") Integer idCompetencia){
@@ -77,6 +75,11 @@ public class ColaboradorResource {
     @GetMapping(value = "/aplicarCompetencia/{idCompetencia}") //OK
     public ResponseEntity<List<ColaboradorDTO>> buscarColaboradorPraAplicarCompeteciaPorId(@PathVariable Integer idCompetencia) {
         return ResponseEntity.ok().body(service.buscarColaboradorPraAplicarCompeteciaPorId(idCompetencia));
+    }
+
+    @GetMapping(value = "/competenciasColaborador/{idColaborador}") //OK
+    public ResponseEntity<List<TurmaColaboradorCompetenciaDTO>> procurarCompetenciasEnsinadaPorColaborador(@PathVariable Integer idColaborador) {
+        return ResponseEntity.ok().body(service.procurarCompetenciasEnsinadaPorColaborador(idColaborador));
     }
 
 }

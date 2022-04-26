@@ -1,3 +1,4 @@
+import { API_PATH } from './../../../../environments/environment';
 import { Injectable } from "@angular/core";
 
 import { CompetenciaModel } from './../models/competencia.model';
@@ -31,6 +32,10 @@ export class CompetenciaService{
 
     criarCompetencia(competencia: CompetenciaModel): Observable<CompetenciaModel[]>{
         return this.httpClient.post<CompetenciaModel[]>(environment.apiUrl + 'competencia', competencia);
+    }
+
+    deletarCompetencia(competenciaId: Number): Observable<CompetenciaModel> {
+        return this.httpClient.delete<CompetenciaModel>(environment.apiUrl + 'competencia/' +competenciaId);
     }
 
 }

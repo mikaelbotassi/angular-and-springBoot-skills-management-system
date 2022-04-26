@@ -42,5 +42,16 @@ public interface TurmaColaboradorCompetenciaRepository extends JpaRepository<Tur
             " and cc.competencia.id = tcc.competencia.id where tcc.turma.id  = :idTurma")
     List<ColaboradorCompetencia> procurarColaboradorCompetenciaPorTurma(@Param("idTurma") Integer id);
 
+    @Query(value = "select tcc from TurmaColaboradorCompetencia tcc inner join ColaboradorCompetencia cc " +
+            "on cc.competencia.id = tcc.competencia.id and cc.nivel = 3" +
+            "where tcc.colaborador.id = :idColaborador and tcc.turma.status.id != 3 ")
+    List<TurmaColaboradorCompetencia> procurarCompetenciasEnsinadaPorColaborador(@Param("idColaborador") Integer idColaborador);
+
+    @Query(value = "select tcc from TurmaColaboradorCompetencia tcc where tcc.competencia.id = :idCompetencia and tcc.turma.status.id = 2")
+    List<TurmaColaboradorCompetencia> procurarPorIdCompetencia(@Param("idCompetencia") Integer idCompetencia);
+
+    @Query(value = "select tcc from TurmaColaboradorCompetencia tcc  " +
+            "where tcc.colaborador.id = :idColaborador and tcc.turma.status.id != 3 ")
+    List<TurmaColaboradorCompetencia> procurarColaboradorTurma(@Param("idColaborador") Integer idColaborador);
 
 }

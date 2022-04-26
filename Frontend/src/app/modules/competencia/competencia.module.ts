@@ -12,6 +12,9 @@ import { CompetenciaService } from './service/competencia.service';
 import {InputTextModule} from 'primeng/inputtext';
 import { FormCompetenciaModalComponent } from './form-competencia/form-competencia-modal.component';
 import { MessageService } from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+
 @NgModule({
   declarations: [CompetenciaListarComponent, FormCompetenciaComponent, FormCompetenciaModalComponent],
   imports: [
@@ -20,9 +23,10 @@ import { MessageService } from 'primeng/api';
         SharedModule,
         InputTextModule,
         CompetenciaRoutingModule,
+        ConfirmDialogModule
   ],
   exports:[CompetenciaListarComponent],
-  providers: [CompetenciaService, CategoriaService, DialogService, MessageService],
+  providers: [CompetenciaService, CategoriaService, DialogService, MessageService, ConfirmationService],
   entryComponents:[FormCompetenciaModalComponent]
 })
 export class CompetenciaModule { }

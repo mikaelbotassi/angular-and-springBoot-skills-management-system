@@ -39,4 +39,7 @@ public class TurmaFormacao implements Serializable {
     @JoinColumn(name = "id_status")
     @NotNull(message = "O STATUS DA TURMA NAO PODE SER NULL")
     private Status status;
+
+    @Column(name = "ativo")
+    private Boolean ativo;
 }

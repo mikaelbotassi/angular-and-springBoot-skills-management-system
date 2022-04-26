@@ -1,7 +1,7 @@
 package br.com.turma.sgc.resource;
 
-import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.Competencia.CadastrarCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Competencia.CompetenciaDTO;
 import br.com.turma.sgc.service.CompetenciaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -72,5 +72,11 @@ public class CompetenciaResource {
     public ResponseEntity<List<CadastrarCompetenciaDTO>> buscarCompetenciasDropdown(){
         return ResponseEntity.ok().body(competenciaService.buscarCompetenciasDropdown());
     }
+
+    @GetMapping("/presente")
+    public ResponseEntity<Boolean> buscarCompetenciasDropdown(@RequestBody @Valid CompetenciaDTO competencia){
+       return  ResponseEntity.ok().body(competenciaService.ePresent(competencia));
+    }
+
 
 }

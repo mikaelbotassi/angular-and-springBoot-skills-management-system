@@ -1,7 +1,7 @@
 package br.com.turma.sgc.service.mapper;
 
 import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
-import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

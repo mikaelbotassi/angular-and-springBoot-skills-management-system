@@ -63,8 +63,8 @@ export class turmaFormacaoService{
         return this.httpClient.delete<TurmaColaboradorCompetenciaModel>(API_PATH + this.url + "/turmaColaboradorCompetenciaDeletar/" + turmaColaboradorCompetenciaModel.turmaId + '/' + turmaColaboradorCompetenciaModel.colaboradorId + '/' + turmaColaboradorCompetenciaModel.competenciaId);
     }
 
-    subirNivelColaboradorCompetencia(colaboradorId: number, competenciaId: number ): Observable<TurmaColaboradorCompetenciaNivelModel>{
-        return this.httpClient.put<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/colaboradorCompetencia/subirNivel/" + colaboradorId + '/' + competenciaId,null);
+    subirNivelColaboradorCompetencia(turmaColaboradorCompetenciaNivelModel: TurmaColaboradorCompetenciaNivelModel[] ): Observable<TurmaColaboradorCompetenciaNivelModel>{
+        return this.httpClient.put<TurmaColaboradorCompetenciaNivelModel>(API_PATH + this.url + "/colaboradorCompetencia/subirNivel",turmaColaboradorCompetenciaNivelModel);
     }
 
     cadastrarColaboradorCompetenciaZero(colaboradorId: number, competenciaId:number): Observable<TurmaColaboradorCompetenciaNivelModel>{
@@ -73,6 +73,14 @@ export class turmaFormacaoService{
 
     listarStatus():Observable<StatusModel[]>{
         return this.httpClient.get<StatusModel[]>(API_PATH + "status");
+    }
+
+    procurarTurmaColaboradorCompetencia(colaboradorId: number, competenciaId: number, turmaId: number): Observable<TurmaColaboradorCompetenciaModel>{
+        return this.httpClient.get<TurmaColaboradorCompetenciaModel>(API_PATH + this.url + "/procurarTurmaColaboradorCompetenciaPorId/" + turmaId + "/" + colaboradorId + "/" + competenciaId);
+    }
+
+    procurarTurmaPorId(turmaId: number): Observable<TurmaFormacaoModel>{
+return this.httpClient.get<TurmaFormacaoModel>(API_PATH + this.url + "/" + turmaId);
     }
 
 }

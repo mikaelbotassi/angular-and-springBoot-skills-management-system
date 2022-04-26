@@ -1,5 +1,6 @@
 <body>
     <p-toast></p-toast>
+    <p-confirmDialog acceptLabel="sim"  rejectLabel="não" ></p-confirmDialog>
 
     <div class = "div-tela-sombreada">
 
@@ -14,10 +15,6 @@
             <button type="button" class = "transition-size" pButton icon="ui ui-icon-plus" label="CRIAR" (click)="showDialogEdit(true)"></button>
         </div>
 
-        <!-- <div class="botao-Create">
-            <button type="button" pButton icon="ui ui-icon-pencil" label="CRIAR" class="botao-create" (click)="showDialogEdit(true)"></button>
-        </div> -->
-
         <div class="ui-g div-cards-competencias">
 
             <p-card *ngFor="let competencia of competenciasFiltrada" class="card-competencia col-sm-12 col-md-7 col-lg-2 transition-size" (click) = "showDialog(competencia)" >
@@ -28,14 +25,15 @@
             </p-card>
         </div>
 
-        <p-dialog [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}" class="dialog-competencia">
+        <p-dialog #dialogCompetencia [(visible)]="display" *ngIf="!!competenciaDetalhada" header="{{competenciaDetalhada.nome}}" >
                 <p class="tipo-dado" >ID DA COMPETÊNCIA: <span class = "dado-competencia"> {{competenciaDetalhada.id}} </span> </p>
                 <p class="tipo-dado" >DESCRIÇÃO DA COMPETÊNCIA: <span class = "dado-competencia">{{competenciaDetalhada.descricao}}</span> </p>
                 <p class="tipo-dado" >CATEGORIA: <span class = "dado-competencia">{{competenciaDetalhada.categoria.descricao}}</span> </p>
                 <p-footer>
                     <button type="button" pButton icon="ui ui-icon-pencil" label="EDITAR" class="botao-editar" (click)="showDialogEdit(false)">
+
                     </button>
-                    <!-- <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button> -->
+                    <button type="button" pButton icon="ui ui-icon-trash" label="EXCLUIR" (click)="deletarCompetencia(competenciaDetalhada)" class="ui-button-secondary botao-excluir" class = "botao-excluir"></button>
                 </p-footer>
         </p-dialog>
 

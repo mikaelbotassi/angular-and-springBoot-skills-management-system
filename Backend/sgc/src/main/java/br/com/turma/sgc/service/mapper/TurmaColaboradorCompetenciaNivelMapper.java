@@ -1,8 +1,7 @@
 package br.com.turma.sgc.service.mapper;
 
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
-import br.com.turma.sgc.domain.TurmaColaboradorCompetencia;
-import br.com.turma.sgc.service.dto.TurmaColaboradorCompetenciaNivelDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaNivelDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -22,5 +21,6 @@ public interface TurmaColaboradorCompetenciaNivelMapper extends EntityMapper<Tur
     @Mapping(source = "colaboradorNome", target = "colaborador.nome")
     @Mapping(source = "colaboradorId", target = "colaborador.id")
     @Mapping(source = "competenciaId", target = "competencia.id")
+    @Mapping(source = "colaboradorSobrenome", target = "colaborador.sobrenome")
     ColaboradorCompetencia toEntity(TurmaColaboradorCompetenciaNivelDTO dto);
 }

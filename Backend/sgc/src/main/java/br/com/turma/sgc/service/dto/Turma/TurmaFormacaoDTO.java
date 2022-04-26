@@ -1,4 +1,4 @@
-package br.com.turma.sgc.service.dto;
+package br.com.turma.sgc.service.dto.Turma;
 
 
 import br.com.turma.sgc.domain.Colaborador;
@@ -27,5 +27,7 @@ public class TurmaFormacaoDTO implements Serializable {
     private Integer statusId;
 
     private String statusNome;
+
+    private Boolean ativo = true;
 
 }

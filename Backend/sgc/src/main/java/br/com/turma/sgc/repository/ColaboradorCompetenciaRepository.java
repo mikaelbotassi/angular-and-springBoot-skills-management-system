@@ -4,8 +4,8 @@ import br.com.turma.sgc.domain.Colaborador;
 import br.com.turma.sgc.domain.ColaboradorCompetencia;
 import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.pk.ColaboradorCompetenciaPK;
-import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.Competencia.CadastrarCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Competencia.CompetenciaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,9 +23,6 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
     @Query("select cc.colaborador from ColaboradorCompetencia cc where cc.competencia.id = :idCompetencia")
     List<Colaborador> buscarColaboradoresPorCompetencia(@Param("idCompetencia") Integer idCompetencia);
 
-//    @Query("select cc.colaborador from ColaboradorCompetencia cc where cc.nivel = :nivelMax")
-//    List<ColaboradorBuscaDTO> buscaColaboradorInstrutor(@Param("nivelMax") Integer nivelMax);
-
     @Query("select cc from ColaboradorCompetencia cc where cc.colaborador.id = :idColaborador")
     List<CompetenciaDTO> buscaCompetenciaNivel (@Param("idColaborador") Integer idColaborador);
 
@@ -41,12 +38,13 @@ public interface ColaboradorCompetenciaRepository extends JpaRepository<Colabora
     @Query(value = "update ColaboradorCompetencia set nivel = nivel + 1 where colaborador.id = :colaboradorId and competencia.id = :competenciaId ")
     void aumentarNivelColaboradorCompetencia(@Param("colaboradorId") Integer colaboradorId, @Param("competenciaId") Integer competenciaId);
 
-    @Query("select new br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO(competencia.id, nivel, competencia.nome) from ColaboradorCompetencia " +
-            " where colaborador.id = :idColaborador")
+    @Query("select new br.com.turma.sgc.service.dto.Competencia.CadastrarCompetenciaDTO(competencia.id, nivel, competencia.nome) from ColaboradorCompetencia " +
+            " where colaborador.id = :idColaborador and competencia.ativo = true")
     List<CadastrarCompetenciaDTO> obterCompetenciaColaborador(@Param("idColaborador") Integer idColaborador);
 
     @Modifying
     @Query("delete from ColaboradorCompetencia where colaborador.id = :idColaborador and competencia.id not in :idsCompetencias")
     void excluirCompetenciaColaborador(@Param("idColaborador") Integer idColaborador, @Param("idsCompetencias") List<Integer> idsCompetencias);
+
 
 }

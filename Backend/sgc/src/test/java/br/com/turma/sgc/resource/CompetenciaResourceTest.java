@@ -1,9 +1,12 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.SgcApplication;
+import br.com.turma.sgc.builder.ColaboradorBuilder;
 import br.com.turma.sgc.builder.CompetenciaBuilder;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.builder.TurmaColaboradorCompetenciaBuilder;
+import br.com.turma.sgc.builder.TurmaFormacaoBuilder;
+import br.com.turma.sgc.service.dto.Competencia.CompetenciaDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaDTO;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
 import lombok.SneakyThrows;
@@ -17,8 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SgcApplication.class)
@@ -29,6 +31,16 @@ public class CompetenciaResourceTest extends IntTestComum {
 
     @Autowired
     private CompetenciaBuilder competenciaBuilder;
+
+    @Autowired
+    private ColaboradorBuilder colaboradorBuilder;
+
+    @Autowired
+    private TurmaFormacaoBuilder turmaFormacaoBuilder;
+
+    @Autowired
+    private TurmaColaboradorCompetenciaBuilder turmaColaboradorCompetenciaBuilder;
+
 
     @Before
     public void inicializaTeste(){
@@ -49,10 +61,6 @@ public class CompetenciaResourceTest extends IntTestComum {
     @Test
     @SneakyThrows
     public void salvarTest() {
-
-        //Como customizar o builder
-//        CompetenciaDTO dto = competenciaBuilder.customizar(competencia -> competencia.setNome("Java")).construir();
-
         CompetenciaDTO dto = competenciaBuilder.construirEntidade();
 
         getMockMvc().perform(post(URL)
@@ -94,7 +102,6 @@ public class CompetenciaResourceTest extends IntTestComum {
     @Test
     @SneakyThrows
     public void procurarCompetenciaNivelColaboradorTest() {
-//"/colaborador/{idColaborador}/nivel/{idNivel}"
         CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
 
         getMockMvc().perform(get(URL + "/colaborador/" + 1 +"/nivel/" + 3)).andExpect(status().isOk());
@@ -104,6 +111,37 @@ public class CompetenciaResourceTest extends IntTestComum {
     @SneakyThrows
     public void buscarCompetenciaPorIdCategoria() {
         CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
-        getMockMvc().perform(get(URL + "/categoria/" + dto.getId())).andExpect(status().isOk());
+        getMockMvc().perform(get(URL + "/categoria/" + dto.getCategoria().getId())).andExpect(status().isOk());
     }
+
+    @Test
+    @SneakyThrows
+    public void procurarCompetenciaColaboradorTest() {
+        getMockMvc().perform(get(URL + "/colaboradores/" + 1)).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarCompetenciaColaboradorTurma() {
+        TurmaColaboradorCompetenciaDTO dto = turmaColaboradorCompetenciaBuilder.persistir(turmaColaboradorCompetenciaBuilder.construirEntidade());
+        getMockMvc().perform(get(URL + "/turma/" + dto.getTurmaId() + "/colaborador/" + dto.getColaboradorId())).andExpect(status().isOk());
+    }
+
+
+
+    @Test
+    @SneakyThrows
+    public void procurarCompetenciadropdown() {
+
+        getMockMvc().perform(get(URL + "/dropdown")).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void existeCompetencia () {
+        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+        getMockMvc().perform(get(URL + "/presente")
+                        .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                        .content(TestUtil.convertObjectToJsonBytes(dto)))
+                .andExpect(status().isOk());    }
 }

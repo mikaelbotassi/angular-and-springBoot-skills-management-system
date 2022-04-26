@@ -29,6 +29,10 @@
 			<column name="id_status" type="NUMBER" >
                 		<constraints nullable="false"/>
             		</column>
+
+			<column name="ativo" defaultValueBoolean="true" type="Boolean">
+			</column>
+
 		</createTable>
 
 		<addForeignKeyConstraint baseTableName="turma_formacao" baseColumnNames="id_status" constraintName="fk_status"
@@ -38,5 +42,6 @@
 	</changeSet>
 	<changeSet author="Gustavo.Canicali" id="202202052143">
 		<createSequence sequenceName="sq_turma_formacao" incrementBy="1" startValue="1" />
+		<addDefaultValue tableName="turma_formacao" columnName="ativo" defaultValueBoolean="true" />
 	</changeSet>
 </databaseChangeLog>

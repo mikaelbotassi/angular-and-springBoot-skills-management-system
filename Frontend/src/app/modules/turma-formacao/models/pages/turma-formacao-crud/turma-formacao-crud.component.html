@@ -1,195 +1,70 @@
-
-    <p-toast position="top-right" [key]="succes" ></p-toast>
-    
-
-    <h2>Turmas</h2>
+<p-toast position="top-right" [key]="succes"></p-toast>
 
 
-    <p-dialog class="titulo-turma"  (onHide)="limparHolderColaboradorCompetencia($event)" header="Cadastrar turma" [draggable]="false" [modal]="true" [(visible)]="display"  >
-        <form  >
+<h2>Turmas</h2>
 
-        <div class="card table-colab"  >
-                <div class="card ui-grid-col-12">
-                    <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
-                    <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                    <input pInputText placeholder="nome turma" maxlength="40" class="registrar-turma ui-grid-col-3 " type="text" name="nomeDaTurma"  [(ngModel)]="inputNomeTurma" />
-                    <textarea [rows]="1" [cols]="30"  type="text" maxlength="255" pInputTextarea autoResize="autoResize" name="descricaoDaTurma"  [(ngModel)]="inputDescricaoTurma" class="registrar-turmar ui-grid-col-6 "  placeholder="descricao..." ></textarea>
-
-                </div>
-
-                <form>
-                    <p-fieldset  legend="Adicionar colaborador" [toggleable]="true" [collapsed]="true" >
-                        <div class="ui-g-4"  >
-
-                        <p  class="registrar-turma ">Colaborador</p>
-
-                        <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador"  
-                        name="colaboradorNomeDropDown" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
-                        </p-dropdown>
-                       
-                        <p  class="registrar-turma ">Competencia</p>
-
-                        <p-dropdown name="competenciaNomeDropDown" [options]="competenciasTotal" placeholder="competencia" optionLabel="nome" 
-                        [(ngModel)]="competenciaDropDown" filter="true" >
-                        </p-dropdown>
-
-                        <button pButton class="commit-button-colab"  
-                        (click)="inserirColaboradorCompetenciaHolder()"   icon="pi pi-plus" 
-                        label="Adicionar" type="button" iconPos="left"  > </button>
-
-                    </div>
-
-
-                       <div class="ui-g-8" >
-                      <p-table [value]="colaboradorCompetenciaHolder">
-                            <ng-template pTemplate="header">
-                            <tr>
-                                <th>Colaborador</th>
-                                <th>Competencia</th>
-                                <th>Nivel</th>
-                                <th>Descartar</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-colaborador>
-                            <tr>
-                                <td>{{colaborador.colaboradorNome}} {{colaborador.colaboradorSobrenome}} </td>
-                                <td>{{colaborador.competenciaNome}}</td>
-                                <td>{{colaborador.nivelNome}}</td>
-                                <td>
-                                    <button pButton class="button-descarte" (click)="deletarColaboradorCompetenciaHolder(colaborador)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        </p-table>
-                    </div> 
-                        
-                    </p-fieldset>
-                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar" iconPos="left" [disabled]="desabilitarCadastrar()" (click)="inserirTurma() " > </button>
-                    <button pButton class="commit-button ui-grid-col-3" type="button" icon="pi pi-plus" label="Cadastrar e iniciar" iconPos="left" [disabled]="desabilitarCadastrarIniciando(0)" (click)="inserirTurmaIniciando()" > </button>
-
-                </form>
-        </div>
-    </form>
-
-    </p-dialog>
+<p-confirmDialog acceptLabel="sim" rejectLabel="não"></p-confirmDialog>
 
 
 
-    
-        <p-table #dt [value]="turmas"  [rows]="15"  [paginator]="true">
-            <ng-template pTemplate="caption">
-                <button pButton class="new-button" id="botaoDisplay" icon="pi pi-plus" label="Nova turma" iconPos="left" (click)="showDialog()"> </button>
-                Turmas
-            </ng-template>
-            <ng-template pTemplate="header" >
-                <tr>
-                    <th >nome
-                        <input pInputText (input)="dt.filter($event.target.value, 'nome','startsWith')" />
-                    </th>
-                    <th>descricao
-                    </th>
-                    <th  class="coluna-media">status
-                        <p-dropdown [options]="statusDisponiveis"
-                        (onChange)="dt.filter($event.value, 'statusNome', 'equals')"
-                        placeholder="Status" [showClear]="true">
-                <ng-template let-option pTemplate="item">
-                    <span>{{option.label}}</span>
-                </ng-template>
-            </p-dropdown>
-                    </th>
-                    <th class="coluna-menor">Modificar</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-turma class="ui-grid-col-12" >
-                <tr >
-                    <td >{{turma.nome}}
-                        
-                    </td>
-                    <td >{{turma.descricao}}</td>
-                    <td >{{turma.statusNome}}</td>
-                    <td class="botao-acao">
-                        <button pButton  icon="ui-icon-pencil" pTooltip="Alterar turma"  (click)="showDialogAlt(turma); listarTurmaColaboradorCompetencia(turma.id)" ></button>
-                    </td>
-                </tr>
-            </ng-template>
-            
-        </p-table>
+<p-table #dt [value]="turmas" [rows]="15" [paginator]="true" [globalFilterFields]="['inicio','termino']">
+    <ng-template pTemplate="caption">
+        <button pButton class="new-button" id="botaoDisplay" icon="pi pi-plus" label="Nova turma" iconPos="left"
+            (click)="showDialog(null)"> </button>
+        Turmas
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nome
+                <input pInputText (input)="dt.filter($event.target.value, 'nome','startsWith')" />
+            </th>
+            <th>Descrição</th>
+            <th class="coluna-media">Status
+                <p-dropdown [options]="statusDisponiveis" (onChange)="dt.filter($event.value, 'statusNome', 'equals')"
+                    placeholder="Status" [showClear]="true">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>
+            </th>
+            <th>
+                Data de início
+                <br>
+                <p-calendar todayButtonLabel="hoje" class="filtro" (onSelect)="onDateSelect($event)"
+                    (onClearClick)="dt.filter('', 'inicio', 'equals')" [showButtonBar]="true"
+                    styleClass="ui-column-filter" [readonlyInput]="true" dateFormat="dd/mm/yy">
+                </p-calendar>
+            </th>
+            <th>
+                Data do término
+                <br>
+                <p-calendar class="filtro" (onSelect)="onDateSelectTermino($event)"
+                    (onClearClick)="dt.filter('', 'termino', 'equals')" [showButtonBar]="true"
+                    styleClass="ui-column-filter" [readonlyInput]="true" dateFormat="dd/mm/yy">
+                </p-calendar>
+            </th>
+            <th class="coluna-menor">Modificar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-turma class="ui-grid-col-12">
+        <tr>
+            <td>{{turma.nome}}
 
-        <p-dialog class="dialog-turma" (onHide)="limparHolderColaboradorCompetencia($event)" header="Alterar turma" *ngIf="!!turmaDetalhada" [draggable]="false" [modal]="true" [(visible)]="displayAlt"  >
-            <form id="alterarTurma">
-            <div class="card table-colab"  >
-                    <div class="card ui-grid-col-12">
-                        <p  class="registrar-turma ui-grid-col-4" >Nome da turma</p>
-                        <p  class="registrar-turmar ui-grid-col-6">Descricao da turma</p>
-                        <input pInputText placeholder="nome turma" maxlength="40" value="{{turmaDetalhada.nome}}"  class="registrar-turma ui-grid-col-3 " type="text" name="nomeTurmaAlt" [(ngModel)]="inputNomeTurma" />
-                        <textarea [rows]="1" [cols]="30" type="text" maxlength="255" value="{{turmaDetalhada.descricao}}" pInputTextarea autoResize="autoResize" class="registrar-turmar ui-grid-col-6 " name="descricaoTurmaAlt" [(ngModel)]="inputDescricaoTurma"  placeholder="descricao..."  ></textarea>
-                        <br/>
-                        <button pButton class="finalizar-button ui-grid-col-4" type="button" [disabled]="desabilitarBotaoTerminar(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Finalizar turma" iconPos="left" (click)="finalizarTurma(turmaDetalhada)" > </button>
+            </td>
+            <td>{{turma.descricao}}</td>
+            <td>{{turma.statusNome}}</td>
+            <td>{{turma.inicio}}</td>
+            <td>{{turma.termino}}</td>
+            <td class="botao-acao">
+                <p-button class="botao-laranja" icon="ui-icon-pencil" pTooltip="Alterar turma"
+                    (click)="showDialog(turma)"></p-button>
+                <p-button class="botao-laranja" icon="ui-icon-trash" pTooltip="Deletar turma"
+                    [disabled]="desabilitarDeletarTurma(turma)" (click)="deletarTurma(turma)"></p-button>
 
+            </td>
+        </tr>
+    </ng-template>
 
-                    </div>
-    
-                    <form>
-                        <p-fieldset legend="Adicionar colaborador"   [toggleable]="true" collapsed="true" >
-                            <div class="ui-g-4"  >
-                                <p  class="registrar-turma ">Colaborador</p>
-                                <p-dropdown [options]="colaboradoresTotal" placeholder="colaborador"
-                        name="colaboradorNomeDropDownAlterar" optionLabel="nome" [(ngModel)]="colaboradorDropDown" [filter]="true" >
-                        </p-dropdown>
+</p-table>
 
-                        <p  class="registrar-turma ">Competencia</p>
-
-                        <p-dropdown name="competenciaNomeDropDownAlterar" [options]="competenciasTotal" placeholder="competencia" optionLabel="nome" 
-                        [(ngModel)]="competenciaDropDown" filter="true" >
-                        </p-dropdown>
-
-                        <button pButton class="commit-button-colab"  
-                        (click)="inserirColaboradorCompetenciaHolder()"   icon="pi pi-plus" 
-                        label="Adicionar" type="button" iconPos="left" [disabled]="desabilitarBotaoAdicionarColaborador(turmaDetalhada.statusId)"  > </button>   
-
-                                </div>
-    
-    
-                           <div class="ui-g-8" >
-                          <p-table [value]="colaboradorCompetenciaHolder">
-                                <ng-template pTemplate="header">
-                                <tr>
-                                    <th>Colaborador</th>
-                                    <th>Competencia</th>
-                                    <th>Nivel</th>
-                                    <th>Descartar</th>
-                                </tr>
-
-                            </ng-template>
-                            <ng-template pTemplate="body" let-colaborador>
-                                <tr>
-                                    <td>{{colaborador.colaboradorNome}} {{colaborador.colaboradorSobrenome}} </td>
-                                    <td>{{colaborador.competenciaNome}}</td>
-                                    <td>{{colaborador.nivelNome}}</td>
-                                    <td>
-                                        <button pButton class="button-descarte" [disabled]="desabilitarBotaoColaboradorCompetenciaAlt(turmaDetalhada.statusId, colaborador.nivel)" (click)="deletarColaboradorCompetenciaHolderAlt(colaborador, turmaDetalhada.id)" icon="ui-icon-trash" pTooltip="Descartar colaborador"  ></button>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                </tr>
-                            </ng-template>
-                            </p-table>
-                        </div> 
-                            
-                        </p-fieldset>
-                    </form>
-            </div>
-            <button pButton class="commit-button" type="button"  icon="ui-icon-pencil" [disabled]="desabilitarBotaoColaboradorCompetencia(turmaDetalhada.statusId)"  label="Alterar" iconPos="left" (click)="alterarTurma(turmaDetalhada)" > </button>
-            <button pButton class="commit-button ui-grid-col-4" type="button" [disabled]="desabilitarCadastrarIniciando(turmaDetalhada.statusId)" icon="ui-icon-play-arrow" label="Alterar e iniciar turma" iconPos="left" (click)="iniciarTurma(turmaDetalhada)" > </button>
-     
-    
-        </form>
-    
-        </p-dialog>
-
-
-
-
-
-
+<app-turma-formacao-form-modal (atualizaLista)="listarTurmas()" #turma></app-turma-formacao-form-modal>

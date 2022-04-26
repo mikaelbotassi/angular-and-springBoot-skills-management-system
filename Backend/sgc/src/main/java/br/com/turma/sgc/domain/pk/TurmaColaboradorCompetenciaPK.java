@@ -24,9 +24,4 @@ public class TurmaColaboradorCompetenciaPK implements Serializable {
     @Column(name = "id_competencia")
     private Integer idCompetencia;
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(idColaborador, idCompetencia, idTurmaFormacao);
-//    }
-
 }

@@ -1,24 +1,28 @@
 <h2>Colaboradores</h2>
+
+<p-confirmDialog acceptLabel="sim" rejectLabel="não"></p-confirmDialog>
+
+
 <p-table #dtColaborador [paginator]="true" [columns]="coloumns" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
-         [value]="colaboradores" [showCurrentPageReport]="true" dataKey="id"
-         currentPageReportTemplate="Mostrando {first} á {last} de {totalRecords} entradas">
+    [value]="colaboradores" [showCurrentPageReport]="true" dataKey="id"
+    currentPageReportTemplate="Mostrando {first} á {last} de {totalRecords} entradas">
     <ng-template pTemplate="caption">
-        <p-button class="botao-novo botao-laranja" (onClick)="visivel = !visivel" label="Novo Colaborador" icon="pi pi-plus" iconPos="left"></p-button>
+        <p-button class="botao-novo botao-laranja" (onClick)="visivel = !visivel" label="Novo Colaborador"
+            icon="pi pi-plus" iconPos="left"></p-button>
         Colaboradores
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th>Nome
                 <p-sortIcon field="nome"></p-sortIcon>
-                <input pInputText type="text" (input)="dtColaborador.filter($event.target.value, 'nome', 'startsWith')"
-                       placeholder="Pesquisa por nome">
+                <input pInputText type="text" (input)="dtColaborador.filter($event.target.value, 'nome', 'startsWith')">
             </th>
             <th class="coluna-senioridade">Senioridade
                 <p-sortIcon field="nomeSenioridade"></p-sortIcon>
                 <div>
                     <p-dropdown [options]="senioridades"
-                                (onChange)="dtColaborador.filter($event.value, 'nomeSenioridade', 'equals')"
-                                placeholder="Senioridade" [showClear]="true">
+                        (onChange)="dtColaborador.filter($event.value, 'nomeSenioridade', 'equals')"
+                        placeholder="Senioridade" [showClear]="true">
                         <ng-template let-option pTemplate="item">
                             <span>{{option.label}}</span>
                         </ng-template>
@@ -32,15 +36,21 @@
         <tr>
             <td>{{colaborador.nome}} {{colaborador.sobrenome}}</td>
             <td>{{colaborador.nomeSenioridade}}</td>
-            <td class="botao-acao">
-                <span class="botao-acao-icon"><p-button class="botao-laranja" icon="ui-icon-pencil" (onClick)="abrirDialogAlterar(colaborador)"
-                                                        pTooltip="Alterar"></p-button></span>
+            <td class="botao-acao botao-centro">
+                <span class="botao-acao-icon">
+                    <p-button class="botao-laranja" icon="ui-icon-pencil" (onClick)="abrirDialogAlterar(colaborador)"
+                        pTooltip="Alterar"></p-button>
+                    <p-button class="botao-laranja" icon="ui-icon-trash" (onClick)="deletarColaborador(colaborador)"
+                        pTooltip="Deletar"></p-button>
+                </span>
             </td>
         </tr>
     </ng-template>
 </p-table>
 
-<p-dialog (onHide)="limparFormularioFilho()" [(visible)]="visivel" [style]="{width: '700px', height: '800px'}" header="Colaborador" class="dialog-competencia">
+
+
+<p-dialog [draggable]="false" [modal]="true" (onHide)="limparFormularioFilho()" [(visible)]="visivel"
+    header="Colaborador">
     <app-colaborador-form #colaboradorForm (atualizaListaColaborador)="getColaboradores()"></app-colaborador-form>
 </p-dialog>
-

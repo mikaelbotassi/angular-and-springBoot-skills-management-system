@@ -3,8 +3,9 @@ package br.com.turma.sgc.resource;
 import br.com.turma.sgc.SgcApplication;
 import br.com.turma.sgc.builder.ColaboradorBuilder;
 import br.com.turma.sgc.builder.CompetenciaBuilder;
-import br.com.turma.sgc.service.dto.CadastrarCompetenciaDTO;
-import br.com.turma.sgc.service.dto.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.Competencia.CadastrarCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorDTO;
+import br.com.turma.sgc.service.dto.Competencia.CompetenciaDTO;
 import br.com.turma.sgc.service.mapper.ColaboradorMapper;
 import br.com.turma.sgc.util.IntTestComum;
 import br.com.turma.sgc.util.TestUtil;
@@ -127,6 +128,43 @@ public class ColaboradorResourceTest extends IntTestComum {
         ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
 
         getMockMvc().perform(get(URL + "/" + dto.getId())).andExpect(status().isOk());
+    }
+
+
+    @Test
+    @SneakyThrows
+    public void procurarColaboradorPorCompetencia() {
+
+        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/competencias/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarColaboradorPorId() {
+
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/colaborador/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarColaboradorAplicarCompetencia() {
+
+        CompetenciaDTO dto = competenciaBuilder.persistir(competenciaBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/aplicarCompetencia/" + dto.getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    public void procurarCompetenciasEnsinadasColaboradorId() {
+
+        ColaboradorDTO dto = colaboradorBuilder.persistir(colaboradorBuilder.construirEntidade());
+
+        getMockMvc().perform(get(URL + "/competenciasColaborador/" + dto.getId())).andExpect(status().isOk());
     }
 
 }

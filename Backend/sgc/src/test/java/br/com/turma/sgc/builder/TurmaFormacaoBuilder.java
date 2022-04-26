@@ -1,17 +1,13 @@
 package br.com.turma.sgc.builder;
 
-import br.com.turma.sgc.domain.Competencia;
 import br.com.turma.sgc.domain.TurmaFormacao;
-import br.com.turma.sgc.enums.CategoriaEnum;
 import br.com.turma.sgc.repository.TurmaFormacaoRepository;
 import br.com.turma.sgc.service.TurmaFormacaoService;
-import br.com.turma.sgc.service.dto.CompetenciaDTO;
-import br.com.turma.sgc.service.dto.TurmaFormacaoDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaFormacaoDTO;
 import br.com.turma.sgc.service.mapper.TurmaFormacaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -42,6 +38,7 @@ public class TurmaFormacaoBuilder extends ConstrutorDeEntidade<TurmaFormacaoDTO>
     @Override
     public TurmaFormacaoDTO persistir(TurmaFormacaoDTO entidade) {
         TurmaFormacao turmaFormacao = turmaFormacaoMapper.toEntity(entidade);
+        turmaFormacao.setAtivo(true);
         return turmaFormacaoMapper.toDto(turmaFormacaoRepository.save(turmaFormacao));
     }
 

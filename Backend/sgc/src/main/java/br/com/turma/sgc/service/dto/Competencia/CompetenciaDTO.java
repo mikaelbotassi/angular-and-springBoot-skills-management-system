@@ -1,5 +1,6 @@
-package br.com.turma.sgc.service.dto;
+package br.com.turma.sgc.service.dto.Competencia;
 
+import br.com.turma.sgc.service.dto.CategoriaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

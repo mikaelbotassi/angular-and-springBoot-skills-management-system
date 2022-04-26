@@ -11,6 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompetenciaService } from '../competencia/service/competencia.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ColaboradorListaComponent } from './components/colaborador-lista/colaborador-lista.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import { cpf } from 'cpf-cnpj-validator'; 
 
 
 @NgModule({
@@ -33,10 +36,12 @@ import { ColaboradorListaComponent } from './components/colaborador-lista/colabo
     InputMaskModule,
     FileUploadModule,
     ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [
     ColaboradorService,
     CompetenciaService,
+    ConfirmationService,
   ]
 })
 export class ColaboradorModule { }

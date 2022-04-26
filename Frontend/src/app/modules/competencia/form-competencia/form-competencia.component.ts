@@ -1,3 +1,4 @@
+import { ConfirmationService } from 'primeng/api';
 import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 
@@ -5,7 +6,7 @@ import { CategoriaService } from './../service/categoria.service';
 import { CompetenciaService } from './../service/competencia.service';
 import { CategoriaModel } from './../models/categoria.model';
 import { CompetenciaModel } from './../models/competencia.model';
-import { SelectItem, MessageService } from 'primeng';
+import { SelectItem, MessageService, ConfirmDialog } from 'primeng';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize} from 'rxjs/operators';
 
@@ -23,7 +24,7 @@ export class FormCompetenciaComponent implements OnInit{
     categorias: CategoriaModel[] = [];
      visible: boolean;
 
-    constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService, private messageService:MessageService) { }
+    constructor(private formBuilder: FormBuilder, private categoriaService:CategoriaService, private competenciaService:CompetenciaService, private messageService:MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
 
@@ -70,12 +71,7 @@ export class FormCompetenciaComponent implements OnInit{
         })
     }
 
-    converterParaDropDown(categorias: CategoriaModel[], campoValue:string, campoLabel:string):SelectItem[]{
-        return categorias.map((categoria:CategoriaModel) => ({
-            value:campoValue ? categoria[campoValue] : categoria,
-            label:categoria[campoLabel]
-        }))
-    }
+    
 
     atualizarCompetencia(): void{
 
@@ -162,13 +158,24 @@ export class FormCompetenciaComponent implements OnInit{
     }
 
     finalizarFormulario() :void {
+        this.confirmationService.confirm({
+            message: 'Tem certeza que deseja salvar essa competência?',
+            header: 'Confirmação',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => this.callFinalizaFormulario()
+          });
+        
+
+    }
+
+
+    callFinalizaFormulario(){
         if (typeof this.competenciaEditada === "undefined") {
             this.criarCompetencia();
         }
         else {
             this.atualizarCompetencia();
         }
-
     }
 
 }

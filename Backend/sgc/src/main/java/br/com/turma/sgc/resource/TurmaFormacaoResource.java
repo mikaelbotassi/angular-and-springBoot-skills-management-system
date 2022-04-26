@@ -1,12 +1,18 @@
 package br.com.turma.sgc.resource;
 
 import br.com.turma.sgc.service.TurmaFormacaoService;
-import br.com.turma.sgc.service.dto.*;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Colaborador.ColaboradorFuncaoTurmaDTO;
+import br.com.turma.sgc.service.dto.Colaborador.InstrutorCompetenciaTurmaDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaColaboradorCompetenciaNivelDTO;
+import br.com.turma.sgc.service.dto.Turma.TurmaFormacaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +35,7 @@ public class TurmaFormacaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody TurmaFormacaoDTO turma){
+    public ResponseEntity<TurmaFormacaoDTO> inserir(@RequestBody @Valid TurmaFormacaoDTO turma){
         return ResponseEntity.created(URI.create("./api/turmaFormacao")).body(turmaFormacaoService.inserir(turma));
     }
 
@@ -40,7 +46,7 @@ public class TurmaFormacaoResource {
     }
 
     @PutMapping
-    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody TurmaFormacaoDTO turma){
+    public ResponseEntity<TurmaFormacaoDTO> atualizar(@RequestBody @Valid TurmaFormacaoDTO turma){
         return ResponseEntity.ok().body(turmaFormacaoService.atualizar(turma));
     }
 
@@ -65,7 +71,7 @@ public class TurmaFormacaoResource {
     }
 
     @PostMapping(value = "/inserirColaborador")
-    public ResponseEntity<TurmaColaboradorCompetenciaDTO> inserirColaboradorTurma (@RequestBody TurmaColaboradorCompetenciaDTO turmaColaboradorCompetenciaDTO) {
+    public ResponseEntity<TurmaColaboradorCompetenciaDTO> inserirColaboradorTurma (@RequestBody @Valid TurmaColaboradorCompetenciaDTO turmaColaboradorCompetenciaDTO) {
         return ResponseEntity.created(URI.create("./api/turmaFormacao/inserirColaborador")).body(turmaFormacaoService.inserirColaboradorTurma(turmaColaboradorCompetenciaDTO));
     }
     @GetMapping(value = "/turmasFinalizadas")
@@ -76,11 +82,6 @@ public class TurmaFormacaoResource {
     @GetMapping(value = "/turmasEmAndamento")
     public ResponseEntity<List<TurmaFormacaoDTO>> buscaTurmaAndamento(){
         return ResponseEntity.ok().body(turmaFormacaoService.buscarTurmaAndamento());
-    }
-
-    @GetMapping(value = "/inicio/{inicio}/fim/{fim}")
-    public ResponseEntity<List<TurmaFormacaoDTO>> buscarTodasTurmasPorIntervalo(@PathVariable String inicio,@PathVariable String fim){
-        return ResponseEntity.ok().body(turmaFormacaoService.buscarTodasTurmasPorIntervalo(inicio, fim));
     }
 
     @GetMapping(value = "/todosColaboradorCompetenciaTurma/{id}")
@@ -105,15 +106,20 @@ public class TurmaFormacaoResource {
     }
 
     @Transactional
-    @PutMapping(value = "colaboradorCompetencia/subirNivel/{idColaborador}/{idCompetencia}")
-    public ResponseEntity<Void> subirNivelColaboradorCompetencia(@PathVariable Integer idColaborador, @PathVariable Integer idCompetencia){
-        turmaFormacaoService.subirNivelColaboradorCompetencia(idColaborador,idCompetencia);
+    @PutMapping(value = "colaboradorCompetencia/subirNivel")
+    public ResponseEntity<Void> subirNivelColaboradorCompetencia(@RequestBody @Valid List<TurmaColaboradorCompetenciaNivelDTO> turmaColaboradorCompetenciaNivelDTO){
+        turmaFormacaoService.subirNivelColaboradorCompetencia(turmaColaboradorCompetenciaNivelDTO);
       return ResponseEntity.accepted().build();
     }
 
     @PostMapping(value = "cadastrarColaboradorCompetenciaZero/{colaboradorId}/{competenciaId}")
     public ResponseEntity<ColaboradorCompetenciaDTO> inserir(@PathVariable Integer colaboradorId, @PathVariable Integer competenciaId){
         return ResponseEntity.created(URI.create("./api/turmaFormacao")).body(turmaFormacaoService.inserirColaboradorCompetenciaZero(colaboradorId, competenciaId));
+    }
+
+    @GetMapping(value = "procurarTurmaColaboradorCompetenciaPorId/{turmaId}/{colaboradorId}/{competenciaId}")
+    public ResponseEntity<TurmaColaboradorCompetenciaDTO> procurarTurmaColaboradorCompetenciaPorId(@PathVariable Integer turmaId,@PathVariable Integer colaboradorId,@PathVariable Integer competenciaId){
+        return ResponseEntity.ok().body(turmaFormacaoService.procurarTurmaColaboradorCompetenciaPorId(colaboradorId,competenciaId,turmaId));
     }
 
 }

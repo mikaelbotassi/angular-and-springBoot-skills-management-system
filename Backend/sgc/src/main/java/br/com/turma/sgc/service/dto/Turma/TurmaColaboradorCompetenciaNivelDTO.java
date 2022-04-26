@@ -1,4 +1,4 @@
-package br.com.turma.sgc.service.dto;
+package br.com.turma.sgc.service.dto.Turma;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,5 @@ public class TurmaColaboradorCompetenciaNivelDTO implements Serializable {
 
     private Integer competenciaId;
 
-    private String nivelNome;
 
 }
